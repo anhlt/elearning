@@ -42,7 +42,15 @@ class TestController extends AppController {
 	}
 
 	public function delete() {
-
-	}
+    	$id = $this->params['named']['id'];
+    	if ($this->Test->delete($id)) {
+            $this->Session->setFlash(__('The test has been deleted'), 'alert', array(
+                'plugin' => 'BoostCake',
+                'class' => 'alert-success'
+            )); 
+            
+            return $this->redirect($this->referer());      	
+    	}
+    }
 }
 ?>

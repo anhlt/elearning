@@ -133,10 +133,12 @@ class LessonController extends AppController {
     }
 
 
-    public function detail_doc()
+    public function doc()
 	{			
 		$user = $this->Auth->user();
 		$lesson_id = $this->params['named']['id'];
+		$this->Session->write('lesson_id', $lesson_id);
+
 		$this->set("id", $lesson_id);			
 
 		if($user["role"] == 'lecturer') {
@@ -164,8 +166,8 @@ class LessonController extends AppController {
 		}		
 	}
 
-	public function detail_test() {
-		$lesson_id = $this->params['named']['id'];
+	public function test() {
+		$lesson_id = $this->Session->read('lesson_id');
 		$this->set("id", $lesson_id);
 		$user = $this->Auth->user();
 		
@@ -194,13 +196,18 @@ class LessonController extends AppController {
 		}		
 	}
 
-	public function detail_coin() {
-
+	public function coin() {
+		$lesson_id = $this->Session->read('lesson_id');
+		$this->set("id", $lesson_id);
+		$user = $this->Auth->user();
 	}
 
-	public function detail_std() {
-		$lesson_id = $this->params['named']['lesson_id'];
-		$lesson = $this->Lesson->findById($lesson_id);
+
+	public function student() {
+		$lesson_id = $this->Session->read('lesson_id');
+		$this->set("id", $lesson_id);
+		$lesson = $this->Lesson->findById($lesson_id);		
+
 		$this->paginate = array(
 		    'fields' => array('Student.full_name','Student.id','LessonMembership.baned','LessonMembership.liked','LessonMembership.lesson_id'),
 			'limit' => 10,
@@ -215,11 +222,15 @@ class LessonController extends AppController {
 	}
 
 	public function summary() {
-
+		$lesson_id = $this->Session->read('lesson_id');		
+		$this->set("id", $lesson_id);
+		$lesson = $this->Lesson->findById($lesson_id);
 	}
 
 	public function report() {
-		
+		$lesson_id = $this->Session->read('lesson_id');		
+		$this->set("id", $lesson_id);
+		$lesson = $this->Lesson->findById($lesson_id);
 	}
 
     public function banstudent($value=''){
@@ -245,5 +256,5 @@ class LessonController extends AppController {
     	}
 		return $this->redirect($this->referer());
 
-    }
+    }    
 }

@@ -11197,3 +11197,278 @@ Stack Trace:
 #3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
 #4 [internal function]: App::shutdown()
 #5 {main}
+2014-03-10 17:02:52 Error: [MissingTableException] Table admins for model Admin was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'admins',
+  'class' => 'Admin',
+  'ds' => 'default',
+)
+Request URL: /users/login
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('admins')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1063): Model->getDataSource()
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(User), Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\Auth\BaseAuthenticate.php(112): Model->find('first', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\Auth\FormAuthenticate.php(81): BaseAuthenticate->_findUser('thanh91_bg', '11091991')
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\AuthComponent.php(750): FormAuthenticate->authenticate(Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\AuthComponent.php(597): AuthComponent->identify(Object(CakeRequest), Object(CakeResponse))
+#8 C:\xampp\htdocs\elearning\Controller\UsersController.php(64): AuthComponent->login()
+#9 [internal function]: UsersController->login()
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#13 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-10 17:03:03 Error: [MissingTableException] Table admins for model Admin was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'admins',
+  'class' => 'Admin',
+  'ds' => 'default',
+)
+Request URL: /users/login
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('admins')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1063): Model->getDataSource()
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(User), Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\Auth\BaseAuthenticate.php(112): Model->find('first', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\Auth\FormAuthenticate.php(81): BaseAuthenticate->_findUser('thanh91_bg', '11091991')
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\AuthComponent.php(750): FormAuthenticate->authenticate(Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\AuthComponent.php(597): AuthComponent->identify(Object(CakeRequest), Object(CakeResponse))
+#8 C:\xampp\htdocs\elearning\Controller\UsersController.php(64): AuthComponent->login()
+#9 [internal function]: UsersController->login()
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#13 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-10 17:05:01 Error: [MissingTableException] Table admins for model Admin was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'admins',
+  'class' => 'Admin',
+  'ds' => 'default',
+)
+Request URL: /users/login
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('admins')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1063): Model->getDataSource()
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(User), Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\Auth\BaseAuthenticate.php(112): Model->find('first', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\Auth\FormAuthenticate.php(81): BaseAuthenticate->_findUser('thanh91_bg', '11091991')
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\AuthComponent.php(750): FormAuthenticate->authenticate(Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\AuthComponent.php(597): AuthComponent->identify(Object(CakeRequest), Object(CakeResponse))
+#8 C:\xampp\htdocs\elearning\Controller\UsersController.php(64): AuthComponent->login()
+#9 [internal function]: UsersController->login()
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#13 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-10 17:05:40 Error: [MissingTableException] Table admins for model Admin was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'admins',
+  'class' => 'Admin',
+  'ds' => 'default',
+)
+Request URL: /users/login
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('admins')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1063): Model->getDataSource()
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(User), Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\Auth\BaseAuthenticate.php(112): Model->find('first', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\Auth\FormAuthenticate.php(81): BaseAuthenticate->_findUser('thanh91_bg', '11091991')
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\AuthComponent.php(750): FormAuthenticate->authenticate(Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\AuthComponent.php(597): AuthComponent->identify(Object(CakeRequest), Object(CakeResponse))
+#8 C:\xampp\htdocs\elearning\Controller\UsersController.php(64): AuthComponent->login()
+#9 [internal function]: UsersController->login()
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#13 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-10 17:08:24 Error: [MissingActionException] Action AdminController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminController',
+  'action' => 'index',
+)
+Request URL: /admin
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-10 17:09:45 Error: [MissingTableException] Table ip_admins for model IpAdmin was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'ip_admins',
+  'class' => 'IpAdmin',
+  'ds' => 'default',
+)
+Request URL: /admin/delete_ip_address
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('ip_admins')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3305): Model->getDataSource()
+#2 C:\xampp\htdocs\elearning\Controller\AdminController.php(76): Model->query('DELETE FROM ip_...')
+#3 [internal function]: AdminController->delete_ip_address()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-10 17:09:45 Error: [MissingTableException] Table ip_admins for model IpAdmin was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'ip_admins',
+  'class' => 'IpAdmin',
+  'ds' => 'default',
+)
+Request URL: /admin/delete_ip_address
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('ip_admins')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3305): Model->getDataSource()
+#2 C:\xampp\htdocs\elearning\Controller\AdminController.php(76): Model->query('DELETE FROM ip_...')
+#3 [internal function]: AdminController->delete_ip_address()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-10 17:18:34 Error: [MissingActionException] Action DocumentController::del_doc() could not be found.
+Exception Attributes: array (
+  'controller' => 'DocumentController',
+  'action' => 'del_doc',
+)
+Request URL: /document/del_doc/id:14
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-10 17:20:28 Error: [MissingActionException] Action DocumentController::del_doc() could not be found.
+Exception Attributes: array (
+  'controller' => 'DocumentController',
+  'action' => 'del_doc',
+)
+Request URL: /document/del_doc/id:14
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-10 17:20:45 Error: [MissingControllerException] Controller class LessionController could not be found.
+Exception Attributes: array (
+  'class' => 'LessionController',
+  'plugin' => NULL,
+)
+Request URL: /lession/detail_doc
+Stack Trace:
+#0 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-03-10 17:21:44 Error: [MissingControllerException] Controller class LessionController could not be found.
+Exception Attributes: array (
+  'class' => 'LessionController',
+  'plugin' => NULL,
+)
+Request URL: /lession/detail_doc
+Stack Trace:
+#0 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-03-10 17:36:04 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Lecturer\studentmanage.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Lecturer\\studentmanage.ctp',
+)
+Request URL: /lecturer/studentmanage/lesson_id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LecturerController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-10 17:36:20 Error: [MissingActionException] Action LessonController::detail_doc() could not be found.
+Exception Attributes: array (
+  'controller' => 'LessonController',
+  'action' => 'detail_doc',
+)
+Request URL: /lesson/detail_doc/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-10 17:36:42 Error: [MissingActionException] Action LessonController::detail_doc() could not be found.
+Exception Attributes: array (
+  'controller' => 'LessonController',
+  'action' => 'detail_doc',
+)
+Request URL: /lesson/detail_doc/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-10 17:38:24 Error: [MissingActionException] Action LessonController::detail_test() could not be found.
+Exception Attributes: array (
+  'controller' => 'LessonController',
+  'action' => 'detail_test',
+)
+Request URL: /lesson/detail_test/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-10 17:38:40 Error: [MissingActionException] Action LessonController::detail_doc() could not be found.
+Exception Attributes: array (
+  'controller' => 'LessonController',
+  'action' => 'detail_doc',
+)
+Request URL: /lesson/detail_doc/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-10 17:38:43 Error: [MissingActionException] Action LessonController::detail_coin() could not be found.
+Exception Attributes: array (
+  'controller' => 'LessonController',
+  'action' => 'detail_coin',
+)
+Request URL: /lesson/detail_coin/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-10 17:40:18 Error: [MissingActionException] Action TsvsController::home() could not be found.
+Exception Attributes: array (
+  'controller' => 'TsvsController',
+  'action' => 'home',
+)
+Request URL: /Tsvs/home
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TsvsController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-10 17:44:09 Error: Fatal Error (64): Cannot redeclare LessonController::student() in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 227]
+2014-03-10 17:44:09 Error: [FatalErrorException] Cannot redeclare LessonController::student()
+Request URL: /lesson/student/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(64, 'Cannot redeclar...', 'C:\xampp\htdocs...', 227)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot redeclar...', 'C:\xampp\htdocs...', 227, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot redeclar...', 'C:\xampp\htdocs...', 227, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-10 17:44:35 Error: Fatal Error (64): Cannot redeclare LessonController::student() in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 227]
+2014-03-10 17:44:35 Error: [FatalErrorException] Cannot redeclare LessonController::student()
+Request URL: /lesson/coin/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(64, 'Cannot redeclar...', 'C:\xampp\htdocs...', 227)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot redeclar...', 'C:\xampp\htdocs...', 227, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot redeclar...', 'C:\xampp\htdocs...', 227, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}

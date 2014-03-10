@@ -51,7 +51,11 @@ if (!defined('APP_DIR')) {
  * /app/webroot/test.php
  */
 #define('CAKE_CORE_INCLUDE_PATH',  DS . 'home' . DS . 'action' . DS . 'workspace' . DS . 'Vendor' . DS . 'pear-pear.cakephp.org' . DS . 'CakePHP');
-define('CAKE_CORE_INCLUDE_PATH',  DS . 'var' . DS . 'www' . DS . 'Vendor' . DS . 'pear-pear.cakephp.org' . DS . 'CakePHP');
+
+#define('CAKE_CORE_INCLUDE_PATH',  DS . 'var' . DS . 'www' . DS . 'Vendor' . DS . 'pear-pear.cakephp.org' . DS . 'CakePHP');
+#define('CAKE_CORE_INCLUDE_PATH',  "C:" . DS . 'xampp' . DS . 'htdocs' . DS . 'Vendor' . DS . 'pear-pear.cakephp.org' . DS . 'CakePHP');
+define('CAKE_CORE_INCLUDE_PATH',  "E:" . DS . 'Workspace'. DS. 'Project' . DS . 'Vendor' . DS . 'pear-pear.cakephp.org' . DS . 'CakePHP');
+
 
 /**
  * Editing below this line should not be necessary.

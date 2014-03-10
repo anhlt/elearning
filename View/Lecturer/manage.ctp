@@ -29,7 +29,7 @@
 
 			  	<td><?php echo $this->html->link('Delete', array('controller' => 'lesson', 'action' => 'delete', "id"=>$result['Lesson']['id']),array('class' => 'button'))?>
 			  		<?php echo $this->html->link('Edit', array('controller' => 'lesson', 'action' => 'edit', "id"=>$result['Lesson']['id']),array('class' => 'button'))?>
-			  		<?php echo $this->html->link('Detail', array('controller' => 'lesson', 'action' => 'detail_doc', "id"=>$result['Lesson']['id']), array('class' => 'button'))?>
+			  		<?php echo $this->html->link('Detail', array('controller' => 'lesson', 'action' => 'doc', "id"=>$result['Lesson']['id']), array('class' => 'button'))?>
 			  		<?php echo $this->html->link('Manage', array('controller' => 'lecturer', 'action' => 'studentmanage', "lesson_id"=>$result['Lesson']['id']), array('class' => 'btn bun-info'))?>
 			  	</td>
 			  </tr>

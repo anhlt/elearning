@@ -4,23 +4,23 @@
 	<div class="col-xs-5 col-md-3">
 		<ul class="nav nav-pills nav-stacked" id="myTab">
 			<li>
-				<?php echo $this->html->link('ファイル情報', array('controller' => 'lesson', 'action' => 'detail_doc',
+				<?php echo $this->html->link('ファイル情報', array('controller' => 'lesson', 'action' => 'doc',
 					'id' => $id));?> 
 			</li>
 			<li class="active">
-				<?php echo $this->html->link('テスト情報', array('controller' => 'lesson', 'action' => 'detail_test',
+				<?php echo $this->html->link('テスト情報', array('controller' => 'lesson', 'action' => 'test',
 					'id' => $id));?> 
 			</li>
 			<li>
-				<?php echo $this->html->link('課金情報', array('controller' => 'lesson', 'action' => 'detail_coin',
+				<?php echo $this->html->link('課金情報', array('controller' => 'lesson', 'action' => 'coin',
 					'id' => $id));?> 
 			</li>
 			<li>
-				<?php echo $this->html->link('学生リスト', array('controller' => 'lesson', 'action' => 'detail_std',
+				<?php echo $this->html->link('学生リスト', array('controller' => 'lesson', 'action' => 'student',
 					'id' => $id));?> 
 			</li>
 			<li>
-				<?php echo $this->html->link('サマリー情報', array('controller' => 'lesson', 'action' => 'sammary',
+				<?php echo $this->html->link('サマリー情報', array('controller' => 'lesson', 'action' => 'summary',
 					'id' => $id));?> 
 			</li>
 			<li>
