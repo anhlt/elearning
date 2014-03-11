@@ -12,7 +12,7 @@
 					'id' => $id));?> 
 			</li>
 			<li class='active'>
-				<?php echo $this->html->link('課金情報', array('controller' => 'lesson', 'action' => 'coin',
+				<?php echo $this->html->link('課金情報', array('controller' => 'lesson', 'action' => 'bill',
 					'id' => $id));?> 
 			</li>
 			<li>
@@ -35,22 +35,17 @@
 				'ul' => 'pagination'
 				)); ?>
 			<table class="table table-condensed">
-				<tr>
-					<td  class="col-sm-1"><?php echo $this->Paginator->sort('id'); ?></td>	
-					<td  class="col-sm-1">Link</td>				
-					<td  class="col-sm-1">Title</td>
-					<td  class="col-sm-1">Delete</td>
-					<td  class="col-sm-1">Edit</td>			
+				Students
+				<tr>										
+					<td  class="col-sm-3"><?php echo $this->Paginator->sort('Name');?></td>
+					<td  class="col-sm-3"><?php echo $this->Paginator->sort('Start time');?></td>
+					<td  class="col-sm-3"><?php echo $this->Paginator->sort('Time');?></td>					
 				</tr>
 			 <?php foreach ($results as $result) {?>
-			  <tr>
-			  	<td><?php echo($result['Document']['id']) ?> </td>
-			  	<td><?php echo($result['Document']['link']) ?> </td>
-			  	<td><?php echo($result['Document']['title']) ?> </td>
-			  	<td><?php echo $this->Html->image("edit.png", array("alt" => "edit",'url' => array('controller' => 'document', 'action' => 'edit', "id"=>$result['Document']['id']))); ?>
-			  	</td>
-			  	<td><?php echo $this->Html->image("trash.png", array("alt" => "delete",'url' => array('controller' => 'document', 'action' => 'delete', "id"=>$result['Document']['id']))); ?>
-			  	</td>
+			  <tr>			  		  	
+			  	<td><?php echo($result['Student']['full_name']) ?> </td>
+			  	<td><?php echo($result['Study']['start_time']) ?> </td>
+			  	<td><?php echo($result['Lesson']['lesson_time']) ?> </td>			  	
 			  </tr>
 			 <?php }?>
 			</table>

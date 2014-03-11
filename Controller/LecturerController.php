@@ -2,7 +2,7 @@
 
 class LecturerController extends AppController {
 	var $name = "Lecturer";
-  	var $uses = array('User', 'Lecturer','Question','Lesson', 'Test', 'Document', 'LessonMembership');	
+  	var $uses = array('User', 'Lecturer','Question','Lesson', 'Test', 'Document');	
 
 	public $components = array('RequestHandler', 'Paginator');		
 	#public $helpers = array('Js' => array('Jquery'), 'Paginator');
@@ -72,7 +72,7 @@ class LecturerController extends AppController {
 
 
 
-	public function studentmanage()
+	/*public function studentmanage()
 	{
 
 		$lesson_id = $this->params['named']['lesson_id'];
@@ -88,5 +88,5 @@ class LecturerController extends AppController {
 		$this->LessonMembership->Behaviors->load('Containable');
 		$students = $this->Paginator->paginate("LessonMembership");
 		$this->set("results",$students);
-	}
+	}*/
 }

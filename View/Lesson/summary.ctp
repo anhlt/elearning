@@ -12,7 +12,7 @@
 					'id' => $id));?> 
 			</li>
 			<li>
-				<?php echo $this->html->link('課金情報', array('controller' => 'lesson', 'action' => 'coin',
+				<?php echo $this->html->link('課金情報', array('controller' => 'lesson', 'action' => 'bill',
 					'id' => $id));?> 
 			</li>
 			<li>
@@ -30,30 +30,28 @@
 		</ul>
 	</div>
 	<div class="col-xs-13 col-md-9">
-		<div class="well">
-			<?php echo $this->Paginator->pagination(array(
-				'ul' => 'pagination'
-				)); ?>
-			<table class="table table-condensed">
-				<tr>
-					<td  class="col-sm-1"><?php echo $this->Paginator->sort('id'); ?></td>	
-					<td  class="col-sm-1">Link</td>				
-					<td  class="col-sm-1">Title</td>
-					<td  class="col-sm-1">Delete</td>
-					<td  class="col-sm-1">Edit</td>			
-				</tr>
-			 <?php foreach ($results as $result) {?>
-			  <tr>
-			  	<td><?php echo($result['Document']['id']) ?> </td>
-			  	<td><?php echo($result['Document']['link']) ?> </td>
-			  	<td><?php echo($result['Document']['title']) ?> </td>
-			  	<td><?php echo $this->Html->image("edit.png", array("alt" => "edit",'url' => array('controller' => 'document', 'action' => 'edit', "id"=>$result['Document']['id']))); ?>
-			  	</td>
-			  	<td><?php echo $this->Html->image("trash.png", array("alt" => "delete",'url' => array('controller' => 'document', 'action' => 'delete', "id"=>$result['Document']['id']))); ?>
-			  	</td>
-			  </tr>
-			 <?php }?>
-			</table>
+		<div class="well">			
+			<div class='row'>
+				<div class='col-md-4'>参加した人：</div>
+				<div class='col-md-8'><?php echo $row?>　人</div>
+			</div>
+			<br>
+			<div class='row'>
+				<div class='col-md-4'>いいね：</div>
+				<div class='col-md-8'><?php echo $like?> %</div>
+			</div>
+			<br>
+			<div class='row'>
+				<div class='col-md-4'>課金：</div>
+				<div class='col-md-8'><?php echo ($row * 20000)?>　VND</div>
+			</div>
+			<br> <br>
+			<div class='row'>
+				<div class='col-md-4'>授業を削除する：</div>
+				<div class='col-md-4'>
+					<?php echo $this->html->link('Delete', array('controller' => 'lesson', 'action' => 'delete_lesson'), array('class' => 'btn btn-primary'))?>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

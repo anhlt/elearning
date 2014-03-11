@@ -12,7 +12,7 @@
 					'id' => $id));?> 
 			</li>
 			<li>
-				<?php echo $this->html->link('課金情報', array('controller' => 'lesson', 'action' => 'coin',
+				<?php echo $this->html->link('課金情報', array('controller' => 'lesson', 'action' => 'bill',
 					'id' => $id));?> 
 			</li>
 			<li>
@@ -33,15 +33,16 @@
 		<div class="well">
 			<?php echo $this->Paginator->pagination(array(
 				'ul' => 'pagination'
-				)); ?>		
-			<table class="table bordered-table">
+				)); ?>
+			<div class='table-responsive'>
+			<table class="table">
 				<tr>
 					<td  class="col-sm-1"><?php echo $this->Paginator->sort('id'); ?></td>	
 					<td  class="col-sm-1">Title</td>	
 					<td  class="col-sm-1">Time</td>	
 					<td  class="col-sm-1">Link</td>			
 					<td  class="col-sm-1">Edit</td>
-					<td  class="col-sm-1">Delete</td>					
+					<td  class="col-sm-1">Delete</td>			
 				</tr>
 			 <?php foreach ($results as $result) {?>
 			  <tr>
@@ -55,7 +56,8 @@
 			  	</td>
 			  </tr>
 			 <?php }?>
-			</table>			
-		</div>		
+			</table>
+			</div>
+		</div>
 	</div>
 </div>

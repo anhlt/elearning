@@ -12,7 +12,7 @@
 					'id' => $id));?> 
 			</li>
 			<li>
-				<?php echo $this->html->link('課金情報', array('controller' => 'lesson', 'action' => 'coin',
+				<?php echo $this->html->link('課金情報', array('controller' => 'lesson', 'action' => 'bill',
 					'id' => $id));?> 
 			</li>
 			<li>
@@ -29,31 +29,60 @@
 			</li>			
 		</ul>
 	</div>
-	<div class="col-xs-13 col-md-9">
+	<div class="col-xs-13 col-md-9">		
 		<div class="well">
-			<?php echo $this->Paginator->pagination(array(
-				'ul' => 'pagination'
+			<div class='row'><h4 style='text-align: center;'><b>レポートがない</b></h4></div>
+			<br><br> <br>	
+			<div class='row' style='margin-left: 43px;'><b>返事</b></div>
+			<br>			
+			<div style='width: 700px; height: 100px; margin: auto; border: 1px solid #428BCA;'>
+				
+
+				
+			</div>
+
+			
+
+			<br><br>
+
+			<div class='row'>
+			<?php echo $this->Form->create('Test',array(
+				'inputDefaults' => array(  
+					'div' => false,  
+					'label' => false,  
+					'wrapInput' => false,  
+					'class' => 'form-control'  
+					),  
+				'style' => 'margin-left: 45px;',
+			    'url' => array('controller' => 'Test', 'action' => 'add','id' => $id),
+			    'method' => 'post',
+			    'enctype' => 'multipart/form-data'
 				)); ?>
-			<table class="table table-condensed">
-				<tr>
-					<td  class="col-sm-1"><?php echo $this->Paginator->sort('id'); ?></td>	
-					<td  class="col-sm-1">Link</td>				
-					<td  class="col-sm-1">Title</td>
-					<td  class="col-sm-1">Delete</td>
-					<td  class="col-sm-1">Edit</td>			
-				</tr>
-			 <?php foreach ($results as $result) {?>
-			  <tr>
-			  	<td><?php echo($result['Document']['id']) ?> </td>
-			  	<td><?php echo($result['Document']['link']) ?> </td>
-			  	<td><?php echo($result['Document']['title']) ?> </td>
-			  	<td><?php echo $this->Html->image("edit.png", array("alt" => "edit",'url' => array('controller' => 'document', 'action' => 'edit', "id"=>$result['Document']['id']))); ?>
-			  	</td>
-			  	<td><?php echo $this->Html->image("trash.png", array("alt" => "delete",'url' => array('controller' => 'document', 'action' => 'delete', "id"=>$result['Document']['id']))); ?>
-			  	</td>
-			  </tr>
-			 <?php }?>
-			</table>
+
+				<div class="form-group">
+					<div class="col-xs-13 col-md-8">
+					<?php echo $this->Form->input('title', array(  
+						'placeholder' => '返事の内容',  
+						'style' => 'width: 300px;'						
+					)); ?>
+					</div>
+					<div class="col-xs-13 col-md-1">
+						<?php echo $this->Form->submit('返事', array(
+						'class' => 'btn btn-primary',
+						'div' => false
+						)); ?>
+					</div>
+					<div class="col-xs-13 col-md-1">
+					<?php echo $this->Form->reset('キャンセル',array(
+							'class' => 'btn btn-primary',
+							'div' => false, 
+							'value' => 'キャンセル'
+							));?>	
+					
+					</div> 						
+				</div>
+			</form>
 		</div>
+		</div>		
 	</div>
 </div>

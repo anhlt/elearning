@@ -12,7 +12,7 @@
 					'id' => $id));?> 
 			</li>
 			<li>
-				<?php echo $this->html->link('課金情報', array('controller' => 'lesson', 'action' => 'coin',
+				<?php echo $this->html->link('課金情報', array('controller' => 'lesson', 'action' => 'bill',
 					'id' => $id));?> 
 			</li>
 			<li>

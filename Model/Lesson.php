@@ -10,7 +10,7 @@ class Lesson extends AppModel {
             'associationForeignKey' => 'tag_id'
         ));
     public $hasMany = array(
-        'LessonMembership' => 
+        'Study' => 
             array('dependent' => True ),
     );
     

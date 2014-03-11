@@ -12,7 +12,7 @@
 					'id' => $id));?> 
 			</li>
 			<li>
-				<?php echo $this->html->link('課金情報', array('controller' => 'lesson', 'action' => 'coin',
+				<?php echo $this->html->link('課金情報', array('controller' => 'lesson', 'action' => 'bill',
 					'id' => $id));?> 
 			</li>
 			<li class="active">
@@ -38,7 +38,7 @@
 			<table class="table table-condensed">
 				Students
 				<tr>
-					<td  class="col-sm-1"><?php echo $this->Paginator->sort('id'); ?></td>
+					<td  class="col-sm-1"><?php echo $this->Paginator->sort('id'); ?></td>					
 					<td  class="col-sm-2"><?php echo $this->Paginator->sort('Name');?></td>
 					<td  class="col-sm-1"><?php echo $this->Paginator->sort('baned');?></td>
 					<td  class="col-sm-1"><?php echo $this->Paginator->sort('liked');?></td>
@@ -46,13 +46,13 @@
 				</tr>
 			 <?php foreach ($results as $result) {?>
 			  <tr>
-			  	<td><?php echo($result['Student']['id']) ?> </td>
+			  	<td><?php echo($result['Student']['id']) ?> </td>			  	
 			  	<td><?php echo($result['Student']['full_name']) ?> </td>
-			  	<td><?php echo($result['LessonMembership']['baned']?"True":"false") ?> </td>
-			  	<td><?php echo($result['LessonMembership']['liked']?"True":"false") ?> </td>
+			  	<td><?php echo($result['Study']['baned']?"True":"false") ?> </td>
+			  	<td><?php echo($result['Study']['liked']?"True":"false") ?> </td>
 			  	<td><?php echo $this->html->link('Delete', array('controller' => 'lesson', 'action' => 'deletestudent',
-			  		"student_id"=>$result['Student']['id'],"lesson_id"=>$result['LessonMembership']['lesson_id']),array('class' => 'btn btn-danger'))?>
-			  		<?php echo $this->html->link('Ban', array('controller' => 'lesson', 'action' => 'banstudent',"student_id"=>$result['Student']['id'],"lesson_id"=>$result['LessonMembership']['lesson_id']),array('class' => 'btn btn-warning'))?>
+			  		"student_id"=>$result['Student']['id'],"lesson_id"=>$result['Study']['lesson_id']),array('class' => 'btn btn-danger'))?>
+			  		<?php echo $this->html->link('Ban', array('controller' => 'lesson', 'action' => 'banstudent',"student_id"=>$result['Student']['id'],"lesson_id"=>$result['Study']['lesson_id']),array('class' => 'btn btn-warning'))?>
 			  	</td>
 			  </tr>
 			 <?php }?>
