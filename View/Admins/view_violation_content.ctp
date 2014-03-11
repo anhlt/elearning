@@ -33,7 +33,9 @@ echo $this->Form->create('Admin', array(
         'class' => 'form-control'
     ),
     'class' => 'well',
-    'url' => array('controller' => 'Admins', 'action' => 'view_violation_content_process','id' => $violate_id)
+    'url' => array('controller' => 'Admins', 'action' => 'view_violation_content_process','id' => $violate_id
+       ,'count'=> $count, 'lecturer_id' =>$lecturer_id,
+        )
 ));
 
 echo $this->Form->submit('確認', array(

@@ -21442,3 +21442,43 @@ Stack Trace:
 #0 D:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #1 {main}
 >>>>>>> 69dd70fa812ca0939d3cf64c9583ff13b72dab21
+2014-03-11 05:51:13 Error: Fatal Error (4): syntax error, unexpected 'return' (T_RETURN), expecting function (T_FUNCTION) in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 233]
+2014-03-11 05:51:13 Error: [FatalErrorException] syntax error, unexpected 'return' (T_RETURN), expecting function (T_FUNCTION)
+Request URL: /admins/view_violation_content/1
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'E:\Installs\Web...', 233)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'E:\Installs\Web...', 233, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'E:\Installs\Web...', 233, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-11 06:30:50 Error: [NotFoundException] Not Found
+Request URL: /admins/view_violation/page:3
+Stack Trace:
+#0 E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php(113): PaginatorComponent->paginate('Violate')
+#1 [internal function]: AdminsController->view_violation()
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#4 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#5 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(104): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2014-03-11 06:30:55 Error: [NotFoundException] Not Found
+Request URL: /admins/view_violation/page:3
+Stack Trace:
+#0 E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php(113): PaginatorComponent->paginate('Violate')
+#1 [internal function]: AdminsController->view_violation()
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#4 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#5 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(104): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2014-03-11 07:28:02 Error: [NotFoundException] Not Found
+Request URL: /admins/view_violation/page:3/sort:document_id/direction:asc
+Stack Trace:
+#0 E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php(113): PaginatorComponent->paginate('Violate')
+#1 [internal function]: AdminsController->view_violation()
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#4 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#5 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(104): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
