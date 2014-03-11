@@ -278,29 +278,24 @@ class LessonController extends AppController {
 		$lesson_id = $this->Session->read('lesson_id');		
 		$this->set("id", $lesson_id);
 		$user = $this->Auth->user();
+		//var_dump($user['id']);
 
 		if($user["role"] == 'lecturer') {
 			$sql = array("conditions"=> array("Lesson.id =" => $lesson_id, "lecturer_id =" => $user['id']));
 			$results = $this->Lesson->find('first', $sql);
 			
-			if($results != NULL) {
-				/*$sql = array(
-				    'fields' => array('Student.full_name', 'Comment.id', 'Comment.content', 'Comment.time'),					
-					'conditions' => array(
-					 	'Comment.lesson_id' => $lesson_id),
-						'contain' => array('Student')
-				);*/
-				
+			if($results != NULL) {				
 				$sql = array(
 				    'fields' => array('Comment.id', 'Comment.user_id', 'Comment.content', 'Comment.time'),
 					'conditions' => array(
-					'Comment.lesson_id' => $lesson_id)
+						'Comment.lesson_id' => $lesson_id),
+						//'contain' => array('Student')
 				);
 				
 				$results = $this->Comment->find('all', $sql);
-				var_dump($results);					
+				//var_dump($results);					
 				
-				//$this->set('row', $row);
+				$this->set('results', $results);
 				
 			} else {
 				$this->redirect(array('controller' => 'users' ,"action" => "permission" ));
@@ -363,6 +358,7 @@ class LessonController extends AppController {
     	$lesson_id = $this->Session->read('lesson_id');
 		$this->set("id", $lesson_id);		
 		$user = $this->Auth->user();
+
 		
 		if($user["role"] == 'lecturer') {
 			$sql = array("conditions"=> array("Lesson.id =" => $lesson_id, "lecturer_id =" => $user['id']));
@@ -384,6 +380,5 @@ class LessonController extends AppController {
 		} else {
 			$this->redirect(array('controller' => 'users' ,"action" => "permission" ));
 		}
-
     }
 }

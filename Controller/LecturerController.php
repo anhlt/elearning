@@ -2,7 +2,7 @@
 
 class LecturerController extends AppController {
 	var $name = "Lecturer";
-  	var $uses = array('User', 'Lecturer','Question','Lesson', 'Test', 'Document');	
+  	var $uses = array('User', 'Lecturer','Question','Lesson', 'Test', 'Document', 'Comment');	
 
 	public $components = array('RequestHandler', 'Paginator');		
 	#public $helpers = array('Js' => array('Jquery'), 'Paginator');
@@ -89,4 +89,34 @@ class LecturerController extends AppController {
 		$students = $this->Paginator->paginate("LessonMembership");
 		$this->set("results",$students);
 	}*/
+
+	public function reply() {
+		$user_id = $this->Auth->user()['id'];
+		$lesson_id = $this->params['named']['id'];
+
+		if ($this->request->is('post'))
+		{			
+			$data['Comment']['user_id'] = $user_id;
+			$data['Comment']['lesson_id'] = $lesson_id;
+			$data['Comment']['content'] = $this->request->data['Report']['content'];
+
+			var_dump($data);
+			$this->Comment->create();
+
+			if($this->Comment->save($data)){
+                $this->Session->setFlash(__('Your comment has been uploaded'), 'alert', array(
+	                'plugin' => 'BoostCake',
+	                'class' => 'alert-success'
+            	));       	
+				
+			} else {
+                $this->Session->setFlash(__('Your comment could not be uploaded. Plz try again'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+            	));	
+			}
+		}
+
+		return $this->redirect($this->referer());
+	}	
 }

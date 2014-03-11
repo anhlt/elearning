@@ -31,11 +31,14 @@
 	</div>
 	<div class="col-xs-13 col-md-9">
 		<div class="well">
+			<div style='text-align: center; margin-bottom: 20px;'>
+				<h4><b>課金情報</b></h4>
+			</div>
 			<?php echo $this->Paginator->pagination(array(
 				'ul' => 'pagination'
-				)); ?>
+				)); ?>	
+
 			<table class="table table-condensed">
-				Students
 				<tr>										
 					<td  class="col-sm-3"><?php echo $this->Paginator->sort('Name');?></td>
 					<td  class="col-sm-3"><?php echo $this->Paginator->sort('Start time');?></td>

@@ -30,7 +30,11 @@
 		</ul>
 	</div>
 	<div class="col-xs-13 col-md-9">
-		<div class="well">			
+		<div class="well">
+			<div style='text-align: center; margin-bottom: 20px;'>
+				<h4><b>サマリー情報</b></h4>
+			</div>
+
 			<div class='row'>
 				<div class='col-md-4'>参加した人：</div>
 				<div class='col-md-8'><?php echo $row?>　人</div>

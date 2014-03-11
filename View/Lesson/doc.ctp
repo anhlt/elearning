@@ -31,6 +31,10 @@
 	</div>
 	<div class="col-xs-13 col-md-9">
 		<div class="well">
+			<div style='text-align: center; margin-bottom: 20px;'>
+				<h4><b>ドキュメント情報</b></h4>
+			</div>
+
 			<?php echo $this->Paginator->pagination(array(
 				'ul' => 'pagination'
 				)); ?>

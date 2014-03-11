@@ -1,4 +1,4 @@
-<div class="row">
+<div>
 	<?php echo $this->Session->flash(); ?>
 
 	<div class="col-xs-5 col-md-3">
@@ -31,6 +31,10 @@
 	</div>
 	<div class="col-xs-13 col-md-9">
 		<div class="well">
+			<div style='text-align: center; margin-bottom: 20px;'>
+				<h4><b>テスト情報</b></h4>
+			</div>
+
 			<?php echo $this->Paginator->pagination(array(
 				'ul' => 'pagination'
 				)); ?>

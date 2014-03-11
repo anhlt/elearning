@@ -31,22 +31,27 @@
 	</div>
 	<div class="col-xs-13 col-md-9">		
 		<div class="well">
-			<div class='row'><h4 style='text-align: center;'><b>レポートがない</b></h4></div>
+			<div style='text-align: center; margin-bottom: 20px;'>
+				<h4><b>レポート</b></h4>
+			</div>
+
+			<div class='row'><p style='margin-left: 60px;'><b>レポートがない</b></p></div>
 			<br><br> <br>	
 			<div class='row' style='margin-left: 43px;'><b>返事</b></div>
 			<br>			
-			<div style='width: 700px; height: 100px; margin: auto; border: 1px solid #428BCA;'>
-				
-
-				
+			<div style='width: 700px; margin: auto; border: 1px solid #428BCA; background-color: #FFF; border-radius: 4px; padding: 10px 10px 20px 10px;'>
+				<?php 
+					foreach ($results as $result) {
+						echo '<b><font color="#3276B1">'.$result['Comment']['user_id'].':   '.'</font></b>';
+						echo '<span>'.$result['Comment']['content'].'</span>';
+						echo '</br>';
+					}
+				?>				
 			</div>
-
-			
-
 			<br><br>
 
 			<div class='row'>
-			<?php echo $this->Form->create('Test',array(
+			<?php echo $this->Form->create('Report',array(
 				'inputDefaults' => array(  
 					'div' => false,  
 					'label' => false,  
@@ -54,16 +59,17 @@
 					'class' => 'form-control'  
 					),  
 				'style' => 'margin-left: 45px;',
-			    'url' => array('controller' => 'Test', 'action' => 'add','id' => $id),
+			    'url' => array('controller' => 'lecturer', 'action' => 'reply', 'id' => $id),
 			    'method' => 'post',
 			    'enctype' => 'multipart/form-data'
 				)); ?>
 
 				<div class="form-group">
 					<div class="col-xs-13 col-md-8">
-					<?php echo $this->Form->input('title', array(  
+					<?php echo $this->Form->input('content', array(  
 						'placeholder' => '返事の内容',  
-						'style' => 'width: 300px;'						
+						'style' => 'width: 300px;',
+						'required' => true						
 					)); ?>
 					</div>
 					<div class="col-xs-13 col-md-1">
@@ -82,7 +88,7 @@
 					</div> 						
 				</div>
 			</form>
-		</div>
+			</div>
 		</div>		
 	</div>
 </div>

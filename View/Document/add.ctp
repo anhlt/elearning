@@ -9,15 +9,15 @@
 		row ++;
 		//alert("title"+row);
 
-		/*var line ='<div class="row" id="row'+row+'"> <div class="col-md-8"> <?php echo $this->Form->input("title'+row+'", array("class"=>"form-control", "required"=> true, "label"=>"ドキュメントの名前", "placeholder"=>"ドキュメントの名前", "style"=>"width: 300px"));?> <?php echo $this->Form->input("link'+row+'", array("type"=>"file", "required"=>true, "class"=>"btn-file"));?> </div><div class="col-md-2"> <input type="button" class="btn btn-primary" value="削除" onclick="removeRow('+row+');">'+
-		'</div></div>';	*/	
+		var line ='<div class="row" id="row'+row+'"> <div class="col-md-8"> <?php echo $this->Form->input("title'+row+'", array("class"=>"form-control", "required"=> true, "label"=>"ドキュメントの名前", "placeholder"=>"ドキュメントの名前", "style"=>"width: 300px"));?> <?php echo $this->Form->input("link'+row+'", array("type"=>"file", "required"=>true, "class"=>"btn-file"));?> </div><div class="col-md-2"> <input type="button" class="btn btn-primary" value="削除" onclick="removeRow('+row+');">'+
+		'</div></div>';
 
-		var line =  '<div class="form-group">'+
+		/*var line =  '<div class="form-group">'+
 						'<input type="text" name="title'+row+'" placeholder="ドキュメントの名前" style="width: 300px" label="ドキュメントの名前">'+
 					'</div>'+
 					'<div class="form-group">'+
 						'<input type="file" name="link'+row+'" placeholder="ファイル" class="btn-file" label="ファイル">'+
-					'</div>';
+					'</div>';*/
 
 
 
