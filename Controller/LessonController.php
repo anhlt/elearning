@@ -238,18 +238,20 @@ class LessonController extends AppController {
                 $this->set("rank_stt", $rank_stt);
                 $this->Lesson->recursive = 2;
                 if($rank_stt == RANK_BY_LECTURER){ 
-                    $options['order'] = array('Lecturer.full_name'); 
-                    $lessons = $this->Lesson->find("all",$options);
+               //     $options['order'] = array('Lecturer.full_name'); 
+                    $lessons = $this->Lesson->find("all");
                     $this->set("lessons", $lessons);
                 }else if ($rank_stt==RANK_BY_LESSON){//rank by lessons's name
-                   $options['order'] = array("Lesson.name");
-                    $lessons = $this->Lesson->find("all", $options);
-                    $this->set("lessons", $lessons);
+               //    $options['order'] = array("Lesson.name");
+               //     $lessons = $this->Lesson->find("all", $options);
+              //      $this->set("lessons", $lessons);
 
                 }else if ($rank_stt==RANK_BY_TAG){
-                    $lessons = $this->Lesson->find("all", $options);
-                    $this->set("lessons", $lessons);
+               //     $lessons = $this->Lesson->find("all", $options);
+               //     $this->set("lessons", $lessons);
                 }
+		debug($lessons);
+//		die();
             }
         }
         if ($this->request->is('get')) {

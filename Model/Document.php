@@ -1,8 +1,12 @@
 <?php
 class Document extends AppModel {
-	public $name = 'document';
-	public $hasMany = 'Document';
-	
+//	public $name = 'document';
+//	public $hasMany = 'Document';
+	public $belongsTo = array(
+		'Lesson'=>array(
+			'className'=>'Lesson', 
+			'foreignKey'=>'lessons_id'
+		));	
 	public $validate = array(
 		'title' => array(
 			'required' => array(

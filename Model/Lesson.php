@@ -1,7 +1,11 @@
 <?php 
 class Lesson extends AppModel {
-	public $belongsTo="Lecturer";
-    public $actsAs = array('Containable');
+	public $belongsTo=array(
+		'Lecturer'=>array(
+			'className'=>'Lecturer',
+			'foreignKey'=>'lecturer_id')
+		);
+        public $actsAs = array('Containable');
 	public $hasAndBelongsToMany = array(
         'Tag' => array(
             'className' => 'Tag',
