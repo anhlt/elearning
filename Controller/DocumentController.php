@@ -35,14 +35,12 @@ class DocumentController extends AppController {
 		}
 	}
 
-	public function upload() {
-	}
-
 	public function edit() {
 		$document_id = $this->params['named']['id'];
 	}
 
 	public function delete() {
+<<<<<<< HEAD
 		$document_id = $this->params['named']['id'];
 	}
 
@@ -61,5 +59,16 @@ class DocumentController extends AppController {
             $this->Violate->save($data);
             $this->redirect(array("controller"=>"lesson","action"=>"learn",$lesson_id));  
         }
+=======
+    	$id = $this->params['named']['id'];
+    	if ($this->Document->delete($id)) {
+            $this->Session->setFlash(__('The document has been deleted'), 'alert', array(
+                'plugin' => 'BoostCake',
+                'class' => 'alert-success'
+            )); 
+
+            return $this->redirect($this->referer());      	
+    	}
+>>>>>>> 023f1290fae2a3453f317cc5719d964a797bec7c
     }
 }

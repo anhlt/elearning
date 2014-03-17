@@ -38,11 +38,27 @@ class TestController extends AppController {
 	}
 
 	public function edit() {
+		$test_id = $this->params['named']['id'];
+		var_dump($test_id);
 
+		$this->set("id", $test_id);
+
+		$results = $this->Test->find("first", $test_id);
+		$this->set('result', $results['Test']);
+
+		var_dump($results);
 	}
 
 	public function delete() {
-
-	}
+    	$id = $this->params['named']['id'];
+    	if ($this->Test->delete($id)) {
+            $this->Session->setFlash(__('The test has been deleted'), 'alert', array(
+                'plugin' => 'BoostCake',
+                'class' => 'alert-success'
+            )); 
+            
+            return $this->redirect($this->referer());      	
+    	}
+    }
 }
 ?>

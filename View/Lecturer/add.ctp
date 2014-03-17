@@ -88,9 +88,6 @@
 	'class' => 'btn btn-default'  
 	)); ?>  
 
-
-
-
 	<?php echo $this->Form->end(); ?>  
 	  
 	</div>  

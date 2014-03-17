@@ -18,14 +18,14 @@
 				'class' => 'form-control'  
 				),  
 			'class' => 'well',
-		    'url' => array('controller' => 'Test', 'action' => 'add','id' => $id),
+		    'url' => array('controller' => 'Test', 'action' => 'edit','id' => $id),
 		    'method' => 'post',
 		    'enctype' => 'multipart/form-data'
 			)); ?>
 
 			<div class="form-group">
 				<?php echo $this->Form->input('title', array(  
-					'placeholder' => 'ファイルの名前',  
+					'value' => $result['title'],  
 					'style' => 'width: 300px;',
 					'label' => 'ファイルの名前',
 				)); ?>  
@@ -34,6 +34,7 @@
 			<div class='form-group'>
 				<?php echo $this->Form->input('link', array( 
 					'type'=> 'file', 
+					'value' => $result['link'],
 					'placeholder' => 'ファイル',  
 					'class' => 'btn-file'
 				)); ?>
@@ -41,15 +42,16 @@
 
 			<div class="form-group">
 				<?php echo $this->Form->input('test_time', array(  
-					'placeholder' => 'テスト時間',  
+					'value' => $result['test_time'],  
 					'style' => 'width: 100px;',
 					'label' => '時間 （分）',
 				)); ?>				
 			</div>	
-			<?php $val = "thanhbq"?>		
+					
 			<div class='form-group'>
 				<?php echo $this->Form->textarea('des', array(												
-					'label' => '説明', 					 
+					'label' => '説明', 
+					'value' => '説明', 
 					'class'=>"form-control",
 					'rows'=>"4",
 					'style'=> 'width: 600px;'

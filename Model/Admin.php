@@ -6,6 +6,8 @@
  */
 class Admin extends AppModel {
     //put your code here
+    var $useTable = "Admin";
+
     public $hasOne = 'User';    
     public $validate = array(
         'username' => array(
@@ -43,6 +45,5 @@ class Admin extends AppModel {
            )
        ),
     );
-
 }
 ?>
