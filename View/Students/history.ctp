@@ -1,4 +1,4 @@
-<?php $this->LeftMenu->leftMenuStudent();?>
+<?php $this->LeftMenu->leftMenuStudent(STUDENT_STUDY_HISTORY);?>
 <div class = 'col-xs-13 col-md-9 '>
 <?php 
 echo " <h1> 勉強の歴史</h1>";

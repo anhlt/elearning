@@ -16,7 +16,7 @@ function upcomment(event, lesson_id){
 }
 </style>
 
-<?php $this->LeftMenu->leftMenuStudent();?>
+<?php $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE);?>
     <div class="col-xs-13 col-md-9 well">  
 <?php
 foreach($lessons as $row){

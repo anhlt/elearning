@@ -38,7 +38,7 @@ $(document).ready(function(){
     });
 }); 
 </script>
-<?php $this->LeftMenu->leftMenuStudent(); ?>
+<?php $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE); ?>
 
     <div class="col-xs-13 col-md-9">
 <?php
@@ -70,10 +70,10 @@ if (isset($rank_stt)){
                 $lecturer = $row['Lecturer'];
                 $user = $row['Lecturer']['User'];
                 if ($flag==0){
-                    echo $this->Html->tableHeaders(array("id", "先生", "授業の名前",  "アップロードの日")); 
+                    echo $this->Html->tableHeaders(array("id",'先生のユーザ名',  '先生の名前', "授業の名前",  "アップロードの日")); 
                     $flag = 1;
                 }
-                echo $this->Html->tableCells(array($lesson['id'], $user['username'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"show", $lesson['id'])),  $lesson['update_date'])); 
+                echo $this->Html->tableCells(array($lesson['id'],$user['username'],  $lecturer['full_name'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"show", $lesson['id'])),  $lesson['update_date'])); 
             }
         }else if ($rank_stt==RANK_BY_LESSON){
             $flag =0;
@@ -81,6 +81,7 @@ if (isset($rank_stt)){
                 $lesson = $row['Lesson'];
                 $lecturer = $row['Lecturer'];
                 $user = $row['Lecturer']['User'];
+                //    $tags = $row['Tag']; 
                 if ($flag==0){
                     echo $this->Html->tableHeaders(array("id",  "授業の名前", "先生 のユーザ名", "先生の名前", "アップロードの日"));  
                     $flag = 1;
@@ -89,32 +90,27 @@ if (isset($rank_stt)){
             }
 
         }else if ($rank_stt==RANK_BY_TAG){
-            $flag =0;
+            echo $this->Html->tableHeaders(array("id",  "タグ", "授業の名前", "先生のユーザ名", "先生の名前", "アップロードの日"));  
             foreach($lessons as $row){
-                $lesson = $row['Lesson'];
-                $lecturer = $row['Lecturer'];
-                $user = $row['User'];
                 $tag = $row['Tag'];
-                if ($flag==0){
-                    echo $this->Html->tableHeaders(array("id",  "タグ", "授業の名前", "先生のユーザ名", "先生の名前", "アップロードの日"));  
-                    $flag = 1;
+                $lesson_r = $row['Lesson'];
+                foreach($lesson_r as $lesson) {
+                    $lecturer = $lesson['Lecturer'];
+                    $user = $lecturer['User'];
+                    echo $this->Html->tableCells(array($lesson['id'], $tag['name'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"show",  $lesson['id'])), $user['username'], $lecturer['full_name'],  $lesson['update_date'])); 
                 }
-                echo $this->Html->tableCells(array($lesson['id'], $tag['name'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"show",  $lesson['id'])), $user['username'], $lecturer['full_name'],  $lesson['update_date'])); 
             }
         }
     }
-}else if (isset($lessons)){ //Truong hop search 
-    $flag =0;
-    foreach($lessons as $row){
+}else if (isset($tags)){ //Truong hop search 
+   // debug($tags);
+    foreach($tags as $row){
         $lessons = $row['Lesson'];
         $tag = $row['Tag'];
+        echo $this->Html->tableHeaders(array("id", "タグ",   "授業の名前", "先生 のユーザ名", "先生の名前", "アップロードの日"));  
         foreach ($lessons as $lesson) {
-            if ($flag==0){
-                echo $this->Html->tableHeaders(array("id", "タグ",   "授業の名前", "先生 のユーザ名", "先生の名前", "アップロードの日"));  
-                $flag = 1;
-            }
             echo $this->Html->tableCells(array($lesson['id'],$tag['name'],   $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"show",$lesson['id'] )), $lesson['Lecturer']['User']['username'], $lesson['Lecturer']['full_name'],  $lesson['update_date'])); 
-        
+
         }
     }
 }

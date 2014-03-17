@@ -238,19 +238,21 @@ class LessonController extends AppController {
                 $this->set("rank_stt", $rank_stt);
                 $this->Lesson->recursive = 2;
                 if($rank_stt == RANK_BY_LECTURER){ 
-               //     $options['order'] = array('Lecturer.full_name'); 
-                    $lessons = $this->Lesson->find("all");
+                    $options['order'] = array('Lecturer.full_name'); 
+                    $lessons = $this->Lesson->find("all", $options);
                     $this->set("lessons", $lessons);
                 }else if ($rank_stt==RANK_BY_LESSON){//rank by lessons's name
-               //    $options['order'] = array("Lesson.name");
-               //     $lessons = $this->Lesson->find("all", $options);
-              //      $this->set("lessons", $lessons);
+                   $options['order'] = array("Lesson.name");
+                   $lessons = $this->Lesson->find("all", $options);
+                   $this->set("lessons", $lessons);
 
                 }else if ($rank_stt==RANK_BY_TAG){
-               //     $lessons = $this->Lesson->find("all", $options);
-               //     $this->set("lessons", $lessons);
+                    $this->Tag->recursive = 3; 
+                    $options['order'] = array("Tag.name"); 
+                    $lessons = $this->Tag->find("all", $options);
+                    $this->set("lessons", $lessons);
                 }
-		debug($lessons);
+//		debug($lessons);
 //		die();
             }
         }
@@ -261,36 +263,15 @@ class LessonController extends AppController {
                 $tag_value = $this->params['url']['search_value'];
                 $options['conditions'] = array("Tag.name LIKE" => "%".$tag_value."%");
                 $tags = $this->Tag->find("all", $options); 
-                $this->set("lessons", $tags);
+                $this->set("tags", $tags);
             }
         }
     }
     public function show($lesson_id){
-        $options['fields']= array("Lecturer.*", "User.*", "Lesson.*");
-        $options['joins'] = array(
-            array("table"=>"lecturers", "alias"=>"Lecturer",  "conditions"=>array("Lecturer.id = Lesson.lecturer_id")), 
-            array("table"=>"users", "alias"=>"User", "conditions"=>array("User.id=Lesson.lecturer_id"))
-        ); 
+        $this->Lesson->recursive = 2; 
         $options['conditions'] = array("Lesson.id"=>$lesson_id); 
-        //      array("table"=>"documents", "alias"=>"Document", "conditions"=>array("Document.lesson_id = Lesson.id")));
-        //  $options['conditions'] = array("Lesson.id"=>$lesson_id); 
-        $lessons = $this->Lesson->find("all",$options); 
-        //Get tai lieu 
-        $options['fields'] = array("Document.*");
-        $options['joins'] = array(
-            array("table"=>"documents", "alias"=>"Document", "conditions"=>array("Document.lesson_id = Lesson.id")));
-        $options['conditions'] = array("Lesson.id"=>$lesson_id); 
-        $documents = $this->Lesson->find("all", $options);
-        $this->set("documents", $documents);
-
-        //Get comment
-        $options['fields'] = array("Comment.*");
-        $options['joins'] = array(
-            array("table"=>"comment", "alias"=>"Comment", "conditions"=>array("Comment.lesson_id = Lesson.id")));
-        $options['conditions'] = array("Lesson.id"=>$lesson_id); 
-        $comments = $this->Lesson->find("all", $options);
-        $this->set("comments", $comments);
-        $this->set("lessons", $lessons);
+        $lessons = $this->Lesson->find("first",$options); 
+        $this->set("lessons",  $lessons);
     }
     
     public function register($lesson_id){
