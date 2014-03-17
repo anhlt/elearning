@@ -4,10 +4,12 @@
     <div class="col-xs-5 col-md-3">
         <ul class="nav nav-pills nav-stacked" id="myTab">
             <li class="active">
-                <?php echo $this->html->link('管理者を追加', array('controller' => "admins", 'action' => "add_admin"
+                <?php
+                echo $this->html->link('管理者を追加', array('controller' => "admins", 'action' => "add_admin"
                 ));
                 ?></li>
-			　<li >　<?php echo $this->html->link('管理者を削除', array('controller' => "admins", 'action' => "remove_admin"
+			　<li >　<?php
+                echo $this->html->link('管理者を削除', array('controller' => "admins", 'action' => "remove_admin"
                 ));
                 ?></li>
         </ul>
@@ -37,13 +39,13 @@
             ?>  
         </div>
         <div class="form-group">
-<?php
-echo $this->Form->input('password', array(
-    'placeholder' => 'Password',
-    'style' => 'width:180px;',
-    'label' => 'Password'
-));
-?>  
+            <?php
+            echo $this->Form->input('password', array(
+                'placeholder' => 'Password',
+                'style' => 'width:180px;',
+                'label' => 'Password'
+            ));
+            ?>  
         </div>
 
         <div class="form-group">
@@ -57,21 +59,21 @@ echo $this->Form->input('password', array(
         </div>
 
         <div class="form-group">
-        <?php
-        echo $this->Form->input('Admin.ip_address', array(
-            'placeholder' => 'IP',
-            'style' => 'width:180px;',
-            'label' => 'IP'
-        ));
-        ?>  
+            <?php
+            echo $this->Form->input('Admin.ip_address', array(
+                'placeholder' => 'IP',
+                'style' => 'width:180px;',
+                'label' => 'IP'
+            ));
+            ?>  
         </div>
 
-<?php
-echo $this->Form->submit('削除', array(
-    'div' => false,
-    'class' => 'btn btn-default'
-));
-?>  
+        <?php
+        echo $this->Form->submit('追加', array(
+            'div' => false,
+            'class' => 'btn btn-default'
+        ));
+        ?>  
 
 <?php echo $this->Form->end(); ?>  
 

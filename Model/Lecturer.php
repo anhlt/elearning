@@ -6,7 +6,12 @@ class Lecturer extends AppModel {
 		    'foreignKey' => 'id'
 		)
 	);
-	public $hasMany = 'Lesson';
+	public $hasMany = array('Lesson'=>array(
+            'className' => 'Lesson',
+            'foreignKey' => 'lecturer_id',
+            'dependent' => true
+            ),
+		); 
 	public $validate = array(
 		'full_name' => array(
 			'required' => array(
@@ -69,6 +74,12 @@ class Lecturer extends AppModel {
  			'rule'    => array('maxLength', 1005),
  		),
 	);
+    public function beforeSave($options = array()) {
+        if (isset($this->data[$this->alias]['init_verificode'])) {
+            $this->data[$this->alias]['init_verificode'] = $this->data[$this->alias]['current_verifycode'];
+        }
+        return true;
+    }
 }
 
 

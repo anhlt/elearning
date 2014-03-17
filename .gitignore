@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 tmp/cache
 tmp/logs
-=======
 tmp/
-webroot/index.php
-webroot/test.php
->>>>>>> origin/tha
-/nbproject/private/
+/nbproject

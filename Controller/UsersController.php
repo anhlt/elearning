@@ -41,7 +41,7 @@ class UsersController extends AppController {
 					'plugin' => 'BoostCake',
 					'class' => 'alert-success'
 				));
-    			return $this->redirect(array('controller' => 'pages', 'action' => 'display'));
+    			return $this->redirect(array('controller' => 'user', 'action' => 'login'));
     		}
 			$this->Session->setFlash(__('The User could not be saved. Plz try again'), 'alert', array(
 				'plugin' => 'BoostCake',
@@ -77,7 +77,10 @@ class UsersController extends AppController {
 	        	{
 	        		$this->redirect(array('controller'=>'Admins'));
 	        	}
-	            return $this->redirect(array('controller' => "lecturer", "action" => "index" ));
+	        	if ($user['role'] == 'lecturer') {
+	        		return $this->redirect(array('controller' => "lecturer" ));
+	        	}	            
+	            return $this->redirect(array('controller' => "lecturer" ));
 	        }else
 	        {
 

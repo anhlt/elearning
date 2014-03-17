@@ -73,6 +73,5 @@ class Student extends AppModel{
             'rule'    => array('maxLength', 1005),
         ),
     );
-
 }
 ?>

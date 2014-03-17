@@ -1,13 +1,10 @@
 <?php
-
-
 /**
  * Description of ManagerModel
  *
  * @author Tha
  */
 class Admin extends AppModel {
-
     //put your code here
     var $useTable = "Admin";
 
@@ -49,4 +46,5 @@ class Admin extends AppModel {
        ),
     );
 }
+
 ?>

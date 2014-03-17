@@ -5,16 +5,14 @@ class LecturerController extends AppController {
   	var $uses = array('User', 'Lecturer','Question','Lesson', 'Test', 'Document', 'Comment');	
 
 	public $components = array('RequestHandler', 'Paginator');		
-	#public $helpers = array('Js' => array('Jquery'), 'Paginator');
+    public $helpers = array('LeftMenu');
     
 
   	public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow(array('add', 'upload_test', 'manage', 'view'));
     }
-
     public function add(){
-
     	if($this->Auth->loggedIn()){
       	  $this->redirect('/');
     	}
@@ -24,11 +22,12 @@ class LecturerController extends AppController {
      		$droplist[$question['Question']['id']] = $question['Question']['question'];
     	}
     	$this->set('droplist', $droplist);
+
 		if($this->request->is('post')){
 			$this->User->create();
 			$this->request->data['Lecturer']['ip_address'] = $this->request->clientIp();
+			$this->request->data['Lecturer']['init_verifycode'] = $this->request->data['Lecturer']['current_verifycode']; 
 			$this->request->data['User']['role'] = 'lecturer';
-
 			if($this->User->saveAll($this->request->data)){
 				$this->Session->setFlash(__('The user has been saved'), 'alert', array(
 					'plugin' => 'BoostCake',
@@ -54,7 +53,6 @@ class LecturerController extends AppController {
 	{
 		
 	}	
-
 	public function manage($value='')
 	{
 		$this->paginate = array(
@@ -69,26 +67,6 @@ class LecturerController extends AppController {
 		$data = $this->Paginator->paginate("Lesson");
 		$this->set('results',$data);
 	}
-
-
-
-	/*public function studentmanage()
-	{
-
-		$lesson_id = $this->params['named']['lesson_id'];
-		$lesson = $this->Lesson->findById($lesson_id);
-		$this->paginate = array(
-		    'fields' => array('Student.full_name','Student.id','LessonMembership.baned','LessonMembership.liked','LessonMembership.lesson_id'),
-			'limit' => 10,
-			'conditions' => array(
-			 	'LessonMembership.lesson_id' => $lesson_id),
-			'contain' => array('Student')
-		);
-
-		$this->LessonMembership->Behaviors->load('Containable');
-		$students = $this->Paginator->paginate("LessonMembership");
-		$this->set("results",$students);
-	}*/
 
 	public function reply() {
 		$user_id = $this->Auth->user()['id'];

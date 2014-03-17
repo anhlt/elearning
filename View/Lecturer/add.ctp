@@ -24,6 +24,20 @@
 		'style' => 'width:180px;',
 		'label' => 'Password'
 	  )); ?>  
+	</div>	
+	<div class="form-group">
+	  <?php echo $this->Form->input('full_name', array(  
+		'placeholder' => 'Name',  
+		'style' => 'width:180px;',
+		'label' => 'Name'
+	  )); ?>  
+	</div>	
+	<div class="form-group">
+	  <?php echo $this->Form->input('credit_card_number', array(  
+		'placeholder' => 'Creadit Card Number',  
+		'style' => 'width:180px;',
+		'label' => 'Creadit Card Number'
+	  )); ?>  
 	</div>
 
 	<div class="form-group">

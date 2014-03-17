@@ -8,11 +8,11 @@
 		'class' => 'form-control'  
 		),  
 	'class' => 'well',
-    'url' => array('controller' => 'Document', 'action' => 'edit')
+    'url' => array('controller' => 'Documents', 'action' => 'edit')
     )); ?>
 
 
-
+<?php echo   $this->Form->input('id'); ?>
 <?php echo $this->Upload->edit('Document', $this->Form->fields['Document.id']);?>
 
 
