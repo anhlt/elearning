@@ -45,16 +45,8 @@
 					'style' => 'width: 100px;',
 					'label' => '時間 （分）',
 				)); ?>				
-			</div>	
-			<?php $val = "thanhbq"?>		
-			<div class='form-group'>
-				<?php echo $this->Form->textarea('des', array(												
-					'label' => '説明', 					 
-					'class'=>"form-control",
-					'rows'=>"4",
-					'style'=> 'width: 600px;'
-				));?>
-			</div>
+			</div>						
+			
 			<div class='form-group'>					 
 				<?php echo $this->Form->submit('アップロード', array(
 				'class' => 'btn btn-primary',

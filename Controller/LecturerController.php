@@ -4,14 +4,16 @@ class LecturerController extends AppController {
 	var $name = "Lecturer";
   	var $uses = array('User', 'Lecturer','Question','Lesson', 'Test', 'Document', 'Comment');	
 
-	public $components = array('RequestHandler', 'Paginator');		
-    public $helpers = array('LeftMenu');
+	public $components = array('RequestHandler');
+	public $helpers = array('Js' => array('Jquery'),'LeftMenu');
+
     
 
   	public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array('add', 'upload_test', 'manage', 'view'));
+        $this->Auth->allow("add");
     }
+
     public function add(){
     	if($this->Auth->loggedIn()){
       	  $this->redirect('/');
@@ -57,15 +59,35 @@ class LecturerController extends AppController {
 	{
 		$this->paginate = array(
 		    'fields' => array('Lesson.id', 'Lesson.Name','Lesson.summary'),
-			'limit' => 10,
+			'limit' => 5,
 			'conditions' => array(
 				'Lesson.lecturer_id' => $this->Auth->user('id')
 			)
 		);
 
-		$this->Paginator->settings = $this->paginate;
-		$data = $this->Paginator->paginate("Lesson");
-		$this->set('results',$data);
+		$results = $this->paginate('Lesson');
+		if ($this->request->is('ajax')) {
+ 			$this->render('manage', 'ajax'); // View, Layout
+		}
+		$this->set('results',$results);
+	}
+
+
+	public function studentmanage()
+	{
+		$lesson_id = $this->params['named']['lesson_id'];
+		$lesson = $this->Lesson->findById($lesson_id);
+		$this->paginate = array(
+		    'fields' => array('Student.full_name','Student.id','LessonMembership.baned','LessonMembership.liked','LessonMembership.lesson_id'),
+			'limit' => 10,
+			'conditions' => array(
+			 	'LessonMembership.lesson_id' => $lesson_id),
+			'contain' => array('Student')
+		);
+
+		$this->LessonMembership->Behaviors->load('Containable');
+		$students = $this->paginate("LessonMembership");
+		$this->set("results",$students);
 	}
 
 	public function reply() {
@@ -94,7 +116,6 @@ class LecturerController extends AppController {
             	));	
 			}
 		}
-
 		return $this->redirect($this->referer());
 	}	
 }

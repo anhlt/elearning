@@ -32,6 +32,9 @@
 
 	<div class="col-xs-13 col-md-9">
 		<div class="well">
+			<div class='form-group'>
+				<b><?php echo $this->Html->link("授業管理", array('controller' => 'lecturer', 'action' => 'manage')); ?></b>	  
+			</div>
 			<div style='text-align: center; margin-bottom: 20px;'>
 				<h4><b>学生情報</b></h4>
 			</div>

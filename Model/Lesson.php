@@ -2,6 +2,7 @@
 class Lesson extends AppModel {
 	public $belongsTo="Lecturer";
     public $actsAs = array('Containable');
+    
 	public $hasAndBelongsToMany = array(
         'Tag' => array(
             'className' => 'Tag',
@@ -12,7 +13,8 @@ class Lesson extends AppModel {
     public $hasMany = array(
         'Study' => 
             array('dependent' => True ),
-        'Document'
+        'Document',
+        'Comment'
     );
     
     public $validate = array(

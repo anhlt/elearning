@@ -31,6 +31,9 @@
 	</div>
 	<div class="col-xs-13 col-md-9">
 		<div class="well">
+			<div class='form-group'>
+				<b><?php echo $this->Html->link("授業管理", array('controller' => 'lecturer', 'action' => 'manage')); ?></b>	  
+			</div>
 			<div style='text-align: center; margin-bottom: 20px;'>
 				<h4><b>テスト情報</b></h4>
 			</div>
@@ -42,11 +45,12 @@
 			<table class="table">
 				<tr>
 					<td  class="col-sm-1"><?php echo $this->Paginator->sort('id'); ?></td>	
-					<td  class="col-sm-1">Title</td>	
-					<td  class="col-sm-1">Time</td>	
-					<td  class="col-sm-1">Link</td>			
+					<td  class="col-sm-1"><?php echo $this->Paginator->sort('Title'); ?></td>	
+					<td  class="col-sm-1"><?php echo $this->Paginator->sort('Time'); ?></td>	
+					<td  class="col-sm-1">Link</td>	
 					<td  class="col-sm-1">Edit</td>
-					<td  class="col-sm-1">Delete</td>			
+					<td  class="col-sm-1">Delete</td>
+					<td  class="col-sm-1">View</td>		
 				</tr>
 			 <?php foreach ($results as $result) {?>
 			  <tr>
@@ -58,10 +62,19 @@
 			  	</td>
 			  	<td><?php echo $this->Html->image("trash.png", array("alt" => "delete",'url' => array('controller' => 'test', 'action' => 'delete', "id"=>$result['Test']['id']))); ?>
 			  	</td>
+			  	<td><?php echo $this->Html->link("View", array('controller' => 'test', 'action' => 'view', "id"=>$result['Test']['id'])); ?>
+			  	</td>
 			  </tr>
 			 <?php }?>
 			</table>
 			</div>
 		</div>
+	</div>
+	<div class='form-group' style='float: right; margin-right: 15px;'>
+		<div class="form-group">
+			<span style='margin-right: 20px;'>テストを追加する</span>
+			<?php echo $this->html->link('追加', array('controller' => 'test', 'action' => 'add', 'id' => $id),
+				array('class' => 'btn btn-primary'));?>		
+		</div>	
 	</div>
 </div>

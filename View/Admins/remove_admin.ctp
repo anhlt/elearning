@@ -1,6 +1,3 @@
-
-
-
 <div class="col-xs-5 col-md-3">
 		<ul class="nav nav-pills nav-stacked" id="myTab">
 			<li class="active">
@@ -35,4 +32,3 @@
 			</table>
 		</div>
 	</div>
-

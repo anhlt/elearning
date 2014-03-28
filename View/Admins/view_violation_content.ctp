@@ -1,3 +1,5 @@
+<div class="row">
+<?php echo $this->element('admin_menus');?>
 <div class="col-xs-5 col-md-3">
     <ul class="nav nav-pills nav-stacked" id="myTab">
         <li class="active">
@@ -33,7 +35,9 @@ echo $this->Form->create('Admin', array(
         'class' => 'form-control'
     ),
     'class' => 'well',
-    'url' => array('controller' => 'Admins', 'action' => 'view_violation_content_process','id' => $violate_id)
+    'url' => array('controller' => 'Admins', 'action' => 'view_violation_content_process','id' => $violate_id
+       ,'count'=> $count, 'lecturer_id' =>$lecturer_id,
+        )
 ));
 
 echo $this->Form->submit('確認', array(
@@ -49,3 +53,4 @@ echo $this->Form->submit('削除', array(
 echo $this->Form->end();
 
 ?>
+<div>

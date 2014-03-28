@@ -31,18 +31,36 @@
 	</div>
 	<div class="col-xs-13 col-md-9">		
 		<div class="well">
+			<div class='form-group'>
+				<b><?php echo $this->Html->link("授業管理", array('controller' => 'lecturer', 'action' => 'manage')); ?></b>	  
+			</div>
 			<div style='text-align: center; margin-bottom: 20px;'>
 				<h4><b>レポート</b></h4>
 			</div>
 
-			<div class='row'><p style='margin-left: 60px;'><b>レポートがない</b></p></div>
+			<div class='row'>
+				<p style='margin-left: 60px;'>				
+				<?php 
+				if($reports) {
+					foreach ($reports as $report) {									
+						echo $this->html->link($report['Document']['title'], array('controller' => 'document', 'action' => 'edit',
+							'id' => $id, 'document_id' => $report['Document']['id'], 'ihan' => 'true'));
+						echo '</br>';
+					}
+				}					
+				else {
+					echo '<b>レポートがない</b>';
+				}
+				?>
+				</p>
+			</div>
 			<br><br> <br>	
 			<div class='row' style='margin-left: 43px;'><b>返事</b></div>
 			<br>			
 			<div style='width: 700px; margin: auto; border: 1px solid #428BCA; background-color: #FFF; border-radius: 4px; padding: 10px 10px 20px 10px;'>
 				<?php 
 					foreach ($results as $result) {
-						echo '<b><font color="#3276B1">'.$result['Comment']['user_id'].':   '.'</font></b>';
+						echo '<b><font color="#3276B1">'.$result['Comment']['full_name'].':   '.'</font></b>';
 						echo '<span>'.$result['Comment']['content'].'</span>';
 						echo '</br>';
 					}
@@ -68,7 +86,7 @@
 					<div class="col-xs-13 col-md-8">
 					<?php echo $this->Form->input('content', array(  
 						'placeholder' => '返事の内容',  
-						'style' => 'width: 300px;',
+						'style' => 'width: 400px;',
 						'required' => true						
 					)); ?>
 					</div>

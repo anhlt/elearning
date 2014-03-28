@@ -33,30 +33,22 @@
 
 			<div class='form-group'>
 				<?php echo $this->Form->input('link', array( 
-					'type'=> 'file', 
+					'type'=> 'file',					
 					'value' => $result['link'],
-					'placeholder' => 'ファイル',  
+					'placeholder' => 'ファイル',
+					'required' => false,
 					'class' => 'btn-file'
 				)); ?>
 			</div>
 
 			<div class="form-group">
-				<?php echo $this->Form->input('test_time', array(  
+				<?php echo $this->Form->input('test_time', array(
 					'value' => $result['test_time'],  
 					'style' => 'width: 100px;',
-					'label' => '時間 （分）',
+					'label' => '時間 （分）',					
 				)); ?>				
-			</div>	
-					
-			<div class='form-group'>
-				<?php echo $this->Form->textarea('des', array(												
-					'label' => '説明', 
-					'value' => '説明', 
-					'class'=>"form-control",
-					'rows'=>"4",
-					'style'=> 'width: 600px;'
-				));?>
-			</div>
+			</div>					
+			
 			<div class='form-group'>					 
 				<?php echo $this->Form->submit('アップロード', array(
 				'class' => 'btn btn-primary',

@@ -3,8 +3,6 @@
 <meta charset='utf-8'/>
 <title> 新授業を作成する</title>
 
-
-
 <!--
 <script type="text/javascript">		
 	var row = 0;
@@ -131,7 +129,7 @@
 		<div id='addition'>
 
 		</div>
-		<br><br>
+		<br>
 
 		<div class='row'>
 		<div class=' col-md-1'>
@@ -143,7 +141,7 @@
 		<div>私はそのドキュメントを専従する</div>
 		</div>
 
-		<br> <br> <br>
+		<br>
 		<div class='form-group'>
 		<?php echo $this->Form->submit('アップロード', array(
 		'class' => 'btn btn-primary',

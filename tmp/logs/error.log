@@ -15885,3 +15885,2092 @@ Stack Trace:
 #3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
 #4 [internal function]: App::shutdown()
 #5 {main}
+2014-03-17 04:47:19 Error: Fatal Error (4): syntax error, unexpected '<<' (T_SL), expecting function (T_FUNCTION) in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 238]
+2014-03-17 04:47:19 Error: [FatalErrorException] syntax error, unexpected '<<' (T_SL), expecting function (T_FUNCTION)
+Request URL: /lesson/doc/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 238)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 238, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 238, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 04:48:25 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Document.document_id' in 'field list'
+Request URL: /lesson/doc/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Documen...', Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Documen...', Array, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Documen...', false)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Document), 'SELECT `Documen...', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Document), Object(Document), 'hasMany', 'Document', Array, Array, true, Array, 0, Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Document), Array)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('all', Array)
+#8 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Component\PaginatorComponent.php(196): Model->find('all', Array)
+#9 C:\xampp\htdocs\elearning\Controller\LessonController.php(135): PaginatorComponent->paginate('Document')
+#10 [internal function]: LessonController->doc()
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#13 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#14 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#15 {main}
+2014-03-17 04:56:56 Error: [MissingActionException] Action LessonController::add:01() could not be found.
+Exception Attributes: array (
+  'controller' => 'LessonController',
+  'action' => 'add:01',
+)
+Request URL: /lesson/add:01
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-17 04:57:20 Error: Fatal Error (4): syntax error, unexpected '<<' (T_SL), expecting function (T_FUNCTION) in [C:\xampp\htdocs\elearning\Controller\LecturerController.php, line 75]
+2014-03-17 04:57:20 Error: [FatalErrorException] syntax error, unexpected '<<' (T_SL), expecting function (T_FUNCTION)
+Request URL: /lecturer/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 75)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 75, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 75, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 04:57:24 Error: Fatal Error (4): syntax error, unexpected '<<' (T_SL) in [C:\xampp\htdocs\elearning\Model\Admin.php, line 49]
+2014-03-17 04:57:24 Error: [FatalErrorException] syntax error, unexpected '<<' (T_SL)
+Request URL: /users/login
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 49)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 49, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 49, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 04:57:30 Error: Fatal Error (4): syntax error, unexpected '<<' (T_SL) in [C:\xampp\htdocs\elearning\Model\Admin.php, line 49]
+2014-03-17 04:57:30 Error: [FatalErrorException] syntax error, unexpected '<<' (T_SL)
+Request URL: /users/login
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 49)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 49, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 49, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 04:58:03 Error: Fatal Error (4): syntax error, unexpected '<<' (T_SL), expecting function (T_FUNCTION) in [C:\xampp\htdocs\elearning\Controller\LecturerController.php, line 75]
+2014-03-17 04:58:03 Error: [FatalErrorException] syntax error, unexpected '<<' (T_SL), expecting function (T_FUNCTION)
+Request URL: /lecturer
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 75)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 75, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 75, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 04:58:31 Error: [MissingActionException] Action LessonController::detail_doc() could not be found.
+Exception Attributes: array (
+  'controller' => 'LessonController',
+  'action' => 'detail_doc',
+)
+Request URL: /lesson/detail_doc/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-17 04:58:58 Error: Fatal Error (4): syntax error, unexpected 'public' (T_PUBLIC) in [C:\xampp\htdocs\elearning\Controller\DocumentController.php, line 45]
+2014-03-17 04:58:58 Error: [FatalErrorException] syntax error, unexpected 'public' (T_PUBLIC)
+Request URL: /document/delete/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 04:59:16 Error: Fatal Error (4): syntax error, unexpected 'public' (T_PUBLIC) in [C:\xampp\htdocs\elearning\Controller\DocumentController.php, line 45]
+2014-03-17 04:59:16 Error: [FatalErrorException] syntax error, unexpected 'public' (T_PUBLIC)
+Request URL: /document/edit/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 04:59:18 Error: Fatal Error (4): syntax error, unexpected 'public' (T_PUBLIC) in [C:\xampp\htdocs\elearning\Controller\DocumentController.php, line 45]
+2014-03-17 04:59:18 Error: [FatalErrorException] syntax error, unexpected 'public' (T_PUBLIC)
+Request URL: /document/delete/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 05:01:37 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Document\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Document\\delete.ctp',
+)
+Request URL: /document/delete/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:01:58 Error: [MissingControllerException] Controller class ElearningController could not be found.
+Exception Attributes: array (
+  'class' => 'ElearningController',
+  'plugin' => NULL,
+)
+Request URL: /elearning/lecturer/
+Stack Trace:
+#0 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-03-17 05:06:35 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00006
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:06:45 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00006
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:07:37 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00002
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:08:14 Error: [MissingActionException] Action TestController::add:01() could not be found.
+Exception Attributes: array (
+  'controller' => 'TestController',
+  'action' => 'add:01',
+)
+Request URL: /test/add:01
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-17 05:08:20 Error: [MissingActionException] Action TestController::add:1() could not be found.
+Exception Attributes: array (
+  'controller' => 'TestController',
+  'action' => 'add:1',
+)
+Request URL: /test/add:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-17 05:11:31 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00007
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:11:47 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00007
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:12:04 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00007
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:12:29 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00008
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:12:30 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00008
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:12:41 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00007
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:12:45 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00008
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:12:59 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00007
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:14:13 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00007
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:14:14 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00007
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:14:15 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00007
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:14:15 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00007
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:14:16 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00007
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:14:16 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00007
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:14:36 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00007
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:14:40 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00008
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:15:03 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00009
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:15:29 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00010
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:15:53 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\delete.ctp',
+)
+Request URL: /test/delete/id:00010
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:18:13 Error: [MissingActionException] Action DocumentController::add:01() could not be found.
+Exception Attributes: array (
+  'controller' => 'DocumentController',
+  'action' => 'add:01',
+)
+Request URL: /document/add:01
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-17 05:18:18 Error: [MissingActionException] Action DocumentController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'DocumentController',
+  'action' => 'index',
+)
+Request URL: /document/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-17 05:18:21 Error: [MissingControllerException] Controller class DocumentsController could not be found.
+Exception Attributes: array (
+  'class' => 'DocumentsController',
+  'plugin' => NULL,
+)
+Request URL: /documents/add
+Stack Trace:
+#0 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-03-17 05:19:06 Error: [MissingActionException] Action DocumentController::add:01() could not be found.
+Exception Attributes: array (
+  'controller' => 'DocumentController',
+  'action' => 'add:01',
+)
+Request URL: /document/add:01
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-17 05:25:41 Error: [MissingActionException] Action LessonController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'LessonController',
+  'action' => 'index',
+)
+Request URL: /lesson/index/add/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-17 05:29:35 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Document\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Document\\delete.ctp',
+)
+Request URL: /document/delete/id:9
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:30:18 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Document\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Document\\delete.ctp',
+)
+Request URL: /document/delete/id:10
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:32:49 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Document\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Document\\delete.ctp',
+)
+Request URL: /document/delete/id:10
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:32:54 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Document\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Document\\delete.ctp',
+)
+Request URL: /document/delete/id:11
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:33:20 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Document\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Document\\delete.ctp',
+)
+Request URL: /document/delete/id:12
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 05:35:45 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Document\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Document\\delete.ctp',
+)
+Request URL: /document/delete/id:14
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-17 06:42:50 Error: [MissingHelperException] Helper class UploadHelper could not be found.
+Exception Attributes: array (
+  'class' => 'UploadHelper',
+  'plugin' => false,
+)
+Request URL: /document/edit/id:16
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\HelperCollection.php(63): HelperCollection->load('Upload')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(818): HelperCollection->__isset('Upload')
+#2 C:\xampp\htdocs\elearning\View\Document\edit.ctp(16): View->__get('Upload')
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(929): include('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(891): View->_evaluate('C:\xampp\htdocs...', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(460): View->_render('C:\xampp\htdocs...')
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#8 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#9 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2014-03-17 06:46:45 Error: Fatal Error (4): syntax error, unexpected '<' in [C:\xampp\htdocs\elearning\View\Lesson\doc.ctp, line 46]
+2014-03-17 06:46:45 Error: [FatalErrorException] syntax error, unexpected '<'
+Request URL: /lesson/doc/id:1/sort:id/direction:asc
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 46)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 46, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 46, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 07:00:34 Error: Fatal Error (4): syntax error, unexpected ''class'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in [C:\xampp\htdocs\elearning\View\Test\edit.ctp, line 40]
+2014-03-17 07:00:34 Error: [FatalErrorException] syntax error, unexpected ''class'' (T_CONSTANT_ENCAPSED_STRING), expecting ')'
+Request URL: /test/edit/id:00015
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 40)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 40, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 40, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 07:46:15 Error: Fatal Error (4): syntax error, unexpected ',' in [C:\xampp\htdocs\elearning\Controller\TestController.php, line 63]
+2014-03-17 07:46:15 Error: [FatalErrorException] syntax error, unexpected ','
+Request URL: /Test/edit/id:00024
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 63)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 63, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 63, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 07:48:57 Error: Fatal Error (4): syntax error, unexpected '{' in [C:\xampp\htdocs\elearning\Controller\TestController.php, line 67]
+2014-03-17 07:48:57 Error: [FatalErrorException] syntax error, unexpected '{'
+Request URL: /Test/edit/id:00024
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 67)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 67, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 67, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 07:49:09 Error: Fatal Error (4): syntax error, unexpected '{' in [C:\xampp\htdocs\elearning\Controller\TestController.php, line 66]
+2014-03-17 07:49:09 Error: [FatalErrorException] syntax error, unexpected '{'
+Request URL: /Test/edit/id:00024
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 66)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 66, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 66, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 07:49:57 Error: Fatal Error (4): syntax error, unexpected '{' in [C:\xampp\htdocs\elearning\Controller\TestController.php, line 66]
+2014-03-17 07:49:57 Error: [FatalErrorException] syntax error, unexpected '{'
+Request URL: /Test/edit/id:00024
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 66)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 66, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 66, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 07:49:59 Error: Fatal Error (4): syntax error, unexpected '{' in [C:\xampp\htdocs\elearning\Controller\TestController.php, line 66]
+2014-03-17 07:49:59 Error: [FatalErrorException] syntax error, unexpected '{'
+Request URL: /test/edit/id:00024
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 66)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 66, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 66, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 07:50:39 Error: Fatal Error (4): syntax error, unexpected '{' in [C:\xampp\htdocs\elearning\Controller\TestController.php, line 67]
+2014-03-17 07:50:39 Error: [FatalErrorException] syntax error, unexpected '{'
+Request URL: /test/edit/id:00024
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 67)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 67, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 67, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 07:50:42 Error: Fatal Error (4): syntax error, unexpected '{' in [C:\xampp\htdocs\elearning\Controller\TestController.php, line 67]
+2014-03-17 07:50:42 Error: [FatalErrorException] syntax error, unexpected '{'
+Request URL: /test/edit/id:00024
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 67)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 67, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 67, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 07:52:11 Error: Fatal Error (4): syntax error, unexpected '{' in [C:\xampp\htdocs\elearning\Controller\TestController.php, line 67]
+2014-03-17 07:52:11 Error: [FatalErrorException] syntax error, unexpected '{'
+Request URL: /Test/edit/id:00024
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 67)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 67, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 67, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 08:25:53 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Comment.student_id' in 'field list'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Comment...', Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Comment...', Array, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Comment...', false)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Student), 'SELECT `Comment...', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1291): DboSource->queryAssociation(Object(Student), Object(Comment), 'hasMany', 'Comment', Array, Array, true, Array, 0, Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1217): DboSource->queryAssociation(Object(Study), Object(Student), 'belongsTo', 'Student', Array, Array, true, Array, 1, Array)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Lesson), Object(Study), 'hasMany', 'Study', Array, Array, true, Array, 2, Array)
+#8 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Lesson), Array)
+#9 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(597): Model->find('first', Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(800): DboSource->query('findById', Array, Object(Lesson))
+#12 C:\xampp\htdocs\elearning\Controller\LessonController.php(284): Model->__call('findById', Array)
+#13 C:\xampp\htdocs\elearning\Controller\LessonController.php(284): Lesson->findById('1')
+#14 [internal function]: LessonController->report()
+#15 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#16 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#17 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#18 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#19 {main}
+2014-03-17 08:26:32 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Comment.student_id' in 'field list'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Comment...', Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Comment...', Array, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Comment...', false)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Student), 'SELECT `Comment...', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1291): DboSource->queryAssociation(Object(Student), Object(Comment), 'hasMany', 'Comment', Array, Array, true, Array, 0, Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1217): DboSource->queryAssociation(Object(Study), Object(Student), 'belongsTo', 'Student', Array, Array, true, Array, 1, Array)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Lesson), Object(Study), 'hasMany', 'Study', Array, Array, true, Array, 2, Array)
+#8 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Lesson), Array)
+#9 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(597): Model->find('first', Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(800): DboSource->query('findById', Array, Object(Lesson))
+#12 C:\xampp\htdocs\elearning\Controller\LessonController.php(284): Model->__call('findById', Array)
+#13 C:\xampp\htdocs\elearning\Controller\LessonController.php(284): Lesson->findById('1')
+#14 [internal function]: LessonController->report()
+#15 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#16 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#17 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#18 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#19 {main}
+2014-03-17 08:27:39 Error: [MissingTableException] Table comments for model Comment was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'comments',
+  'class' => 'Comment',
+  'ds' => 'default',
+)
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('comments')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1063): Model->getDataSource()
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Lesson), Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(597): Model->find('first', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(800): DboSource->query('findById', Array, Object(Lesson))
+#6 C:\xampp\htdocs\elearning\Controller\LessonController.php(284): Model->__call('findById', Array)
+#7 C:\xampp\htdocs\elearning\Controller\LessonController.php(284): Lesson->findById('1')
+#8 [internal function]: LessonController->report()
+#9 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#12 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#13 {main}
+2014-03-17 08:27:48 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Comment.student_id' in 'field list'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Comment...', Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Comment...', Array, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Comment...', false)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Student), 'SELECT `Comment...', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1291): DboSource->queryAssociation(Object(Student), Object(Comment), 'hasMany', 'Comment', Array, Array, true, Array, 0, Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1217): DboSource->queryAssociation(Object(Study), Object(Student), 'belongsTo', 'Student', Array, Array, true, Array, 1, Array)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Lesson), Object(Study), 'hasMany', 'Study', Array, Array, true, Array, 2, Array)
+#8 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Lesson), Array)
+#9 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(597): Model->find('first', Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(800): DboSource->query('findById', Array, Object(Lesson))
+#12 C:\xampp\htdocs\elearning\Controller\LessonController.php(284): Model->__call('findById', Array)
+#13 C:\xampp\htdocs\elearning\Controller\LessonController.php(284): Lesson->findById('1')
+#14 [internal function]: LessonController->report()
+#15 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#16 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#17 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#18 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#19 {main}
+2014-03-17 08:32:00 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Comment.student_id' in 'field list'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Comment...', Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Comment...', Array, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Comment...', false)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Student), 'SELECT `Comment...', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1291): DboSource->queryAssociation(Object(Student), Object(Comment), 'hasMany', 'Comment', Array, Array, true, Array, 0, Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1217): DboSource->queryAssociation(Object(Study), Object(Student), 'belongsTo', 'Student', Array, Array, true, Array, 1, Array)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Lesson), Object(Study), 'hasMany', 'Study', Array, Array, true, Array, 2, Array)
+#8 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Lesson), Array)
+#9 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(597): Model->find('first', Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(800): DboSource->query('findById', Array, Object(Lesson))
+#12 C:\xampp\htdocs\elearning\Controller\LessonController.php(284): Model->__call('findById', Array)
+#13 C:\xampp\htdocs\elearning\Controller\LessonController.php(284): Lesson->findById('1')
+#14 [internal function]: LessonController->report()
+#15 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#16 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#17 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#18 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#19 {main}
+2014-03-17 08:32:57 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Comment.student_id' in 'field list'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Comment...', Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Comment...', Array, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Comment...', false)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Student), 'SELECT `Comment...', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1291): DboSource->queryAssociation(Object(Student), Object(Comment), 'hasMany', 'Comment', Array, Array, true, Array, 0, Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1217): DboSource->queryAssociation(Object(Study), Object(Student), 'belongsTo', 'Student', Array, Array, true, Array, 1, Array)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Lesson), Object(Study), 'hasMany', 'Study', Array, Array, true, Array, 2, Array)
+#8 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Lesson), Array)
+#9 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(597): Model->find('first', Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(800): DboSource->query('findById', Array, Object(Lesson))
+#12 C:\xampp\htdocs\elearning\Controller\LessonController.php(284): Model->__call('findById', Array)
+#13 C:\xampp\htdocs\elearning\Controller\LessonController.php(284): Lesson->findById('1')
+#14 [internal function]: LessonController->report()
+#15 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#16 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#17 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#18 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#19 {main}
+2014-03-17 08:57:42 Error: [PDOException] SQLSTATE[42S02]: Base table or view not found: 1051 Unknown table 'Comment'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Comment...', Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Comment...', Array, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1077): DboSource->fetchAll('SELECT `Comment...', false)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Lesson), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(597): Model->find('first', Array)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(800): DboSource->query('findById', Array, Object(Lesson))
+#8 C:\xampp\htdocs\elearning\Controller\LessonController.php(295): Model->__call('findById', Array)
+#9 C:\xampp\htdocs\elearning\Controller\LessonController.php(295): Lesson->findById('1', Array)
+#10 [internal function]: LessonController->report()
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#13 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#14 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#15 {main}
+2014-03-17 08:58:37 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Lesson.Comment.*' in 'field list'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Lesson....', Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Lesson....', Array, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1077): DboSource->fetchAll('SELECT `Lesson....', false)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Lesson), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(597): Model->find('first', Array)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(800): DboSource->query('findById', Array, Object(Lesson))
+#8 C:\xampp\htdocs\elearning\Controller\LessonController.php(295): Model->__call('findById', Array)
+#9 C:\xampp\htdocs\elearning\Controller\LessonController.php(295): Lesson->findById('1', Array)
+#10 [internal function]: LessonController->report()
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#13 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#14 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#15 {main}
+2014-03-17 09:03:03 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 300]
+2014-03-17 09:03:03 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 300)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 300, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 300, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:03:04 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 300]
+2014-03-17 09:03:04 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 300)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 300, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 300, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:03:04 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 300]
+2014-03-17 09:03:04 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 300)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 300, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 300, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:03:04 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 300]
+2014-03-17 09:03:04 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 300)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 300, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 300, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:04:46 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 303]
+2014-03-17 09:04:46 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 303)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 303, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 303, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:04:47 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 303]
+2014-03-17 09:04:47 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 303)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 303, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 303, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:04:47 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 303]
+2014-03-17 09:04:47 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 303)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 303, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 303, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:04:47 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 303]
+2014-03-17 09:04:47 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 303)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 303, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 303, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:04:47 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 303]
+2014-03-17 09:04:47 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 303)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 303, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 303, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:04:47 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 303]
+2014-03-17 09:04:47 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 303)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 303, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 303, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:05:30 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 305]
+2014-03-17 09:05:30 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 305)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 305, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 305, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:05:31 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 305]
+2014-03-17 09:05:31 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 305)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 305, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 305, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:05:38 Error: Fatal Error (4): syntax error, unexpected ''Comment'' (T_CONSTANT_ENCAPSED_STRING) in [C:\xampp\htdocs\elearning\View\Lesson\report.ctp, line 45]
+2014-03-17 09:05:38 Error: [FatalErrorException] syntax error, unexpected ''Comment'' (T_CONSTANT_ENCAPSED_STRING)
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:06:07 Error: Fatal Error (4): syntax error, unexpected ''Comment'' (T_CONSTANT_ENCAPSED_STRING) in [C:\xampp\htdocs\elearning\View\Lesson\report.ctp, line 45]
+2014-03-17 09:06:07 Error: [FatalErrorException] syntax error, unexpected ''Comment'' (T_CONSTANT_ENCAPSED_STRING)
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:06:33 Error: Fatal Error (4): syntax error, unexpected ''Comment'' (T_CONSTANT_ENCAPSED_STRING) in [C:\xampp\htdocs\elearning\View\Lesson\report.ctp, line 45]
+2014-03-17 09:06:33 Error: [FatalErrorException] syntax error, unexpected ''Comment'' (T_CONSTANT_ENCAPSED_STRING)
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:07:24 Error: Fatal Error (4): syntax error, unexpected ''Comment'' (T_CONSTANT_ENCAPSED_STRING) in [C:\xampp\htdocs\elearning\View\Lesson\report.ctp, line 45]
+2014-03-17 09:07:24 Error: [FatalErrorException] syntax error, unexpected ''Comment'' (T_CONSTANT_ENCAPSED_STRING)
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:07:57 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Comment.student_id' in 'field list'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Comment...', Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Comment...', Array, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Comment...', false)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Student), 'SELECT `Comment...', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Student), Object(Comment), 'hasMany', 'Comment', Array, Array, true, Array, 0, Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Student), Array)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#8 C:\xampp\htdocs\elearning\Controller\LessonController.php(306): Model->find('first', Array)
+#9 [internal function]: LessonController->report()
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#13 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-17 09:09:26 Error: Fatal Error (4): syntax error, unexpected ''Comment'' (T_CONSTANT_ENCAPSED_STRING) in [C:\xampp\htdocs\elearning\View\Lesson\report.ctp, line 45]
+2014-03-17 09:09:26 Error: [FatalErrorException] syntax error, unexpected ''Comment'' (T_CONSTANT_ENCAPSED_STRING)
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 45, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:09:57 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Comment.student_id' in 'field list'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Comment...', Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Comment...', Array, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Comment...', false)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Student), 'SELECT `Comment...', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Student), Object(Comment), 'hasMany', 'Comment', Array, Array, true, Array, 0, Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Student), Array)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#8 C:\xampp\htdocs\elearning\Controller\LessonController.php(306): Model->find('first', Array)
+#9 [internal function]: LessonController->report()
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#13 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-17 09:11:03 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Comment.student_id' in 'field list'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Comment...', Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Comment...', Array, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Comment...', false)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Student), 'SELECT `Comment...', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Student), Object(Comment), 'hasMany', 'Comment', Array, Array, true, Array, 0, Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Student), Array)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#8 C:\xampp\htdocs\elearning\Controller\LessonController.php(306): Model->find('first', Array)
+#9 [internal function]: LessonController->report()
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#13 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-17 09:12:25 Error: Fatal Error (4): syntax error, unexpected '[', expecting variable (T_VARIABLE) or '$' in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 303]
+2014-03-17 09:12:25 Error: [FatalErrorException] syntax error, unexpected '[', expecting variable (T_VARIABLE) or '$'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 303)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 303, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 303, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:12:43 Error: Fatal Error (4): syntax error, unexpected '[', expecting variable (T_VARIABLE) or '$' in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 303]
+2014-03-17 09:12:43 Error: [FatalErrorException] syntax error, unexpected '[', expecting variable (T_VARIABLE) or '$'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 303)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 303, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 303, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:12:44 Error: Fatal Error (4): syntax error, unexpected '[', expecting variable (T_VARIABLE) or '$' in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 303]
+2014-03-17 09:12:44 Error: [FatalErrorException] syntax error, unexpected '[', expecting variable (T_VARIABLE) or '$'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 303)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 303, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 303, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:12:44 Error: Fatal Error (4): syntax error, unexpected '[', expecting variable (T_VARIABLE) or '$' in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 303]
+2014-03-17 09:12:44 Error: [FatalErrorException] syntax error, unexpected '[', expecting variable (T_VARIABLE) or '$'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 303)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 303, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 303, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 09:13:34 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Comment.student_id' in 'field list'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Comment...', Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Comment...', Array, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Comment...', false)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Student), 'SELECT `Comment...', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Student), Object(Comment), 'hasMany', 'Comment', Array, Array, true, Array, 0, Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Student), Array)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#8 C:\xampp\htdocs\elearning\Controller\LessonController.php(306): Model->find('first', Array)
+#9 [internal function]: LessonController->report()
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#13 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-17 09:14:06 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Comment.student_id' in 'field list'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Comment...', Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Comment...', Array, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Comment...', false)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Student), 'SELECT `Comment...', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Student), Object(Comment), 'hasMany', 'Comment', Array, Array, true, Array, 0, Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Student), Array)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#8 C:\xampp\htdocs\elearning\Controller\LessonController.php(306): Model->find('first', Array)
+#9 [internal function]: LessonController->report()
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#13 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-17 09:14:07 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Comment.student_id' in 'field list'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Comment...', Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Comment...', Array, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Comment...', false)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Student), 'SELECT `Comment...', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Student), Object(Comment), 'hasMany', 'Comment', Array, Array, true, Array, 0, Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Student), Array)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#8 C:\xampp\htdocs\elearning\Controller\LessonController.php(306): Model->find('first', Array)
+#9 [internal function]: LessonController->report()
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#13 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-17 09:14:07 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Comment.student_id' in 'field list'
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Comment...', Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Comment...', Array, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Comment...', false)
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Student), 'SELECT `Comment...', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Student), Object(Comment), 'hasMany', 'Comment', Array, Array, true, Array, 0, Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Student), Array)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#8 C:\xampp\htdocs\elearning\Controller\LessonController.php(306): Model->find('first', Array)
+#9 [internal function]: LessonController->report()
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#13 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-17 10:02:55 Error: [MissingHelperException] Helper class UploadHelper could not be found.
+Exception Attributes: array (
+  'class' => 'UploadHelper',
+  'plugin' => false,
+)
+Request URL: /document/edit/id:19
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\HelperCollection.php(63): HelperCollection->load('Upload')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(818): HelperCollection->__isset('Upload')
+#2 C:\xampp\htdocs\elearning\View\Document\edit.ctp(16): View->__get('Upload')
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(929): include('C:\xampp\htdocs...')
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(891): View->_evaluate('C:\xampp\htdocs...', Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(460): View->_render('C:\xampp\htdocs...')
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#8 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#9 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#10 {main}
+2014-03-17 10:08:04 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\DocumentController.php, line 51]
+2014-03-17 10:08:04 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /document/edit/id:19
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 51)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 51, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 51, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 16:33:34 Error: [MissingActionException] Action DocumentController::edit() could not be found.
+Exception Attributes: array (
+  'controller' => 'DocumentController',
+  'action' => 'edit',
+)
+Request URL: /document/edit/id:19
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-17 16:37:01 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\DocumentController.php, line 63]
+2014-03-17 16:37:01 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /Document/edit
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 63)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 63, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 63, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 16:39:21 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\DocumentController.php, line 64]
+2014-03-17 16:39:21 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /Document/edit/id:19
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 64)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 64, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 64, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 16:39:53 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\DocumentController.php, line 64]
+2014-03-17 16:39:53 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /Document/edit/id:19
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 64)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 64, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 64, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 16:56:43 Error: [MissingControllerException] Controller class ElearningController could not be found.
+Exception Attributes: array (
+  'class' => 'ElearningController',
+  'plugin' => NULL,
+)
+Request URL: /elearning/
+Stack Trace:
+#0 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-03-17 17:13:51 Error: Fatal Error (4): syntax error, unexpected 'echo' (T_ECHO) in [C:\xampp\htdocs\elearning\View\Layouts\default.ctp, line 15]
+2014-03-17 17:13:51 Error: [FatalErrorException] syntax error, unexpected 'echo' (T_ECHO)
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 15)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 15, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 15, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 17:13:52 Error: Fatal Error (4): syntax error, unexpected 'echo' (T_ECHO) in [C:\xampp\htdocs\elearning\View\Layouts\default.ctp, line 15]
+2014-03-17 17:13:52 Error: [FatalErrorException] syntax error, unexpected 'echo' (T_ECHO)
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 15)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 15, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 15, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 17:13:53 Error: Fatal Error (4): syntax error, unexpected 'echo' (T_ECHO) in [C:\xampp\htdocs\elearning\View\Layouts\default.ctp, line 15]
+2014-03-17 17:13:53 Error: [FatalErrorException] syntax error, unexpected 'echo' (T_ECHO)
+Request URL: /lesson/report/id:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 15)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 15, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 15, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 17:17:42 Error: [MissingActionException] Action TsvsController::home() could not be found.
+Exception Attributes: array (
+  'controller' => 'TsvsController',
+  'action' => 'home',
+)
+Request URL: /tsvs/home
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TsvsController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-17 17:17:47 Error: [MissingControllerException] Controller class TsvController could not be found.
+Exception Attributes: array (
+  'class' => 'TsvController',
+  'plugin' => NULL,
+)
+Request URL: /tsv/home
+Stack Trace:
+#0 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-03-17 17:17:54 Error: [MissingActionException] Action TestController::home() could not be found.
+Exception Attributes: array (
+  'controller' => 'TestController',
+  'action' => 'home',
+)
+Request URL: /test/home
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-17 17:18:02 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/index
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-17 17:18:03 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/index
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-17 17:19:18 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/index
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-17 17:19:22 Error: [MissingActionException] Action TsvsController::home() could not be found.
+Exception Attributes: array (
+  'controller' => 'TsvsController',
+  'action' => 'home',
+)
+Request URL: /tsvs/home
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TsvsController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-25 17:21:37 Error: Fatal Error (1): Call to undefined function find() in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 403]
+2014-03-25 17:21:37 Error: [FatalErrorException] Call to undefined function find()
+Request URL: /lesson/delete
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'C:\xampp\htdocs...', 403)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'C:\xampp\htdocs...', 403, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'C:\xampp\htdocs...', 403, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-25 17:26:21 Error: Fatal Error (4): syntax error, unexpected ';' in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 393]
+2014-03-25 17:26:21 Error: [FatalErrorException] syntax error, unexpected ';'
+Request URL: /lesson/summary/id:5
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 393)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 393, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 393, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-25 17:26:25 Error: Fatal Error (4): syntax error, unexpected ';' in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 393]
+2014-03-25 17:26:25 Error: [FatalErrorException] syntax error, unexpected ';'
+Request URL: /lesson/summary/id:5
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 393)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 393, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 393, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-25 17:28:56 Error: Fatal Error (1): Call to undefined function find() in [C:\xampp\htdocs\elearning\Controller\LessonController.php, line 403]
+2014-03-25 17:28:56 Error: [FatalErrorException] Call to undefined function find()
+Request URL: /lesson/delete
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'C:\xampp\htdocs...', 403)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'C:\xampp\htdocs...', 403, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'C:\xampp\htdocs...', 403, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-25 17:30:44 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Lesson\delete.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Lesson\\delete.ctp',
+)
+Request URL: /lesson/delete
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#4 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-03-26 17:13:14 Error: Fatal Error (1): Call to a member function load() on a non-object in [C:\xampp\htdocs\elearning\Controller\LecturerController.php, line 88]
+2014-03-26 17:13:14 Error: [FatalErrorException] Call to a member function load() on a non-object
+Request URL: /lecturer/studentmanage/lesson_id:9
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 88)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 88, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 88, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-26 17:13:15 Error: Fatal Error (1): Call to a member function load() on a non-object in [C:\xampp\htdocs\elearning\Controller\LecturerController.php, line 88]
+2014-03-26 17:13:15 Error: [FatalErrorException] Call to a member function load() on a non-object
+Request URL: /lecturer/studentmanage/lesson_id:9
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 88)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 88, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 88, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-26 17:34:20 Error: [MissingTableException] Table reports for model Report was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'reports',
+  'class' => 'Report',
+  'ds' => 'default',
+)
+Request URL: /lesson/report/id:9
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('reports')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): Model->getDataSource()
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#3 C:\xampp\htdocs\elearning\Controller\LessonController.php(275): Model->find('first', Array)
+#4 [internal function]: LessonController->report()
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#8 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#9 {main}
+2014-03-26 17:34:37 Error: [MissingTableException] Table reports for model Report was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'reports',
+  'class' => 'Report',
+  'ds' => 'default',
+)
+Request URL: /lesson/report/id:9
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('reports')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): Model->getDataSource()
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#3 C:\xampp\htdocs\elearning\Controller\LessonController.php(275): Model->find('first', Array)
+#4 [internal function]: LessonController->report()
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#8 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#9 {main}
+2014-03-26 17:34:39 Error: [MissingTableException] Table reports for model Report was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'reports',
+  'class' => 'Report',
+  'ds' => 'default',
+)
+Request URL: /lesson/report/id:9
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('reports')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): Model->getDataSource()
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#3 C:\xampp\htdocs\elearning\Controller\LessonController.php(275): Model->find('first', Array)
+#4 [internal function]: LessonController->report()
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#8 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#9 {main}
+2014-03-26 17:34:44 Error: [MissingTableException] Table reports for model Report was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'reports',
+  'class' => 'Report',
+  'ds' => 'default',
+)
+Request URL: /lesson/report/id:9
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('reports')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): Model->getDataSource()
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#3 C:\xampp\htdocs\elearning\Controller\LessonController.php(275): Model->find('first', Array)
+#4 [internal function]: LessonController->report()
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#8 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#9 {main}
+2014-03-26 17:35:18 Error: [MissingTableException] Table reports for model Report was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'reports',
+  'class' => 'Report',
+  'ds' => 'default',
+)
+Request URL: /lesson/report/id:9
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('reports')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): Model->getDataSource()
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#3 C:\xampp\htdocs\elearning\Controller\LessonController.php(275): Model->find('first', Array)
+#4 [internal function]: LessonController->report()
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#8 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#9 {main}
+2014-03-26 17:35:20 Error: [MissingTableException] Table reports for model Report was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'reports',
+  'class' => 'Report',
+  'ds' => 'default',
+)
+Request URL: /lesson/report/id:9
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('reports')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): Model->getDataSource()
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('first', Array)
+#3 C:\xampp\htdocs\elearning\Controller\LessonController.php(275): Model->find('first', Array)
+#4 [internal function]: LessonController->report()
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(LessonController), Array)
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(LessonController), Object(CakeRequest), Object(CakeResponse))
+#8 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#9 {main}
+2014-03-28 09:21:43 Error: Fatal Error (4): syntax error, unexpected ';' in [C:\xampp\htdocs\elearning\Controller\DocumentController.php, line 75]
+2014-03-28 09:21:43 Error: [FatalErrorException] syntax error, unexpected ';'
+Request URL: /document/edit/id:9/document_id:1/ihan:1
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 75)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 75, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 75, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-28 09:51:53 Error: Fatal Error (4): syntax error, unexpected ';', expecting ')' in [C:\xampp\htdocs\elearning\View\Document\edit.ctp, line 28]
+2014-03-28 09:51:53 Error: [FatalErrorException] syntax error, unexpected ';', expecting ')'
+Request URL: /document/edit/id:9/document_id:2
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 28)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 28, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 28, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-28 09:51:55 Error: Fatal Error (4): syntax error, unexpected ';', expecting ')' in [C:\xampp\htdocs\elearning\View\Document\edit.ctp, line 28]
+2014-03-28 09:51:55 Error: [FatalErrorException] syntax error, unexpected ';', expecting ')'
+Request URL: /document/edit/id:9/document_id:2/ihan:true
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 28)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'C:\xampp\htdocs...', 28, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'C:\xampp\htdocs...', 28, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-28 09:54:37 Error: Fatal Error (1): Call to a member function find() on a non-object in [C:\xampp\htdocs\elearning\Controller\DocumentController.php, line 83]
+2014-03-28 09:54:38 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /document/edit/id:9/document_id:2
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 83)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 83, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 83, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-28 10:31:30 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:31:31 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:32:00 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:32:02 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:32:03 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:33:02 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:33:04 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:33:05 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:33:05 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:33:05 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:33:06 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:33:06 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:34:56 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:35:23 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:36:01 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:36:25 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:37:27 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:37:54 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:37:55 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:38:00 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:38:52 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:38:53 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:38:54 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:38:55 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:38:55 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:38:55 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:38:56 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:38:56 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:39:30 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 10:39:52 Error: [MissingViewException] View file "C:\xampp\htdocs\elearning\View\Test\home.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'C:\\xampp\\htdocs\\elearning\\View\\Test\\home.ctp',
+)
+Request URL: /test/
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName('home')
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render('home', NULL)
+#2 C:\xampp\htdocs\elearning\Controller\TestController.php(158): Controller->render('home')
+#3 [internal function]: TestController->index()
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(TestController), Array)
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(TestController), Object(CakeRequest), Object(CakeResponse))
+#7 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#8 {main}
+2014-03-28 18:27:34 Error: Fatal Error (1): Call to a member function load() on a non-object in [C:\xampp\htdocs\elearning\Controller\LecturerController.php, line 88]
+2014-03-28 18:27:35 Error: [FatalErrorException] Call to a member function load() on a non-object
+Request URL: /lecturer/studentmanage/lesson_id:9
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 88)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 88, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 88, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-28 18:27:36 Error: Fatal Error (1): Call to a member function load() on a non-object in [C:\xampp\htdocs\elearning\Controller\LecturerController.php, line 88]
+2014-03-28 18:27:36 Error: [FatalErrorException] Call to a member function load() on a non-object
+Request URL: /lecturer/studentmanage/lesson_id:9
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 88)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'C:\xampp\htdocs...', 88, Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'C:\xampp\htdocs...', 88, Array)
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-28 18:28:15 Error: [MissingActionException] Action DocumentController::view() could not be found.
+Exception Attributes: array (
+  'controller' => 'DocumentController',
+  'action' => 'view',
+)
+Request URL: /document/view/id:2
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-28 18:52:42 Error: [MissingActionException] Action DocumentController::view() could not be found.
+Exception Attributes: array (
+  'controller' => 'DocumentController',
+  'action' => 'view',
+)
+Request URL: /document/view/id:2
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}

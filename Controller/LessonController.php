@@ -2,7 +2,7 @@
 class LessonController extends AppController {
 	var $name = "Lesson";
 
-  	var $uses = array('User', 'Lecturer','Question','Lesson','Tag', 'Document', 'Test', 'Study', 'Comment');
+  	var $uses = array('User', 'Lecturer','Question','Lesson','Tag', 'Document', 'Test', 'Study', 'Comment', 'Student', 'Report');
   	public $components = array('RequestHandler', 'Paginator');
 
   	public function beforeFilter() {
@@ -46,8 +46,7 @@ class LessonController extends AppController {
     }
 
     public function edit(){
-    	$lesson_id = $this->params['named']['id'];
-    	//var_dump($lesson_id);
+    	$lesson_id = $this->params['named']['id'];    	
 		$Lesson = $this->Lesson->findById($lesson_id);
 		if (!$Lesson) {
 			$this->Session->setFlash(__('This Lesson not exist'), 'alert', array(
@@ -56,7 +55,7 @@ class LessonController extends AppController {
 			));	
 			return $this->redirect(array('controller' => 'Lecturer', 'action' => 'manage'));		
 		}
-		$this->set("id", $lesson_id);
+		$this->set("id", $lesson_id);		
 
     	if($this->request->is('post')){
 	    	$data = ($this->request->data);
@@ -74,7 +73,7 @@ class LessonController extends AppController {
 	    		array_push($tags, $tag['Tag']['id']);
 	    	}
 	    	$data['Tag'] = $tags;
-			if($this->Lesson->saveAll($data)){
+			if($this->Lesson->saveAll($data)) {
 				$this->Session->setFlash(__('The Lesson Info has been saved'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-success'
@@ -88,25 +87,6 @@ class LessonController extends AppController {
 			}			
 			return $this->redirect($this->referer());
     	}
-    }
-
-    public function delete($value='')
-    {
-    	$lesson_id = $this->params['named']['id'];
-    	$lesson = $this->Lesson->find("first", array('conditions' => array('Lesson.id' => $lesson_id))); 
-    	if($lesson && $this->Lesson->delete($lesson_id)){
-			$this->Session->setFlash(__('The Lesson has been Removed'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-success'
-			));
-    	}else{
-				$this->Session->setFlash(__('The Lesson could not be deleted. Plz try again'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));	
-
-    	}
-		return $this->redirect($this->referer());
     }
 
     public function doc()
@@ -235,7 +215,7 @@ class LessonController extends AppController {
 			$this->redirect(array('controller' => 'users' ,"action" => "permission" ));
 		}
 	}
-	
+
 	public function summary() {
 		$lesson_id = $this->Session->read('lesson_id');		
 		$this->set("id", $lesson_id);
@@ -278,26 +258,60 @@ class LessonController extends AppController {
 	public function report() {
 		$lesson_id = $this->Session->read('lesson_id');		
 		$this->set("id", $lesson_id);
-		$user = $this->Auth->user();
-		//var_dump($user['id']);
+		$user = $this->Auth->user();	
 
 		if($user["role"] == 'lecturer') {
 			$sql = array("conditions"=> array("Lesson.id =" => $lesson_id, "lecturer_id =" => $user['id']));
 			$results = $this->Lesson->find('first', $sql);
 			
 			if($results != NULL) {				
+				$results = $this->Document->find('all', array('conditions'=> array('Document.lesson_id' => $lesson_id)));
+				//var_dump($results);
+				$reports = array();
+				foreach ($results as $result) {
+					$docs = null;
+					$link = $result['Document']['link'];
+					$sql = array('conditions' => array('Report.document_id' => $result['Document']['id'], 'Report.state' => 1));
+					$docs = $this->Report->find('first', $sql);
+					
+					if($docs != NULL) {
+						$x['Document']['id'] = $result['Document']['id'];
+						$x['Document']['title'] = $result['Document']['title'];						
+						array_push($reports, $x);
+					}	    					
+				}	
+				$this->set('reports', $reports);
+				//debug($reports);
+				//echo "<pre>";
+
 				$sql = array(
 				    'fields' => array('Comment.id', 'Comment.user_id', 'Comment.content', 'Comment.time'),
 					'conditions' => array(
 						'Comment.lesson_id' => $lesson_id),
 						//'contain' => array('Student')
-				);
-				
+				);				
 				$results = $this->Comment->find('all', $sql);
-				//var_dump($results);					
+	
+				$index = 0;
+				foreach ($results as $result)
+				{
+					if($result['Comment']['user_id'] == $user['id']) {
+						$results[$index]['Comment']['full_name'] = '私';						
+					} else {
+						$sql = array('fields' => array('Student.full_name'),
+							'conditions' => array(
+							'Student.id' => $result['Comment']['user_id'])
+							);					
+
+						$s = $this->Student->find('first', $sql);								
+						$results[$index]['Comment']['full_name'] = $s['Student']['full_name'];
+					}
+
+					$index ++;
+				}				
 				
 				$this->set('results', $results);
-				
+
 			} else {
 				$this->redirect(array('controller' => 'users' ,"action" => "permission" ));
 			}
@@ -310,7 +324,7 @@ class LessonController extends AppController {
     	$lesson_id = $this->params['named']['lesson_id'];
     	$student_id = $this->params['named']['student_id'];
 
-    	$member = $this->Study->find("first",array(
+    	$member = $this->Study->find("first", array(
     				'conditions' => array('lesson_id' => $lesson_id ,'student_id' => $student_id )
     			)
     		);
@@ -354,22 +368,64 @@ class LessonController extends AppController {
         }
         if ($this->request->is('get')) {
             $this->Tag->recursive = 3;
-    } 
+        }
+    }   
 
-    public function delete_lesson() {
+     public function deletestudent($value=''){
+    	$lesson_id = $this->params['named']['lesson_id'];
+    	$student_id = $this->params['named']['student_id'];
+
+    	$member = $this->Study->find("first", array(
+    				'conditions' => array('lesson_id' => $lesson_id ,'student_id' => $student_id )
+    			)
+    		);
+
+    	if($this->Study->delete($member['Study']['id'])){
+			$this->Session->setFlash(__('The User has been Removed'), 'alert', array(
+				'plugin' => 'BoostCake',
+				'class' => 'alert-success'
+			));
+    	}else{
+				$this->Session->setFlash(__('The User could not be deleted. Plz try again'), 'alert', array(
+				'plugin' => 'BoostCake',
+				'class' => 'alert-warning'
+			));	
+    	}
+		return $this->redirect($this->referer());
+    } 
+     
+    public function delete() {
     	$lesson_id = $this->Session->read('lesson_id');
 		$this->set("id", $lesson_id);		
 		$user = $this->Auth->user();
 		
-		if($user["role"] == 'lecturer') {
-			$sql = array("conditions"=> array("Lesson.id =" => $lesson_id, "lecturer_id =" => $user['id']));
-			$result = $this->Lesson->find('first', $sql);
-			//var_dump($result);
+		if($user['role'] == 'lecturer') {
+			$sql = array('conditions'=> array('Lesson.id' => $lesson_id, 'lecturer_id' => $user['id']));
+			$result = $this->Lesson->find('first', $sql);			
 
 			if($result != NULL) 
-			{				
+			{
 				if ($this->Lesson->delete($lesson_id))
-				{
+				{	
+					//del document file
+					$results = $this->Document->find('all', array('conditions'=> array('Document.lesson_id' => $lesson_id)));
+					var_dump($results);
+					foreach ($results as $result) {
+						$link = $result['Document']['link'];
+						if ($this->Document->delete($result['Document']['id'])) {
+				    		unlink(WWW_ROOT.DS.$link);	                 	
+				    	}		    					
+					}	    	
+
+					//del test file
+					$results = $this->Test->find('all', array('conditions'=> array('Test.lesson_id' => $lesson_id)));					
+					foreach ($results as $result) {
+						$link = $result['Test']['link'];
+						if ($this->Test->delete($result['Test']['id'])) {
+				    		unlink(WWW_ROOT.DS.$link);	                 	
+				    	}		    					
+					}	
+
 					$this->Session->setFlash(__('The Lesson has been deleted'), 'alert', array(
 	                'plugin' => 'BoostCake',
 	                'class' => 'alert-success'
@@ -382,7 +438,7 @@ class LessonController extends AppController {
 			$this->redirect(array('controller' => 'users' ,"action" => "permission" ));
 		}          
     }
-
+    
     public function show($lesson_id){
         $options['fields']= array("Lecturer.*", "User.*", "Lesson.*");
         $options['joins'] = array(

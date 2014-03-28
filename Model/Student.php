@@ -8,7 +8,7 @@ class Student extends AppModel{
     );    
 
     public $hasMany = array(
-        'Study', 'Comment'
+        'Study'
     );
 
     public $validate = array(

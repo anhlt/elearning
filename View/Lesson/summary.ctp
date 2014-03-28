@@ -31,6 +31,9 @@
 	</div>
 	<div class="col-xs-13 col-md-9">
 		<div class="well">
+			<div class='form-group'>
+				<b><?php echo $this->Html->link("授業管理", array('controller' => 'lecturer', 'action' => 'manage')); ?></b>	  
+			</div>
 			<div style='text-align: center; margin-bottom: 20px;'>
 				<h4><b>サマリー情報</b></h4>
 			</div>
@@ -51,9 +54,11 @@
 			</div>
 			<br> <br>
 			<div class='row'>
-				<div class='col-md-4'>授業を削除する：</div>
-				<div class='col-md-4'>
-					<?php echo $this->html->link('Delete', array('controller' => 'lesson', 'action' => 'delete_lesson'), array('class' => 'btn btn-primary'))?>
+				<div class='col-md-2'>
+					<p style='margin-top: 15px;'>授業を削除する</p>
+				</div>
+				<div class='col-md-1'>
+					<?php echo $this->html->link('Delete', array('controller' => 'lesson', 'action' => 'delete'), array('class' => 'btn btn-primary'))?>
 				</div>
 			</div>
 		</div>
