@@ -21482,3 +21482,82 @@ Stack Trace:
 #4 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
 #5 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(104): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #6 {main}
+2014-03-17 08:42:36 Error: Fatal Error (64): Cannot redeclare class AdminsController in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 272]
+2014-03-17 08:42:36 Error: [FatalErrorException] Cannot redeclare class AdminsController
+Request URL: /admins/view_violation
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(64, 'Cannot redeclar...', 'E:\Installs\Web...', 272)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot redeclar...', 'E:\Installs\Web...', 272, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot redeclar...', 'E:\Installs\Web...', 272, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 08:43:00 Error: Fatal Error (64): Cannot redeclare class AdminsController in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 272]
+2014-03-17 08:43:00 Error: [FatalErrorException] Cannot redeclare class AdminsController
+Request URL: /admins
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(64, 'Cannot redeclar...', 'E:\Installs\Web...', 272)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot redeclar...', 'E:\Installs\Web...', 272, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot redeclar...', 'E:\Installs\Web...', 272, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 08:46:32 Error: Fatal Error (64): Cannot redeclare class AdminsController in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 272]
+2014-03-17 08:46:32 Error: [FatalErrorException] Cannot redeclare class AdminsController
+Request URL: /admins/add_admin
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(64, 'Cannot redeclar...', 'E:\Installs\Web...', 272)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot redeclar...', 'E:\Installs\Web...', 272, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot redeclar...', 'E:\Installs\Web...', 272, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 08:51:16 Error: Fatal Error (64): Cannot redeclare class AdminsController in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 272]
+2014-03-17 08:51:16 Error: [FatalErrorException] Cannot redeclare class AdminsController
+Request URL: /admins/add_admin
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(64, 'Cannot redeclar...', 'E:\Installs\Web...', 272)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot redeclar...', 'E:\Installs\Web...', 272, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot redeclar...', 'E:\Installs\Web...', 272, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 08:53:42 Error: Fatal Error (64): Cannot redeclare class AdminsController in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 260]
+2014-03-17 08:53:42 Error: [FatalErrorException] Cannot redeclare class AdminsController
+Request URL: /admins/add_admin
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(64, 'Cannot redeclar...', 'E:\Installs\Web...', 260)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot redeclar...', 'E:\Installs\Web...', 260, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot redeclar...', 'E:\Installs\Web...', 260, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-17 08:54:19 Error: [MissingTableException] Table question for model Question was not found in datasource default.
+Exception Attributes: array (
+  'table' => 'question',
+  'class' => 'Question',
+  'ds' => 'default',
+)
+Request URL: /Users/verifycode
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('question')
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): Model->getDataSource()
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('all', Array)
+#3 E:\Installs\WebServer\htdocs\elearning\Controller\UsersController.php(109): Model->find('all')
+#4 [internal function]: UsersController->verifycode()
+#5 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(UsersController), Array)
+#6 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#7 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#8 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(106): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#9 {main}
+2014-03-30 08:16:46 Error: [MissingActionException] Action UsersController::remove() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'remove',
+)
+Request URL: /users/remove
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(106): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}

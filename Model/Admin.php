@@ -1,11 +1,4 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 /**
  * Description of ManagerModel
  *
@@ -33,25 +26,23 @@ class Admin extends AppModel {
                 'message' => 'A password is required'
             )
         ),
-//        'email' => array(
-//            'email' => array(
-//                'rule' => array('email', true),
-//                'message' => 'Please supply a valid email address.'
-//            ),
-//            'isUnique' => array(
-//                'rule' => 'isUnique',
-//                'message' => 'This Username has already been used.'
-//            )
-//        ),
-//        'ip_address' => array(
-//            'ip_address' => array(
-//                'rule' => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)
-//                'message' => 'Please supply a valid IP address.'
-//            )
-//        ),
+       'email' => array(
+           'email' => array(
+               'rule' => array('email', true),
+               'message' => 'Please supply a valid email address.'
+           ),
+           'isUnique' => array(
+               'rule' => 'isUnique',
+               'message' => 'This Username has already been used.'
+           )
+       ),
+       'ip_address' => array(
+           'ip_address' => array(
+               'rule' => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)
+               'message' => 'Please supply a valid IP address.'
+           )
+       ),
     );
 
 }
-
-
 ?>

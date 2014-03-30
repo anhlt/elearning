@@ -12,6 +12,7 @@
 
 	<!-- Le styles -->
 	<?php echo $this->Html->css('bootstrap.min'); ?>
+	<?php echo $this->Html->css('style'); ?>
     <?php echo $this->Html->script('jquery-1.11.0.js');?>
     <style>
 	body {
@@ -77,5 +78,6 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<?php echo $this->Html->script('bootstrap.min'); ?>
 	<?php echo $this->Html->script('tagmanager'); ?>
+	<?php echo $this->Js->writeBuffer(); ?>
 </body>
 </html>

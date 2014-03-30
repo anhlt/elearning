@@ -1,27 +1,20 @@
+<div class="row">
 
-<div class="col-xs-5 col-md-3">
-		<ul class="nav nav-pills nav-stacked" id="myTab">
-			<li class="active">
-                            <?php echo $this->html->link('管理者を追加',array('controller'=>"admins", 'action'=>"add_admin"
-                                   ));?></li>
-			　<li >　<?php echo $this->html->link('管理者を削除',array('controller'=>"admins", 'action'=>"remove_admin"
-                                   ));?></li>
-		</ul>
-	</div>
-
+ <?php echo $this->element('admin_menus');?>    
 <div class="col-xs-13 col-md-9">
+<h2>ドキュメント管理</h2>    
     	<?php echo $this->Session->flash(); ?>
 
 		<div class="well">
 			<?php echo $this->Paginator->pagination(array(
 				'ul' => 'pagination'
 				)); ?>
-			<table class="table table-condensed">
+			<table class="table table-striped">
 				<tr>
 					<td  class="col-sm-1"><?php echo $this->Paginator->sort('student_id'); ?></td>
 					<td  class="col-sm-1"><?php echo $this->Paginator->sort('document_id');?></td>
                                         <td  class="col-sm-1"><?php echo $this->Paginator->sort('time');?></td>
-					<td  class="col-sm-3">See</td>
+					<td  class="col-sm-3">見る</td>
 				</tr>
 			 <?php foreach ($res as $result) {?>
 			  <tr>
@@ -35,3 +28,4 @@
 			</table>
 		</div>
 	</div>
+</div> 

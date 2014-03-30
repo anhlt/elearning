@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-tmp/
-webroot/index.php
-webroot/test.php
-=======
 tmp/cache
 tmp/logs
->>>>>>> 69dd70fa812ca0939d3cf64c9583ff13b72dab21
-/nbproject/private/
+tmp/
+/nbproject

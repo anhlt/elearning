@@ -1,6 +1,14 @@
 <?php
-
 class Student extends AppModel{
+    public $belongsTo = array(
+        'User' => array(
+            'className' => 'User',
+            'foreignKey' => 'id'
+        )
+    );
+    public $hasMany = array(
+        'LessonMembership'
+    );
     public $validate = array(
         'full_name' => array(
             'required' => array(
@@ -63,7 +71,5 @@ class Student extends AppModel{
             'rule'    => array('maxLength', 1005),
         ),
     );
-
-
 }
 ?>

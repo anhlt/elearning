@@ -36,18 +36,19 @@ class User extends AppModel {
     public $hasOne = array(
         'Lecturer' => array(
             'className' => 'Lecturer',
-            'foreignKey' => 'id'
-        ),
-        'Admin' => array(
-            'className' => 'Admin',
             'foreignKey' => 'id',
             'dependent' => true
-        )
-        ,
-        'Student' => array(
-            'className' => 'Student',
-            'foreignKey' => 'id'
-        )
+            ),
+            'Student' => array(
+                'className' => 'Student',
+                'foreignKey' => 'id',
+                'dependent' => true
+            ),
+            'Admin' => array(
+                'className' => 'Admin',
+                'foreignKey' => 'id',
+                'dependent' => true
+            )
     );
 
     public function beforeSave($options = array()) {

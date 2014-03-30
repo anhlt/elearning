@@ -1,4 +1,4 @@
 <?php
 class Question extends AppModel {
-	public $useTable = 'question';
+	//public $useTable = 'question';
 }
