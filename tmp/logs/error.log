@@ -17974,3 +17974,118 @@ Stack Trace:
 #1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
 #2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #3 {main}
+2014-04-01 17:39:01 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+Exception Attributes: array (
+  'class' => 'Mysql',
+  'message' => 'SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+',
+  'enabled' => true,
+)
+Request URL: /users/login
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(260): Mysql->connect()
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\ConnectionManager.php(105): DboSource->__construct(Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3476): ConnectionManager::getDataSource('default')
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(1126): Model->setDataSource('default')
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('users')
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(1355): Model->getDataSource()
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\Helper\FormHelper.php(207): Model->schema()
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\Helper\FormHelper.php(459): FormHelper->_introspectModel('User', 'fields')
+#8 C:\xampp\htdocs\elearning\View\Users\login.ctp(13): FormHelper->create(Array)
+#9 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(929): include('C:\xampp\htdocs...')
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(891): View->_evaluate('C:\xampp\htdocs...', Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(460): View->_render('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#13 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#14 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#15 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#16 {main}
+2014-04-01 17:39:07 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+Exception Attributes: array (
+  'class' => 'Mysql',
+  'message' => 'SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+',
+  'enabled' => true,
+)
+Request URL: /users/login
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(260): Mysql->connect()
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\ConnectionManager.php(105): DboSource->__construct(Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3476): ConnectionManager::getDataSource('default')
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(1126): Model->setDataSource('default')
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('users')
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(1355): Model->getDataSource()
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\Helper\FormHelper.php(207): Model->schema()
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\Helper\FormHelper.php(459): FormHelper->_introspectModel('User', 'fields')
+#8 C:\xampp\htdocs\elearning\View\Users\login.ctp(13): FormHelper->create(Array)
+#9 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(929): include('C:\xampp\htdocs...')
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(891): View->_evaluate('C:\xampp\htdocs...', Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(460): View->_render('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#13 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#14 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#15 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#16 {main}
+2014-04-01 17:39:12 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+Exception Attributes: array (
+  'class' => 'Mysql',
+  'message' => 'SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+',
+  'enabled' => true,
+)
+Request URL: /users/login
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(260): Mysql->connect()
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\ConnectionManager.php(105): DboSource->__construct(Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3476): ConnectionManager::getDataSource('default')
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(1126): Model->setDataSource('default')
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('users')
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(1355): Model->getDataSource()
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\Helper\FormHelper.php(207): Model->schema()
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\Helper\FormHelper.php(459): FormHelper->_introspectModel('User', 'fields')
+#8 C:\xampp\htdocs\elearning\View\Users\login.ctp(13): FormHelper->create(Array)
+#9 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(929): include('C:\xampp\htdocs...')
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(891): View->_evaluate('C:\xampp\htdocs...', Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(460): View->_render('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#13 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#14 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#15 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#16 {main}
+2014-04-01 17:39:28 Error: [MissingConnectionException] Database connection "Mysql" is missing, or could not be created.
+Exception Attributes: array (
+  'class' => 'Mysql',
+  'message' => 'SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+',
+  'enabled' => true,
+)
+Request URL: /users/login
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(260): Mysql->connect()
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\ConnectionManager.php(105): DboSource->__construct(Array)
+#2 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3476): ConnectionManager::getDataSource('default')
+#3 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(1126): Model->setDataSource('default')
+#4 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(3498): Model->setSource('users')
+#5 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(1355): Model->getDataSource()
+#6 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\Helper\FormHelper.php(207): Model->schema()
+#7 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\Helper\FormHelper.php(459): FormHelper->_introspectModel('User', 'fields')
+#8 C:\xampp\htdocs\elearning\View\Users\login.ctp(13): FormHelper->create(Array)
+#9 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(929): include('C:\xampp\htdocs...')
+#10 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(891): View->_evaluate('C:\xampp\htdocs...', Array)
+#11 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(460): View->_render('C:\xampp\htdocs...')
+#12 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#13 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#14 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#15 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#16 {main}
+2014-04-01 17:58:51 Error: [MissingActionException] Action DocumentController::view() could not be found.
+Exception Attributes: array (
+  'controller' => 'DocumentController',
+  'action' => 'view',
+)
+Request URL: /document/view/id:2
+Stack Trace:
+#0 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 C:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(DocumentController), Object(CakeRequest), Object(CakeResponse))
+#2 C:\xampp\htdocs\elearning\webroot\index.php(101): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}

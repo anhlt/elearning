@@ -51,7 +51,7 @@
 			  <tr>			  		  	
 			  	<td><?php echo($result['Student']['full_name']) ?> </td>
 			  	<td><?php echo($result['Study']['start_time']) ?> </td>
-			  	<td><?php echo($result['Lesson']['lesson_time']) ?> </td>			  	
+			  	<td><?php echo($result['Lesson']['lesson_time']. ' days') ?> </td>			  	
 			  </tr>
 			 <?php }?>
 			</table>

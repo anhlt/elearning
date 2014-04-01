@@ -39,7 +39,7 @@ class TestController extends AppController {
 
 	public function edit() {
 		$test_id = $this->params['named']['id'];
-		var_dump($test_id);		
+		//var_dump($test_id);		
 		$this->set("id", $test_id);
 		$results = $this->Test->find("first", array("conditions"=>array('id'=>$test_id)));
 		$this->set('result', $results['Test']);		

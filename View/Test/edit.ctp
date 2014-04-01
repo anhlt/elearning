@@ -37,6 +37,7 @@
 					'value' => $result['link'],
 					'placeholder' => 'ファイル',
 					'required' => false,
+					'id' => 'f',
 					'class' => 'btn-file'
 				)); ?>
 			</div>
@@ -64,4 +65,19 @@
 			</div>					
 		</form>
 	</body>
+	<script>
+	var fl = document.getElementById('f');					
+
+			fl.onchange = function(e){ 
+			    var ext = this.value.match(/\.(.+)$/)[1];			    
+			    switch(ext)
+			    {
+			        case 'tsv':		            
+			            break;
+			        default:
+			            alert('File invalid !');
+			            this.value='';
+			    }		    
+			};
+	</script>
 </html>

@@ -331,7 +331,12 @@ class LessonController extends AppController {
 		$member['Study']['baned'] = !$member['Study']['baned'];
 
     	if($this->Study->save($member)){
-			$this->Session->setFlash(__('The User has been Baned'), 'alert', array(
+    		if($member['Study']['baned'])
+    			$info = 'The user has been baned !';
+    		else
+    			$info = 'The user has been allowed !';
+
+			$this->Session->setFlash(__($info), 'alert', array(
 				'plugin' => 'BoostCake',
 				'class' => 'alert-success'
 			));
@@ -381,7 +386,7 @@ class LessonController extends AppController {
     		);
 
     	if($this->Study->delete($member['Study']['id'])){
-			$this->Session->setFlash(__('The User has been Removed'), 'alert', array(
+			$this->Session->setFlash(__('The user has been removed !'), 'alert', array(
 				'plugin' => 'BoostCake',
 				'class' => 'alert-success'
 			));
@@ -426,7 +431,7 @@ class LessonController extends AppController {
 				    	}		    					
 					}	
 
-					$this->Session->setFlash(__('The Lesson has been deleted'), 'alert', array(
+					$this->Session->setFlash(__('The lesson has been deleted'), 'alert', array(
 	                'plugin' => 'BoostCake',
 	                'class' => 'alert-success'
 		            )); 		            
