@@ -56,7 +56,7 @@
 				  	<td><?php echo($result['Document']['id']) ?> </td>
 				  	<td><?php echo($result['Document']['link']) ?> </td>
 				  	<td><?php echo($result['Document']['title']) ?> </td>
-				  	<td><?php echo $this->Html->image("edit.png", array("alt" => "edit",'url' => array('controller' => 'document', 'action' => 'edit', 'id' => $id, "document_id"=>$result['Document']['id']))); ?>
+				  	<td><?php echo $this->Html->image("edit.png", array("alt" => "edit",'url' => array('controller' => 'document', 'action' => 'edit', 'id' => $id, "document_id"=>$result['Document']['id'], 'ihan' => 'false'))); ?>
 				  	</td>		  	
 				  	<td><?php echo $this->Html->image("trash.png", array("alt" => "delete",'url' => array('controller' => 'document', 'action' => 'delete', "id"=>$result['Document']['id']))); ?>
 				  	</td>
