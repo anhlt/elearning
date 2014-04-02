@@ -236,7 +236,7 @@ class LessonController extends AppController {
             if (isset( $lesson['rank'])){
                 $rank_stt = $lesson['rank'];
                 $this->set("rank_stt", $rank_stt);
-                $this->Lesson->recursive = 2;
+                $this->Lesson->recursive = 1;
                 if($rank_stt == RANK_BY_LECTURER){ 
                     $options['order'] = array('Lecturer.full_name'); 
                     $lessons = $this->Lesson->find("all",$options);
