@@ -19,24 +19,34 @@ function upcomment(event, lesson_id){
 <?php $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE);?>
     <div class="col-xs-13 col-md-9 well">  
 <?php
-foreach($lessons as $row){
-    $lesson = $row['Lesson'];
-    $lesson_id = $lesson['id'];
-    echo "<h1>". $lesson['name']. "</h1>"; 
-    echo "<br>まとめ</br>";
-    echo $lesson['summary'];
-}
+$lesson = $lessons['Lesson'];
+$lesson_id = $lesson['id'];
+echo "<br>タイトル</br>";
+echo $lesson['name']; 
+echo "<br>まとめ</br>";
+echo $lesson['summary'];
 //hien thi tai lieu
 echo "<br>";
 echo "資料";
 echo "<br>";
+$documents = $lessons['Document'];
 foreach($documents as $row){
-    $document = $row['Document'];
+    $document = $row;
     $link = $document['link'];
-    echo $this->Html->link($document['title'], array("controller"=>"documents", "action"=>"show", $document['id'] ));
+    echo $this->Html->link($document['title'], array("controller"=>"document", "action"=>"show", $document['id'] ));
     if (stripos(strrev($link),strrev(PDF))===0) echo "[pdf]";
     if (stripos(strrev($link), strrev(TSV))===0) echo "[tsv]";
-    echo $this->Html->link("[違反レポート]", array("controller"=>"documents", "action"=>"report", $lesson_id, $document['id']));
+    echo "<br>";  
+}
+?>
+<?php
+//テストのTSVを表示する
+$tests = $lessons['Test'];
+foreach($tests as $row){
+    $test = $row;
+    $link = $test['link'];
+    echo $this->Html->link($test['title'], array("controller"=>"tests", "action"=>"show", $test['id'] ));
+    if (stripos(strrev($link), strrev(TSV))===0) echo "[tsv]";
     echo "<br>";  
 }
 
@@ -45,11 +55,11 @@ foreach($documents as $row){
 <?php if (isset($liked) && $liked == 1) {
     echo "ありがとう";  
     echo "<div class = 'btn btn-warning'>";
-    echo $this->Html->link("悪いね", array("controller"=>"lessons", "action"=>"dislike", $lesson_id));
+    echo $this->Html->link("悪いね", array("controller"=>"lesson", "action"=>"dislike", $lesson_id));
     echo "</div>";
 }else {
     echo"<div class = 'btn btn-warning'>";
-    echo $this->Html->link("いいね", array("controller"=>"lessons", "action"=>"like", $lesson_id));
+    echo $this->Html->link("いいね", array("controller"=>"lesson", "action"=>"like", $lesson_id));
     echo "</div>";
 }
 ?>
@@ -61,12 +71,14 @@ foreach($documents as $row){
 </ul>
 <div class="tab-content" style='padding:10px;'>
   <div class="tab-pane active" id="hyouka">
-<?php 
-echo "<br>この授業に参加する人の数: ".$learnedPeople."人</br>";
+<?php
+$learnedPeople = $lessons['Student'];
+$learnedPeopleNumber = count($learnedPeople); 
+echo "<br>この授業に参加する人の数: ".$learnedPeopleNumber."人</br>";
 echo "<br>いいね:".$likePeople."人<br>";
-foreach($comments as $row){
-    $comment = $row['Comment'];
-    $username = $row['User']['username'];
+$comments = $lessons['Comment'];
+foreach($comments as $comment){
+    $username = $comment['User']['username'];
     echo "<p class = 'btn btn-info' style = 'margin:5px'> ".$username." </p> ".$comment['content'];
     echo "<br>";
 }

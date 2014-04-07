@@ -5,7 +5,7 @@ class Document extends AppModel {
 	public $belongsTo = array(
 		'Lesson'=>array(
 			'className'=>'Lesson', 
-			'foreignKey'=>'lessons_id'
+			'foreignKey'=>'lesson_id'
 		));	
 	public $validate = array(
 		'title' => array(

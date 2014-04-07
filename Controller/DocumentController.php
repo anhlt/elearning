@@ -48,7 +48,7 @@ class DocumentController extends AppController {
 
     public $helpers = array("TsvReader");
     public function show($document_id){
-        $document = $this->Document->find("first", array("conditions"=>array("id"=>$document_id)));
+        $document = $this->Document->find("first", array("conditions"=>array("Document.id"=>$document_id)));
         $this->set("document", $document['Document']);
     }
     public function report($lesson_id,  $document_id){

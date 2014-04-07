@@ -12,11 +12,19 @@ class Lesson extends AppModel {
             'joinTable' => 'lessons_tags',
             'foreignKey' => 'lesson_id',
             'associationForeignKey' => 'tag_id'
+        ), 
+        'Student'=> array(
+            'className' => 'Tag', 
+            'joinTable' => 'students_lessons', 
+            'foreignKey' => 'lesson_id',
+            'associationForeignKey' => 'student_id'
         ));
     public $hasMany = array(
         'LessonMembership' => 
             array('dependent' => True ),
-        'Document'
+                'Document', 
+                'Comment', 
+                'Test'
     );
     
     public $validate = array(
