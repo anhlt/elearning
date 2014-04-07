@@ -20,7 +20,5 @@ class LeftMenuHelper extends AppHelper{
             </ul>
             </div>"; 
     }
-
-
 }
 ?>

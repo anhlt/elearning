@@ -119,8 +119,5 @@ class StudentsController extends AppController {
         );
         $res = $this->StudentsLesson->find("all", $options);
         $this->set("history", $res);
-
-
-     //   debug($res);
     }
 }

@@ -6,20 +6,8 @@
 				'wrapInput' => false,  
 				'class' => 'form-control'  
 				),  
-			'class' => 'well',
-		    'url' => array('controller' => 'Lesson', 'action' => 'edit','id'=>$id)
+			'class' => 'well'
 			)); ?>
-
-		<div class="form-group">
-			<?php echo $this->Form->input('id', array(  
-				'placeholder' => 'Class name',  
-				'style' => 'width:300px;',
-				'label' => 'Class name',
-				'type'  => 'hidden',
-				'value' => $id
-			)); ?>  
-		</div>
-
 		<div class="form-group">
 			<?php echo $this->Form->input('name', array(  
 				'placeholder' => 'Class name',  
@@ -27,7 +15,6 @@
 				'label' => 'Class name',
 			)); ?>  
 		</div>
-
 		<div class="form-group">
 			<?php echo $this->Form->text('summary', array(  
 				'placeholder' => 'Description',  

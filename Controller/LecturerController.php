@@ -2,9 +2,9 @@
 
 class LecturerController extends AppController {
 	var $name = "Lecturer";
-  	var $uses = array('User', 'Lecturer','Question','Lesson', 'Test', 'Document', 'LessonMembership');	
+  	var $uses = array('User', 'Lecturer','Question','Lesson', 'Test', 'Document', 'Comment');	
 
-	public $components = array('RequestHandler');
+	public $components = array('RequestHandler','Paginator');
 	public $helpers = array('Js' => array('Jquery'),'LeftMenu');
 
     
@@ -43,6 +43,36 @@ class LecturerController extends AppController {
 			));
 		}
 	}
+
+    public function edit(){
+        $this->request->data = $this->Auth->user();
+		$questions = $this->Question->find('all');
+		$droplist = array();
+		foreach ($questions as $question) {
+			$droplist[$question['Question']['id']] = $question['Question']['question'];
+		}
+		$this->set('droplist', $droplist);
+	    if($this->request->is('post')) {
+	    	var_dump($this->request->data);
+			var_dump($errors);
+			$this->request->data['Lecturer']['ip_address'] = $this->request->clientIp();
+			$this->request->data['User']['role'] = 'lecturer';
+			if($this->User->saveAll($this->request->data)){
+				$this->Session->setFlash(__('The user has been saved'), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-success'
+				));
+				return $this->redirect(array('controller' => 'pages', 'action' => 'display'));
+			}
+	    	$errors = $this->User->validationErrors;
+			var_dump($errors);
+
+			$this->Session->setFlash(__('The User could not be saved. Plz try again'), 'alert', array(
+				'plugin' => 'BoostCake',
+				'class' => 'alert-warning'
+			));
+	    }
+    }
 	
 	public function index(){
 		$user = $this->Auth->user();
@@ -73,12 +103,12 @@ class LecturerController extends AppController {
 	}
 
 
-
-
 	public function studentmanage()
 	{
 		$lesson_id = $this->params['named']['lesson_id'];
 		$lesson = $this->Lesson->findById($lesson_id);
+		var_dump($lesson);
+		die();
 		$this->paginate = array(
 		    'fields' => array('Student.full_name','Student.id','LessonMembership.baned','LessonMembership.liked','LessonMembership.lesson_id'),
 			'limit' => 10,
@@ -87,8 +117,37 @@ class LecturerController extends AppController {
 			'contain' => array('Student')
 		);
 
-		$this->LessonMembership->Behaviors->load('Containable');
+		#$this->LessonMembership->Behaviors->load('Containable');
 		$students = $this->paginate("LessonMembership");
 		$this->set("results",$students);
 	}
+
+	public function reply() {
+		$user_id = $this->Auth->user('id');
+		$lesson_id = $this->params['named']['id'];
+
+		if ($this->request->is('post'))
+		{			
+			$data['Comment']['user_id'] = $user_id;
+			$data['Comment']['lesson_id'] = $lesson_id;
+			$data['Comment']['content'] = $this->request->data['Report']['content'];
+
+			var_dump($data);
+			$this->Comment->create();
+
+			if($this->Comment->save($data)){
+                $this->Session->setFlash(__('Your comment has been uploaded'), 'alert', array(
+	                'plugin' => 'BoostCake',
+	                'class' => 'alert-success'
+            	));       	
+				
+			} else {
+                $this->Session->setFlash(__('Your comment could not be uploaded. Plz try again'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+            	));	
+			}
+		}
+		return $this->redirect($this->referer());
+	}	
 }

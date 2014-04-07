@@ -19,7 +19,7 @@ class Document extends AppModel {
 				'rule' => array('notEmpty'),
 				'message' => 'Title is required'
 			)
-		),			
+		),	
 	);
 }
 ?>

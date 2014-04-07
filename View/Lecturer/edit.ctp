@@ -7,17 +7,10 @@
 		'div' => false,  
 		'label' => false,  
 		'wrapInput' => false,  
-		'class' => 'form-control'  
+		'class' => 'form-control'
 	  ),  
 	  'class' => 'well'  
-	)); ?> 
-	<div class="form-group">
-    	<?php echo $this->Form->input('username', array(  
-			'placeholder' => 'Email',  
-			'style' => 'width:180px;',
-			'label' => 'Username',
-		)); ?>  
-	</div>
+	)); ?>
 	<div class="form-group">
 	  <?php echo $this->Form->input('password', array(  
 		'placeholder' => 'Password',  
@@ -31,6 +24,20 @@
 		'placeholder' => 'Email',  
 		'style' => 'width:180px;',
 		'label' => 'Email'
+	  )); ?>  
+	</div>
+	<div class="form-group">
+	  <?php echo $this->Form->input('Lecturer.full_name', array(  
+		'placeholder' => 'Name',  
+		'style' => 'width:180px;',
+		'label' => 'Name'
+	  )); ?>  
+	</div>	
+	<div class="form-group">
+	  <?php echo $this->Form->input('Lecturer.credit_card_number', array(  
+		'placeholder' => 'Creadit Card Number',  
+		'style' => 'width:180px;',
+		'label' => 'Creadit Card Number'
 	  )); ?>  
 	</div>
 	<div class="form-group">
@@ -69,7 +76,7 @@
 		'label' => 'Answer'
 	  )); ?>  
 	</div>
-	<?php echo $this->Form->submit('Sign up', array(  
+	<?php echo $this->Form->submit('save', array(  
 	'div' => false,  
 	'class' => 'btn btn-default'  
 	)); ?>  

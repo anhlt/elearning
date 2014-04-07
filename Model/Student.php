@@ -4,11 +4,13 @@ class Student extends AppModel{
         'User' => array(
             'className' => 'User',
             'foreignKey' => 'id'
-        )
-    );
+        ),        
+    );    
+
     public $hasMany = array(
-        'LessonMembership'
+        'Study'
     );
+
     public $validate = array(
         'full_name' => array(
             'required' => array(

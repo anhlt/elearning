@@ -10,7 +10,7 @@
 	<body>		
 		<div class='head'><h3>ファイルをアップロード</h3></div>		
 		<div class='main'>
-		<?php echo $this->Form->create('Document',array(
+		<?php echo $this->Form->create('Test',array(
 			'inputDefaults' => array(  
 				'div' => false,  
 				'label' => false,  
@@ -18,12 +18,11 @@
 				'class' => 'form-control'  
 				),  
 			'class' => 'well',
-		    'url' => array('controller' => 'document', 'action' => 'edit', 'id' => $id, 'document_id' => $document_id, 'ihan' => false),
+		    'url' => array('controller' => 'Test', 'action' => 'edit','id' => $id),
 		    'method' => 'post',
 		    'enctype' => 'multipart/form-data'
 			)); ?>
-			
-			<?php echo $this->Form->hidden('ihan', array('value' => $ihan));?>					
+
 			<div class="form-group">
 				<?php echo $this->Form->input('title', array(  
 					'value' => $result['title'],  
@@ -38,33 +37,47 @@
 					'value' => $result['link'],
 					'placeholder' => 'ファイル',
 					'required' => false,
+					'id' => 'f',
 					'class' => 'btn-file'
 				)); ?>
 			</div>
 
-			<div class='row'>
-				<div class=' col-md-1'>
-				<?php echo $this->Form->checkbox('Document.check', array(
-				'class' => 'btn-checkbox',
-				'required' => true	
-				)); ?>	
-				</div>
-				<div>私はそのドキュメントを専従する</div>
+			<div class="form-group">
+				<?php echo $this->Form->input('test_time', array(
+					'value' => $result['test_time'],  
+					'style' => 'width: 100px;',
+					'label' => '時間 （分）',					
+				)); ?>				
+			</div>					
+			
+			<div class='form-group'>					 
+				<?php echo $this->Form->submit('アップロード', array(
+				'class' => 'btn btn-primary',
+				'div' => false
+				));?>
+
+				<?php echo $this->Form->reset('再アップロード',array(
+					'class' => 'btn btn-primary',
+					'div' => false, 
+					'value' => '再アップロード'
+					));?>	
 			</div>
-
-			<br>
-			<div class='form-group'>
-			<?php echo $this->Form->submit('アップロード', array(
-				'class' => 'btn btn-primary',
-				'div' => false,				
-			));?>
-
-			<?php echo $this->Form->reset('再アップロード',array(
-				'class' => 'btn btn-primary',
-				'div' => false,
-				'value' => '再アップロード'
-			));?>
-			</div>								
+			</div>					
 		</form>
 	</body>
+	<script>
+	var fl = document.getElementById('f');					
+
+			fl.onchange = function(e){ 
+			    var ext = this.value.match(/\.(.+)$/)[1];			    
+			    switch(ext)
+			    {
+			        case 'tsv':		            
+			            break;
+			        default:
+			            alert('File invalid !');
+			            this.value='';
+			    }		    
+			};
+	</script>
 </html>

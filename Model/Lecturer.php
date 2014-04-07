@@ -16,7 +16,7 @@ class Lecturer extends AppModel {
 		'full_name' => array(
 			'required' => array(
 				'rule' => array('notEmpty'),
-				'message' => 'A username is required'
+				'message' => 'A full_name is required'
 			)
 		),
 		'init_password' => array(
@@ -56,7 +56,7 @@ class Lecturer extends AppModel {
                     ),
         'email' => array(
 	    	'email' => array(
-	        	'rule'    => array('email', true),
+	        	'rule'    => array('email'),
 	        	'message' => 'Please supply a valid email address.'
 	    	),
 			'isUnique' => array(
