@@ -5,7 +5,7 @@
 				'label' => false,  
 				'wrapInput' => false,  
 				'class' => 'form-control'  
-				),  
+				),	
 			'class' => 'well'
 			)); ?>
 		<div class="form-group">
@@ -35,7 +35,6 @@
 		'div' => false,  
 		'class' => 'btn btn-default'  
 		)); ?>  
-
 
 		<?php echo $this->Form->end(); ?>  
 	</div>

@@ -46,13 +46,13 @@ class LessonController extends AppController {
     }
 
     public function edit(){
-    	var_dump($this->request->is('post'));
-    	if($this->request->is('post')){
-    		echo "string";
-	        var_dump($this->request->data);
-
+	    if (empty($this->request->data)) {
+    		$id = ($this->params['named']['id']);
+    		$Lesson = $this->Lesson->findById($id);
+     	    $this->request->data = $Lesson;
+		}
+    	else{
 	    	$data = ($this->request->data);
-	    	$data['Lesson']['lecturer_id'] = $this->Auth->user('id');
 	    	$rawtags = explode(",",$data["hidden-data"]['Tag']['name']);
 	    	$tags = array();
 	    	foreach ($rawtags as $key => $value) {
@@ -78,7 +78,7 @@ class LessonController extends AppController {
 					'class' => 'alert-warning'
 				));	
 			}			
-			return $this->redirect($this->referer());
+			$this->redirect(array('controller' => 'lecturer'));
     	}
     }
 
