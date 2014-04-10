@@ -2,3 +2,4 @@ tmp/cache
 tmp/logs
 tmp/
 /nbproject
+webroot/files/*
