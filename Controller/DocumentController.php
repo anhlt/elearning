@@ -125,7 +125,7 @@ class DocumentController extends AppController {
     }
 
     public function show($document_id){
-        $document = $this->Document->find("first", array("conditions"=>array("id"=>$document_id)));
+        $document = $this->Document->find("first", array("conditions"=>array("Document.id"=>$document_id)));
         $this->set("document", $document['Document']);
     }
 

@@ -1,22 +1,32 @@
 <?php 
 class Lesson extends AppModel {
-	public $belongsTo="Lecturer";
-    public $actsAs = array('Containable');
-    
+
+	public $belongsTo=array(
+		'Lecturer'=>array(
+			'className'=>'Lecturer',
+			'foreignKey'=>'lecturer_id')
+		);
+        public $actsAs = array('Containable');
 	public $hasAndBelongsToMany = array(
         'Tag' => array(
             'className' => 'Tag',
             'joinTable' => 'lessons_tags',
             'foreignKey' => 'lesson_id',
             'associationForeignKey' => 'tag_id'
+        ), 
+        'Student'=> array(
+            'className' => 'Tag', 
+            'joinTable' => 'students_lessons', 
+            'foreignKey' => 'lesson_id',
+            'associationForeignKey' => 'student_id'
         ));
     public $hasMany = array(
         'Study' => 
             array('dependent' => True ),
-        'Document',
-        'Comment'
-    );
-    
+                'Document', 
+                'Comment', 
+                'Test'
+    		);
     public $validate = array(
         'name' => array(
             'required' => array(

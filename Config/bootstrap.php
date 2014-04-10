@@ -23,6 +23,14 @@ define("RANK_BY_TAG", 2);
 define("RANK_BY_LESSON", 1);
 define("PDF", "pdf");
 define("TSV", "tsv");
+define("O", "operation");
+define("D", "debug");
+define ("E", "error");
+define ("STUDENT_PROFILE", 1);
+define ("STUDENT_CHOOSE_COURSE", 2);
+define ("STUDENT_STUDY_HISTORY", 3);
+define ("MAX_LEARN_DAY", 10);
+define ("DELETED", -1);
 /**
  * The settings below can be used to set additional paths to models, views and controllers.
  *

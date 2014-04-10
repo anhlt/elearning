@@ -6,9 +6,13 @@ class Student extends AppModel{
             'foreignKey' => 'id'
         ),        
     );    
-
     public $hasMany = array(
-        'Study'
+        'LessonMembership');
+    public $hasAndBelongsToMany = array( 
+        'Lesson'=>array(
+            'joinTable'=> 'students_lessons', 
+            'foreignKey'=> 'student_id', 
+            'associationForeignKey'=> 'lesson_id')
     );
 
     public $validate = array(

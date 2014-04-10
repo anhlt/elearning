@@ -6,10 +6,11 @@ class Lecturer extends AppModel {
 		    'foreignKey' => 'id'
 		)
 	);
-	public $hasMany = array('Lesson'=>array(
-            'className' => 'Lesson',
-            'foreignKey' => 'lecturer_id',
-            'dependent' => true
+	public $hasMany = array(
+		'Lesson'=>array(
+           		 'className' => 'Lesson',
+         		 'foreignKey' => 'lecturer_id',
+        		 'dependent' => true
             ),
 		); 
 	public $validate = array(
