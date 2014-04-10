@@ -279,28 +279,11 @@ class LessonController extends AppController {
     }
     public function learn($lesson_id){
         $user_id = $this->Auth->user("id");
-    //    $this->loadModel("StudentsLesson");
-    //    $options['conditions'] = array("student_id"=>$user_id, "lesson_id"=>$lesson_id);
-    //    $res =  $this->StudentsLesson->find("first", $options);
-     /*   if (count($res)==0){
-            $this->Session->setFlash(__("この授業はまだ登録しません"));
-            $this->redirect("/lesson/show/".$lesson_id);
-            return; 
-        }else {
-            $day_attended = $res['StudentsLesson']['days_attended'];
-            $now = date("Y-m-d H:i:s");
-            $days = floor((strtotime($now)- strtotime($day_attended))/24/3600);
-            if ($days > MAX_LEARN_DAY){ 
-                $this->Session->setFlash(__("この授業はまだ登録しません"));
-                $this->redirect("/lesson/show/".$lesson_id);
-            }
-
-        }*/
-
-        if (!$this->Util->checkLessonAvailableWithStudent($lesson_id, $user_id)){
-             $this->Session->setFlash(__("<div class = 'alert alert-warning'>この授業はまだ登録しません</div>"));
-             $this->redirect("/lesson/show/".$lesson_id);
-        } 
+        
+        if ($this->Session->read("scroll")== "1"){
+            $this->set("scroll", "1");
+            $this->Session->delete("scroll");
+        }
         $this->Lesson->recursive = 2; 
         $options['conditions'] = array("Lesson.id"=>$lesson_id); 
         $lessons = $this->Lesson->find("first",$options); 
@@ -310,6 +293,7 @@ class LessonController extends AppController {
         $learnedStudents = $lessons['Student'];
         $likedNumber = 0;
         $liked = 0;
+        $student_lesson_id = -1;
         foreach($learnedStudents as $student){
             if ($student['StudentsLesson']['liked'] == true){
                 $likedNumber += 1; 
@@ -324,7 +308,11 @@ class LessonController extends AppController {
         $this->set("likePeople", $likedNumber);
         $this->set("liked", $liked);
         $this->set('student_lesson_id', $student_lesson_id);
-     //   debug($lessons);
+        if (!$this->Util->checkLessonAvailableWithStudent($lesson_id, $user_id)){
+      /*      $this->Session->setFlash(__("<div class = 'alert alert-warning'>この授業はまだ登録しません</div>"));
+      $this->redirect("/lesson/show/".$lesson_id);*/
+           $this->set("learnable", 1); 
+        }   
     }
 
     public function register($lesson_id){
@@ -403,6 +391,7 @@ class LessonController extends AppController {
         $this->loadModel("Comment");
         $data = array("user_id"=>$this->Auth->user("id"), "lesson_id"=>$lesson_id, "content"=>$content);
         $this->Comment->save($data);
+        $this->Session->write("scroll", "1");
         $this->redirect($this->referer());
     }
 

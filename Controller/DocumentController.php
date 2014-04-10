@@ -1,55 +1,62 @@
 <?php
 class DocumentController extends AppController {
-	var $name = "Document";
-	var $uses = array('Document','Lesson');
+    var $name = "Document";
+    var $uses = array('Document','Lesson');
+    var $components = array("Util");
 
-	public function add() {
-		$lesson_id = $this->params['named']['id'];
-		$this->set('id', $lesson_id);
-		$a['Document']['lesson_id'] = $lesson_id;
-		if ($this->request->is('post')) {
-			$data = $this->request->data['Document'];
-			unset($data['check']);
-			echo "<pre>";
-			var_dump($data);
-			foreach ($data as $Document) {
-				var_dump($Document);
-				$name = uniqid() . $Document['link']['name'];
-				if (is_uploaded_file($Document['link']['tmp_name'])) {
-					$data['Document']['title'] = $Document['title'];
-					move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT."course".DS.$name);
-					$data['Document']['lesson_id'] = $lesson_id;
-					$this->Document->create();
-					if ($this->Document->save($data)) {
-						$this->Session->setFlash(__('The document has been uploaded'), 'alert', array(
-							'plugin' => 'BoostCake',
-							'class' => 'alert-success'));
-					};
-				}
-				else
-	                $this->Session->setFlash(__('The document could not be uploaded. Plz try again'), 'alert', array(
-	                    'plugin' => 'BoostCake',
-	                    'class' => 'alert-warning'));      
-	        }
- 		$this->redirect(array('controller' => 'Lecturer'));	
-		}
-	}
+    public function add() {
+        $lesson_id = $this->params['named']['id'];
+        $this->set('id', $lesson_id);
+        $a['Document']['lesson_id'] = $lesson_id;
+        if ($this->request->is('post')) {
+            $data = $this->request->data['Document'];
+            unset($data['check']);
+            echo "<pre>";
+            var_dump($data);
+            foreach ($data as $Document) {
+                var_dump($Document);
+                $name = uniqid() . $Document['link']['name'];
+                if (is_uploaded_file($Document['link']['tmp_name'])) {
+                    $data['Document']['title'] = $Document['title'];
+                    move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT."course".DS.$name);
+                    $data['Document']['lesson_id'] = $lesson_id;
+                    $this->Document->create();
+                    if ($this->Document->save($data)) {
+                        $this->Session->setFlash(__('The document has been uploaded'), 'alert', array(
+                            'plugin' => 'BoostCake',
+                            'class' => 'alert-success'));
+                    };
+                }
+                else
+                    $this->Session->setFlash(__('The document could not be uploaded. Plz try again'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-warning'));      
+            }
+            $this->redirect(array('controller' => 'Lecturer'));	
+        }
+    }
 
-	public function upload() {
-	}
+    public function upload() {
+    }
 
-	public function edit() {
-		$document_id = $this->params['named']['id'];
-	}
+    public function edit() {
+        $document_id = $this->params['named']['id'];
+    }
 
-	public function delete() {
-		$document_id = $this->params['named']['id'];
-	}
+    public function delete() {
+        $document_id = $this->params['named']['id'];
+    }
 
     public $helpers = array("TsvReader");
     public function show($document_id){
         $document = $this->Document->find("first", array("conditions"=>array("Document.id"=>$document_id)));
         $this->set("document", $document['Document']);
+        $lesson_id = $document['Lesson']['id']; 
+        if ($this->Util->checkLessonAvailableWithStudent($lesson_id, $this->Auth->user("id"))){
+            $this->set("learnable", 1);
+        }else {
+            $this->set("learnable", -1);
+        }
     }
     public function report($lesson_id,  $document_id){
         $document = $this->Document->find("first", array("conditions"=>array("id"=>$document_id)));

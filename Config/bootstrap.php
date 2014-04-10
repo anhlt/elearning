@@ -24,6 +24,7 @@ define("RANK_BY_LESSON", 1);
 define("PDF", "pdf");
 define("TSV", "tsv");
 define ("MP3", "mp3");
+define ("MP4", "mp4");
 define("O", "operation");
 define("D", "debug");
 define ("E", "error");
