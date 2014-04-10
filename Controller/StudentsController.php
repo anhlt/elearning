@@ -131,4 +131,40 @@ class StudentsController extends AppController {
         $this->set("tests", $tests);
         //debug($tests);
     }
+    public function search(){
+        $keyword = $this->params['url']['search_value'];
+        $this->loadModel("Document");
+        $option['conditions'] = array("Document.title like "=>"%".$keyword."%"); 
+        $documents =$this->Document->find("all", $option);
+        $this->set("documents", $documents);
+   
+        $this->loadModel("Lesson");
+        $option['conditions'] = array("OR"=>array(
+            array("Lesson.name like "=>"%".$keyword."%"), 
+            array("Lesson.summary like "=>"%".$keyword."%")
+        )); 
+        $lessons =$this->Lesson->find("all", $option);
+        $this->set("lessons", $lessons);
+    
+        $this->loadModel("Lecturer");
+        $option['conditions'] =  array("OR"=>array(
+            array("Lecturer.full_name like "=>"%".$keyword."%"),
+            array("User.username like "=>"%".$keyword."%")
+        ));
+        
+        $lecturers =$this->Lecturer->find("all", $option);
+        $this->set("lecturers", $lecturers);
+     
+        $this->loadModel("Student");
+        $option['conditions'] =  array("OR"=>array(
+            array("Student.full_name like "=>"%".$keyword."%"), 
+            array("User.username like "=>"%".$keyword."%")
+        )) ;
+
+        $students =$this->Student->find("all", $option);
+        $this->set("students", $students);
+
+$this->set("keyword", $keyword);
+    //    debug($documents);
+    }
 }
