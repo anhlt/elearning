@@ -337,7 +337,7 @@ class LessonController extends AppController {
             if (isset( $lesson['rank'])){
                 $rank_stt = $lesson['rank'];
                 $this->set("rank_stt", $rank_stt);
-                $this->Lesson->recursive = 1;
+                $this->Lesson->recursive = 2;
                 if($rank_stt == RANK_BY_LECTURER){ 
                     $options['order'] = array('Lecturer.full_name'); 
                     $lessons = $this->Lesson->find("all", $options);
@@ -353,8 +353,6 @@ class LessonController extends AppController {
                     $lessons = $this->Tag->find("all", $options);
                     $this->set("lessons", $lessons);
                 }
-                //		debug($lessons);
-                //		die();
             }
         }
         if ($this->request->is('get')) {
@@ -446,21 +444,26 @@ class LessonController extends AppController {
         $lessons = $this->Lesson->find("first",$options); 
         $this->set("lessons",  $lessons);
     }
+
+
+
     public function learn($lesson_id){
-        $user_id = $this->Auth->user("id");
-        if (!$this->Util->checkLessonAvailableWithStudent($lesson_id, $user_id)){
-             $this->Session->setFlash(__("<div class = 'alert alert-warning'>この授業はまだ登録しません</div>"));
-             $this->redirect("/lesson/show/".$lesson_id);
-        } 
-        $this->Lesson->recursive = 2; 
-        $options['conditions'] = array("Lesson.id"=>$lesson_id); 
-        $lessons = $this->Lesson->find("first",$options); 
+	    $user_id = $this->Auth->user("id");
+	    if (!$this->Util->checkLessonAvailableWithStudent($lesson_id, $user_id)){
+	         $this->Session->setFlash(__("<div class = 'alert alert-warning'>この授業はまだ登録しません</div>"));
+	         $this->redirect("/lesson/show/".$lesson_id);
+	    } 
+
+//        	$lesson = $this->Lesson->findById($lesson_id);
+
+        $this->Lesson->recursive = 1; 
+        $lessons = $this->Lesson->findById($lesson_id);
         $this->set("lessons",  $lessons);
 
-        // いいねを計算する     
         $learnedStudents = $lessons['Student'];
         $likedNumber = 0;
         $liked = 0;
+
         foreach($learnedStudents as $student){
             if ($student['StudentsLesson']['liked'] == true){
                 $likedNumber += 1; 
@@ -468,14 +471,13 @@ class LessonController extends AppController {
                     $liked = 1;
                 }
             }
-            if ($student['id'] ==$user_id){
+            if ($student['id'] == $user_id){
                 $student_lesson_id = $student['StudentsLesson']['id'];
             }
         }
         $this->set("likePeople", $likedNumber);
         $this->set("liked", $liked);
         $this->set('student_lesson_id', $student_lesson_id);
-     //   debug($lessons);
     }
 
     public function register($lesson_id){

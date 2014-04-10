@@ -30,7 +30,7 @@ echo "<h1 style='margin-top:0px'>".$document['title']."</h1>";
 $link = $document['link'];
 if (stripos(strrev(strtolower($link)), strrev(PDF))===0){
     echo $this->Html->image('icon/trans.png', array("class"=>"transimage"));
-    echo "<iframe id = 'frame class = 'disabled' style = 'z-index:-1' src='http://elearning.com/pdf/1.pdf'></iframe>";
+    echo "<iframe id = 'frame' style = 'z-index:-1' src='http://elearning.com/pdf/1.pdf'></iframe>";
     echo "</div>";
 }else if (stripos(strrev(strtolower($link)),strrev(MP3))===0){
    echo "<iframe id = 'frameMusic' src='http://elearning.com/mp4/abc.3gp'></iframe>";
