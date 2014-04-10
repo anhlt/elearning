@@ -20,6 +20,7 @@
 	}
 	</style>
 	<?php echo $this->Html->css('bootstrap-responsive.min'); ?>
+	<?php echo $this->Html->css('docs.min'); ?>
 	<?php echo $this->Html->css('tagmanager'); ?>	
 
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -78,6 +79,7 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<?php echo $this->Html->script('bootstrap.min'); ?>
 	<?php echo $this->Html->script('tagmanager'); ?>
+	<?php echo $this->Html->script('jquery.smooth-scroll.js'); ?>
 	<?php echo $this->element('sql_dump');?>
 </body>
 </html>

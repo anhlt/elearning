@@ -17,9 +17,21 @@ foreach($lessons as $lesson){
     echo $this->Html->tableCells(array($days_attended, $this->Html->link($lesson_name, "/lesson/learn/".$lesson_id), $learn_state));     
 } 
 echo "</table>";
-echo "<h3> 受けたテスト</h2>"; 
-echo "<table class = 'table table-border'>";
-
+//受けたテストの情報
+echo " <h3>受けたテスト</h3>"; 
+echo "<table class = 'table table-bordered'>";
+echo $this->Html->tableHeaders(array("登録の日", "テストの名前", "授業の名前", "点数", "結果ディテール"));
+foreach($tests as $element){
+    $time = $element['Result']['time']; 
+    $test_name = $element['Test']['title'];
+    $test_id = $element['Test']['id'];
+    $lesson_name = $element['Test']['Lesson']['name'];
+    $id_lesson = $element['Test']['Lesson']['id'];
+    $days = $this->Util->calDate($time);
+    $point = $element['Result']['point'];
+    $result_id = $element['Result']['id'];
+    echo $this->Html->tableCells(array($days."日前に", $this->Html->link($test_name, "/tests/show/".$test_id), $this->Html->link($lesson_name, "/lessons/show/".$id_lesson), $point, $this->Html->link("ディテール", "/tests/result/".$result_id)));     
+} 
 echo "</table>";
 ?>
 </div>

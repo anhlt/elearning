@@ -80,13 +80,13 @@ class TestsController extends AppController {
 
     public function result($result_id) {
         $this->loadModel("Result");
-        $dataTest = $this->Result->find('first', array('conditions' => array('id' => $result_id)));
+        $dataTest = $this->Result->find('first', array('conditions' => array('Result.id' => $result_id)));
         $this->set('result', $dataTest['Result']['student_of_choice']);
         $this->set('data', $this->getDataTSV($dataTest['Result']["test_id"]));
     }
 
     private function getDataTSV($id) {
-        $test = $this->Test->find("first", array("conditions"=>array("id"=>$id)));
+        $test = $this->Test->find("first", array("conditions"=>array("Test.id"=>$id)));
         $filename = $test['Test']['link'];  //TSVファイルの名前はリンクとして保存されている
 
         $link = $_SERVER['DOCUMENT_ROOT']  . 'tsv' . DS . $filename;

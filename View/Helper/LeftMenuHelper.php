@@ -10,39 +10,46 @@ class LeftMenuHelper extends AppHelper{
             </ul>
             </div>"; 
     }
-    public function leftMenuStudent($index){
+    public function leftMenuStudent($index, $nhanhcon=""){
         if ($index ==STUDENT_CHOOSE_COURSE) {
             echo " 
-            <div class='col-xs-5 col-md-3'>
-            <ul class='nav nav-pills nav-stacked'>
-            <li><a href='/students/profile'> プロファイル管理 </a></li>
-            <li class='active'><a href='/lesson/search'>授業を選択</a></li>
-            <li><a href='/students/history'>勉強の歴史</a></li>
-            </ul>
-            </div>";
+                <div class='col-xs-5 col-md-3'>
+                <ul class='nav nav-pills nav-stacked'>
+                <li><a href='/students/profile'> プロファイル管理 </a></li>";
+            if ($nhanhcon == ""){
+                echo "<li class='active'><a href='/lesson/search'>授業を選択</a></li>";
+                
+            }else {
+                echo "<li class='active'><a href='/lesson/search'>授業を選択>".$nhanhcon."</a></li>";
+            }
+            echo " <li><a href='/students/history'>勉強の歴史</a></li>
+                </ul>
+                </div>";
         }else if ($index ==STUDENT_PROFILE){
             echo " 
-            <div class='col-xs-5 col-md-3'>
-            <ul class='nav nav-pills nav-stacked'>
-            <li class = 'active' ><a href='/students/profile'> プロファイル管理 </a></li>
-            <li><a href='/lesson/search'>授業を選択</a></li>
-            <li><a href='/students/history'>勉強の歴史</a></li>
-            </ul>
-            </div>";
+                <div class='col-xs-5 col-md-3'>
+                <ul class='nav nav-pills nav-stacked'>";
+            if ($nhanhcon == ""){
+               echo  "<li class = 'active' ><a href='/students/profile'> プロファイル管理 </a></li>";
+            }else {
+               echo  "<li class = 'active' ><a href='/students/profile'> プロファイル管理>".$nhanhcon."</a></li>";
+            }
+            echo "<li><a href='/lesson/search'>授業を選択</a></li>
+                <li><a href='/students/history'>勉強の歴史</a></li>
+                </ul>
+                </div>";
 
         }else if ($index == STUDENT_STUDY_HISTORY){
             echo " 
-            <div class='col-xs-5 col-md-3'>
-            <ul class='nav nav-pills nav-stacked'>
-            <li><a href='/students/profile'> プロファイル管理 </a></li>
-            <li><a href='/lesson/search'>授業を選択</a></li>
-            <li class = 'active'><a href='/students/history'>勉強の歴史</a></li>
-            </ul>
-            </div>";
+                <div class='col-xs-5 col-md-3'>
+                <ul class='nav nav-pills nav-stacked'>
+                <li><a href='/students/profile'> プロファイル管理 </a></li>
+                <li><a href='/lesson/search'>授業を選択</a></li>
+                <li class = 'active'><a href='/students/history'>勉強の歴史</a></li>
+                </ul>
+                </div>";
 
         }  
     }
-
-
 }
 ?>

@@ -7,6 +7,13 @@ function upcomment(event, lesson_id){
     }
 }
 </script>
+<script type='text/javascript'>
+$(document).ready(function(){
+    $.smoothScroll({
+        scrollTarget: '#scroll'
+    });
+});
+</script>
 <style>
 #username{
     margin-top :10px; 
@@ -16,55 +23,50 @@ function upcomment(event, lesson_id){
 }
 </style>
 
-<?php $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE);?>
+<?php $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE, "勉強");?>
     <div class="col-xs-13 col-md-9 well">  
 <?php
 $lesson = $lessons['Lesson'];
 $lesson_id = $lesson['id'];
-echo "<br>タイトル</br>";
-echo $lesson['name']; 
-echo "<br>まとめ</br>";
-echo $lesson['summary'];
+echo "<h1 style='margin-top:0px'>".$lesson['name']."</h1>"; 
+if (isset($liked) && $liked == 1) {
+    echo $this->Html->image("icon/unlike.png", array("url"=>"/lesson/dislike/".$student_lesson_id, "width"=>"20", "height"=>"20"));
+}else {
+    echo $this->Html->image("icon/like.png", array("url"=>"/lesson/like/".$student_lesson_id, "width"=>"20", "height"=>"20"));
+}
+$learnedPeople = $lessons['Student'];
+$learnedPeopleNumber = count($learnedPeople); 
+echo " <span class='label label-primary'>".$likePeople."人/".$learnedPeopleNumber."人いいねした</span>";
+echo "<br>";
+
+echo "<div class ='bs-callout bs-callout-info'>".$lesson['summary']."</div>";
 //hien thi tai lieu
-echo "<br>";
-echo "資料";
-echo "<br>";
+echo "<div class = 'bs-callout bs-callout-info'>";
+echo "<h3 style='margin-top:0px'>資料一覧</h3>";
 $documents = $lessons['Document'];
 foreach($documents as $row){
     $document = $row;
     $link = $document['link'];
+    if (stripos(strrev($link),strrev(PDF))===0) echo $this->Html->image("icon/pdf.png", array("height"=>"20", "width"=>"20"))." ";
     echo $this->Html->link($document['title'], array("controller"=>"document", "action"=>"show", $document['id'] ));
-    if (stripos(strrev($link),strrev(PDF))===0) echo "[pdf]";
-    if (stripos(strrev($link), strrev(TSV))===0) echo "[tsv]";
-    echo "<br>";  
+    echo "</br>";  
 }
+echo "</div>";
 ?>
 <?php
 //テストのTSVを表示する
+echo "<div class = 'bs-callout bs-callout-info'>";
+echo "<h3 style='margin-top:0px'>テスト一覧</h3>";
 $tests = $lessons['Test'];
 foreach($tests as $row){
     $test = $row;
     $link = $test['link'];
+    if (stripos(strrev($link),strrev(TSV))===0) echo $this->Html->image("icon/tsv.png", array("height"=>"20", "width"=>"20"))." ";
     echo $this->Html->link($test['title'], array("controller"=>"tests", "action"=>"show", $test['id'] ));
-    if (stripos(strrev($link), strrev(TSV))===0) echo "[tsv]";
     echo "<br>";  
 }
-
+echo "</div>";
 ?>
-<br> 
-<?php if (isset($liked) && $liked == 1) {
-    echo "ありがとう";  
-    echo "<div class = 'btn btn-warning'>";
-    echo $this->Html->link("悪いね", array("controller"=>"lesson", "action"=>"dislike", $lesson_id));
-    echo "</div>";
-}else {
-    echo"<div class = 'btn btn-warning'>";
-    echo $this->Html->link("いいね", array("controller"=>"lesson", "action"=>"like", $lesson_id));
-    echo "</div>";
-}
-?>
-<br>
-<br>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#hyouka" data-toggle="tab">評価</a></li>
   <li><a href="#comment" data-toggle="tab">コメント</a></li>
@@ -72,14 +74,12 @@ foreach($tests as $row){
 <div class="tab-content" style='padding:10px;'>
   <div class="tab-pane active" id="hyouka">
 <?php
-$learnedPeople = $lessons['Student'];
-$learnedPeopleNumber = count($learnedPeople); 
-echo "<br>この授業に参加する人の数: ".$learnedPeopleNumber."人</br>";
-echo "<br>いいね:".$likePeople."人<br>";
 $comments = $lessons['Comment'];
 foreach($comments as $comment){
     $username = $comment['User']['username'];
-    echo "<p class = 'btn btn-info' style = 'margin:5px'> ".$username." </p> ".$comment['content'];
+    $user_id = $comment['User']['id'];
+    //  echo $this->Html->image("icon/student.jpg", array("width"=>30, "height"=>30));
+    echo $this->Html->link($username.":", "/students/profile/".$user_id).$comment['content'];
     echo "<br>";
 }
 echo "<input id = 'commentIp' type ='text' size = '70' placeholder
