@@ -18,32 +18,19 @@ class StudentsController extends AppController {
         $this->Student->recursive = 2;
         $id = $this->Auth->user("id");
         if($this->request->is('post')){
- /*           $full_name = $this->data["Students"]["full_name"];
-            $address = $this->data['Students']['address'];
-            $phone_number = $this->data["Students"]["phone_number"];
-            $email = $this->data["Students"]["email"];
-            $username = $this->data["Students"]["username"];
-            $password = $this->data["Students"]["password"];
-            $repassword = $this->data['Students']['rePassword'];
-            $credit_card_number = $this->data["Students"]["credit_card_number"];
-            $answer_verifycode = $this->data["Students"]["answer_verifycode"];
-            $student_info = array("full_name"=>$full_name, "address"=>$address, "phone_number"=>$phone_number, "email"=>$email, "username"=>$username, "password"=>"$password", "repassword"=>$repassword, "credit_card_number"=>$credit_card_number); 
-            $this->Student->updateAll($student_info, array('id'=>$id));
-            //       $this->Student->save($student_info);
-            $this->redirect(array('controller'=>'students', 'action'=>'profile'));
-  */
             $user = $this->data['User'];
             $student = $this->data['Student'];
             debug($user);
             debug($student);
-    //        $this->Student->updateAll($student, array("Student.id"=>$id));
-    //        $this->User->updateAll($user, array("User.id"=>$id));
+            $this->Student->id = $id;
+            $this->Student->save($student);
+            $this->loadModel("User");
+            $this->User->id = $id;
+            $this->User->save($user);
+            $this->Session->setFlash("<div class = 'alert alert-warning alert-dismissable'>プロファイルが更新された</div>");
             $this->redirect("/students/profile");
-          //  $this->Student->save($student);
-            //    $this->User->save($user);
         }
         $this->loadModel('Question');
-        //     echo ($id);    
         $student = $this->Student->find('first', array('conditions'=>array('Student.id'=>$id)));  
         $this->set('student', $student['Student']);
         $questions = $this->Question->find('all');
@@ -127,21 +114,21 @@ class StudentsController extends AppController {
         $id = $this->Auth->user("id");
         $student = $this->Student->find('first', array('conditions'=>array('Student.id'=>$id)));  
         $this->set('student', $student['Student']);
+        $this->set('user', $student['User']);
     }
 
     public function history(){
         $user_id = $this->Auth->user("id");
-
-        //      $this->LoadModel("StudentsLesson");
         $this->Student->recursive = 2;
-        //     $options['fields'] = array("Lesson.*", "StudentsLesson.*");
         $options['conditions'] = array("Student.id"=>$user_id);
-        //    $options['joins'] = array(
-        //         array("table"=>"lessons", "alias"=>"Lesson", "conditions"=>array("Lesson.id = StudentsLesson.lesson_id"))
-        //    );
-
         $res = $this->Student->find("first", $options);
         $this->set("student", $res);
-        // debug($res);
+        
+        $this->loadModel("Result");
+        $this->Result->recursive = 2;
+        $options['order'] = array("Result.time");
+        $tests = $this->Result->find("all",$options);
+        $this->set("tests", $tests);
+        //debug($tests);
     }
 }

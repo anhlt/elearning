@@ -1,5 +1,5 @@
 <?php
-$this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE); 
+$this->LeftMenu->leftMenuStudent(STUDENT_PROFILE, "更新"); 
 ?>
     <?php echo $this->Session->flash(); ?>
 <div class = 'col-xs-13 col-md-9' > 

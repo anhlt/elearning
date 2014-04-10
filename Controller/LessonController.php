@@ -4,8 +4,10 @@ class LessonController extends AppController {
     var $uses = array('User', 'Lecturer','Question','Lesson','Tag', 'Document', 'Test', 'LessonMembership', 'Comment', 'Student', 'Report');
     public $components = array('RequestHandler', 'Paginator','Util');
 
+
     public function beforeFilter() {
         parent::beforeFilter();
+        $this->Session->delete("scroll");
     }
 
     public function add($value='')
@@ -447,7 +449,7 @@ class LessonController extends AppController {
     public function learn($lesson_id){
         $user_id = $this->Auth->user("id");
         if (!$this->Util->checkLessonAvailableWithStudent($lesson_id, $user_id)){
-             $this->Session->setFlash(__("この授業はまだ登録しません"));
+             $this->Session->setFlash(__("<div class = 'alert alert-warning'>この授業はまだ登録しません</div>"));
              $this->redirect("/lesson/show/".$lesson_id);
         } 
         $this->Lesson->recursive = 2; 
@@ -455,14 +457,25 @@ class LessonController extends AppController {
         $lessons = $this->Lesson->find("first",$options); 
         $this->set("lessons",  $lessons);
 
-        // いいねを計算するいいねを計算する     
+        // いいねを計算する     
         $learnedStudents = $lessons['Student'];
         $likedNumber = 0;
+        $liked = 0;
         foreach($learnedStudents as $student){
-            if ($student['StudentsLesson']['liked'] == true)
+            if ($student['StudentsLesson']['liked'] == true){
                 $likedNumber += 1; 
+                if ($student['id']==$user_id) {
+                    $liked = 1;
+                }
+            }
+            if ($student['id'] ==$user_id){
+                $student_lesson_id = $student['StudentsLesson']['id'];
+            }
         }
         $this->set("likePeople", $likedNumber);
+        $this->set("liked", $liked);
+        $this->set('student_lesson_id', $student_lesson_id);
+     //   debug($lessons);
     }
 
     public function register($lesson_id){
@@ -484,18 +497,19 @@ class LessonController extends AppController {
     }
 
 
-    public function like($lesson_id){
+    public function like($student_lesson_id){
         //  $this->set("liked", true);
         $this->loadModel("StudentsLesson");
+        $this->StudentsLesson->id = $student_lesson_id; 
         $data = array("liked"=>1);
-        $this->StudentsLesson->updateAll($data, array("lesson_id"=>$lesson_id, "student_id"=>$this->Auth->user("id")));
+        $this->StudentsLesson->save($data);
         $this->redirect($this->referer());
     }
-    public function dislike($lesson_id){
-        //  $this->set("liked", true);
+    public function dislike($student_lesson_id){
         $this->loadModel("StudentsLesson");
+        $this->StudentsLesson->id = $student_lesson_id; 
         $data = array("liked"=>0);
-        $this->StudentsLesson->updateAll($data, array("lesson_id"=>$lesson_id, "student_id"=>$this->Auth->user("id")));
+        $this->StudentsLesson->save($data);
         $this->redirect($this->referer());
     }
 

@@ -3,3 +3,5 @@ tmp/logs
 tmp/
 /nbproject
 webroot/files/*
+webroot/mp3/
+webroot/pdf/

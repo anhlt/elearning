@@ -1,5 +1,10 @@
 <?php
 class Test extends AppModel {
+    public $useTable = 'tests';
+    
+    public $belongsTo = array(
+        'Lesson'
+    );
 	public $validate = array(
 		'title' => array(
 			'required' => array(

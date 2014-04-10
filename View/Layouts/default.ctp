@@ -26,6 +26,14 @@
 		padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
 	}
 	</style>
+	<?php echo $this->Html->css('bootstrap-responsive.min'); ?>
+	<?php echo $this->Html->css('docs.min'); ?>
+	<?php echo $this->Html->css('tagmanager'); ?>	
+
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 
 	<?php
 	echo $this->fetch('meta');
@@ -71,5 +79,6 @@
 	<?php echo $this->Html->script('bootstrap.min'); ?>
 	<?php echo $this->Html->script('tagmanager'); ?>
 	<?php echo $this->Js->writeBuffer(); ?>
+	<?php echo $this->Html->script('jquery.smooth-scroll.js'); ?>
 </body>
 </html>
