@@ -14,7 +14,7 @@ class Lesson extends AppModel {
             'associationForeignKey' => 'tag_id'
         ), 
         'Student'=> array(
-            'className' => 'Tag', 
+            'className' => 'Student', 
             'joinTable' => 'students_lessons', 
             'foreignKey' => 'lesson_id',
             'associationForeignKey' => 'student_id'

@@ -1,7 +1,7 @@
 tmp/cache
-tmp/logs
+tmp/logs/*
 tmp/
 /nbproject
-webroot/mp3/
-webroot/pdf/
-webroot/files/
+webroot/mp3/*
+webroot/pdf/*
+webroot/files/*
