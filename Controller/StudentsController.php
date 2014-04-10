@@ -3,7 +3,7 @@
 class StudentsController extends AppController {
     //   var $helpers = array("Html", "Form");//このところはちょっと変、AppController　にあるのに
     var $components = array("Auth");//ここも
-    var $useTable = array('Question', 'Student');
+    var $uses = array('Question', 'Student');
     public $helpers = array("Util");
     public function beforeFilter(){
         $this->Auth->allow("register");	

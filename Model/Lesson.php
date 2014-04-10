@@ -21,11 +21,10 @@ class Lesson extends AppModel {
             'associationForeignKey' => 'student_id'
         ));
     public $hasMany = array(
-        'Study' => 
-            array('dependent' => True ),
-                'Document', 
-                'Comment', 
-                'Test'
+                'LessonMembership' => array('dependent' => True ),
+                'Document' => array('dependent' => True ), 
+                'Comment'=> array('dependent' => True ), 
+                'Test'=> array('dependent' => True )
     		);
     public $validate = array(
         'name' => array(

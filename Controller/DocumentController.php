@@ -21,11 +21,11 @@ class DocumentController extends AppController {
 			foreach ($data as $Document) 
 			{				
 				$name = uniqid() . $Document['link']['name'];			
-				$data['Document']['link'] = "course/".$name;
+				$data['Document']['link'] = DS . "pdf" . DS . $name;
 
 				if (is_uploaded_file($Document['link']['tmp_name'])) {
 					$data['Document']['title'] = $Document['title'];
-					move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT."course".DS.$name);
+					move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT."pdf".DS.$name);
 					$data['Document']['lesson_id'] = $lesson_id;
 					$this->Document->create();
 					if ($this->Document->save($data)) {
