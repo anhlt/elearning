@@ -9,6 +9,13 @@
 			'class' => 'well'
 			)); ?>
 		<div class="form-group">
+			<?php echo $this->Form->input('id', array(  
+				'placeholder' => 'ID',  
+				'style' => 'width:300px;',
+				'label' => 'ID',
+			)); ?>  
+		</div>
+		<div class="form-group">
 			<?php echo $this->Form->input('name', array(  
 				'placeholder' => 'Class name',  
 				'style' => 'width:300px;',

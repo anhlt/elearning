@@ -45,28 +45,27 @@ class LecturerController extends AppController {
 	}
 
     public function edit(){
-        $this->request->data = $this->Auth->user();
-		$questions = $this->Question->find('all');
-		$droplist = array();
-		foreach ($questions as $question) {
-			$droplist[$question['Question']['id']] = $question['Question']['question'];
-		}
-		$this->set('droplist', $droplist);
-	    if($this->request->is('post')) {
-	    	var_dump($this->request->data);
-			var_dump($errors);
+    	if (empty($this->request->data)) {
+
+	        $lecturer_id = $this->Auth->user('id');
+	        $this->request->data = $this->Lecturer->findById($lecturer_id);
+			$questions = $this->Question->find('all');
+			$droplist = array();
+			foreach ($questions as $question) {
+				$droplist[$question['Question']['id']] = $question['Question']['question'];
+			}
+			$this->set('droplist', $droplist);
+	    }else{
 			$this->request->data['Lecturer']['ip_address'] = $this->request->clientIp();
 			$this->request->data['User']['role'] = 'lecturer';
-			if($this->User->saveAll($this->request->data)){
+			if($this->User->save($this->request->data)){
 				$this->Session->setFlash(__('The user has been saved'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-success'
 				));
-				return $this->redirect(array('controller' => 'pages', 'action' => 'display'));
+				return $this->redirect(array('controller' => 'lecturer', 'action' => 'manage'));
 			}
 	    	$errors = $this->User->validationErrors;
-			var_dump($errors);
-
 			$this->Session->setFlash(__('The User could not be saved. Plz try again'), 'alert', array(
 				'plugin' => 'BoostCake',
 				'class' => 'alert-warning'

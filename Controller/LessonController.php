@@ -56,7 +56,6 @@ class LessonController extends AppController {
 	    	$rawtags = explode(",",$data["hidden-data"]['Tag']['name']);
 	    	$tags = array();
 	    	foreach ($rawtags as $key => $value) {
-	    		var_dump($value);
 		    	$tag = $this->Tag->findByName($value);
 		    	if (!$tag) {
 		    		$this->Tag->create();
@@ -66,7 +65,7 @@ class LessonController extends AppController {
 	    		array_push($tags, $tag['Tag']['id']);
 	    	}
 	    	$data['Tag'] = $tags;
-			if($this->Lesson->saveAll($data)) {
+			if($this->Lesson->save($data)) {
 				$this->Session->setFlash(__('The Lesson Info has been saved'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-success'
