@@ -29,7 +29,10 @@ class LecturerController extends AppController {
 			$this->User->create();
 			$this->request->data['Lecturer']['ip_address'] = $this->request->clientIp();
 			$this->request->data['Lecturer']['init_verifycode'] = $this->request->data['Lecturer']['current_verifycode']; 
+			$this->request->data['Lecturer']['init_password'] = $this->request->data['User']['password']; 
+
 			$this->request->data['User']['role'] = 'lecturer';
+			var_dump($this->request->data);
 			if($this->User->saveAll($this->request->data)){
 				$this->Session->setFlash(__('The user has been saved'), 'alert', array(
 					'plugin' => 'BoostCake',
@@ -45,27 +48,26 @@ class LecturerController extends AppController {
 	}
 
     public function edit(){
+		$questions = $this->Question->find('all');
+		$droplist = array();
+		foreach ($questions as $question) {
+			$droplist[$question['Question']['id']] = $question['Question']['question'];
+		}
+		$this->set('droplist', $droplist);
     	if (empty($this->request->data)) {
 
 	        $lecturer_id = $this->Auth->user('id');
 	        $this->request->data = $this->Lecturer->findById($lecturer_id);
-			$questions = $this->Question->find('all');
-			$droplist = array();
-			foreach ($questions as $question) {
-				$droplist[$question['Question']['id']] = $question['Question']['question'];
-			}
-			$this->set('droplist', $droplist);
-	    }else{
+
+    	}else{
 			$this->request->data['Lecturer']['ip_address'] = $this->request->clientIp();
-			$this->request->data['User']['role'] = 'lecturer';
-			if($this->User->save($this->request->data)){
+			if($this->Lecturer->save($this->request->data)){
 				$this->Session->setFlash(__('The user has been saved'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-success'
 				));
 				return $this->redirect(array('controller' => 'lecturer', 'action' => 'manage'));
 			}
-	    	$errors = $this->User->validationErrors;
 			$this->Session->setFlash(__('The User could not be saved. Plz try again'), 'alert', array(
 				'plugin' => 'BoostCake',
 				'class' => 'alert-warning'

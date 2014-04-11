@@ -158,4 +158,10 @@ class UsersController extends AppController {
 		'class' => 'alert-warning'
 		));
 	}
+
+	public function changepassword($value='')
+	{
+		$id = $this->Auth->User('id');
+		var_dump($id);
+	}
 }
