@@ -104,6 +104,7 @@ class DocumentController extends AppController {
 		}
 	}
 
+
 	public function delete() 
 	{
 
@@ -127,6 +128,12 @@ class DocumentController extends AppController {
     public function show($document_id){
         $document = $this->Document->find("first", array("conditions"=>array("Document.id"=>$document_id)));
         $this->set("document", $document['Document']);
+        $lesson_id = $document['Lesson']['id']; 
+        if ($this->Util->checkLessonAvailableWithStudent($lesson_id, $this->Auth->user("id"))){
+            $this->set("learnable", 1);
+        }else {
+            $this->set("learnable", -1);
+        }
     }
 
     public function report($lesson_id,  $document_id){

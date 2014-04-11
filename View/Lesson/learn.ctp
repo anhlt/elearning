@@ -29,14 +29,19 @@ $(document).ready(function(){
 $lesson = $lessons['Lesson'];
 $lesson_id = $lesson['id'];
 echo "<h1 style='margin-top:0px'>".$lesson['name']."</h1>"; 
-if (isset($liked) && $liked == 1) {
-    echo $this->Html->image("icon/unlike.png", array("url"=>"/lesson/dislike/".$student_lesson_id, "width"=>"20", "height"=>"20"));
-}else {
-    echo $this->Html->image("icon/like.png", array("url"=>"/lesson/like/".$student_lesson_id, "width"=>"20", "height"=>"20"));
+if ($student_lesson_id != -1){
+    if (isset($liked) && $liked == 1) {
+        echo $this->Html->image("icon/unlike.png", array("url"=>"/lesson/dislike/".$student_lesson_id, "width"=>"20", "height"=>"20"));
+    }else {
+        echo $this->Html->image("icon/like.png", array("url"=>"/lesson/like/".$student_lesson_id, "width"=>"20", "height"=>"20"));
+    }
 }
 $learnedPeople = $lessons['Student'];
 $learnedPeopleNumber = count($learnedPeople); 
 echo " <span class='label label-primary'>".$likePeople."人/".$learnedPeopleNumber."人いいねした</span>";
+if ($student_lesson_id ==-1){
+    echo "   <span class = 'label label-danger'>".$this->Html->link('登録', "/lesson/register/".$lesson_id)."</span>";
+}
 echo "<br>";
 
 echo "<div class ='bs-callout bs-callout-info'>".$lesson['summary']."</div>";
@@ -48,7 +53,15 @@ foreach($documents as $row){
     $document = $row;
     $link = $document['link'];
     if (stripos(strrev($link),strrev(PDF))===0) echo $this->Html->image("icon/pdf.png", array("height"=>"20", "width"=>"20"))." ";
-    echo $this->Html->link($document['title'], array("controller"=>"document", "action"=>"show", $document['id'] ));
+    if (stripos(strrev($link),strrev(MP3))===0) echo $this->Html->image("icon/mp3.png", array("height"=>"20", "width"=>"20"))." ";
+    if (stripos(strrev($link),strrev(MP4))===0) echo $this->Html->image("icon/mp4.png", array("height"=>"20", "width"=>"20"))." ";
+    if (stripos(strrev($link),strrev(PDF))===0) {
+        echo $this->Html->link($document['title'], array("controller"=>"document", "action"=>"show", $document['id'] ));
+    }else if ($student_lesson_id == -1){
+        echo $document['title'];
+    }else {
+        echo $this->Html->link($document['title'], array("controller"=>"document", "action"=>"show", $document['id'] ));
+    }
     echo "</br>";  
 }
 echo "</div>";
@@ -62,11 +75,17 @@ foreach($tests as $row){
     $test = $row;
     $link = $test['link'];
     if (stripos(strrev($link),strrev(TSV))===0) echo $this->Html->image("icon/tsv.png", array("height"=>"20", "width"=>"20"))." ";
-    echo $this->Html->link($test['title'], array("controller"=>"tests", "action"=>"show", $test['id'] ));
+    if ($student_lesson_id != -1){ 
+        echo $this->Html->link($test['title'], array("controller"=>"tests", "action"=>"show", $test['id'] ));
+    }else {
+        echo $test['title'];
+    }
     echo "<br>";  
 }
 echo "</div>";
 ?>
+<?php if (isset($scroll)) echo "<div id = 'scroll'></div>";?>
+<?php if ($student_lesson_id != -1){ ?>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#hyouka" data-toggle="tab">評価</a></li>
   <li><a href="#comment" data-toggle="tab">コメント</a></li>
@@ -86,7 +105,8 @@ echo "<input id = 'commentIp' type ='text' size = '70' placeholder
     = 'あなたのコメント'style='margin-top:10px;' class='form-control'  onkeypress = 'upcomment(event, ".$lesson_id.")' /> "; 
 ?> </div>
   <div class="tab-pane" id="comment">
-<?php 
+<?php
+}
 ?></div>
 </div>
 </div>

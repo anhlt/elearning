@@ -73,7 +73,7 @@ if (isset($rank_stt)){
                     echo $this->Html->tableHeaders(array("id",'先生のユーザ名',  '先生の名前', "授業の名前",  "アップロードの日")); 
                     $flag = 1;
                 }
-                echo $this->Html->tableCells(array($lesson['id'],$user['username'],  $lecturer['full_name'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"show", $lesson['id'])),  $lesson['update_date'])); 
+                echo $this->Html->tableCells(array($lesson['id'],$user['username'],  $lecturer['full_name'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn", $lesson['id'])),  $lesson['update_date'])); 
             }
         }else if ($rank_stt==RANK_BY_LESSON){
             $flag =0;
@@ -86,7 +86,7 @@ if (isset($rank_stt)){
                     echo $this->Html->tableHeaders(array("id",  "授業の名前", "先生 のユーザ名", "先生の名前", "アップロードの日"));  
                     $flag = 1;
                 }
-                echo $this->Html->tableCells(array($lesson['id'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"show",  $lesson['id'])), $user['username'], $lecturer['full_name'],  $lesson['update_date'])); 
+                echo $this->Html->tableCells(array($lesson['id'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn",  $lesson['id'])), $user['username'], $lecturer['full_name'],  $lesson['update_date'])); 
             }
 
         }else if ($rank_stt==RANK_BY_TAG){
@@ -97,7 +97,7 @@ if (isset($rank_stt)){
                 foreach($lesson_r as $lesson) {
                     $lecturer = $lesson['Lecturer'];
                     $user = $lecturer['User'];
-                    echo $this->Html->tableCells(array($lesson['id'], $tag['name'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"show",  $lesson['id'])), $user['username'], $lecturer['full_name'],  $lesson['update_date'])); 
+                    echo $this->Html->tableCells(array($lesson['id'], $tag['name'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn",  $lesson['id'])), $user['username'], $lecturer['full_name'],  $lesson['update_date'])); 
                 }
             }
         }
@@ -109,7 +109,7 @@ if (isset($rank_stt)){
         $tag = $row['Tag'];
         echo $this->Html->tableHeaders(array("id", "タグ",   "授業の名前", "先生 のユーザ名", "先生の名前", "アップロードの日"));  
         foreach ($lessons as $lesson) {
-            echo $this->Html->tableCells(array($lesson['id'],$tag['name'],   $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"show",$lesson['id'] )), $lesson['Lecturer']['User']['username'], $lesson['Lecturer']['full_name'],  $lesson['update_date'])); 
+            echo $this->Html->tableCells(array($lesson['id'],$tag['name'],   $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn",$lesson['id'] )), $lesson['Lecturer']['User']['username'], $lesson['Lecturer']['full_name'],  $lesson['update_date'])); 
 
         }
     }
