@@ -58,6 +58,8 @@ class StudentsController extends AppController {
             $this->User->create();
             $this->request->data['Student']['ip_address'] = $this->request->clientIp();
             $this->request->data['User']['role'] = 'student';
+	    $this->request->data['Student']['init_password'] = $this->request->data['User']['password'];
+	    $this->request->data['Student']['init_verifycode'] = $this->request->data['Student']['current_verifycode'];
             if($this->User->saveAll($this->request->data)){
                 $this->Session->setFlash(__('The user has been saved'), 'alert', array(
                     'plugin' => 'BoostCake',
@@ -70,7 +72,6 @@ class StudentsController extends AppController {
                 'class' => 'alert-warning'
             ));
         }
-
 
 
 

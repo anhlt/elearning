@@ -93,7 +93,7 @@
 )); ?>  
     </div>
     <div class="form-group">
-<?php echo $this->Form->input('Student.answer_verifycode', array(  
+<?php echo $this->Form->input('Student.current_verifycode', array(  
     'placeholder' => 'Answer',  
     'style' => 'width:180px;',
     'label' => 'Answer'

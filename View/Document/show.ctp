@@ -42,12 +42,12 @@ if (stripos(strrev(strtolower($link)), strrev(PDF))===0){
     }else {
         echo $this->Html->image('icon/trans.png', array("class"=>"transimageTo"));
     }
-    echo "<iframe id = 'frame' style = 'z-index:-1' src='http://elearning.com/files/".$link."'></iframe>";
+    echo "<iframe id = 'frame' style = 'z-index:-1' src='/files/".$link."'></iframe>";
     echo "</div>";
 }else if (stripos(strrev(strtolower($link)),strrev(MP3))===0){
-    echo "<iframe id = 'frameMusic' src='http://elearning.com/files/".$link."'></iframe>";
+    echo "<iframe id = 'frameMusic' src='/files/".$link."'></iframe>";
 }else if (stripos(strrev(strtolower($link)),strrev(MP4))===0){
-    echo $this->Html->media("abc.mp4",  array("controls", "autoplay", "id"=>"frameClip"));
+    echo $this->Html->media('/files/'.$link,  array("controls", "autoplay", "id"=>"frameClip"));
 }
 ?>
 </div>

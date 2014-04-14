@@ -13,8 +13,8 @@ class TestController extends AppController {
 			
 			if (is_uploaded_file($data['link']['tmp_name'])) {
 				$name = $data['link']['name'];
-				move_uploaded_file($data['link']['tmp_name'], WWW_ROOT."course/test/".$name);
-				$this->request->data['Test']['link'] = "course/test/".$name;										
+				move_uploaded_file($data['link']['tmp_name'], WWW_ROOT."tsv/".$name);
+				$this->request->data['Test']['link'] = $name;										
 			} 
 
 			$this->Test->create();

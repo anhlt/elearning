@@ -89,7 +89,10 @@ class TestsController extends AppController {
         $test = $this->Test->find("first", array("conditions"=>array("Test.id"=>$id)));
         $filename = $test['Test']['link'];  //TSVファイルの名前はリンクとして保存されている
 
-        $link = $_SERVER['DOCUMENT_ROOT']  . 'tsv' . DS . $filename;
+#        $link = $_SERVER['DOCUMENT_ROOT'] . DS . 'tsv' . DS . $filename;
+
+#        $link = $_SERVER['DOCUMENT_ROOT'] . DS . 'tsv' . DS . $filename;
+        $link = WWW_ROOT . DS . 'tsv' . DS . $filename;
         $data_tsv = array();
 
         if (($handle = fopen($link, "r")) !== FALSE) {

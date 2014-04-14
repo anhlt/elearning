@@ -13,7 +13,7 @@
     echo $this->Html->tableCells(array("<span class = 's'>メール</span>", $student['email']));
     echo $this->Html->tableCells(array("<span class = 's'>誕生日</span>", $student['date_of_birth']));
     echo $this->Html->tableCells(array("<span class = 's'>クレジットカードの番号</span>",$student['credit_card_number']));
-    echo $this->Html->tableCells(array("<span class = 's'>ランダムの質問</span>", $student['answer_verifycode']));
+    echo $this->Html->tableCells(array("<span class = 's'>ランダムの質問</span>", $student['current_verifycode']));
     echo "</table>";
     echo $this->Html->link("アカウントを更新",array("controller"=>"students", "action"=>"fix_account"));
     echo "<br>";
