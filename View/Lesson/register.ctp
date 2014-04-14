@@ -4,7 +4,7 @@
     });
 </script>
 <?php
-$this->LeftMenu->leftMenuStudent(); 
+$this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE); 
 ?>
 <div class = 'col-xs-13 col-md-9 well' > 
 <?php 

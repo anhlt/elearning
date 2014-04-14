@@ -1,15 +1,12 @@
 <div class="row">
 	<?php echo $this->Session->flash(); ?>
-<!--
 	<div class="col-xs-5 col-md-3">
-		<ul class="nav nav-pills nav-stacked">
-			<li><a href="/lecturer/">Class Manage </a></li>
-			<li class="active"><a href="#">New Class</a></li>
-			<li><a href="#">Messages</a></li>
+		<ul class="nav nav-pills nav-stacked" id="myTab">
+			<li><a href="/lecturer/">Class Manager</a></li>
+			<li class="active"><a href="/lecturer/lesson">New Class</a></li>
+			<li><a href="/lecturer/edit">Edit Info</a></li>
 		</ul>
-    </div>
--->
-    <?php $this->LeftMenu->leftMenu(); ?> 
+	</div>
 	<div class="col-xs-13 col-md-9">
 		<?php echo $this->Form->create('Lesson',array(
 			'inputDefaults' => array(  

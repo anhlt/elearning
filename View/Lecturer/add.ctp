@@ -26,14 +26,14 @@
 	  )); ?>  
 	</div>	
 	<div class="form-group">
-	  <?php echo $this->Form->input('full_name', array(  
+	  <?php echo $this->Form->input('Lecturer.full_name', array(  
 		'placeholder' => 'Name',  
 		'style' => 'width:180px;',
 		'label' => 'Name'
 	  )); ?>  
 	</div>	
 	<div class="form-group">
-	  <?php echo $this->Form->input('credit_card_number', array(  
+	  <?php echo $this->Form->input('Lecturer.credit_card_number', array(  
 		'placeholder' => 'Creadit Card Number',  
 		'style' => 'width:180px;',
 		'label' => 'Creadit Card Number'
@@ -87,9 +87,6 @@
 	'div' => false,  
 	'class' => 'btn btn-default'  
 	)); ?>  
-
-
-
 
 	<?php echo $this->Form->end(); ?>  
 	  
