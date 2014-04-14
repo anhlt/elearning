@@ -469,8 +469,7 @@ class AdminsController extends AppController{
             $this->loadModel('Parameter');
             //$data = $this->Parameter->query("SELECT value FROM parameters WHERE name = 'LESSON_COST'");
             //$_LESSON_COST = $data[0]['parameters']['value'];
-            $this->set('_LESSON_COST',$this->Parameter->getLessonCost());
-            
+            $this->set('_LESSON_COST',$this->Parameter->getLessonCost());            
             $this->set('_LECTURER_MONEY_PERCENT',$this->Parameter->getLecturerMoneyPercent());
             $this->set('_ENABLE_LESSON_TIME',$this->Parameter->getEnableLessonTime());
             $this->set('_WRONG_PASSWORD_TIMES',$this->Parameter->getWrongPasswordTimes());

@@ -163,6 +163,9 @@ class LessonController extends AppController {
 				$students = $this->Paginator->paginate("LessonMembership");
 				$this->set("results", $students);
 
+				$this->loadModel("Parameter");
+			  	$this->set("lesson_time",$this->Parameter->getEnableLessonTime()); 
+
 			} else {
 				$this->redirect(array('controller' => 'users' ,"action" => "permission" ));
 			}

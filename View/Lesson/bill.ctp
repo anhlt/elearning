@@ -36,9 +36,9 @@
 			  	<td><?php echo($result['Student']['full_name']) ?> </td>
 			  	<td><?php echo($result['LessonMembership']['days_attended']) ?> </td>
 			  	<td>
-			  		<?php			  			
-						$datetime = new DateTime($result['LessonMembership']['days_attended']);
-						$datetime->modify('+20 day');
+			  		<?php			  			 			
+						$datetime = new DateTime($result['LessonMembership']['days_attended']);						
+						$datetime->modify("+". $lesson_time . "day");
 						echo $datetime->format('Y-m-d H:i:s');
 			  		?> 
 			  	</td>			  	

@@ -37,9 +37,7 @@
 					<div class='col-md-2'><?php echo ($row * 20000)?>　VND</div>
 				</div>
 				<br>
-			</div>
-
-			
+			</div>			
 
 			<div class='row'>				
 				<span style='margin: 10px 40px 0px 115px;'>授業を削除する</span>
