@@ -22150,3 +22150,23 @@ Stack Trace:
 #3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
 #4 [internal function]: App::shutdown()
 #5 {main}
+2014-04-14 15:47:17 Error: Fatal Error (1): Call to undefined method AdminsController::uses() in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 707]
+2014-04-14 15:47:17 Error: [FatalErrorException] Call to undefined method AdminsController::uses()
+Request URL: /admins/generate_tsv/2014/3
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'E:\Installs\Web...', 707)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'E:\Installs\Web...', 707, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'E:\Installs\Web...', 707, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-14 11:01:09 Error: Fatal Error (4): syntax error, unexpected '$lecturer' (T_VARIABLE), expecting ',' or ';' in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 707]
+2014-04-14 11:01:09 Error: [FatalErrorException] syntax error, unexpected '$lecturer' (T_VARIABLE), expecting ',' or ';'
+Request URL: /admins/generate_tsv/2014/3
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'E:\Installs\Web...', 707)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'E:\Installs\Web...', 707, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'E:\Installs\Web...', 707, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}

@@ -691,6 +691,57 @@ class AdminsController extends AppController {
         
     }
     
+    
+    private function getLecturerFee($year,$month)
+    {        
+            $this->uses = array('LessonMembership');
+            $res = $this->LessonMembership->find('all');
+            $this->uses = array('Lecturer');
+            $lecturer_list = $this->Lecturer->find('all', array('condition' => array('actived' => 1)));
+            $this->uses = array('LessonMembership'); //$student['Student']['id'];
+            
+            $lecturer_list_ = array();
+            $i = 0 ;
+           // debug($lecturer_list);
+            foreach ($lecturer_list as $lecturer) {
+               // echo "id =".$lecturer['Lecturer']['id'];
+                $count = 0; 
+                $this->uses = array('Lesson');
+                $lesson_list = $this->Lesson->find('all', array('condition' => array('Lesson.lecturer_id' => 11)));
+                //debug($lesson_list);
+                $this->uses = array('LessonMembership');
+                $result = $this->LessonMembership->find('all');                
+                foreach ($result as $res) {
+                    $date = $res['LessonMembership']['days_attended'];
+                    if ($this->getYear($date) == $year && $this->getMonth($date) == $month)
+                        foreach($lesson_list as $lesson)
+                    {
+                        if($lesson['Lesson']['id'] == $res['Lesson']['id'])
+                        $count++;
+                    }
+                        
+                }
+                $lecturer['count'] = $count;
+                $lecturer_list_[$i] = $lecturer;
+                $i++;
+            }
+            $this->set('$lecturer_list', $lecturer_list_);            
+            $this->paginate = array(
+                'limit' => 2,
+                'fields' => array(),
+            );
+            
+                $this->uses = array('Lesson');
+                $lesson_list = $this->Lesson->find('all', array('conditions' => array('Lesson.lecturer_id' => 10)));
+                debug($lesson_list);
+            
+            
+        //debug($student_list_);    
+        //debug($lecturer_list_);
+        return $lecturer_list_;
+        
+    }
+    
 
     private function getCurrentYear() {
 
@@ -753,7 +804,7 @@ class AdminsController extends AppController {
         
         foreach($student_list as $student)
         {
-              $data.= "\n";
+        $data.= "\n";
         $data.= mb_convert_kana($student['Student']['id'], "rnaskhcv")."\t";   
         $data.= mb_convert_kana($student['Student']['full_name'], "rnaskhcv")."\t"; 
         $data.= mb_convert_kana($student['count']*20000, "rnaskhcv")."\t";
@@ -773,6 +824,9 @@ class AdminsController extends AppController {
         $data.= $credit_number."\t";
         }
         $data.= "\n";
+        $this->getLecturerFee($year, $month);
+        
+        
         $data.= mb_convert_kana("END___END___END", "rnaskhcv")."\t";
         // $data.= "END___END___END\t";
         $data.= mb_convert_kana($year, "rnaskhcv")."\t";
