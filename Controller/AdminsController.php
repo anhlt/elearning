@@ -5,159 +5,161 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-class AdminsController extends AppController{
+
+class AdminsController extends AppController {
+
     //public $components = array('RequestHandler');
     public $components = array('Paginator');
     public $helpers = array('Js');
-    
-    var $uses = array('Admin','IpAdmin','Lecturer', 'User', 'Student', 'Parameter');   
-    
+    var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter');
+
     public function beforeFilter() {
-    $this->Auth->allow("add_admin");
-       $this->Auth->allow("remove_admin");
-       $this->Auth->allow("remove_admin_process");
-       $this->Auth->allow("view_violation");
+        $this->Auth->allow("add_admin");
+        $this->Auth->allow("remove_admin");
+        $this->Auth->allow("remove_admin_process");
+        $this->Auth->allow("view_violation");
         $this->Auth->allow("view_violation_content");
         $this->Auth->allow("view_violation_content_process");
-       
+        $this->Auth->allow("fee_manager");
+        $this->Auth->allow("ranking_lecturer");
+        $this->Auth->allow("generate_tsv");
     }
 
     public function index() {
         
     }
-    
- 
+
 //以下はipアドレス管理の機能だ    
 //    
-    public function add_ip_address(){
+    public function add_ip_address() {
         $id = $this->Auth->user('id');
         //$this->Session->write('id', '911');
         //$id = $this->Session->read('id');
         //echo $id;
-        if($this->request->is('post')){
+        if ($this->request->is('post')) {
             //echo $this->Session->read('id');
             $this->loadModel('IpAdmin');
             //echo $this->request->data['add']['ip_address'];
             $ip_address = $this->request->data['add']['ip_address'];
-            $this->IpAdmin->set(array('ip_address'=>$ip_address));
+            $this->IpAdmin->set(array('ip_address' => $ip_address));
             //check empty
-            if($ip_address == NULL){
+            if ($ip_address == NULL) {
                 $this->Session->setFlash(__('IPアドレスが空しい'));
-            //check exist
-            }else if($this->IpAdmin->query("SELECT * FROM ip_admins WHERE admin_id = '$id' and ip_address = '$ip_address'") != NULL){
+                //check exist
+            } else if ($this->IpAdmin->query("SELECT * FROM ip_admins WHERE admin_id = '$id' and ip_address = '$ip_address'") != NULL) {
                 //$this->Session->setFlash(__('IPアドレスが存在した'));
                 $this->Session->setFlash(__('IPアドレスが存在した'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));                 
-            //check format    
-            }else if($this->IpAdmin->validates()){
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
+                //check format    
+            } else if ($this->IpAdmin->validates()) {
                 $sql = "INSERT INTO ip_admins VALUES('$id','$ip_address')";
-                $this->IpAdmin->query($sql);      
-            }else{
+                $this->IpAdmin->query($sql);
+            } else {
                 //$this->Session->setFlash(__('IPアドレスのフォーマットが正しくない'));
                 $this->Session->setFlash(__('IPアドレスのフォーマットが正しくない'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));                
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
             }
         }
         $datas = $this->IpAdmin->findAllByAdmin_id($id);
-        $this->set('data',$datas); // truyen du lieu cho view tung ung voi ten function
+        $this->set('data', $datas); // truyen du lieu cho view tung ung voi ten function
     }
-    
-    public function edit_ip_address(){
+
+    public function edit_ip_address() {
         $id = $this->Auth->user('id');
         $this->loadModel('IpAdmin');
-        if($this->request->is('post')){
-            $old_ip_address =$this->request->data['edit']['old_ip_address'];
-            $new_ip_address =$this->request->data['edit']['new_ip_address'];
-            $this->IpAdmin->set(array('ip_address'=>$new_ip_address));
+        if ($this->request->is('post')) {
+            $old_ip_address = $this->request->data['edit']['old_ip_address'];
+            $new_ip_address = $this->request->data['edit']['new_ip_address'];
+            $this->IpAdmin->set(array('ip_address' => $new_ip_address));
             //debug($this->IpAdmin);die;
             //check exist
-            if($this->IpAdmin->query("SELECT * FROM ip_admins WHERE admin_id = '$id' and ip_address = '$new_ip_address'") != NULL){
+            if ($this->IpAdmin->query("SELECT * FROM ip_admins WHERE admin_id = '$id' and ip_address = '$new_ip_address'") != NULL) {
                 //$this->Session->setFlash(__('IPアドレスが存在した'));
                 $this->Session->setFlash(__('IPアドレスが存在した'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));  
-            //check format    
-            }else if($this->IpAdmin->validates()){
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
+                //check format    
+            } else if ($this->IpAdmin->validates()) {
                 //echo $old_ip_address;
                 //echo $new_ip_address;
                 $sql = "UPDATE ip_admins SET ip_address = '$new_ip_address' WHERE admin_id = '$id' and ip_address = '$old_ip_address' ";
                 //echo "ok";
-                if(!$this->IpAdmin->query($sql)){
-                    $this->redirect(array('controller'=>'admins','action'=>'add_ip_address')); // chuyen ve View/Admin/add_ip_address.ctp
-                } 
-            }else{
+                if (!$this->IpAdmin->query($sql)) {
+                    $this->redirect(array('controller' => 'admins', 'action' => 'add_ip_address')); // chuyen ve View/Admin/add_ip_address.ctp
+                }
+            } else {
                 //echo "loi";
                 //$this->Session->setFlash(__('IPアドレスのフォーマットが正しくない'));
                 $this->Session->setFlash(__('IPアドレスのフォーマットが正しくない'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));                 
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
             }
         }
     }
-    public function delete_ip_address($ip_address){
+
+    public function delete_ip_address($ip_address) {
         $id = $this->Auth->user('id');
         $sql = "DELETE FROM ip_admins WHERE (admin_id = '$id' and ip_address = '$ip_address')";
         $this->IpAdmin->query($sql);
-        $this->redirect(array('action'=>'add_ip_address')); // chuyen ve View/Admin/add_ip_address.ctp
+        $this->redirect(array('action' => 'add_ip_address')); // chuyen ve View/Admin/add_ip_address.ctp
     }
-    
+
 //以下は先生管理の機能だ
-    public function manage_lecturer(){
+    public function manage_lecturer() {
         $this->loadModel('User');
         $this->loadModel('Lecturer');
         if ($this->request->is('post')) {
-           $this->set('data', NULL);
-           $username = $this->request->data["search"]["username"];
-           //echo $username;
-           //die();
-           if($username != NULL){
-                    $sql1 = "SELECT * FROM Lecturers, Users WHERE (Lecturers.id = Users.id and 
+            $this->set('data', NULL);
+            $username = $this->request->data["search"]["username"];
+            //echo $username;
+            //die();
+            if ($username != NULL) {
+                $sql1 = "SELECT * FROM Lecturers, Users WHERE (Lecturers.id = Users.id and 
                     Users.username = '$username')";
-                    //$sql = "SELECT * FROM users";
-                    $data = $this->Lecturer->User->query($sql1);
-                    if($data != NULL){
+                //$sql = "SELECT * FROM users";
+                $data = $this->Lecturer->User->query($sql1);
+                if ($data != NULL) {
                     $this->set('data', $data);
                     // $this->redirect(array('action'=>'manage_lecturer'));
-                    }else{
-                        $this->Session->setFlash(__('見つけない'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));  
-                        //$this->redirect(array('action'=>'manage_lecturer'));
-                    }
-              }else{
-                    $sql2 = "SELECT * FROM Lecturers, Users WHERE (Lecturers.id = Users.id and Users.role = 'lecturer')";
-                    //$sql = "SELECT * FROM users";
-                    $data = $this->Lecturer->User->query($sql2);
-                    //var_dump($data);
-                    if($data == NULL){
-                        $this->Session->setFlash(__('ダータがない'));
-                    }else{
-                        $this->set('data', $data);
-                    }    
-              }
-               
-        }else{
+                } else {
+                    $this->Session->setFlash(__('見つけない'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-warning'
+                    ));
+                    //$this->redirect(array('action'=>'manage_lecturer'));
+                }
+            } else {
+                $sql2 = "SELECT * FROM Lecturers, Users WHERE (Lecturers.id = Users.id and Users.role = 'lecturer')";
+                //$sql = "SELECT * FROM users";
+                $data = $this->Lecturer->User->query($sql2);
+                //var_dump($data);
+                if ($data == NULL) {
+                    $this->Session->setFlash(__('ダータがない'));
+                } else {
+                    $this->set('data', $data);
+                }
+            }
+        } else {
             $sql2 = "SELECT * FROM Lecturers, Users WHERE (Lecturers.id = Users.id and Users.role = 'lecturer')";
             //$sql = "SELECT * FROM users";
             $data = $this->Lecturer->User->query($sql2);
             //var_dump($data);
             $this->set('data', $data);
-            if($data == NULL){
+            if ($data == NULL) {
                 $this->Session->setFlash(__('ダータがない'));
-            }else{
+            } else {
                 $this->set('data', $data);
-            }   
+            }
         }
     }
-    
-    public function view_infor_lecturer($id_lecturer){
+
+    public function view_infor_lecturer($id_lecturer) {
         //echo $id_lecturer;
         $this->loadModel('User');
         $this->loadModel('Lecturer');
@@ -167,136 +169,135 @@ class AdminsController extends AppController{
         //var_dump($infor);
         $this->set('infor', $infor);
     }
-    
-    public function unlock_lecturer($id_lecturer){
+
+    public function unlock_lecturer($id_lecturer) {
         $this->loadModel('User');
         $sql = "UPDATE users SET actived = 1 WHERE users.id = '$id_lecturer'";
         $result = $this->User->query($sql);
-        $this->redirect(array('action'=>'manage_lecturer'));
+        $this->redirect(array('action' => 'manage_lecturer'));
     }
-    
-    public function lock_lecturer($id_lecturer){
+
+    public function lock_lecturer($id_lecturer) {
         $this->loadModel('User');
         $sql = "UPDATE users SET actived = 0 WHERE users.id = '$id_lecturer'";
         $result = $this->User->query($sql);
-        $this->redirect(array('action'=>'manage_lecturer'));
+        $this->redirect(array('action' => 'manage_lecturer'));
     }
-    
-    public function reset_password_lecturer($id_lecturer, $init_password){
+
+    public function reset_password_lecturer($id_lecturer, $init_password) {
         //echo $id;
         //echo $init_password;
         $this->loadModel('User');
         $sql = "UPDATE users SET password = '$init_password' WHERE users.id = '$id_lecturer'";
-        if(!$this->User->query($sql)){
+        if (!$this->User->query($sql)) {
             //$this->Session->setFlash(__('パスワードのリセットが成功された'));
             $this->Session->setFlash(__('パスワードのリセットが成功された'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-success'
-			));  
-            $this->redirect(array('action'=>'manage_lecturer'));
-        }else{
+                'plugin' => 'BoostCake',
+                'class' => 'alert-success'
+            ));
+            $this->redirect(array('action' => 'manage_lecturer'));
+        } else {
             //$this->Session->setFlash(__('パスワードのリセットができない'));
             $this->Session->setFlash(__('パスワードのリセットができない'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));              
-            $this->redirect(array('action'=>'manage_lecturer'));
+                'plugin' => 'BoostCake',
+                'class' => 'alert-warning'
+            ));
+            $this->redirect(array('action' => 'manage_lecturer'));
         }
     }
-    
-   public function reset_verifycode_lecturer($id_lecturer, $init_verifycode){
+
+    public function reset_verifycode_lecturer($id_lecturer, $init_verifycode) {
         //echo $id;
         //echo $init_password;
         $this->loadModel('Lecturer');
         $sql = "UPDATE Lecturers SET current_verifycode = '$init_verifycode' WHERE Lecturers.id = '$id_lecturer'";
-        if(!$this->User->query($sql)){
+        if (!$this->User->query($sql)) {
             //$this->Session->setFlash(__('verifycodeのリセットが成功された'));
             $this->Session->setFlash(__('verifycodeのリセットが成功された'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-success'
-			));             
-            $this->redirect(array('action'=>'manage_lecturer'));
-        }else{
+                'plugin' => 'BoostCake',
+                'class' => 'alert-success'
+            ));
+            $this->redirect(array('action' => 'manage_lecturer'));
+        } else {
             //$this->Session->setFlash(__('verifycodeのリセットができない'));
             $this->Session->setFlash(__('verifycodeのリセットができない'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));                
-            $this->redirect(array('action'=>'manage_lecturer'));
+                'plugin' => 'BoostCake',
+                'class' => 'alert-warning'
+            ));
+            $this->redirect(array('action' => 'manage_lecturer'));
         }
     }
-    
-    public function delete_lecturer($id_lecturer){
+
+    public function delete_lecturer($id_lecturer) {
         $this->loadModel('Lecturer');
-        if($this->Lecturer->delete($id_lecturer)){
+        if ($this->Lecturer->delete($id_lecturer)) {
             //$this->Session->setFlash(__('アカウントの削除が成功された'));        
-                       $this->Session->setFlash(__('アカウントの削除が成功された'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-success'
-			)); 
+            $this->Session->setFlash(__('アカウントの削除が成功された'), 'alert', array(
+                'plugin' => 'BoostCake',
+                'class' => 'alert-success'
+            ));
             //$this->redirect(array('action'=>'manage_lecturer'));
-        }else{
+        } else {
             //$this->Session->setFlash(__('アカウントの削除ができない'));
             //$notify ="アカウントの削除ができない";
-                    $this->Session->setFlash(__('アカウントの削除ができない'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));
+            $this->Session->setFlash(__('アカウントの削除ができない'), 'alert', array(
+                'plugin' => 'BoostCake',
+                'class' => 'alert-warning'
+            ));
         }
-  
-        $this->redirect(array('action'=>'manage_lecturer'));
+
+        $this->redirect(array('action' => 'manage_lecturer'));
     }
-    
+
 //以下は学生管理の機能だ
-    public function manage_student(){
+    public function manage_student() {
         $this->loadModel('User');
-        $this->loadModel('Student'); 
+        $this->loadModel('Student');
         if ($this->request->is('post')) {
-           $this->set('data', NULL);
-           $username = $this->request->data["search"]["username"];
-           //echo $username;
-           //die();
-           if($username != NULL){
-                    $sql1 = "SELECT * FROM Students, Users WHERE (Students.id = Users.id and 
+            $this->set('data', NULL);
+            $username = $this->request->data["search"]["username"];
+            //echo $username;
+            //die();
+            if ($username != NULL) {
+                $sql1 = "SELECT * FROM Students, Users WHERE (Students.id = Users.id and 
                     Users.username = '$username')";
-                    //$sql = "SELECT * FROM users";
-                    $data = $this->Student->User->query($sql1);
-                    if($data != NULL){
+                //$sql = "SELECT * FROM users";
+                $data = $this->Student->User->query($sql1);
+                if ($data != NULL) {
                     $this->set('data', $data);
                     // $this->redirect(array('action'=>'manage_lecturer'));
-                    }else{
-                        $this->Session->setFlash(__('見つけない'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));  
-                        //$this->redirect(array('action'=>'manage_lecturer'));
-                    }
-           }else{
+                } else {
+                    $this->Session->setFlash(__('見つけない'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-warning'
+                    ));
+                    //$this->redirect(array('action'=>'manage_lecturer'));
+                }
+            } else {
+                $sql = "SELECT * FROM Students, Users WHERE (Students.id = Users.id and Users.role = 'student')";
+                //$sql = "SELECT * FROM users";
+                $data = $this->Student->User->query($sql);
+                //$data = $this->Admin->printfStudent();
+                if ($data == NULL) {
+                    $this->Session->setFlash(__('ダータがない'));
+                } else {
+                    $this->set('data', $data);
+                }
+            }
+        } else {
             $sql = "SELECT * FROM Students, Users WHERE (Students.id = Users.id and Users.role = 'student')";
             //$sql = "SELECT * FROM users";
             $data = $this->Student->User->query($sql);
             //$data = $this->Admin->printfStudent();
-            if($data == NULL){
-                        $this->Session->setFlash(__('ダータがない'));
-                    }else{
-                        $this->set('data', $data);
-                    }   
-           }      
-        }else{
-            $sql = "SELECT * FROM Students, Users WHERE (Students.id = Users.id and Users.role = 'student')";
-            //$sql = "SELECT * FROM users";
-            $data = $this->Student->User->query($sql);
-            //$data = $this->Admin->printfStudent();
-            if($data == NULL){
-                        $this->Session->setFlash(__('ダータがない'));
-                    }else{
-                        $this->set('data', $data);
-                    }   
+            if ($data == NULL) {
+                $this->Session->setFlash(__('ダータがない'));
+            } else {
+                $this->set('data', $data);
+            }
         }
-    
-  }
-    
-    public function view_infor_student($id_student){
+    }
+
+    public function view_infor_student($id_student) {
         //echo $id_lecturer;
         $this->loadModel('User');
         $this->loadModel('Students');
@@ -306,90 +307,88 @@ class AdminsController extends AppController{
         //var_dump($infor);
         $this->set('infor', $infor);
     }
-    
-    public function unlock_student($id_student){
+
+    public function unlock_student($id_student) {
         $this->loadModel('User');
         $sql = "UPDATE users SET actived = 1 WHERE users.id = '$id_student'";
         $result = $this->User->query($sql);
-        $this->redirect(array('action'=>'manage_student'));
+        $this->redirect(array('action' => 'manage_student'));
     }
-    
-    public function lock_student($id_student){
+
+    public function lock_student($id_student) {
         $this->loadModel('User');
         $sql = "UPDATE users SET actived = 0 WHERE users.id = '$id_student'";
         $result = $this->User->query($sql);
-        $this->redirect(array('action'=>'manage_student'));
+        $this->redirect(array('action' => 'manage_student'));
     }
-    
-    public function reset_password_student($id_student, $init_password){
+
+    public function reset_password_student($id_student, $init_password) {
         //echo $id;
         //echo $init_password;
         $this->loadModel('User');
         $sql = "UPDATE users SET password = '$init_password' WHERE users.id = '$id_student'";
-        if(!$this->User->query($sql)){
+        if (!$this->User->query($sql)) {
             //$this->Session->setFlash(__('パスワードのリセットが成功された'));
             $this->Session->setFlash(__('パスワードのリセットが成功された'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-success'
-			));            
-            $this->redirect(array('action'=>'manage_student'));
-        }else{
+                'plugin' => 'BoostCake',
+                'class' => 'alert-success'
+            ));
+            $this->redirect(array('action' => 'manage_student'));
+        } else {
             //$this->Session->setFlash(__('パスワードのリセットができない'));
             $this->Session->setFlash(__('パスワードのリセットが成功された'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));            
-            $this->redirect(array('action'=>'manage_student'));
+                'plugin' => 'BoostCake',
+                'class' => 'alert-warning'
+            ));
+            $this->redirect(array('action' => 'manage_student'));
         }
     }
-    
-   public function reset_verifycode_student($id_student, $init_verifycode){
+
+    public function reset_verifycode_student($id_student, $init_verifycode) {
         //echo $id;
         //echo $init_password;
         $this->loadModel('Student');
         $sql = "UPDATE Students SET current_verifycode = '$init_verifycode' WHERE   Students.id = '$id_student'";
-        if(!$this->User->query($sql)){
+        if (!$this->User->query($sql)) {
             //$this->Session->setFlash(__('verifycodeのリセットが成功された'));
             $this->Session->setFlash(__('verifycodeのリセットが成功された'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-success'
-			));             
-            $this->redirect(array('action'=>'manage_student'));
-        }else{
+                'plugin' => 'BoostCake',
+                'class' => 'alert-success'
+            ));
+            $this->redirect(array('action' => 'manage_student'));
+        } else {
             //$this->Session->setFlash(__('verifycodeのリセットができない'));
             $this->Session->setFlash(__('verifycodeのリセットができない'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));             
-            $this->redirect(array('action'=>'manage_student'));
+                'plugin' => 'BoostCake',
+                'class' => 'alert-warning'
+            ));
+            $this->redirect(array('action' => 'manage_student'));
         }
     }
-    
-    public function delete_student($id_student){
+
+    public function delete_student($id_student) {
         $this->loadModel('Student');
-        if($this->Student->delete($id_student)){
+        if ($this->Student->delete($id_student)) {
             //$this->Session->setFlash(__('アカウントの削除が成功された'));
             $this->Session->setFlash(__('アカウントの削除が成功された'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-success'
-			));             
-            
-        }else{
+                'plugin' => 'BoostCake',
+                'class' => 'alert-success'
+            ));
+        } else {
             //$this->Session->setFlash(__('アカウントの削除ができない'));
             $this->Session->setFlash(__('アカウントの削除ができない'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));             
+                'plugin' => 'BoostCake',
+                'class' => 'alert-warning'
+            ));
             //$this->redirect(array('action'=>'manage_student'));
         }
-        $this->redirect(array('action'=>'manage_student'));
-    }    
-    
+        $this->redirect(array('action' => 'manage_student'));
+    }
+
 //以下はシステム仕様の管理の機能だ    
-    public function manage_parameter(){
-        
-        
-        if($this->request->is('post')){
+    public function manage_parameter() {
+
+        if ($this->request->is('post')) {
             $LESSON_COST = $this->request->data['parameter']['lesson_cost'];
             $LECTURER_MONEY_PERCENT = $this->request->data['parameter']['lecturer_money_percent'];
             $ENABLE_LESSON_TIME = $this->request->data['parameter']['enable_lesson_time'];
@@ -400,91 +399,96 @@ class AdminsController extends AppController{
             $error = "";
             $this->Session->setFlash($error);
             $flash = 1;
-            $this->Parameter->set(array('value'=>$LESSON_COST));
-            if(!$this->Parameter->validates()) $flash = 0; 
-            $this->Parameter->set(array('value'=>$LECTURER_MONEY_PERCENT));
-            if(!$this->Parameter->validates()) $flash = 0;
-            $this->Parameter->set(array('value'=>$ENABLE_LESSON_TIME));
-            if(!$this->Parameter->validates()) $flash = 0;
-            $this->Parameter->set(array('value'=>$WRONG_PASSWORD_TIMES));
-            if(!$this->Parameter->validates()) $flash = 0;
-            $this->Parameter->set(array('value'=>$LOCK_TIME));
-            if(!$this->Parameter->validates()) $flash = 0;
-            $this->Parameter->set(array('value'=>$SESSION_TIME));
-            if(!$this->Parameter->validates()) $flash = 0;
-            $this->Parameter->set(array('value'=>$VIOLATIONS_TIMES));
-            if(!$this->Parameter->validates()) $flash = 0;
-            if($flash){
-                if($LESSON_COST < 0 ){
-                    $error = $error."課金の金額 >= 0\n";
-                }else{
+            $this->Parameter->set(array('value' => $LESSON_COST));
+            if (!$this->Parameter->validates())
+                $flash = 0;
+            $this->Parameter->set(array('value' => $LECTURER_MONEY_PERCENT));
+            if (!$this->Parameter->validates())
+                $flash = 0;
+            $this->Parameter->set(array('value' => $ENABLE_LESSON_TIME));
+            if (!$this->Parameter->validates())
+                $flash = 0;
+            $this->Parameter->set(array('value' => $WRONG_PASSWORD_TIMES));
+            if (!$this->Parameter->validates())
+                $flash = 0;
+            $this->Parameter->set(array('value' => $LOCK_TIME));
+            if (!$this->Parameter->validates())
+                $flash = 0;
+            $this->Parameter->set(array('value' => $SESSION_TIME));
+            if (!$this->Parameter->validates())
+                $flash = 0;
+            $this->Parameter->set(array('value' => $VIOLATIONS_TIMES));
+            if (!$this->Parameter->validates())
+                $flash = 0;
+            if ($flash) {
+                if ($LESSON_COST < 0) {
+                    $error = $error . "課金の金額 >= 0\n";
+                } else {
                     $this->Parameter->updateParameter('LESSON_COST', $LESSON_COST);
                 }
-                if($LECTURER_MONEY_PERCENT > 100 || $LECTURER_MONEY_PERCENT <0 ){
-                    $error = $error."<br>100 >= 先生に支払った課金 >= 0</br>";
-                }else{
+                if ($LECTURER_MONEY_PERCENT > 100 || $LECTURER_MONEY_PERCENT < 0) {
+                    $error = $error . "<br>100 >= 先生に支払った課金 >= 0</br>";
+                } else {
                     $this->Parameter->updateParameter('LECTURER_MONEY_PERCENT', $LECTURER_MONEY_PERCENT);
                 }
-                if($ENABLE_LESSON_TIME <= 0 ){
-                    $error = $error."<br>受講可能の時間 > 0</br>";
-                }else{
+                if ($ENABLE_LESSON_TIME <= 0) {
+                    $error = $error . "<br>受講可能の時間 > 0</br>";
+                } else {
                     $this->Parameter->updateParameter('ENABLE_LESSON_TIME', $ENABLE_LESSON_TIME);
                 }
-                if($WRONG_PASSWORD_TIMES <= 0){
-                    $error = $error."<br>間違えるログインの回数 > =1</br>";
-                }else{
-                     $this->Parameter->updateParameter('WRONG_PASSWORD_TIMES', $WRONG_PASSWORD_TIMES);
+                if ($WRONG_PASSWORD_TIMES <= 0) {
+                    $error = $error . "<br>間違えるログインの回数 > =1</br>";
+                } else {
+                    $this->Parameter->updateParameter('WRONG_PASSWORD_TIMES', $WRONG_PASSWORD_TIMES);
                 }
-                if($LOCK_TIME <= 0){
-                    $error = $error."<br>ロック時間 > 0</br>";
-                }else{
+                if ($LOCK_TIME <= 0) {
+                    $error = $error . "<br>ロック時間 > 0</br>";
+                } else {
                     $this->Parameter->updateParameter('LOCK_TIME', $LOCK_TIME);
                 }
-                if($SESSION_TIME <=0){
-                    $error = $error."<br>操作がない場合はセションが終了する時間 > 0</br>";
-                }else{
+                if ($SESSION_TIME <= 0) {
+                    $error = $error . "<br>操作がない場合はセションが終了する時間 > 0</br>";
+                } else {
                     $this->Parameter->updateParameter('SESSION_TIME', $SESSION_TIME);
                 }
-                if($VIOLATIONS_TIMES <=0){
-                    $error = $error."<br>違犯時、アカウントを削除 >= 1</br>";
-                }else{
+                if ($VIOLATIONS_TIMES <= 0) {
+                    $error = $error . "<br>違犯時、アカウントを削除 >= 1</br>";
+                } else {
                     $this->Parameter->updateParameter('VIOLATIONS_TIMES', $VIOLATIONS_TIMES);
                 }
                 //$this->Session->setFlash($error);
                 $this->Session->setFlash($error, 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));        
-            }else{
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
+            } else {
                 //$this->Session->setFlash(__('各仕様のタイプが数字だ'));
                 $this->Session->setFlash(__('各仕様のタイプが数字だ'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
                 //$this->redirect($this->referer());
-            }       
+            }
         }
-        
-        
-        
-            $this->loadModel('Parameter');
-            //$data = $this->Parameter->query("SELECT value FROM parameters WHERE name = 'LESSON_COST'");
-            //$_LESSON_COST = $data[0]['parameters']['value'];
-            $this->set('_LESSON_COST',$this->Parameter->getLessonCost());
-            
-            $this->set('_LECTURER_MONEY_PERCENT',$this->Parameter->getLecturerMoneyPercent());
-            $this->set('_ENABLE_LESSON_TIME',$this->Parameter->getEnableLessonTime());
-            $this->set('_WRONG_PASSWORD_TIMES',$this->Parameter->getWrongPasswordTimes());
-            $this->set('_LOCK_TIME',$this->Parameter->getLockTime());
-            $this->set('_SESSION_TIME',$this->Parameter->getSessionTime());
-            $this->set('_VIOLATIONS_TIMES',$this->Parameter->getViolationsTimes());
-            
+
+
+
+        $this->loadModel('Parameter');
+        //$data = $this->Parameter->query("SELECT value FROM parameters WHERE name = 'LESSON_COST'");
+        //$_LESSON_COST = $data[0]['parameters']['value'];
+        $this->set('_LESSON_COST', $this->Parameter->getLessonCost());
+
+        $this->set('_LECTURER_MONEY_PERCENT', $this->Parameter->getLecturerMoneyPercent());
+        $this->set('_ENABLE_LESSON_TIME', $this->Parameter->getEnableLessonTime());
+        $this->set('_WRONG_PASSWORD_TIMES', $this->Parameter->getWrongPasswordTimes());
+        $this->set('_LOCK_TIME', $this->Parameter->getLockTime());
+        $this->set('_SESSION_TIME', $this->Parameter->getSessionTime());
+        $this->set('_VIOLATIONS_TIMES', $this->Parameter->getViolationsTimes());
     }
-    
+
     //tha
     public function add_admin() {
         $this->uses = array('User', 'Admin');
-
         if ($this->request->is('post')) {
             $this->request->data["User"]["role"] = "admin";
             $this->request->data["User"]["actived"] = 1;
@@ -501,29 +505,6 @@ class AdminsController extends AppController{
                 'class' => 'alert-warning'
             ));
         }
-
-        //if ($repassword != $password) {
-//            $notify = "パスワードとリパスワードは違がいました";
-//            $this->redirect(array("controller" => "admins",
-//                "action" => "admin",
-//                "notify" => "パスワードとリパスワードは違った",
-//            ));
-//        } else {
-//            $count = $this->admin->find('count', array('conditions' => array("admin.username " => $username)));
-//            echo "count = " . $count;
-//            if ($count > 0)
-//                $notify = "このユーザ名が存在していました";
-//            else {
-//                $notify = "アカウントが作成されました";
-//                $this->admin->save(array("username" => $username, "password" => $password, "email" => $email, "ip_address" => $ip_address));
-//                $this->user->save(array("username" => $username, "password" => $password, "salt" => "0000", "active" => "1", "role" => "admin"));
-//            }
-//        }
-//        
-//        $this->redirect(array("controller" => "admins",
-//            "action" => "admin",
-//            "notify" => $notify,
-//        ));
     }
 
     public function remove_admin() {
@@ -543,7 +524,8 @@ class AdminsController extends AppController{
     }
 
     public function remove_admin_process($id) {
-        if(!isset($id))$this->redirect(array("action" => "remove_admin"));
+        if (!isset($id))
+            $this->redirect(array("action" => "remove_admin"));
         $this->uses = array('User', 'Admin');
         if ($this->User->delete($id))
             $this->Session->setFlash(__('管理者が削除された'), 'alert', array(
@@ -554,123 +536,463 @@ class AdminsController extends AppController{
     }
 
     public function view_violation() {
-        
-        // $this->uses = array('Violate', 'Lecturer','Student','Document');
+
         $this->uses = array('Violate');
 
         $this->paginate = array(
             'limit' => 1,
             'fields' => array(),
-            'conditions' => array(
-                "Violate.accepted" => 0)
+            'group' => array('Violate.document_id'),
         );
+
 
         $this->Paginator->settings = $this->paginate;
         $res = $this->Paginator->paginate("Violate");
-        //debug($res);
+
         $this->set('res', $res);
-        //echo "11111111111";
     }
-   
-    
+
     public function view_violation_content($id) {
+
         $this->uses = array('Violate');
-        $res = $this->Violate->find('all', array('conditions' => array('Violate.id' => $id),
-            "Violate.accepted" => 0
+        $this->paginate = array(
+            'limit' => 1,
+            'fields' => array(),
+            'conditions' => array(
+                "Violate.document_id" => $id)
+        );
+
+
+        $this->Paginator->settings = $this->paginate;
+
+        $res = $this->Violate->find('all', array('conditions' => array('Violate.document_id' => $id),
         ));
-        if ($res) {
-            $violate_id = $res[0]['Violate']['id'];
-            $this->set('violate_id', $violate_id);
-            $student_id = $res[0]['Violate']['student_id'];
-            $this->set('student_id', $student_id);
-            $document_id = $res[0]['Violate']['document_id'];
-            $this->set('document_id', $document_id);
-            $content = $res[0]['Violate']['content'];
-            $this->set('content', $content);
-        }
-        $this->uses = array('Student');
-        $res = $this->Student->find('all', array('conditions' => array('Student.id' => $student_id),
-        ));
-        if ($res) {
-            $student_fullname = $res[0]['Student']['full_name'];
-            $this->set('student_fullname', $student_fullname);
-        }
-        $this->uses = array('Document');
-        $res = $this->Document->find('all', array('conditions' => array('Document.id' => $document_id),
-        ));
-
-        if ($res) {
-            $lesson_id = $res[0]['Document']['lesson_id'];
-            $title = $res[0]['Document']['title'];
-            $this->set('title', $title);
-            $this->set('lesson_id', $lesson_id);
-        }
-        $this->uses = array('Lesson');
-        $res = $this->Lesson->find('all', array('conditions' => array('Lesson.id' => $lesson_id),));
-        if ($res) {
-            $lecturer_id = $res[0]['Lesson']['lecturer_id'];
-        }
-        $violations = $this->Violate->find('all', array('conditions' => array("Violate.accepted" => 1)
-        ));
-
-        $count = 0;
-        if ($violations)
-            foreach ($violations as $violation) {
-                if ($this->checkDocumentIsOfLecturer($lecturer_id, $violation['Violate']['document_id']))
-                    $count++;
-            }
-
-        $this->set('count', $count);
-
-        $this->set('lecturer_id', $lecturer_id);
-
-        $this->uses = array('User');
-
-        $res = $this->User->find('all', array('conditions' => array(
-                'User.id' => $lecturer_id,
-            ),
-        ));
-        if ($res)
-            $lecturer_name = $res[0]['Lecturer']['full_name'];
-        $this->set('lecturer_name', $lecturer_name);
+        $this->set('result', $res);
+        $this->set('document_id', $id);
     }
 
     public function view_violation_content_process() {
-        $this->uses = array('Violate');
-        
-        $id = $this->request->params['named']['id'];
-        $count = $this->request->params['named']['count'];
-        $lecturer_id = $this->request->params['named']['lecturer_id'];
+        $this->uses = array('Checkviolate');
+        $document_id = $this->params['named']['id'];
         if ($this->checkContainKey($this->data, "accept")) {
-            $res = $this->Violate->find('all', array('conditions' => array('Violate.id' => $id),
-                "Violate.id" => $id
-            ));
-            $res[0]['Violate']['accepted'] = 1;
-            $notify = "この違犯リポットを確認しました";
-            //echo $notify;
-            $this->Violate->saveAll($res);
-            $notify = $notify.$this->checkLockLecturerAccount($count+1,$lecturer_id);
-            
+            $data['Checkviolate']['document_id'] = $document_id;
+            $data['Checkviolate']['state'] = 1;
+            $this->Checkviolate->saveAll($data);
+            $this->uses = array('Violate');
+            $this->Violate->deleteAll(array('Violate.document_id' => $document_id), false);
+
+            if ($this->checkDeleteDocument($document_id) == 1) {
+                $this->uses = array('Document');
+                $this->Document->delete($document_id);
+            }
         } else {
-            $notify = "この違犯リポットを削除しました";
-            $this->Violate->delete($id);
+            $this->uses = array('Violate');
+            $this->Violate->deleteAll(array('Violate.document_id' => $this->params['named']['id']), false);
+        }
+    }
+
+    public function fee_manager() {
+//        // $date = date('Y-m-d');
+//        $month = "0";
+//        $year = "1970";
+//        if ($this->request->is('post')) {
+//            echo "dmmm";
+//           // debug($this->data);
+//            $month = $this->data['Fee']['month'];
+//            $year = $this->data['Fee']['year'] + 1970;
+//            echo "month =" . $month;//
+//            $this->uses = array('LessonMembership');
+//            $res = $this->LessonMembership->find('all');
+//            $this->uses = array('Student');
+//            $student_list = $this->Student->find('all', array('condition' => array('actived' => 1)));
+//            $this->uses = array('LessonMembership'); //$student['Student']['id'];
+//            foreach ($student_list as $student) {
+//                $count = 0;
+//                $result = $this->LessonMembership->find('all', array('conditions' => array('LessonMembership.student_id' => $student['Student']['id'])));
+//
+//                foreach ($result as $res) {
+//                    $date = $res['LessonMembership']['days_attended'];
+//                    if ($this->getYear($date) == $year && $this->getMonth($date) == $month)
+//                        $count++;
+//                }
+//                $counts[$student['Student']['id']] = $count;
+//            }
+//            $this->set('student_list', $student_list);
+//            $this->set('counts', $counts);
+//            $this->paginate = array(
+//                'limit' => 2,
+//                'fields' => array(),
+//            );
+//            $this->Paginator->settings = $this->paginate;
+//            $this->set("year", $year);
+//            $this->set("month", $month);
+//        }
+//        echo "why";
+        
+        
+        date_default_timezone_set('Asia/Saigon');
+         $date = date('Y:m:d H:i:s');
+        $month = $this->getMonth($date);
+        $year = $this->getYear($date);
+        if($month == 1) 
+        {
+            $month = 12;$year--;
+        }
+        else
+            $month--;
+        
+        $this->set("year", $year);
+        $this->set("month", $month);
+        if($month<10)$month = "0".$month;
+        $name = "ELS-UBT-".$year . "-".$month.".tsv";
+        $File = "tsv\\fee\\" . $name;
+        $this->set('exit',file_exists($File));
+        $bool = file_exists($File);
+        if($bool == true)$this->Session->setFlash(__($year.'年'.$month.'月のTSVを作成しました'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+        
+       // debug($this->Auth->user);
+         $this->getStudentFee($year,$month);
+       
+    }
+    
+    private function getStudentFee($year,$month)
+    {        
+            $this->uses = array('LessonMembership');
+            $res = $this->LessonMembership->find('all');
+            $this->uses = array('Student');
+            $student_list = $this->Student->find('all', array('condition' => array('actived' => 1)));
+            $this->uses = array('LessonMembership'); //$student['Student']['id'];
+            
+            $student_list_ = array();
+            $i = 0 ;
+            foreach ($student_list as $student) {
+                $count = 0;
+                $result = $this->LessonMembership->find('all', array('conditions' => array('LessonMembership.student_id' => $student['Student']['id'])));
+
+                foreach ($result as $res) {
+                    $date = $res['LessonMembership']['days_attended'];
+                    if ($this->getYear($date) == $year && $this->getMonth($date) == $month)
+                        $count++;
+                }
+                $student['count'] = $count;
+                $student_list_[$i] = $student;
+                $i++;
+            }
+            $this->set('student_list', $student_list);            
+            $this->paginate = array(
+                'limit' => 2,
+                'fields' => array(),
+            );
+        //debug($student_list_);    
+        return $student_list_;
+        
+    }
+    
+
+    private function getCurrentYear() {
+
+        $date = date('Y-m-d');
+        $years = array();
+        for ($i = 1970; $i < $date; $i++) {
+            $years[$i - 1970] = $i;
+        }
+       // debug($years);
+        return $years;
+    }
+
+    private function getMonthSet() {
+        $months = array();
+        $months[0] = "January";
+        $months[1] = "February";
+        $months[2] = "March";
+        $months[3] = "April";
+        $months[4] = "May";
+        $months[5] = "June";
+        $months[6] = "July";
+        $months[7] = "August";
+        $months[8] = "September";
+        $months[9] = "October";
+        $months[10] = "November";
+        $months[11] = "December";
+
+
+        debug($months);
+        return $months;
+    }
+
+    public function generate_tsv($year, $month) {
+        $this->set('year',$year);
+        $this->set('month',$month);
+        
+        
+        date_default_timezone_set('Asia/Saigon');
+        $date = date('Y:m:d H:i:s');
+        echo $date;
+        mb_internal_encoding('UTF-8');
+        header('Content-Type: text/html;charset=utf-8');        
+        if($month<10)$month = "0".$month;
+        $name = "ELS-UBT-".$year . "-".$month.".tsv";
+        $File = "tsv\\fee\\" . $name;
+        $Handle = fopen($File, "w");
+        $data = "".mb_convert_kana("ELS-UBT-GWK5M78", "rnaskhcv")."\t";
+        echo "<br>".$data;
+        $data.= mb_convert_kana($year, "rnaskhcv")."\t";
+        if($month<10)$data.= mb_convert_kana("0".$month, "rnaskhcv")."\t";
+            else $data.= mb_convert_kana($month, "rnaskhcv")."\t";
+            
+        $data.= mb_convert_kana($this->getYear($date), "rnaskhcv")."\t";
+        $data.= mb_convert_kana($this->getMonth($date), "rnaskhcv")."\t";
+        $data.= mb_convert_kana($this->getDate($date), "rnaskhcv")."\t";
+        $data.= mb_convert_kana($this->getHour($date), "rnaskhcv")."\t";
+        $data.= mb_convert_kana($this->getMinus($date), "rnaskhcv")."\t";
+        $data.= mb_convert_kana($this->getSecond($date), "rnaskhcv")."\t";
+        $student_list = $this->getStudentFee($year, $month);
+        
+        foreach($student_list as $student)
+        {
+              $data.= "\n";
+        $data.= mb_convert_kana($student['Student']['id'], "rnaskhcv")."\t";   
+        $data.= mb_convert_kana($student['Student']['full_name'], "rnaskhcv")."\t"; 
+        $data.= mb_convert_kana($student['count']*20000, "rnaskhcv")."\t";
+       
+        $data.= mb_convert_kana($student['Student']['address'], "rnaskhcv")."\t"; 
+        $phone_number= mb_convert_kana($student['Student']['phone_number'], "rnaskhcv")."\t"; 
+        $phone_number = substr_replace($phone_number,'-', 3, 0);
+        $phone_number = substr_replace($phone_number,'-', 7, 0);
+        $data.= $phone_number."\t";
+        $data.= mb_convert_kana("18", "rnaskhcv")."\t";
+        $credit_number = mb_convert_kana($student['Student']['credit_card_number'], "rnaskhcv")."\t";
+        $credit_number = substr_replace($credit_number,'-', 3, 0);
+        $credit_number = substr_replace($credit_number,'-', 8, 0);
+        $credit_number = substr_replace($credit_number,'-', 13, 0);
+        $credit_number = substr_replace($credit_number,'-', 18, 0);
+        $credit_number = substr_replace($credit_number,'-', 23, 0);
+        $data.= $credit_number."\t";
+        }
+        $data.= "\n";
+        $data.= mb_convert_kana("END___END___END", "rnaskhcv")."\t";
+        // $data.= "END___END___END\t";
+        $data.= mb_convert_kana($year, "rnaskhcv")."\t";
+        if($month<10)$data.= mb_convert_kana("0".$month, "rnaskhcv")."\t";
+            else $data.= mb_convert_kana($month, "rnaskhcv")."\t";
+        
+                
+        fprintf($Handle,$data );
+        fclose($Handle);        
+        return $this->redirect(array('controller' => 'admins', 'action' => 'fee_manager'));
+    }
+
+   
+    private function monthToString($month) {
+        if ($month == "January")
+            return 1;
+        if ($month == "February")
+            return 2;
+        if ($month == "March")
+            return 3;
+        if ($month == "April")
+            return 4;
+        if ($month == "May")
+            return 5;
+        if ($month == "June")
+            return 6;
+        if ($month == "July")
+            return 7;
+        if ($month == "August")
+            return 8;
+        if ($month == "September")
+            return 9;
+        if ($month == "October")
+            return 10;
+        if ($month == "November")
+            return 11;
+        if ($month == "December")
+            return 12;
+        return 1;
+    }
+
+    public function ranking_lecturer() {
+
+        if ($this->request->is('post')) {
+            // debug($this->data);
+            $ranking = $this->data['ranking']['choose_ranking'];
+            $this->set('ranking', $ranking);
         }
 
-        $this->Session->setFlash(__($notify), 'alert', array(
-            'plugin' => 'BoostCake',
-            'class' => 'alert-success'
+        $this->uses = array('LessonMembership');
+        $lessons = $this->LessonMembership->find('all', array('conditions' => array('LessonMembership.baned' => false,
+                'LessonMembership.liked' => true)));
+        ;
+        //debug($lessons);
+        // $less[] += $lessions
+        $this->uses = array('User', 'Lecturer');
+        $lecturers = $this->User->find('all', array('conditions' => array('User.role' => 'lecturer', 'User.actived' => 1)
         ));
-        echo "notifiy" + $notify;
-        $this->redirect(array("action" => "view_violation"));
+        ;
+        $i = 0;
+        $teachers = array();
+        foreach ($lecturers as $lecturer) {
+            $teachers[$i]['id'] = $lecturer['Lecturer']['id'];
+            $this->uses = array('Lesson');
+            $lessons_ = $this->Lesson->find('all', array('conditions' => array('Lesson.lecturer_id' => $teachers[$i]['id'])
+            ));
+
+            $teachers[$i]['count_like'] = $this->countLesson($lessons_, $lessons);
+
+            //debug($teachers[$i]);
+            $i++;
+        }
+
+
+        $teachers = $this->array_sort($teachers, 'count_like', SORT_DESC);
+        $this->set('teachers', $teachers);
+        $this->set('lessons', $this->getRankingLesson());
     }
 
-    public function fee_manager()
-    {
-        
+    private function countLesson($lessons, $all_lessons) {
+        $count = 0;
+
+        foreach ($lessons as $lesson) {
+            foreach ($all_lessons as $all_lesson) {
+                if ($lesson['Lesson']['id'] == $all_lesson['Lesson']['id'])
+                    $count++;
+            }
+        }
+        return $count;
+    }
+
+    private function countLikeLesson($lesson, $all_lessons) {
+
+
+        $count = 0;
+
+        foreach ($all_lessons as $all_lesson) {
+            if ($lesson['Lesson']['id'] == $all_lesson['Lesson']['id'])
+                $count++;
+        }
+        return $count;
+    }
+
+    private function getRankingLesson() {
+        $this->uses = array('Lesson');
+        $lessons = $this->Lesson->find('all');
+
+        $this->uses = array('LessonMembership');
+        $all_lessons = $this->LessonMembership->find('all', array('conditions' => array('LessonMembership.baned' => false,
+                'LessonMembership.liked' => true)));
+
+        $lessons_data = array();
+        $i = 0;
+        foreach ($lessons as $lesson) {
+            $lessons_data[$i]['count_like'] = $this->countLikeLesson($lesson, $all_lessons);
+            $lessons_data[$i]['id'] = $lesson['Lesson']['id'];
+            $i++;
+        }
+
+        $lessons = $this->array_sort($lessons_data, 'count_like', SORT_DESC);
+        // debug($lessons);        
+        return $lessons;
+    }
+
+    private function array_sort($array, $on, $order = SORT_ASC) {
+        $new_array = array();
+        $sortable_array = array();
+
+        if (count($array) > 0) {
+            foreach ($array as $k => $v) {
+                if (is_array($v)) {
+                    foreach ($v as $k2 => $v2) {
+                        if ($k2 == $on) {
+                            $sortable_array[$k] = $v2;
+                        }
+                    }
+                } else {
+                    $sortable_array[$k] = $v;
+                }
+            }
+            switch ($order) {
+                case SORT_ASC:
+                    asort($sortable_array);
+                    break;
+                case SORT_DESC:
+                    arsort($sortable_array);
+                    break;
+            }
+
+            foreach ($sortable_array as $k => $v) {
+                $new_array[$k] = $array[$k];
+            }
+        }
+
+        return $new_array;
+    }
+
+    private function getYear($date) {
+
+        $year = "";
+
+        for ($i = 0; $i < 4; $i++) {
+            $year = $year . $date[$i];
+        }
+
+        return $year;
+    }
+
+    private function getMonth($date) {
+        $month = "";
+
+        for ($i = 5; $i < 7; $i++) {
+            $month = $month . $date[$i];
+        }
+
+        return $month;
     }
     
+    private function getDate($date) {
+        $date_ = "";
+
+        for ($i = 8; $i < 10; $i++) {
+            $date_ = $date_ . $date[$i];
+        }
+
+        return $date_;
+    }
     
-    private function checkContainKey($param, $_key) {
+    private function getSecond($date) {
+
+        $second = "";
+
+        for ($i = 17; $i < 19; $i++) {
+            $second = $second . $date[$i];
+        }
+
+        return $second;
+    }
+
+    private function getHour($date) {
+        $hour = "";
+
+        for ($i = 11; $i < 13; $i++) {
+            $hour = $hour . $date[$i];
+        }
+
+        return $hour;
+    }
+    
+    private function getMinus($date) {
+        $minus = "";
+
+        for ($i = 14; $i < 16; $i++) {
+            $minus = $minus . $date[$i];
+        }
+
+        return $minus;
+    }
+
+    private function checkSecond($param, $_key) {
 
         foreach ($param as $key => $value) {
             if ($key == $_key)
@@ -684,7 +1006,7 @@ class AdminsController extends AppController{
         $this->uses = array('Document');
         $res = $this->Document->find('all', array('conditions' => array('Document.id' => $document_id),
         ));
-        
+
         if (!$res)
             return 0;
         $lesson_id = $res[0]['Document']['lesson_id'];
@@ -695,29 +1017,20 @@ class AdminsController extends AppController{
             return 1;
         return 0;
     }
-    
 
-    private function checkLockLecturerAccount($number_of_violation,$user_id)
-    {
-        echo $number_of_violation;
-        if($number_of_violation >= 3)
-        {
-            $this->uses = array('User');
-            echo "user_id =".$user_id; 
-            $res = $this->User->find('all', array('conditions' => array('User.id' => $user_id)
-             
-            ));
-            if($res)
-            {$res[0]['User']['actived'] = 0;
-            $this->User->saveall($res);
-            echo "vuot qua 3 lan";
-            }
-            return "<br>　この先生は違犯回数が3回以上なのでアカウントがロックされていた";
+    private function checkDeleteDocument($document_id) {
+        $res = $this->Checkviolate->find('all', array('conditions' => array('Checkviolate.document_id' => $document_id),
+        ));
+        $count = 0;
+        foreach ($res as $record) {
+            $count++;
         }
-        return "";
-        
-    }
 
+        echo "count = " . $count;
+        if ($count >= 3)
+            return 1;
+        return 0;
+    }
 
 }
 ?>

@@ -21561,3 +21561,592 @@ Stack Trace:
 #1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
 #2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(106): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
 #3 {main}
+2014-03-30 09:50:12 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Document.document_id' in 'field list'
+Request URL: /admins/view_violation_content/1
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Documen...', Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Documen...', Array, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Documen...', false)
+#4 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Document), 'SELECT `Documen...', Array)
+#5 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Document), Object(Document), 'hasMany', 'Document', Array, Array, true, Array, 0, Array)
+#6 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Document), Array)
+#7 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('all', Array)
+#8 E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php(600): Model->find('all', Array)
+#9 [internal function]: AdminsController->view_violation_content('1')
+#10 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#11 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#13 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-30 10:35:25 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Document.document_id' in 'field list'
+Request URL: /admins/view_violation_content/1
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Documen...', Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Documen...', Array, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Documen...', false)
+#4 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Document), 'SELECT `Documen...', Array)
+#5 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Document), Object(Document), 'hasMany', 'Document', Array, Array, true, Array, 0, Array)
+#6 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Document), Array)
+#7 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('all', Array)
+#8 E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php(602): Model->find('all', Array)
+#9 [internal function]: AdminsController->view_violation_content('1')
+#10 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#11 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#13 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-30 10:35:50 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Document.document_id' in 'field list'
+Request URL: /admins/view_violation_content/1
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Documen...', Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Documen...', Array, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Documen...', false)
+#4 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Document), 'SELECT `Documen...', Array)
+#5 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Document), Object(Document), 'hasMany', 'Document', Array, Array, true, Array, 0, Array)
+#6 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Document), Array)
+#7 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('all', Array)
+#8 E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php(602): Model->find('all', Array)
+#9 [internal function]: AdminsController->view_violation_content('1')
+#10 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#11 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#13 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-30 10:37:05 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Document.document_id' in 'field list'
+Request URL: /admins/view_violation_content/2
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Documen...', Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Documen...', Array, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Documen...', false)
+#4 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Document), 'SELECT `Documen...', Array)
+#5 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Document), Object(Document), 'hasMany', 'Document', Array, Array, true, Array, 0, Array)
+#6 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Document), Array)
+#7 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('all', Array)
+#8 E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php(602): Model->find('all', Array)
+#9 [internal function]: AdminsController->view_violation_content('2')
+#10 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#11 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#13 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-30 10:37:09 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Document.document_id' in 'field list'
+Request URL: /admins/view_violation_content/1
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `Documen...', Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `Documen...', Array, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1339): DboSource->fetchAll('SELECT `Documen...', false)
+#4 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1201): DboSource->fetchAssociated(Object(Document), 'SELECT `Documen...', Array)
+#5 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1112): DboSource->queryAssociation(Object(Document), Object(Document), 'hasMany', 'Document', Array, Array, true, Array, 0, Array)
+#6 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(Document), Array)
+#7 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('all', Array)
+#8 E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php(602): Model->find('all', Array)
+#9 [internal function]: AdminsController->view_violation_content('1')
+#10 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#11 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#12 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#13 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#14 {main}
+2014-03-30 12:11:47 Error: Fatal Error (1): Call to a member function delete() on a non-object in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 673]
+2014-03-30 12:11:47 Error: [FatalErrorException] Call to a member function delete() on a non-object
+Request URL: /Admins/view_violation_content_process/id:1
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'E:\Installs\Web...', 673)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'E:\Installs\Web...', 673, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'E:\Installs\Web...', 673, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-30 12:23:12 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry '0' for key 'PRIMARY'
+Request URL: /Admins/view_violation_content_process/id:1
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('INSERT INTO `el...', Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1004): DboSource->execute('INSERT INTO `el...')
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(1832): DboSource->create(Object(Checkviolate), Array, Array)
+#4 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2392): Model->save(Array, Array)
+#5 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2178): Model->saveAssociated(Array, Array)
+#6 E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php(668): Model->saveAll(Array)
+#7 [internal function]: AdminsController->view_violation_content_process()
+#8 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#9 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#10 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#11 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-03-30 12:54:13 Error: [NotFoundException] Not Found
+Request URL: /Admins/view_violation/page:2
+Stack Trace:
+#0 E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php(571): PaginatorComponent->paginate('Violate')
+#1 [internal function]: AdminsController->view_violation()
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#4 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#5 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}
+2014-03-30 12:54:28 Error: Fatal Error (1): Call to undefined function checkDeleteDocument() in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 670]
+2014-03-30 12:54:28 Error: [FatalErrorException] Call to undefined function checkDeleteDocument()
+Request URL: /Admins/view_violation_content_process/id:1
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'E:\Installs\Web...', 670)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'E:\Installs\Web...', 670, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'E:\Installs\Web...', 670, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-03-30 16:04:38 Error: [MissingActionException] Action AdminsController::feemanager() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'feemanager',
+)
+Request URL: /admins/feemanager
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-03-30 16:44:55 Error: Fatal Error (1): Call to a member function find() on a non-object in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 607]
+2014-03-30 16:44:55 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /admins/fee_manager
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'E:\Installs\Web...', 607)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'E:\Installs\Web...', 607, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'E:\Installs\Web...', 607, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-06 18:32:03 Error: Fatal Error (4): syntax error, unexpected 'private' (T_PRIVATE), expecting identifier (T_STRING) in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 662]
+2014-04-06 18:32:03 Error: [FatalErrorException] syntax error, unexpected 'private' (T_PRIVATE), expecting identifier (T_STRING)
+Request URL: /admins/ranking_lecturer
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'E:\Installs\Web...', 662)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'E:\Installs\Web...', 662, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'E:\Installs\Web...', 662, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-06 18:32:15 Error: Fatal Error (1): Call to a member function find() on a non-object in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 651]
+2014-04-06 18:32:15 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /admins/ranking_lecturer
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'E:\Installs\Web...', 651)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'E:\Installs\Web...', 651, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'E:\Installs\Web...', 651, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-06 18:48:16 Error: Fatal Error (64): Cannot use [] for reading in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 649]
+2014-04-06 18:48:16 Error: [FatalErrorException] Cannot use [] for reading
+Request URL: /admins/ranking_lecturer
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(64, 'Cannot use [] f...', 'E:\Installs\Web...', 649)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot use [] f...', 'E:\Installs\Web...', 649, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 64, 'Cannot use [] f...', 'E:\Installs\Web...', 649, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-06 19:04:20 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Lesson.lecture_id' in 'where clause'
+Request URL: /admins/ranking_lecturer
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `User`.`...', Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `User`.`...', Array, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1077): DboSource->fetchAll('SELECT `User`.`...', false)
+#4 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(User), Array)
+#5 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('all', Array)
+#6 E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php(662): Model->find('all', Array)
+#7 [internal function]: AdminsController->ranking_lecturer()
+#8 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#9 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#10 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#11 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-04-06 19:04:35 Error: [PDOException] SQLSTATE[42S22]: Column not found: 1054 Unknown column 'Lesson.lecturer_id' in 'where clause'
+Request URL: /admins/ranking_lecturer
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(458): PDOStatement->execute(Array)
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(424): DboSource->_execute('SELECT `User`.`...', Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(665): DboSource->execute('SELECT `User`.`...', Array, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Datasource\DboSource.php(1077): DboSource->fetchAll('SELECT `User`.`...', false)
+#4 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2902): DboSource->read(Object(User), Array)
+#5 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Model\Model.php(2874): Model->_readDataSource('all', Array)
+#6 E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php(662): Model->find('all', Array)
+#7 [internal function]: AdminsController->ranking_lecturer()
+#8 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#9 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#10 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#11 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-04-06 19:05:06 Error: Fatal Error (1): Call to undefined function countLesson() in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 663]
+2014-04-06 19:05:06 Error: [FatalErrorException] Call to undefined function countLesson()
+Request URL: /admins/ranking_lecturer
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'E:\Installs\Web...', 663)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'E:\Installs\Web...', 663, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'E:\Installs\Web...', 663, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-07 09:37:18 Error: Fatal Error (4): syntax error, unexpected end of file in [E:\Installs\WebServer\htdocs\elearning\View\Admins\ranking_lecturer.ctp, line 92]
+2014-04-07 09:37:18 Error: [FatalErrorException] syntax error, unexpected end of file
+Request URL: /admins/ranking_lecturer
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'E:\Installs\Web...', 92)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'E:\Installs\Web...', 92, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'E:\Installs\Web...', 92, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-07 10:21:59 Error: [MissingViewException] View file "E:\Installs\WebServer\htdocs\elearning\View\Admins\generate_t_s_v.ctp" is missing.
+Exception Attributes: array (
+  'file' => 'E:\\Installs\\WebServer\\htdocs\\elearning\\View\\Admins\\generate_t_s_v.ctp',
+)
+Request URL: /admins/generateTSV
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\View\View.php(457): View->_getViewFileName(NULL)
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(952): View->render(NULL, NULL)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(192): Controller->render()
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#4 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#5 {main}
+2014-04-07 10:23:29 Error: [MissingActionException] Action AdminsController::generateTSV() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generateTSV',
+)
+Request URL: /admins/generateTSV
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-07 10:24:18 Error: [MissingActionException] Action AdminsController::generateTSV() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generateTSV',
+)
+Request URL: /admins/generateTSV
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-07 10:24:23 Error: [MissingActionException] Action AdminsController::generateTSV() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generateTSV',
+)
+Request URL: /admins/generateTSV
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-07 10:52:24 Error: [MissingControllerException] Controller class FeesController could not be found.
+Exception Attributes: array (
+  'class' => 'FeesController',
+  'plugin' => NULL,
+)
+Request URL: /fees/generate_tsv
+Stack Trace:
+#0 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-04-07 10:53:21 Error: [MissingControllerException] Controller class FeesController could not be found.
+Exception Attributes: array (
+  'class' => 'FeesController',
+  'plugin' => NULL,
+)
+Request URL: /fees/generate_tsv
+Stack Trace:
+#0 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-04-07 10:53:25 Error: [MissingControllerException] Controller class FeesController could not be found.
+Exception Attributes: array (
+  'class' => 'FeesController',
+  'plugin' => NULL,
+)
+Request URL: /fees/generate_tsv
+Stack Trace:
+#0 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-04-07 10:55:13 Error: [MissingControllerException] Controller class FeesController could not be found.
+Exception Attributes: array (
+  'class' => 'FeesController',
+  'plugin' => NULL,
+)
+Request URL: /fees/generate_tsv
+Stack Trace:
+#0 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-04-13 11:10:53 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:11:49 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:13:25 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:13:40 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:16:37 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:17:46 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:18:12 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:19:05 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:19:44 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:19:53 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:22:39 Error: Fatal Error (1): Call to a member function find() on a non-object in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 824]
+2014-04-13 11:22:39 Error: [FatalErrorException] Call to a member function find() on a non-object
+Request URL: /admins/fee_manager
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'E:\Installs\Web...', 824)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'E:\Installs\Web...', 824, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'E:\Installs\Web...', 824, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-13 11:23:36 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:23:56 Error: [MissingActionException] Action AdminsController::generate_tsv() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:24:20 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:25:00 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:25:24 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:25:59 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:27:33 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:27:42 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 11:28:23 Error: [PrivateActionException] Private Action AdminsController::generate_tsv() is not directly accessible.
+Exception Attributes: array (
+  'controller' => 'AdminsController',
+  'action' => 'generate_tsv',
+)
+Request URL: /admins/generate_tsv
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#1 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#2 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2014-04-13 14:38:48 Error: Fatal Error (1): Unsupported operand types in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 649]
+2014-04-13 14:38:48 Error: [FatalErrorException] Unsupported operand types
+Request URL: /admins/fee_manager
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Unsupported ope...', 'E:\Installs\Web...', 649)
+#1 [internal function]: ErrorHandler::handleError(1, 'Unsupported ope...', 'E:\Installs\Web...', 649, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Unsupported ope...', 'E:\Installs\Web...', 649, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-13 16:50:59 Error: Fatal Error (1): Call to undefined function SBC_DBC() in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 680]
+2014-04-13 16:50:59 Error: [FatalErrorException] Call to undefined function SBC_DBC()
+Request URL: /admins/generate_tsv/1970/0
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'E:\Installs\Web...', 680)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'E:\Installs\Web...', 680, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'E:\Installs\Web...', 680, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-13 17:33:25 Error: Fatal Error (1): Call to a member function format() on a non-object in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 688]
+2014-04-13 17:33:25 Error: [FatalErrorException] Call to a member function format() on a non-object
+Request URL: /admins/generate_tsv/1988/10
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to a membe...', 'E:\Installs\Web...', 688)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to a membe...', 'E:\Installs\Web...', 688, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to a membe...', 'E:\Installs\Web...', 688, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-13 23:39:06 Error: Fatal Error (1): Call to undefined method View::redirect() in [E:\Installs\WebServer\htdocs\elearning\View\Admins\generate_tsv.ctp, line 12]
+2014-04-13 23:39:06 Error: [FatalErrorException] Call to undefined method View::redirect()
+Request URL: /admins/generate_tsv/2014/3
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'E:\Installs\Web...', 12)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'E:\Installs\Web...', 12, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'E:\Installs\Web...', 12, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-14 05:22:27 Error: Fatal Error (4): syntax error, unexpected '}', expecting ',' or ';' in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 678]
+2014-04-14 05:22:27 Error: [FatalErrorException] syntax error, unexpected '}', expecting ',' or ';'
+Request URL: /admins/fee_manager
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', 'E:\Installs\Web...', 678)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', 'E:\Installs\Web...', 678, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', 'E:\Installs\Web...', 678, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
