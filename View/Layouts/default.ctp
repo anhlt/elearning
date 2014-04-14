@@ -65,11 +65,13 @@ $(document).ready(function(){
     </ul> -->
     <ul class="nav navbar-nav navbar-right">
 <?php if ($this->Session->read('Auth.User')){
-    echo "<li><a style = 'margin-right:420px'>";
     //  echo "<div class='input-group'>";
     //  echo "<span class = 'glyphicon-class'>iab</span>";
-    echo "<input id = 'searchip' class = 'form-control glyphicon-class' placeholder = 'smart search' style='height:25px'/>"; 
-    echo "</a></li>";
+    if($this->Session->read("Auth.User.role") == "student"){
+        echo "<li><a style = 'margin-right:420px'>";
+        echo "<input id = 'searchip' class = 'form-control glyphicon-class' placeholder = 'smart search' style='height:25px'/>"; 
+        echo "</a></li>";
+    }
     echo "<li><a href='/users/logout'>Logout</a></li>";
 } else{
     echo "<li class='dropdown'>

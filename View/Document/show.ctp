@@ -27,13 +27,17 @@ height: 650px;
     width:700px;
     height:700px;
 }
+.floatRight{
+    float:right;
+}
 </style>
 <?php $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE, "勉強");?>
 
 <div class = "col-xs col-md-9 well "  >
 <?php
 
-echo "<h1 style='margin-top:0px'>".$document['title']."</h1>";  
+echo "<h1 style='margin-top:0px'>".$document['title']."</h1>"; 
+echo $this->Html->link('違反レポート', '/document/report/'.$document['id'], array('class'=>'floatRight label label-default'));
 //echo "<input id = 'frame' type = 'text' oncontextmenu = 'return false' />"; 
 $link = $document['link'];
 if (stripos(strrev(strtolower($link)), strrev(PDF))===0){
