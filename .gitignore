@@ -2,12 +2,6 @@ tmp/cache
 tmp/logs/*
 tmp/
 /nbproject
-<<<<<<< HEAD
-webroot/files/*
-webroot/mp3/
-webroot/pdf/
-=======
 webroot/mp3/*
 webroot/pdf/*
 webroot/files/*
->>>>>>> 9c4799b8c50e1f04932882369224f12d10ca68e5
