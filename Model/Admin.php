@@ -5,7 +5,8 @@
  * @author Tha
  */
 class Admin extends AppModel {
-    public $hasOne = 'User';    
+    public $hasOne = 'User';
+    public $useTable = 'admin';
     public $validate = array(
         'username' => array(
             'required' => array(

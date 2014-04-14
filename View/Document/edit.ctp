@@ -18,12 +18,12 @@
 				'class' => 'form-control'  
 				),  
 			'class' => 'well',
-		    'url' => array('controller' => 'document', 'action' => 'edit', 'id' => $id, 'document_id' => $document_id, 'ihan' => false),
+		    'url' => array('controller' => 'document', 'action' => 'edit', 'id' => $id, 'document_id' => $document_id, 'ihan' => $ihan),
 		    'method' => 'post',
 		    'enctype' => 'multipart/form-data'
 			)); ?>
 			
-			<?php echo $this->Form->hidden('ihan', array('value' => $ihan));?>					
+			<!-- <?php echo $this->Form->hidden('ihan', array('value' => $ihan));?> -->		
 			<div class="form-group">
 				<?php echo $this->Form->input('title', array(  
 					'value' => $result['title'],  
@@ -37,7 +37,7 @@
 					'type'=> 'file',					
 					'value' => $result['link'],
 					'placeholder' => 'ファイル',
-					'required' => false,
+					'required' => $ihan,
 					'class' => 'btn-file'
 				)); ?>
 			</div>
