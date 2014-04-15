@@ -13,6 +13,7 @@
 class Violate extends AppModel {
     //put your code here
     
+    
 }
 
 ?>

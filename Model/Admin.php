@@ -6,7 +6,6 @@
  */
 class Admin extends AppModel {
     public $hasOne = 'User';
-    public $useTable = 'admin';
     public $validate = array(
         'username' => array(
             'required' => array(
@@ -28,7 +27,7 @@ class Admin extends AppModel {
         ),
        'email' => array(
            'email' => array(
-               'rule' => array('email', true),
+               'rule' => array('email'),
                'message' => 'Please supply a valid email address.'
            ),
            'isUnique' => array(

@@ -97,9 +97,6 @@ class LecturerController extends AppController {
 		);
 
 		$results = $this->paginate('Lesson');
-		if ($this->request->is('ajax')) {
- 			$this->render('manage', 'ajax'); // View, Layout
-		}
 		$this->set('results',$results);
 	}
 

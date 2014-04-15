@@ -1,31 +1,35 @@
 <div class="row">
-<?php echo $this->element('admin_menus');?>
-<div class="col-xs-5 col-md-3">
-    <ul class="nav nav-pills nav-stacked" id="myTab">
-        <li class="active">
-            <?php echo $this->html->link('管理者を追加', array('controller' => "admins", 'action' => "add_admin"
-            ));
-            ?></li>
-			　<li >　<?php echo $this->html->link('管理者を削除', array('controller' => "admins", 'action' => "remove_admin"
-            ));
-            ?></li>
-    </ul>
-</div>
+
+ <?php echo $this->element('menu');?>    
+<div class="col-xs-13 col-md-9">
+<h2>ドキュメント管理</h2>    
+    	<?php echo $this->Session->flash(); ?>
+
+		<div class="well">
+			
+			<table class="table table-striped">
+				<tr>					
+					 <td  class="col-sm-3">Student_id</td>
+                                        <td  class="col-sm-3">違犯内容</td>
+                                        <td  class="col-sm-3">時間</td>
+				</tr>
+			 <?php foreach ($result as $res) {?>
+			  <tr>
+			  	
+			  	<td><?php echo($res['Violate']['student_id']) ?> </td>
+                                <td><?php echo($res['Violate']['content']) ?> </td>
+			  	<td><?php echo($res['Violate']['time']) ?> </td>
+
+                               
+			  </tr>
+			 <?php }?>
+			</table>
+		</div>
+	</div>
+</div> 
 
 
-
-
-<?php
-echo "違犯リポットの送信者 :" . $student_fullname . "<br>";
-echo "違犯のドキュメント :" . $title . "<br>";
-echo "先生名 ：" . $lecturer_name . "<br>";
-;
-echo "違犯した回数 : ".$count."<br>";
-;
-echo "内容 : " . $content . "<br>";
-;
-//echo $this->html->link('見る',array('controller'=>"admins", 'action'=>"view_violation_content＿process"
-//                                    ,"accept" =>1));
+<?php                             
 
 echo $this->Form->create('Admin', array(
     'inputDefaults' => array(
@@ -35,9 +39,8 @@ echo $this->Form->create('Admin', array(
         'class' => 'form-control'
     ),
     'class' => 'well',
-    'url' => array('controller' => 'Admins', 'action' => 'view_violation_content_process','id' => $violate_id
-       ,'count'=> $count, 'lecturer_id' =>$lecturer_id,
-        )
+    'url' => array('controller' => 'Admins', 'action' => 'view_violation_content_process','id' => $document_id
+       )
 ));
 
 echo $this->Form->submit('確認', array(
@@ -53,4 +56,3 @@ echo $this->Form->submit('削除', array(
 echo $this->Form->end();
 
 ?>
-<div>
