@@ -34,5 +34,7 @@ foreach($tests as $element){
 } 
 echo "</table>";
 ?>
+<ul class = 'pagination'>
+<?php echo $this->Paginator->numbers();?>
 </div>
 

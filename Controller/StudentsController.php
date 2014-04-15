@@ -1,17 +1,20 @@
 <?php
 
 class StudentsController extends AppController {
-    //   var $helpers = array("Html", "Form");//このところはちょっと変、AppController　にあるのに
-    var $components = array("Auth");//ここも
+    var $components = array("Auth", "Paginator", "Loger");
     var $uses = array('Question', 'Student');
-    public $helpers = array("Util");
+    public $helpers = array("Util", "Paginator");
     public function beforeFilter(){
         $this->Auth->allow("register");	
-
+        $role = $this->Auth->user('role'); 
+        if ($role != 'student'){
+            $this->Session->setFlash("<div class = 'alert alert-warning alert-dismissable'>学生じゃないから、アクセスできない</div>");
+            $this->redirect("/users/login");
+        }
     }
 
     public function index(){
-
+        $this->redirect("/students/profile");
     }
 
     public function fix_account(){
@@ -28,6 +31,7 @@ class StudentsController extends AppController {
             $this->User->id = $id;
             $this->User->save($user);
             $this->Session->setFlash("<div class = 'alert alert-warning alert-dismissable'>プロファイルが更新された</div>");
+            $this->Loger->writeLog(O,"", "Student", "ユーザがアカウントを更新した", "" );
             $this->redirect("/students/profile");
         }
         $this->loadModel('Question');
@@ -127,10 +131,16 @@ class StudentsController extends AppController {
         
         $this->loadModel("Result");
         $this->Result->recursive = 2;
-        $options['order'] = array("Result.time");
-        $tests = $this->Result->find("all",$options);
+
+        $paginate = array(
+            "limit"=>10,
+            "order"=>array("Result.time"=>"desc"), 
+            "conditions"=>array("Student.id"=>$user_id)
+        );
+        $this->Paginator->settings = $paginate;
+        $tests = $this->Paginator->paginate("Result");
+
         $this->set("tests", $tests);
-        //debug($tests);
     }
     public function search(){
         $keyword = $this->params['url']['search_value'];

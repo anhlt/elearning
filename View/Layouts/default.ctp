@@ -70,7 +70,6 @@ $(document).ready(function(){
                 </div>
             </li>
             <li><a href='/users/logout'>Logout</a></li>
-
         <?php else:?>
             <li class='dropdown'>
                 <a href='#' class='dropdown-toggle' data-toggle='dropdown'>Sign Up <b class='caret'></b></a>

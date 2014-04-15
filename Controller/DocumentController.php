@@ -14,9 +14,6 @@ class DocumentController extends AppController {
 
 			$data = $this->request->data['Document'];
 			unset($data['check']);
-			//echo "<pre>";
-
-			//debug($data);
 			foreach ($data as $Document)
 			{				
 				$name = uniqid() . $Document['link']['name'];			
@@ -78,14 +75,12 @@ class DocumentController extends AppController {
 					$this->Report->create();
 			    	$this->Report->save($report);		    	
 				}
-
-
                 $this->Session->setFlash(__('The document file has been update'), 'alert', array(
-	                'plugin' => 'BoostCake',
-	                'class' => 'alert-success'
-            	));		
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));		
 
-			} else {
+            } else {
                 $this->Session->setFlash(__('The document file could not be update. Plz try again'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
@@ -104,22 +99,21 @@ class DocumentController extends AppController {
 
 	public function delete() 
 	{
+        $id = $this->params['named']['id'];
+        $data = $this->Document->find('first', $id);
+        $name = $data['Document']['link'];	
 
-    	$id = $this->params['named']['id'];
-    	$data = $this->Document->find('first', $id);
-    	$name = $data['Document']['link'];	
 
-    	if ($this->Document->delete($id)) 
-    	{
-    		unlink(WWW_ROOT . DS . 'pdf' . DS . $name);    		
-
+        if ($this->Document->delete($id)) 
+        {
+            unlink(WWW_ROOT.DS.$name);    		
             $this->Session->setFlash(__('The document has been deleted'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
             )); 
 
             return $this->redirect($this->referer());      	
-    	}
+        }
     }
 
     public function show($document_id){
@@ -133,25 +127,22 @@ class DocumentController extends AppController {
         }
     }
 
-    public function report($lesson_id,  $document_id){
-        $document = $this->Document->find("first", array("conditions"=>array("id"=>$document_id)));
-        $this->set("document", $document['Document']);
+    public function report( $document_id){
+
+        $document = $this->Document->findById($document_id);
+        $lesson_id = $document['Document']['lesson_id'];
+        $this->set('document', $document);
+        $this->loadModel("Report");
+        if ($this->Report->hasAny(array('document_id'=> $document_id, 'state'=>TEACHER_UNFIX))){
+            $this->set('message', 'システムはこのファイルがコピーライトに違反したことが分かりました');
+        }
         if ($this->request->is('post')){
             $content = $this->data['report']['content'];
             $this->loadModel("Violate");
-            $data = array("student_id"=>$this->Auth->user("id"), "document_id"=>"document_id", "content"=>$content, "accepted"=>0); 
+            $data = array("student_id"=>$this->Auth->user("id"), "document_id"=>"document_id", "content"=>$content); 
             $this->Violate->save($data);
             $this->redirect(array("controller"=>"lesson","action"=>"learn",$lesson_id));  
-        }
+        } 
 
-    	$id = $this->params['named']['id'];
-    	if ($this->Document->delete($id)) {
-            $this->Session->setFlash(__('The document has been deleted'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-success'
-            )); 
-
-            return $this->redirect($this->referer());      	
-    	}
     }
 }

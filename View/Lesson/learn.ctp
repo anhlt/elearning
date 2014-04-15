@@ -88,7 +88,6 @@ echo "</div>";
 <?php if ($student_lesson_id != -1){ ?>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#hyouka" data-toggle="tab">評価</a></li>
-  <li><a href="#comment" data-toggle="tab">コメント</a></li>
 </ul>
 <div class="tab-content" style='padding:10px;'>
   <div class="tab-pane active" id="hyouka">

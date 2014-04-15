@@ -33,7 +33,10 @@ define ("STUDENT_CHOOSE_COURSE", 2);
 define ("STUDENT_STUDY_HISTORY", 3);
 define ("MAX_LEARN_DAY", 10);
 define ("DELETED", -1);
+define ("TEACHER_FIXED", 0);
+define ("TEACHER_UNFIX", 1);
 /**
+ *
  * The settings below can be used to set additional paths to models, views and controllers.
  *
  * App::build(array(

@@ -441,16 +441,16 @@ class LessonController extends AppController {
 		}          
     }
     
-    public function show($lesson_id){
-        $user_id = $this->Auth->user("id");
-        if ($this->Util->checkLessonAvailableWithStudent($lesson_id, $user_id)){
-            $this->redirect("/lesson/learn/".$lesson_id);     
-        } 
-        $this->Lesson->recursive = 2; 
-        $options['conditions'] = array("Lesson.id"=>$lesson_id); 
-        $lessons = $this->Lesson->find("first",$options); 
-        $this->set("lessons",  $lessons);
-    }
+    // public function show($lesson_id){
+    //     $user_id = $this->Auth->user("id");
+    //     if ($this->Util->checkLessonAvailableWithStudent($lesson_id, $user_id)){
+    //         $this->redirect("/lesson/learn/".$lesson_id);     
+    //     } 
+    //     $this->Lesson->recursive = 2; 
+    //     $options['conditions'] = array("Lesson.id"=>$lesson_id); 
+    //     $lessons = $this->Lesson->find("first",$options); 
+    //     $this->set("lessons",  $lessons);
+    // }
 
 
 

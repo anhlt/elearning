@@ -13,10 +13,10 @@ foreach ($lessons as $row){
     $lesson = $row['Lesson'];
     if (strpos($lesson['name'], $keyword)!= false){
         $lesson_name = str_replace($keyword, "<b>".$keyword."</b>", $lesson['name']);
-        echo $this->Html->tableCells(array($lesson_name, "Lesson", $this->Html->link("View", "/lesson/show/".$lesson['id'])));
+        echo $this->Html->tableCells(array($lesson_name, "Lesson", $this->Html->link("View", "/lesson/learn/".$lesson['id'])));
     }else {
         $lesson_summary = str_replace($keyword, "<b>".$keyword."</b>", $lesson['summary']);
-        echo $this->Html->tableCells(array($lesson_summary, "Lesson", $this->Html->link("View", "/lesson/show/".$lesson['id'])));
+        echo $this->Html->tableCells(array($lesson_summary, "Lesson", $this->Html->link("View", "/lesson/learn/".$lesson['id'])));
     }
 }
 
