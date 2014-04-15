@@ -18,7 +18,7 @@
 				'class' => 'form-control'  
 				),  
 			'class' => 'well',
-		    'url' => array('controller' => 'Test', 'action' => 'edit','id' => $id),
+		    'url' => array('controller' => 'tests', 'action' => 'edit','id' => $id),
 		    'method' => 'post',
 		    'enctype' => 'multipart/form-data'
 			)); ?>

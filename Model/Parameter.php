@@ -47,8 +47,6 @@ class  Parameter extends AppModel{
     public function updateParameter($name, $value){
         $return = $this->query("UPDATE parameters SET value = '$value' WHERE name = '$name'");
         return $return;
-    }
-    
+    }    
 }
 ?>
-

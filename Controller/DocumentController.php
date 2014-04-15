@@ -10,20 +10,17 @@ class DocumentController extends AppController {
 		$this->set('id', $lesson_id);
 		$a['Document']['lesson_id'] = $lesson_id;
 
-		if ($this->request->is('post')) 
-		{
-
 		if ($this->request->is('post')) {
 
 			$data = $this->request->data['Document'];
 			unset($data['check']);
 			//echo "<pre>";
 
-			foreach ($data as $Document) 
+			//debug($data);
+			foreach ($data as $Document)
 			{				
 				$name = uniqid() . $Document['link']['name'];			
 				$data['Document']['link'] =  $name;
-
 				if (is_uploaded_file($Document['link']['tmp_name'])) {
 					$data['Document']['title'] = $Document['title'];
 					move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT."files".DS.$name);
@@ -33,16 +30,17 @@ class DocumentController extends AppController {
 						$this->Session->setFlash(__('The document has been uploaded'), 'alert', array(
 							'plugin' => 'BoostCake',
 							'class' => 'alert-success'));
-					};
-				}
-				else
-	                $this->Session->setFlash(__('The document could not be uploaded. Plz try again'), 'alert', array(
-	                    'plugin' => 'BoostCake',
-	                    'class' => 'alert-warning'));      
-	        	}
- 				$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $lesson_id));	
-			}
-		}
+					}
+					else {
+	                	$this->Session->setFlash(__('The document could not be uploaded. Plz try again'), 'alert', array(
+          	 				'plugin' => 'BoostCake',
+            				'class' => 'alert-warning'));
+	                }
+				}     
+	        }
+
+ 			$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $lesson_id));	
+		}		
 	}
 
 	public function edit() {
@@ -51,40 +49,36 @@ class DocumentController extends AppController {
 		$this->set('id', $id);
 		$this->set('document_id', $document_id);
 		$results = $this->Document->find("first", array("conditions"=>array('id'=>$document_id)));		
-		$this->set('result', $results['Document']);
-
-		$ihan = false;
-		if($this->params['named']['ihan']) {
-			$ihan = $this->params['named']['ihan'];						
-		}
-		$this->set('ihan', $ihan);		
+		$this->set('result', $results['Document']);		
+		
+		$ihan = $this->params['named']['ihan'];	
+		$this->set('ihan', $ihan);
 
 		if ($this->request->is('post'))
 		{				
 			$data = $this->request->data['Document'];
-			//debug($data);
 			$this->request->data['Document']['id'] = $document_id;
 
-			if (is_uploaded_file($data['link']['tmp_name'])) {
-				$name = $data['link']['name'];
-				unlink(WWW_ROOT.DS.$results['Document']['link']);
-				move_uploaded_file($data['link']['tmp_name'], WWW_ROOT."course/".$name);
-				$this->request->data['Document']['link'] = "course/".$name;										
+			echo WWW_ROOT;
+			if (is_uploaded_file($data['link']['tmp_name'])) {				
+				unlink(WWW_ROOT . DS . 'pdf' . DS . $results['Document']['link']);
+				$name = uniqid() . $data['link']['name'];
+				move_uploaded_file($data['link']['tmp_name'], WWW_ROOT. 'pdf' . DS . $name);
+				$this->request->data['Document']['link'] = $name;										
 			} else {
 				$results = $this->Document->find("first", array("conditions"=>array('id'=>$document_id)));
 				$this->request->data['Document']['link'] = $results['Document']['link'];							
 			}			
 
-			if($this->Document->save($this->request->data['Document'])){
-				$ihan = $data['ihan'];				
+			if($this->Document->save($this->request->data['Document'])){	
 
-				if($ihan) {					
+				if($ihan == 'true') {		
 					$report = $this->Report->find("first", array('conditions' => array('document_id' => $document_id)));
 					$report['Report']['state'] = 0;
 					$this->Report->create();
-			    	$this->Report->save($report);			    	
+			    	$this->Report->save($report);		    	
 				}
-				$this->set('ihan', $ihan);				
+
 
                 $this->Session->setFlash(__('The document file has been update'), 'alert', array(
 	                'plugin' => 'BoostCake',
@@ -97,14 +91,16 @@ class DocumentController extends AppController {
                     'class' => 'alert-warning'
             	));	
 			}
-
-			if($ihan)
+	
+			if($ihan == 'true') {
 				$this->redirect(array('controller' => 'lesson', 'action' => 'report', 'id' => $id));
-			else
+				//echo "_True";
+			}
+			else {
 				$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $id));
+			}
 		}
 	}
-
 
 	public function delete() 
 	{
@@ -115,7 +111,7 @@ class DocumentController extends AppController {
 
     	if ($this->Document->delete($id)) 
     	{
-    		unlink(WWW_ROOT.DS.$name);    		
+    		unlink(WWW_ROOT . DS . 'pdf' . DS . $name);    		
 
             $this->Session->setFlash(__('The document has been deleted'), 'alert', array(
                 'plugin' => 'BoostCake',

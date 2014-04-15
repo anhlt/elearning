@@ -132,10 +132,9 @@ class LecturerController extends AppController {
 			$data['Comment']['user_id'] = $user_id;
 			$data['Comment']['lesson_id'] = $lesson_id;
 			$data['Comment']['content'] = $this->request->data['Report']['content'];
+			$data['Comment']['time'] = date('Y-m-d H:i:s');
 
-			var_dump($data);
 			$this->Comment->create();
-
 			if($this->Comment->save($data)){
                 $this->Session->setFlash(__('Your comment has been uploaded'), 'alert', array(
 	                'plugin' => 'BoostCake',

@@ -163,6 +163,9 @@ class LessonController extends AppController {
 				$students = $this->Paginator->paginate("LessonMembership");
 				$this->set("results", $students);
 
+				$this->loadModel("Parameter");
+			  	$this->set("lesson_time",$this->Parameter->getEnableLessonTime()); 
+
 			} else {
 				$this->redirect(array('controller' => 'users' ,"action" => "permission" ));
 			}
@@ -217,12 +220,13 @@ class LessonController extends AppController {
 				$results = $this->LessonMembership->find('all', $sql);
 				$row = count($results);
 				$like = 0;
-				foreach ($results as $key => $liked) {					
-					if($key) {						
+				foreach ($results as $result) {									
+					if($result['LessonMembership']['liked']) {						
 						$like++;
 					}
-				}			
-				
+				}		
+
+				//echo $like . ' & ' . $row;
 				$this->set('row', $row);
 				if($row) {
 					$this->set('like', ceil(($like/$row) * 100));
@@ -420,6 +424,9 @@ class LessonController extends AppController {
 				    		unlink(WWW_ROOT.DS.$link);	                 	
 				    	}		    					
 					}	
+
+					// delete comment
+					$this->Comment->deleteAll(array('Comment.lesson_id' => $lesson_id), false);
 
 					$this->Session->setFlash(__('The lesson has been deleted'), 'alert', array(
 	                'plugin' => 'BoostCake',

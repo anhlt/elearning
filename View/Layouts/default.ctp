@@ -59,31 +59,30 @@ $(document).ready(function(){
 </div>
 
     <div class="navbar-collapse collapse" id="navbar-main">
-    <!--		<ul class="nav navbar-nav">
-    <li class="active"><a href="/posts/">Student</a></li>
-    <li><a href="/posts/add">Teacher</a></li>
-    </ul> -->
     <ul class="nav navbar-nav navbar-right">
-<?php if ($this->Session->read('Auth.User')){
-    echo "<li><a style = 'margin-right:420px'>";
-    //  echo "<div class='input-group'>";
-    //  echo "<span class = 'glyphicon-class'>iab</span>";
-    echo "<input id = 'searchip' class = 'form-control glyphicon-class' placeholder = 'smart search' style='height:25px'/>"; 
-    echo "</a></li>";
-    echo "<li><a href='/users/logout'>Logout</a></li>";
-} else{
-    echo "<li class='dropdown'>
-        <a href='#' class='dropdown-toggle' data-toggle='dropdown'>Sign Up <b class='caret'></b></a>
-        <ul class='dropdown-menu'>
-        <li><a href='/students/register'>Student</a></li>
-        <li><a href='/lecturer/add'>Teacher</a></li>
-        </ul>
-        </li>";
+        <?php if ($this->Session->read('Auth.User')):?>
+            <li class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="smart search" name="srch-term" id = 'searchip'>
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            </li>
+            <li><a href='/users/logout'>Logout</a></li>
 
-    echo "<li><a href='/users/login'>Login</a></li>";
-}
-?>
-</ul>
+        <?php else:?>
+            <li class='dropdown'>
+                <a href='#' class='dropdown-toggle' data-toggle='dropdown'>Sign Up <b class='caret'></b></a>
+                <ul class='dropdown-menu'>
+                <li><a href='/students/register'>Student</a></li>
+                <li><a href='/lecturer/add'>Teacher</a></li>
+                </ul>
+            </li>
+
+            <li><a href='/users/login'>Login</a></li>
+        <?php endif ?>
+    </ul>
     </div><!--/.nav-collapse -->
     </div>
     </div>
