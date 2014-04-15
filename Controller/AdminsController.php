@@ -1125,6 +1125,10 @@ class AdminsController extends AppController {
 
     $command = "/home/action/.parts/bin/mysqldump --opt --skip-extended-insert --complete-insert --host=localhost --user=root --password=tuananh elearning > ".$fileName;
     exec($command);
+    $this->Session->setFlash(__('Database has been backuped'), 'alert', array(
+        'plugin' => 'BoostCake',
+        'class' => 'alert-success'));
+
     $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));
     }
 
@@ -1135,6 +1139,9 @@ class AdminsController extends AppController {
             var_dump($source);
             unlink($source);
         }
+        $this->Session->setFlash(__('The backup have been deleted'), 'alert', array(
+            'plugin' => 'BoostCake',
+            'class' => 'alert-warning'));
         $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));
     }   
 
@@ -1145,11 +1152,28 @@ class AdminsController extends AppController {
     $dir->chmod(WWW_ROOT.'files/db',0777, true, array());
          $files = $dir->find('.*\.sql');
          foreach ($files as $file) {
-         unlink($dir->pwd().DS.$file);
+            unlink($dir->pwd().DS.$file);
          }
+         $this->Session->setFlash(__('All The backup have been deleted'), 'alert', array(
+            'plugin' => 'BoostCake',
+            'class' => 'alert-warning'));
          $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));
     }
 
+    public function restore_database() {
+        $this->autoRender = false;
+        if(isset($this->params['named']['file'])){
+            $mysql_host = 'localhost';
+            $mysql_username = 'root';
+            $mysql_password = 'tuananh';
+            $db_name = 'elearning';
+            $source = WWW_ROOT.'files/db/'.$this->params['named']['file'];
+            $command ="/home/action/.parts/bin/mysql -u root -ptuananh elearning < ".$source ;
+            var_dump($command);
+            exec($command);
+        }
+        $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));
+    }
 
 }
 ?>
