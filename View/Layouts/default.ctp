@@ -56,6 +56,15 @@ $(document).ready(function(){
     <div class="container">
     <div class="navbar-header">
     <a class="navbar-brand" href=<?php echo $this->webroot; ?>>Home</a>
+    <ul class="nav navbar-nav">
+        <?php if(AuthComponent::user('role')=='lecturer'):?>
+            <li><a href='/lecturer/'>Lecturer</a></li>
+        <?php elseif (AuthComponent::user('role')=='student'): ?>
+            <li><a href='/students/'>Student</a></li>
+        <?php elseif (AuthComponent::user('role')=='admin'): ?>
+            <li><a href='/Admins/'>Admins</a></li>
+        <?php endif?>
+    </ul>
 </div>
 
     <div class="navbar-collapse collapse" id="navbar-main">
@@ -69,6 +78,7 @@ $(document).ready(function(){
                     </div>
                 </div>
             </li>
+            <li><a href='/users/changepassword'>Change Password</a></li>
             <li><a href='/users/logout'>Logout</a></li>
         <?php else:?>
             <li class='dropdown'>

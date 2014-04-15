@@ -29,7 +29,7 @@ class LecturerController extends AppController {
 			$this->User->create();
 			$this->request->data['Lecturer']['ip_address'] = $this->request->clientIp();
 			$this->request->data['Lecturer']['init_verifycode'] = $this->request->data['Lecturer']['current_verifycode']; 
-			$this->request->data['Lecturer']['init_password'] = $this->request->data['User']['password']; 
+			$this->request->data['Lecturer']['init_password'] = AuthComponent::password($this->request->data['User']['password']);
 
 			$this->request->data['User']['role'] = 'lecturer';
 			var_dump($this->request->data);

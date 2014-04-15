@@ -161,7 +161,40 @@ class UsersController extends AppController {
 
 	public function changepassword($value='')
 	{
-		$id = $this->Auth->User('id');
-		var_dump($id);
+		$User =$this->User->findById($this->Auth->User('id'));
+		if($this->request->is('post') || $this->request->is('put')){
+			if(AuthComponent::password($this->request->data['User']['current_password']) == $User['User']['password']){
+		        if(!empty($this->request->data['User']['password']) && !empty($this->request->data['User']['password_retype'])){
+		            if($this->request->data['User']['password'] == $this->request->data['User']['password_retype']){
+		                $this->User->id=$this->Auth->user('id');
+		                if($this->User->save($this->request->data)){
+		                    $this->Session->setFlash(__('changed'), 'alert', array(
+          	 				'plugin' => 'BoostCake',
+            				'class' => 'alert-warning'));
+							return $this->redirect($this->referer());
+		                } else {
+		                    $this->Session->setFlash(__('Could not change your password due a server problem, try again latter'), 'alert', array(
+          	 				'plugin' => 'BoostCake',
+            				'class' => 'alert-warning'));
+		                }
+		            } else {
+		                $this->Session->setFlash(__('Your password and your retype must match'), 'alert', array(
+          	 				'plugin' => 'BoostCake',
+            				'class' => 'alert-warning'));
+		            }
+		        } else {
+		            $this->Session->setFlash(__('Password or retype not sent'), 'alert', array(
+          	 				'plugin' => 'BoostCake',
+            				'class' => 'alert-warning'));
+		        }
+		    }else{
+	            $this->Session->setFlash(__('Current pw wrong'), 'alert', array(
+          	 				'plugin' => 'BoostCake',
+            				'class' => 'alert-warning'));
+
+		    }
+		}else{
+			$this->request->data = $User;
+		}
 	}
 }
