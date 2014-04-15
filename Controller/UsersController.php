@@ -28,7 +28,6 @@ class UsersController extends AppController {
         $this->Auth->allow('add');
         $this->Auth->allow('verifycode');
     }
-
 	public function index($value='')
 	{
 	}

@@ -53,7 +53,7 @@ if (!defined('APP_DIR')) {
  * /app/webroot/index.php
  */
 
-<<<<<<< HEAD
+
 #define('CAKE_CORE_INCLUDE_PATH',  DS . 'home' . DS . 'action' . DS . 'workspace' . DS . 'Vendor' . DS . 'pear-pear.cakephp.org' . DS . 'CakePHP');
 
 
@@ -61,10 +61,6 @@ define('CAKE_CORE_INCLUDE_PATH',  "E:" . DS . 'Workspace'. DS. 'Project' . DS . 
 
 
 
-
-=======
-define('CAKE_CORE_INCLUDE_PATH', DS . 'home' . DS . 'action' . DS . 'Workspace' . DS . 'Vendor' . DS . 'pear-pear.cakephp.org' . DS . 'CakePHP');
->>>>>>> cef4a777e7686fad76b1e92ae3628c77ea682ccd
 
 /**
  * Editing below this line should NOT be necessary.
