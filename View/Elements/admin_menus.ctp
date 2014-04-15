@@ -10,5 +10,6 @@
 		<li><a href='/admins/remove_admin'>remove_admin </a></li>
 		<li><a href='/admins/view_violation'>view_violation </a></li>
 		<li><a href='/admins/manage_parameter'>manage_parameter </a></li>
+		<li><a href='/admins/database_manager'>database_manager </a></li>
 	</ul>
 </div>

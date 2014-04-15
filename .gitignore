@@ -5,3 +5,4 @@ tmp/
 webroot/mp3/*
 webroot/pdf/*
 webroot/files/*
+webroot/tsv/*

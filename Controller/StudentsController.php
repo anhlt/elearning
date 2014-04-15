@@ -6,11 +6,11 @@ class StudentsController extends AppController {
     public $helpers = array("Util", "Paginator");
     public function beforeFilter(){
         $this->Auth->allow("register");	
-        $role = $this->Auth->user('role'); 
-        if ($role != 'student'){
-            $this->Session->setFlash("<div class = 'alert alert-warning alert-dismissable'>学生じゃないから、アクセスできない</div>");
-            $this->redirect("/users/login");
-        }
+        // $role = $this->Auth->user('role'); 
+        // if ($role != 'student'){
+        //     $this->Session->setFlash("<div class = 'alert alert-warning alert-dismissable'>学生じゃないから、アクセスできない</div>");
+        //     $this->redirect("/users/login");
+        // }
     }
 
     public function index(){

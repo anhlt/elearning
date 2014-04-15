@@ -1,5 +1,6 @@
 <?php
-
+App::uses('Folder', 'Utility');
+App::uses('File', 'Utility');
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -888,8 +889,8 @@ class AdminsController extends AppController {
         $i = 0;
         $teachers = array();
         foreach ($lecturers as $lecturer) {
-            $teachers[$i]['id'] = $lecturer['Lecturer']['id'];
-            $teachers[$i]['name'] = $lecturer['Lecturer']['username'];
+            $teachers[$i]['id'] = $lecturer['User']['id'];
+            $teachers[$i]['name'] = $lecturer['User']['username'];
             $this->uses = array('Lesson');
             $lessons_ = $this->Lesson->find('all', array('conditions' => array('Lesson.lecturer_id' => $teachers[$i]['id'])
             ));
@@ -1093,6 +1094,62 @@ class AdminsController extends AppController {
             return 1;
         return 0;
     }
+
+
+    public function database_manager(){
+    $dir = new Folder(WWW_ROOT.'files/db');
+    $dir->chmod(WWW_ROOT.'files/db',0777, true, array());
+    $files = $dir->find('.*\.sql');
+    $files_info = array();
+    foreach ($files as $file_name) {
+        $file = new File($dir->pwd().DS.$file_name);
+        $info = $file->info();
+        $info['created_date'] = date('H:i:s - d/m/Y ', $file->lastChange());
+        $info['created_time'] = $file->lastChange();
+        array_push($files_info, $info);   
+    }
+     $price = array();
+    foreach ($files_info as $key => $row)
+    {
+    $price[$key] = $row['created_time'];
+    }
+    array_multisort($price, SORT_DESC, $files_info);
+    $this->set(compact('files_info'));
+    }
+
+    public function backup_database() {
+    $this->autoRender = false;
+    $databaseName = 'elearning';
+    $fileName = WWW_ROOT.'files/db/'.$databaseName . '-backup-' . date('Y-m-d_H-i-s') . '.sql';
+    echo exec('whoami && which mysqldump');
+
+    $command = "/home/action/.parts/bin/mysqldump --opt --skip-extended-insert --complete-insert --host=localhost --user=root --password=tuananh elearning > ".$fileName;
+    exec($command);
+    $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));
+    }
+
+    public function delete_file(){
+        $this->autoRender = false;
+        if(isset($this->params['named']['file'])){
+            $source = WWW_ROOT.'files/db/'.$this->params['named']['file'];
+            var_dump($source);
+            unlink($source);
+        }
+        $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));
+    }   
+
+    public function delete_all(){
+
+    $this->autoRender = false;
+    $dir = new Folder(WWW_ROOT.'files/db');
+    $dir->chmod(WWW_ROOT.'files/db',0777, true, array());
+         $files = $dir->find('.*\.sql');
+         foreach ($files as $file) {
+         unlink($dir->pwd().DS.$file);
+         }
+         $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));
+    }
+
 
 }
 ?>

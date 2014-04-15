@@ -1,6 +1,6 @@
 
 <div class="row">    
-    <?php echo $this->element('menu'); ?>
+ <?php echo $this->element('admin_menus');?>
 
 
 
