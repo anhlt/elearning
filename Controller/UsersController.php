@@ -170,7 +170,7 @@ class UsersController extends AppController {
 		                if($this->User->save($this->request->data)){
 		                    $this->Session->setFlash(__('changed'), 'alert', array(
           	 				'plugin' => 'BoostCake',
-            				'class' => 'alert-warning'));
+			                'class' => 'alert-success'));
 							return $this->redirect($this->referer());
 		                } else {
 		                    $this->Session->setFlash(__('Could not change your password due a server problem, try again latter'), 'alert', array(

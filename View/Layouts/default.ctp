@@ -15,8 +15,6 @@
 		echo $this->Html->css('bootstrap.min');
 		echo $this->Html->css('style');
 	    echo $this->Html->script('jquery-1.11.0.js');
-	    //echo $this->Html->script('nocopy');
-
 	    echo $this->Html->css('bootstrap-responsive.min');
 	    echo $this->Html->css('bootstrap-responsive.min');
 	    echo $this->Html->css('tagmanager');
@@ -100,7 +98,6 @@ $(document).ready(function(){
     </div> <!-- /container -->
     <!-- Le javascript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
 	<?php echo $this->Html->script('bootstrap.min'); ?>
 	<?php echo $this->Html->script('tagmanager'); ?>
 	<?php echo $this->Js->writeBuffer(); ?>

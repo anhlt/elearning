@@ -102,8 +102,6 @@ class DocumentController extends AppController {
         $id = $this->params['named']['id'];
         $data = $this->Document->find('first', $id);
         $name = $data['Document']['link'];	
-
-
         if ($this->Document->delete($id)) 
         {
             unlink(WWW_ROOT.DS.$name);    		
@@ -119,7 +117,7 @@ class DocumentController extends AppController {
     public function show($document_id){
         $document = $this->Document->find("first", array("conditions"=>array("Document.id"=>$document_id)));
         $this->set("document", $document['Document']);
-        $lesson_id = $document['Lesson']['id']; 
+        $lesson_id = $document['Document']['lesson_id']; 
         if ($this->Util->checkLessonAvailableWithStudent($lesson_id, $this->Auth->user("id"))){
             $this->set("learnable", 1);
         }else {

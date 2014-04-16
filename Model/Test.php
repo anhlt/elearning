@@ -1,6 +1,6 @@
 <?php
 class Test extends AppModel {    
-    
+    public $belongsTo = array('Lesson');
 	public $validate = array(
 		'title' => array(
 			'required' => array(

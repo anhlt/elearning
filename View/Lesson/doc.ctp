@@ -43,7 +43,7 @@
 				  	</td>		  	
 				  	<td><?php echo $this->Html->image("trash.png", array("alt" => "delete",'url' => array('controller' => 'document', 'action' => 'delete', "id"=>$result['Document']['id']))); ?>
 				  	</td>
-				  	<td><?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'view', "id"=>$result['Document']['id']), array('class' => 'glyphicon glyphicon-folder-open')); ?>
+				  	<td><?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'show',$result['Document']['id']), array('class' => 'glyphicon glyphicon-folder-open')); ?>
 			  	</td>
 				  	</tr>
 				 <?php }?>

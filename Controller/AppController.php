@@ -45,4 +45,7 @@ class AppController extends Controller {
 	),
 	'Session',
 	);
+	public function beforeRender() {
+	     $this->response->disableCache();
+	}
 }

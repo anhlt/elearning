@@ -6,11 +6,9 @@ class StudentsController extends AppController {
     public $helpers = array("Util", "Paginator");
     public function beforeFilter(){
         $this->Auth->allow("register");	
-        // $role = $this->Auth->user('role'); 
-        // if ($role != 'student'){
-        //     $this->Session->setFlash("<div class = 'alert alert-warning alert-dismissable'>学生じゃないから、アクセスできない</div>");
-        //     $this->redirect("/users/login");
-        // }
+        $role = $this->Auth->user('role'); 
+        if ($role != 'student')
+            $this->redirect(array('controller' => 'users', 'action' => 'permission'));
     }
 
     public function index(){
@@ -124,7 +122,7 @@ class StudentsController extends AppController {
 
     public function history(){
         $user_id = $this->Auth->user("id");
-        $this->Student->recursive = 2;
+        $this->Student->recursive = 3;
         $options['conditions'] = array("Student.id"=>$user_id);
         $res = $this->Student->find("first", $options);
         $this->set("student", $res);
