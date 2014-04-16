@@ -14,11 +14,10 @@ class AdminsController extends AppController {
     var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter');
 
     public function beforeFilter() {
-        $User = $this->Auth->user();
-        if($User['role'] != 'admin')
+        if($this->Auth->loggedIn() && $this->Auth->user('role') != 'admin')
             $this->redirect(array('controller' => 'users', 'action' => 'permission'));
     }
-    
+
     public function index() {
         
     }

@@ -77,6 +77,7 @@ class Lecturer extends AppModel {
 	);
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['init_verificode'])) {
+        	$this->data[$this->alias]['current_verifycode'] = md5($this->data[$this->alias]['current_verifycode']);
             $this->data[$this->alias]['init_verificode'] = $this->data[$this->alias]['current_verifycode'];
         }
         return true;
