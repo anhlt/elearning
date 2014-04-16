@@ -13,6 +13,7 @@
  */
 class TestsController extends AppController {    
 
+    public $components = array('Paginator');
     public function add() {
         $lesson_id = $this->params['named']['id'];
         $this->set('id', $lesson_id);
@@ -165,6 +166,23 @@ class TestsController extends AppController {
             $this->redirect("/tests/result/".$result_id);
         }
     }
+
+    public function list_result($test_id){
+
+        $this->loadModel('Result');
+        $this->Result->recursive = 1;
+        $this->paginate = array(
+            'fields' => array('Result.id', 'Student.full_name','Result.point'),
+            'limit' => 10,
+            'conditions' => array(
+                'Result.test_id' => $test_id
+           )
+        );
+        $results = $this->Paginator->paginate('Result');
+        $this->set('results',$results);
+
+    }
+
 
     public function result($result_id) {
         $this->loadModel("Result");

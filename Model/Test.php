@@ -1,6 +1,9 @@
 <?php
 class Test extends AppModel {    
     public $belongsTo = array('Lesson');
+    public $hasMany = array(
+                'Result' => array('dependent' => True ));
+    
 	public $validate = array(
 		'title' => array(
 			'required' => array(

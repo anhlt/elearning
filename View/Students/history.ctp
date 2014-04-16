@@ -30,7 +30,7 @@ foreach($tests as $element){
     $days = $this->Util->calDate($time);
     $point = $element['Result']['point'];
     $result_id = $element['Result']['id'];
-    echo $this->Html->tableCells(array($days."日前に", $this->Html->link($test_name, "/tests/show/".$test_id), $this->Html->link($lesson_name, "/lessons/show/".$id_lesson), $point, $this->Html->link("ディテール", "/tests/result/".$result_id)));     
+    echo $this->Html->tableCells(array($days."日前に", $this->Html->link($test_name, "/tests/show/".$test_id), $this->Html->link($lesson_name, "/lesson/learn/".$id_lesson), $point, $this->Html->link("ディテール", "/tests/result/".$result_id)));     
 } 
 echo "</table>";
 ?>

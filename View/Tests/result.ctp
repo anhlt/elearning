@@ -1,5 +1,8 @@
-<?php $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE);?>
-    <div class="col-xs-13 col-md-9 well">
+<div class='row'>
+    <div class="col-xs-2 col-md-2">
+    <a class='btn btn-info' href="javascript:history.go(-1)">Back</a>
+    </div>
+    <div class="col-xs-15 col-md-10 well">
         <h2 name="TestTitle"><?php echo $data[0][1] ?></h2>
 <?php 
 $row = 1;
@@ -59,4 +62,5 @@ $sumQuestion = 0;
     }
 ?>
         <h3>点: <?php echo $point;?></h3>
+</div>
 </div>
