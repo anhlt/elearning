@@ -157,6 +157,14 @@ class UsersController extends AppController {
 		'plugin' => 'BoostCake',
 		'class' => 'alert-warning'
 		));
+	}	
+
+	public function deactive($value='')
+	{
+		$this->Session->setFlash(__("You account haven't been actived"), 'alert', array(
+		'plugin' => 'BoostCake',
+		'class' => 'alert-warning'
+		));
 	}
 
 	public function changepassword($value='')

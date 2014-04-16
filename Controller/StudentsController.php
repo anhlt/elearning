@@ -8,6 +8,8 @@ class StudentsController extends AppController {
         $this->Auth->allow("register");
         if($this->Auth->loggedIn() && $this->Auth->user('role') != 'student')
             $this->redirect(array('controller' => 'users', 'action' => 'permission'));
+        // if($this->Auth->loggedIn() && $this->Auth->user('actived') != 1)
+        //     $this->redirect(array('controller' => 'users', 'action' => 'deactive'));
     }
 
     public function index(){

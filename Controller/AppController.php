@@ -48,4 +48,15 @@ class AppController extends Controller {
 	public function beforeRender() {
 	     $this->response->disableCache();
 	}
+	public function beforeFilter()
+	{
+        if($this->Auth->loggedIn() && $this->Auth->user('actived') == 0){
+			$this->Session->setFlash(__("You account haven't been actived"), 'alert', array(
+				'plugin' => 'BoostCake',
+				'class' => 'alert-warning'
+				));
+        	$this->Auth->logout();
+
+        }
+	}
 }

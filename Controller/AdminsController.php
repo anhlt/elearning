@@ -16,6 +16,8 @@ class AdminsController extends AppController {
     public function beforeFilter() {
         if($this->Auth->loggedIn() && $this->Auth->user('role') != 'admin')
             $this->redirect(array('controller' => 'users', 'action' => 'permission'));
+        // if($this->Auth->loggedIn() && $this->Auth->user('actived') != 1)
+        //     $this->redirect(array('controller' => 'users', 'action' => 'deactive'));
     }
 
     public function index() {
