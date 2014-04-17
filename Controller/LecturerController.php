@@ -14,9 +14,6 @@ class LecturerController extends AppController {
         $this->Auth->allow("add");
         if($this->Auth->loggedIn() && $this->Auth->user('role') != 'lecturer')
         	$this->redirect(array('controller' => 'users', 'action' => 'permission'));
-        // var_dump($this->Auth->user('actived'));
-        // if($this->Auth->loggedIn() && $this->Auth->user('actived') == 0)
-        // 	$this->redirect(array('controller' => 'users', 'action' => 'deactive'));
     }
 
     public function add(){
@@ -37,7 +34,6 @@ class LecturerController extends AppController {
 			$this->request->data['Lecturer']['init_password'] = AuthComponent::password($this->request->data['User']['password']);
 
 			$this->request->data['User']['role'] = 'lecturer';
-			var_dump($this->request->data);
 			if($this->User->saveAll($this->request->data)){
 				$this->Session->setFlash(__('The user has been saved'), 'alert', array(
 					'plugin' => 'BoostCake',

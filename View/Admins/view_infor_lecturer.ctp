@@ -13,10 +13,6 @@ else{
         <td>ユーザ名</td>
         <td><?php echo $infor[0]['Users']['username'];?></td>
     </tr>
-    <tr>
-        <td>初期パスワード</td>
-        <td><?php echo $infor[0]['Lecturers']['init_password'];?></td>
-    </tr>
         <td>氏名</td>
         <td><?php echo $infor[0]['Lecturers']['full_name'];?></td>
     </tr>
