@@ -2,10 +2,7 @@
 
 App::uses('Folder', 'Utility');
 App::uses('File', 'Utility');
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 class AdminsController extends AppController {
 

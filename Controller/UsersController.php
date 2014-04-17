@@ -126,7 +126,6 @@ class UsersController extends AppController {
 
 		if ($this->request->is('post')) {
 			$data = ($this->request->data);
-	    	var_dump($data);
 			if ($this->Auth->login()) {
 	        	$this->Session->write('failedTime',0);
 				$user = $this->Auth->user();
@@ -143,7 +142,7 @@ class UsersController extends AppController {
 													'class' => 'alert-warning'
 												));
 					}
-				}elseif ($user['role'] == 'student' && $data['Lecturer']['question_verifycode_id'] == $user['Student']['question_verifycode_id'] 
+				}elseif ($user['role'] == 'student' && $data['Student']['question_verifycode_id'] == $user['Student']['question_verifycode_id'] 
 					 && $data['Lecturer']['current_verifycode'] == $user['Student']['current_verifycode']) {
 						$this->Session->setFlash(__('OK'),'alert', array(
 							'plugin' => 'BoostCake',
@@ -151,9 +150,7 @@ class UsersController extends AppController {
 				}
 				else
 					$this->Auth->logout();
-
-
-	            return $this->redirect(array('controller' => "lecturer", "action" => "index" ));
+	            return $this->redirect('/'));
 			}
 
 			$this->Session->setFlash(__('Invalid username or password, try again'), 'alert', array(
