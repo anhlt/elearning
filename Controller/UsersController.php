@@ -21,7 +21,7 @@
  */
 
 class UsersController extends AppController {
-	var $uses = array('User', 'Lecturer','Question');
+	var $uses = array('User', 'Lecturer','Admin','Student','Question','Parameter');
     var $components = array("Auth");
     public function beforeFilter() {
         parent::beforeFilter();
@@ -57,10 +57,21 @@ class UsersController extends AppController {
       	  $this->redirect('/');
     	}
     	$failedTime = $this->Session->read('failedTime');
-    	if($failedTime >=5) {
+    	if($failedTime >= $this->Parameter->getWrongPasswordTimes()){
     		$this->redirect(array('controller'=>'Users','action'=>'verifycode'));
     	}
 	    if ($this->request->is('post')) {
+	    	$data = ($this->request->data);
+	    	$user = $this->User->findByUsername($data['User']['username']);
+	    	if ($user['User']['role'] =='admin') {
+		        $this->Session->setFlash(__('Manager cant not login here'), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-warning'
+				));	
+				$this->redirect(array('controller'=>'users','action' => 'login'));
+	    	}
+	  
+
 	        if ($this->Auth->login()) {
 	        	$this->Session->write('failedTime',0);
 
@@ -73,10 +84,10 @@ class UsersController extends AppController {
 	        	{
 	        		$this->redirect(array('controller'=>'Students','action'=>'profile'));
 	        	}
-	        	if($user['role'] == 'admin')
-	        	{
-	        		$this->redirect(array('controller'=>'Admins'));
-	        	}
+	        	// if($user['role'] == 'admin')
+	        	// {
+	        	// 	$this->redirect(array('controller'=>'Admins'));
+	        	// }
 	        	if ($user['role'] == 'lecturer') {
 	        		return $this->redirect(array('controller' => "lecturer" ));
 	        	}	            

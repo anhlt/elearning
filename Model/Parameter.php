@@ -10,9 +10,9 @@ class  Parameter extends AppModel{
     'value' => array(
         'format'=>array(
             'rule' => array('numeric')
-        )
-     )
-);
+            )
+         )
+    );
 
     public function getLessonCost(){
         $data = $this->query("SELECT value FROM parameters WHERE name = 'LESSON_COST'");
