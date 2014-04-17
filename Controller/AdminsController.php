@@ -229,8 +229,8 @@ class AdminsController extends AppController {
     }
 
     public function delete_lecturer($id_lecturer) {
-        $this->loadModel('Lecturer');
-        if ($this->Lecturer->delete($id_lecturer)) {
+        $this->uses = array('Lecturer','User');
+        if ($this->User->delete($id_lecturer)) {
             //$this->Session->setFlash(__('アカウントの削除が成功された'));        
             $this->Session->setFlash(__('アカウントの削除が成功された'), 'alert', array(
                 'plugin' => 'BoostCake',
@@ -367,8 +367,8 @@ class AdminsController extends AppController {
     }
 
     public function delete_student($id_student) {
-        $this->loadModel('Student');
-        if ($this->Student->delete($id_student)) {
+        $this->uses = array('Student','User');
+        if ($this->User->delete($id_student)) {
             //$this->Session->setFlash(__('アカウントの削除が成功された'));
             $this->Session->setFlash(__('アカウントの削除が成功された'), 'alert', array(
                 'plugin' => 'BoostCake',
