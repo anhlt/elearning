@@ -150,7 +150,7 @@ class UsersController extends AppController {
 				}
 				else
 					$this->Auth->logout();
-	            return $this->redirect('/'));
+	            return $this->redirect('/');
 			}
 
 			$this->Session->setFlash(__('Invalid username or password, try again'), 'alert', array(
