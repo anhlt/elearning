@@ -40,7 +40,7 @@ class Admin extends AppModel {
             ),
             'isUnique' => array(
                 'rule' => 'isUnique',
-                'message' => 'This Username has already been used.'
+                'message' => 'This email has already been used.'
             )
         ),
         'ip_address' => array(

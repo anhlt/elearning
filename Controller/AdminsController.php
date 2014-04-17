@@ -3,12 +3,11 @@
 App::uses('Folder', 'Utility');
 App::uses('File', 'Utility');
 
-
 class AdminsController extends AppController {
 
     public $components = array('Paginator');
     public $helpers = array('Js');
-    var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter');
+    var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter', 'Question');
 
     public function beforeFilter() {
         $this->Auth->allow('login');
@@ -176,15 +175,33 @@ class AdminsController extends AppController {
         }
     }
 
-    public function view_infor_lecturer($id_lecturer) {
-        //echo $id_lecturer;
-        $this->loadModel('User');
-        $this->loadModel('Lecturer');
-        $sql = "SELECT * FROM Lecturers, Users WHERE (Lecturers.id = Users.id and Users.id = '$id_lecturer')";
-        $infor = $this->Lecturer->User->query($sql);
-        //echo "<pre>";
-        //var_dump($infor);
-        $this->set('infor', $infor);
+    public function view_infor_lecturer($lecturer_id) {
+        $questions = $this->Question->find('all');
+        $droplist = array();
+        foreach ($questions as $question) {
+            $droplist[$question['Question']['id']] = $question['Question']['question'];
+        }
+        $this->set('droplist', $droplist);
+        if (empty($this->request->data)) {
+            //$lecturer_id = $this->Auth->user('id');
+            $this->request->data = $this->Lecturer->findById($lecturer_id);
+            //var_dump($this->request->data);
+        } else {
+            $this->request->data['Lecturer']['id'] = $lecturer_id;
+            //var_dump($this->request->data);
+            if ($this->Lecturer->save($this->request->data)) {
+                $this->Session->setFlash(__('セーブされた'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+                //$this->redirect(array('controller' => 'Admin', 'action' => 'manage_lecturer'));
+            } else {
+                $this->Session->setFlash(__('セーブできない、もう一度お願い'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
+            }
+        }
     }
 
     public function unlock_lecturer($id_lecturer) {
@@ -315,14 +332,32 @@ class AdminsController extends AppController {
     }
 
     public function view_infor_student($id_student) {
-        //echo $id_lecturer;
-        $this->loadModel('User');
-        $this->loadModel('Students');
-        $sql = "SELECT * FROM Students, Users WHERE (Students.id = Users.id and Users.id = '$id_student')";
-        $infor = $this->Lecturer->User->query($sql);
-        //echo "<pre>";
-        //var_dump($infor);
-        $this->set('infor', $infor);
+        $questions = $this->Question->find('all');
+        $droplist = array();
+        foreach ($questions as $question) {
+            $droplist[$question['Question']['id']] = $question['Question']['question'];
+        }
+        $this->set('droplist', $droplist);
+        if (empty($this->request->data)) {
+            //$lecturer_id = $this->Auth->user('id');
+            $this->request->data = $this->Student->findById($id_student);
+            //var_dump($this->request->data);
+        } else {
+            $this->request->data['Student']['id'] = $id_student;
+            //var_dump($this->request->data);
+            if ($this->Student->save($this->request->data)) {
+                $this->Session->setFlash(__('セーブされた'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+                //$this->redirect(array('controller' => 'Admin', 'action' => 'manage_lecturer'));
+            } else {
+                $this->Session->setFlash(__('セーブできない、もう一度お願い'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
+            }
+        }
     }
 
     public function unlock_student($id_student) {
@@ -550,13 +585,33 @@ class AdminsController extends AppController {
     public function remove_admin_process($id) {
         if (!isset($id))
             $this->redirect(array("action" => "remove_admin"));
-        $this->uses = array('User','Admin');
+        $this->uses = array('User', 'Admin');
         if ($this->User->delete($id))
             $this->Session->setFlash(__('管理者が削除された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
             ));
-       $this->redirect(array("action" => "remove_admin"));
+        $this->redirect(array("action" => "remove_admin"));
+    }
+
+    public function edit_admin_process($id_admin) {
+        if (empty($this->request->data)) {
+            $this->request->data = $this->Admin->findById($id_admin);
+        } else {
+            $this->request->data['User']['id'] = $id_admin;
+            //var_dump($this->request->data);
+            if ($this->Admin->save($this->request->data) && $this->User->save($this->request->data)) {
+                $this->Session->setFlash(__('セーブされた'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+            } else {
+                $this->Session->setFlash(__('セーブできない、もう一度お願い'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
+            }
+        }
     }
 
     public function view_violation() {

@@ -1,44 +1,82 @@
 <div class="row">
 <?php echo $this->element('admin_menus');?>
 <div class="col-xs-13 col-md-9"> 
-<?php if($infor == NULL){
-    echo "データがない";
-}
-else{
-//var_dump($infor);
-?>
-<h2>詳しい情報</h2>    
-<table class="table">
-    <tr>
-        <td>ユーザ名</td>
-        <td><?php echo $infor[0]['Users']['username'];?></td>
-    </tr>
-        <td>氏名</td>
-        <td><?php echo $infor[0]['Students']['full_name'];?></td>
-    </tr>
-    </tr>
-        <td>生年月日</td>
-        <td><?php echo $infor[0]['Students']['date_of_birth'];?></td>
-    </tr>
-    </tr>
-        <td>住所</td>
-        <td><?php echo $infor[0]['Students']['address'];?></td>
-    </tr>
-    </tr>
-        <td>電話番号</td>
-        <td><?php echo $infor[0]['Students']['phone_number'];?></td>
-    </tr>
-    </tr>
-        <td>銀行口座情報</td>
-        <td><?php echo $infor[0]['Students']['credit_card_number'];?></td>
-    </tr>
-    </tr>
-        <td>初期Verifycode</td>
-        <td><?php echo $infor[0]['Students']['init_verifycode'];?></td>
-    </tr>
-</table>    
-<?php
-}
-?>
-</div>
+<div class="row">
+    <h2>学生の情報の更新</h2>    
+	<?php echo $this->Session->flash(); ?>		
+	<div class="col-xs-13 col-md-9">
+		<?php echo $this->Form->create('Student', array(  
+		  'inputDefaults' => array(  
+			'div' => false,  
+			'label' => false,  
+			'wrapInput' => false,  
+			'class' => 'form-control'
+		  ),  
+		  'class' => 'well'  
+		)); ?>
+            	<div class="form-group">
+		  <?php echo $this->Form->input('Student.full_name', array(  
+			'placeholder' => '氏名',  
+			'style' => 'width:180px;',
+			'label' => '氏名'
+		  )); ?>  
+		</div>	
+		<div class="form-group">
+		  <?php echo $this->Form->input('Student.email', array(  
+			'placeholder' => 'メール',  
+			'style' => 'width:180px;',
+			'label' => 'メール'
+		  )); ?>  
+		</div>
+		<div class="form-group">
+		  <?php echo $this->Form->input('Student.credit_card_number', array(  
+			'placeholder' => '銀行口座情報',  
+			'style' => 'width:180px;',
+			'label' => '銀行口座情報'
+		  )); ?>  
+		</div>
+		<div class="form-group">
+			<?php echo $this->Form->input('Student.date_of_birth', array(  
+			'placeholder' => '生年月日',  
+			'style' => 'width:100px;',
+			'label' => '生年月日',
+			'class' => 'inline'
+			)); ?>  
+		</div>	
+		<div class="form-group">
+			<?php echo $this->Form->input('Student.address', array(  
+			'placeholder' => 'アドレス',  
+			'style' => 'width:180px;',
+			'label' => 'アドレス',
+			)); ?>  
+		</div>	
+		<div class="form-group">
+			<?php echo $this->Form->input('Student.phone_number', array(  
+			'placeholder' => '電話番号',  
+			'style' => 'width:180px;',
+			'label' => '電話番号',
+			)); ?>  
+		</div>
+		<div class="form-group">
+			<?php echo $this->Form->input('Student.question_verifycode_id', array(    
+			'style' => 'width:180px;',
+			'label' => '質問',
+			'options' => $droplist,
+			)); ?>  
+		</div>
+		<div class="form-group">
+		  <?php echo $this->Form->input('Student.current_verifycode', array(  
+			'placeholder' => '答え',  
+			'style' => 'width:180px;',
+			'label' => '答え'
+		  )); ?>  
+		</div>
+		<?php echo $this->Form->submit('セーブ', array(  
+		'div' => false,  
+		'class' => 'btn btn-default'  
+		)); ?>  
+		<?php echo $this->Form->end(); ?>  
+		</div>
 </div>    
+</div>
+</div>
