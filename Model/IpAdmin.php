@@ -7,6 +7,7 @@
 
 class  IpAdmin extends AppModel{
     public $useTable = 'ip_admins';
+    
     var $validate = array(
         'ip_address' => array(
             'format'=>array(
