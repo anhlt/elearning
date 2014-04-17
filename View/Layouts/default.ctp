@@ -67,7 +67,7 @@ $(document).ready(function(){
 
     <div class="navbar-collapse collapse" id="navbar-main">
     <ul class="nav navbar-nav navbar-right">
-        <?php if ($this->Session->read('Auth.User')):?>
+        <?php if ($this->Session->read('Auth.User') && AuthComponent::user('role')=='student'):?>
             <li class="navbar-form" role="search">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="smart search" name="srch-term" id = 'searchip'>
