@@ -5,6 +5,7 @@ class StudentsController extends AppController {
     var $uses = array('Question', 'Student');
     public $helpers = array("Util", "Paginator");
     public function beforeFilter(){
+        parent::beforeFilter();
         $this->Auth->allow("register");
         if($this->Auth->loggedIn() && $this->Auth->user('role') != 'student')
             $this->redirect(array('controller' => 'users', 'action' => 'permission'));
