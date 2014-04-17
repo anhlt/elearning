@@ -16,7 +16,7 @@ class Document extends AppModel {
 			),
 			'extension' => array(
 				"rule" => array(
-	            	'extension', array('pdf', 'mp4', 'jpg')
+	            	'extension', array('pdf', 'mp4', 'jpg','mp3','wav','gif','png','tsv')
 	        		),
 				"message" => "Please supply a valid file !",
 			),
