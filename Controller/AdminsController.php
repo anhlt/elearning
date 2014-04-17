@@ -8,24 +8,56 @@ App::uses('File', 'Utility');
 
 class AdminsController extends AppController {
 
-    //public $components = array('RequestHandler');
     public $components = array('Paginator');
     public $helpers = array('Js');
     var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter');
 
     public function beforeFilter() {
+        $this->Auth->allow('login');
         if($this->Auth->loggedIn() && $this->Auth->user('role') != 'admin')
             $this->redirect(array('controller' => 'users', 'action' => 'permission'));
-        // if($this->Auth->loggedIn() && $this->Auth->user('actived') != 1)
-        //     $this->redirect(array('controller' => 'users', 'action' => 'deactive'));
     }
 
     public function index() {
         
     }
 
-//以下はipアドレス管理の機能だ    
-//    
+    public function login() {
+        if($this->Auth->loggedIn()){
+          $this->redirect('/');
+        }
+        if ($this->request->is('post')) {
+            $data = ($this->request->data);
+            $user = $this->User->findByUsername($data['User']['username']);
+            if ($user['User']['role'] !='admin') {
+                $this->Session->setFlash(__('User cant not login here'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                )); 
+                $this->redirect(array('controller'=>'users','action' => 'login'));
+            }
+
+            if ($this->Auth->login()) {
+                $user = $this->Auth->user();
+                if($user['role'] == 'lecturer' && $user['role'] == 'student')
+                {
+                    $this->Auth->logout();
+                    return $this->redirect(array('controller' => 'user' ,'action' => 'login'));
+                }
+                if($user['role'] == 'admin')
+                {
+                 $this->redirect(array('controller'=>'Admins'));
+                }
+            }
+            $this->Session->setFlash(__('Invalid username or password'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                )); 
+
+        }
+    }
+
+
     public function add_ip_address() {
         $id = $this->Auth->user('id');
         //$this->Session->write('id', '911');
@@ -488,7 +520,6 @@ class AdminsController extends AppController {
             $this->request->data["User"]["role"] = "admin";
             $this->request->data["User"]["actived"] = 1;
             if ($this->User->saveAll($this->request->data)) {
-
                 $this->Session->setFlash(__('新しい管理者が追加された'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'

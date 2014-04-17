@@ -6,6 +6,8 @@
  */
 class Admin extends AppModel {
     public $hasOne = 'User';
+    public $hasMany = array(
+                'IpAdmin' => array('dependent' => True )); 
     public $validate = array(
         'username' => array(
             'required' => array(

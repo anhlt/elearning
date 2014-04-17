@@ -67,15 +67,17 @@ $(document).ready(function(){
 
     <div class="navbar-collapse collapse" id="navbar-main">
     <ul class="nav navbar-nav navbar-right">
-        <?php if ($this->Session->read('Auth.User') && AuthComponent::user('role')=='student'):?>
-            <li class="navbar-form" role="search">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="smart search" name="srch-term" id = 'searchip'>
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+        <?php if ($this->Session->read('Auth.User')):?>
+                <?php if (AuthComponent::user('role')=='student'):?>
+                <li class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="smart search" name="srch-term" id = 'searchip'>
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>
+                <?php endif ?>
             <li><a href='/users/changepassword'>Change Password</a></li>
             <li><a href='/users/logout'>Logout</a></li>
         <?php else:?>
@@ -86,8 +88,13 @@ $(document).ready(function(){
                 <li><a href='/lecturer/add'>Teacher</a></li>
                 </ul>
             </li>
-
-            <li><a href='/users/login'>Login</a></li>
+            <li class='dropdown'>
+                <a href='#' class='dropdown-toggle' data-toggle='dropdown'>Login <b class='caret'></b></a>
+                <ul class='dropdown-menu'>
+                <li><a href='/admins/login'>Login as admin</a></li>
+                <li><a href='/users/login'>Login as user</a></li>
+                </ul>
+            </li>
         <?php endif ?>
     </ul>
     </div><!--/.nav-collapse -->
