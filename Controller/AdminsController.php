@@ -521,7 +521,6 @@ class AdminsController extends AppController {
             $this->request->data["User"]["role"] = "admin";
             $this->request->data["User"]["actived"] = 1;
             $admins = $this->Admin->find();
-
             if ($this->User->saveAll($this->request->data)) {
                 $this->request->data['IpAdmin']['admin_id'] = $this->User->id;
                 $this->IpAdmin->save($this->request->data);

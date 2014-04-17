@@ -5,11 +5,11 @@
  * @author Tha
  */
 class Admin extends AppModel {
-    public $hasOne = array(
-                'User' => array(
-                'className' => 'User',
-                'foreignKey' => 'id',
-                'dependent' => true));
+    public $belongsTo = array(
+      'User' => array(
+          'className' => 'User',
+          'foreignKey' => 'id'
+      ));
 
     public $hasMany = array(
                 'IpAdmin' => array('dependent' => True ));
