@@ -12,6 +12,11 @@ class LecturerController extends AppController {
   	public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow("add");
+        if($this->Auth->loggedIn() && $this->Auth->user('role') != 'lecturer')
+        	$this->redirect(array('controller' => 'users', 'action' => 'permission'));
+        // var_dump($this->Auth->user('actived'));
+        // if($this->Auth->loggedIn() && $this->Auth->user('actived') == 0)
+        // 	$this->redirect(array('controller' => 'users', 'action' => 'deactive'));
     }
 
     public function add(){

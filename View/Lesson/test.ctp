@@ -44,7 +44,7 @@
 			  	</td>
 			  	<td><?php echo $this->Html->image("trash.png", array("alt" => "delete",'url' => array('controller' => 'tests', 'action' => 'delete', "id"=>$result['Test']['id']))); ?>
 			  	</td>
-			  	<td><?php echo $this->Html->link("", array('controller' => 'tests', 'action' => 'view', "id"=>$result['Test']['id']), array('class' => 'glyphicon glyphicon-folder-open')); ?>
+			  	<td><?php echo $this->Html->link("", array('controller' => 'tests', 'action' => 'list_result',$result['Test']['id']), array('class' => 'glyphicon glyphicon-folder-open')); ?>
 			  	</td>
 			  </tr>
 			 <?php }?>

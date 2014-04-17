@@ -14,15 +14,10 @@ class AdminsController extends AppController {
     var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter');
 
     public function beforeFilter() {
-        $this->Auth->allow("add_admin");
-        $this->Auth->allow("remove_admin");
-        $this->Auth->allow("remove_admin_process");
-        $this->Auth->allow("view_violation");
-        $this->Auth->allow("view_violation_content");
-        $this->Auth->allow("view_violation_content_process");
-        $this->Auth->allow("fee_manager");
-        $this->Auth->allow("ranking_lecturer");
-        $this->Auth->allow("generate_tsv");
+        if($this->Auth->loggedIn() && $this->Auth->user('role') != 'admin')
+            $this->redirect(array('controller' => 'users', 'action' => 'permission'));
+        // if($this->Auth->loggedIn() && $this->Auth->user('actived') != 1)
+        //     $this->redirect(array('controller' => 'users', 'action' => 'deactive'));
     }
 
     public function index() {

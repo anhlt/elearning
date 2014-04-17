@@ -31,7 +31,7 @@ height: 650px;
     float:right;
 }
 </style>
-<?php $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE, "勉強");?>
+<?php if(AuthComponent::user('role')=='student') $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE, "勉強");?>
 
 <div class = "col-xs col-md-9 well "  >
 <?php
