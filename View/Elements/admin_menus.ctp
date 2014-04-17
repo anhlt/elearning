@@ -1,15 +1,44 @@
 <div class='col-xs-5 col-md-3'>
 	<ul class='nav nav-pills nav-stacked'>
-		<li><a href='/admins/add_admin'>add_admin </a></li>
-		<li><a href='/admins/add_ip_address'>add_ip_address </a></li>
-		<li><a href='/admins/edit_ip_address'>edit_ip_address </a></li>
-		<li><a href='/admins/fee_manager'>fee_manager</a></li>
-		<li><a href='/admins/manage_lecturer'>manage_lecturer</a></li>
-		<li><a href='/admins/manage_student'>manage_student </a></li>
-		<li><a href='/admins/ranking_lecturer'>ranking_lecturer </a></li>
-		<li><a href='/admins/remove_admin'>remove_admin </a></li>
-		<li><a href='/admins/view_violation'>view_violation </a></li>
-		<li><a href='/admins/manage_parameter'>manage_parameter </a></li>
-		<li><a href='/admins/database_manager'>database_manager </a></li>
+		<li><?php
+                echo $this->html->link('管理者の追加', array('controller' => "admins", 'action' => "add_admin"
+                ));
+?></li>
+		<li><?php
+                echo $this->html->link('管理者の削除', array('controller' => "admins", 'action' => "remove_admin"
+                ));
+?></li>
+		<li><?php
+                echo $this->html->link('IPアドレスの管理', array('controller' => "admins", 'action' => "add_ip_address"
+                ));
+?></li>
+		<li><?php
+                echo $this->html->link('先生の管理', array('controller' => "admins", 'action' => "manage_lecturer"
+                ));
+?></li>
+		<li><?php
+                echo $this->html->link('学生の管理', array('controller' => "admins", 'action' => "manage_student"
+                ));
+?></li>
+		<li><?php
+                echo $this->html->link('先生のランキグ', array('controller' => "admins", 'action' => "ranking_lecturer"
+                ));
+?></li>
+		<li><?php
+                echo $this->html->link('違犯報告', array('controller' => "admins", 'action' => "view_violation"
+                ));
+?></li>
+		<li><?php
+                echo $this->html->link('仕様の管理', array('controller' => "admins", 'action' => "manage_parameter"
+                ));
+?></li>
+		<li><?php
+                echo $this->html->link('データベースの管理', array('controller' => "admins", 'action' => "database_manager"
+                ));
+?></li>
+		<li><?php
+                echo $this->html->link('TSVファイルの管理', array('controller' => "admins", 'action' => "fee_manager"
+                ));
+?></li>
 	</ul>
 </div>
