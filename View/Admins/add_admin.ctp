@@ -46,7 +46,7 @@
 
         <div class="form-group">
             <?php
-            echo $this->Form->input('Admin.ip_address', array(
+            echo $this->Form->input('IpAdmin.ip_address', array(
                 'placeholder' => 'IP',
                 'style' => 'width:180px;',
                 'label' => 'IP'

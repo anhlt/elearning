@@ -5,9 +5,15 @@
  * @author Tha
  */
 class Admin extends AppModel {
-    public $hasOne = 'User';
+    public $hasOne = array(
+                'User' => array(
+                'className' => 'User',
+                'foreignKey' => 'id',
+                'dependent' => true));
+
     public $hasMany = array(
-                'IpAdmin' => array('dependent' => True )); 
+                'IpAdmin' => array('dependent' => True ));
+
     public $validate = array(
         'username' => array(
             'required' => array(

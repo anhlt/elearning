@@ -515,11 +515,16 @@ class AdminsController extends AppController {
 
     //tha
     public function add_admin() {
-        $this->uses = array('User', 'Admin');
+        $this->uses = array('User', 'Admin','IpAdmin');
+
         if ($this->request->is('post')) {
             $this->request->data["User"]["role"] = "admin";
             $this->request->data["User"]["actived"] = 1;
+            $admins = $this->Admin->find();
+
             if ($this->User->saveAll($this->request->data)) {
+                $this->request->data['IpAdmin']['admin_id'] = $this->User->id;
+                $this->IpAdmin->save($this->request->data);
                 $this->Session->setFlash(__('新しい管理者が追加された'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'

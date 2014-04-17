@@ -6,18 +6,18 @@
  */
 
 class  IpAdmin extends AppModel{
-    $useTable = 'ip_admins';
+    public $useTable = 'ip_admins';
     var $validate = array(
-    'ip_address' => array(
-        'format'=>array(
-            'rule' => array('ip', 'IPv4'),
-            'message' => 'IPアドレスのフォーマットが正しくない'
-        ),
+        'ip_address' => array(
+            'format'=>array(
+                'rule' => array('ip', 'IPv4'),
+                'message' => 'IPアドレスのフォーマットが正しくない'
+            ),
         'required' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'IPアドレスが空しい'
+            'rule' => array('notEmpty'),
+            'message' => 'IPアドレスが空しい'
+            )
         )
-     )
-);
+    );
 }
 ?>
