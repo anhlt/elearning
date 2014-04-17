@@ -28,9 +28,6 @@ class AdminsController extends AppController {
 //    
     public function add_ip_address() {
         $id = $this->Auth->user('id');
-        //$this->Session->write('id', '911');
-        //$id = $this->Session->read('id');
-        //echo $id;
         if ($this->request->is('post')) {
             //echo $this->Session->read('id');
             $this->loadModel('IpAdmin');
@@ -52,7 +49,6 @@ class AdminsController extends AppController {
                 $sql = "INSERT INTO ip_admins VALUES('$id','$ip_address')";
                 $this->IpAdmin->query($sql);
             } else {
-                //$this->Session->setFlash(__('IPアドレスのフォーマットが正しくない'));
                 $this->Session->setFlash(__('IPアドレスのフォーマットが正しくない'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
@@ -382,7 +378,7 @@ class AdminsController extends AppController {
 
 //以下はシステム仕様の管理の機能だ    
     public function manage_parameter() {
-
+        //$this->Session->setFlash(NULL);
         if ($this->request->is('post')) {
             $LESSON_COST = $this->request->data['parameter']['lesson_cost'];
             $LECTURER_MONEY_PERCENT = $this->request->data['parameter']['lecturer_money_percent'];
@@ -392,7 +388,7 @@ class AdminsController extends AppController {
             $SESSION_TIME = $this->request->data['parameter']['session_time'];
             $VIOLATIONS_TIMES = $this->request->data['parameter']['violations_times'];
             $error = "";
-            $this->Session->setFlash($error);
+            //$this->Session->setFlash($error);
             $flash = 1;
             $this->Parameter->set(array('value' => $LESSON_COST));
             if (!$this->Parameter->validates())
@@ -417,22 +413,22 @@ class AdminsController extends AppController {
                 $flash = 0;
             if ($flash) {
                 if ($LESSON_COST < 0) {
-                    $error = $error . "課金の金額 >= 0\n";
+                    $error = $error . "1回の受講料 >= 0\n";
                 } else {
                     $this->Parameter->updateParameter('LESSON_COST', $LESSON_COST);
                 }
                 if ($LECTURER_MONEY_PERCENT > 100 || $LECTURER_MONEY_PERCENT < 0) {
-                    $error = $error . "<br>100 >= 先生に支払った課金 >= 0</br>";
+                    $error = $error . "<br>100％ >= 報酬％ >= 0％</br>";
                 } else {
                     $this->Parameter->updateParameter('LECTURER_MONEY_PERCENT', $LECTURER_MONEY_PERCENT);
                 }
                 if ($ENABLE_LESSON_TIME <= 0) {
-                    $error = $error . "<br>受講可能の時間 > 0</br>";
+                    $error = $error . "<br>受講可能時間 > 0</br>";
                 } else {
                     $this->Parameter->updateParameter('ENABLE_LESSON_TIME', $ENABLE_LESSON_TIME);
                 }
                 if ($WRONG_PASSWORD_TIMES <= 0) {
-                    $error = $error . "<br>間違えるログインの回数 > =1</br>";
+                    $error = $error . "<br>ログイン誤り回数 > =1</br>";
                 } else {
                     $this->Parameter->updateParameter('WRONG_PASSWORD_TIMES', $WRONG_PASSWORD_TIMES);
                 }
@@ -442,20 +438,22 @@ class AdminsController extends AppController {
                     $this->Parameter->updateParameter('LOCK_TIME', $LOCK_TIME);
                 }
                 if ($SESSION_TIME <= 0) {
-                    $error = $error . "<br>操作がない場合はセションが終了する時間 > 0</br>";
+                    $error = $error . "<br>自動セション終了時間 > 0</br>";
                 } else {
                     $this->Parameter->updateParameter('SESSION_TIME', $SESSION_TIME);
                 }
                 if ($VIOLATIONS_TIMES <= 0) {
-                    $error = $error . "<br>違犯時、アカウントを削除 >= 1</br>";
+                    $error = $error . "<br>違犯の最大回数 >= 1</br>";
                 } else {
                     $this->Parameter->updateParameter('VIOLATIONS_TIMES', $VIOLATIONS_TIMES);
                 }
                 //$this->Session->setFlash($error);
+                if($error != ''){
                 $this->Session->setFlash($error, 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
                 ));
+                }
             } else {
                 //$this->Session->setFlash(__('各仕様のタイプが数字だ'));
                 $this->Session->setFlash(__('各仕様のタイプが数字だ'), 'alert', array(
@@ -479,28 +477,43 @@ class AdminsController extends AppController {
         $this->set('_LOCK_TIME', $this->Parameter->getLockTime());
         $this->set('_SESSION_TIME', $this->Parameter->getSessionTime());
         $this->set('_VIOLATIONS_TIMES', $this->Parameter->getViolationsTimes());
+
     }
 
     //tha
     public function add_admin() {
-        $this->uses = array('User', 'Admin');
+        
         if ($this->request->is('post')) {
+            $this->uses = array('User', 'Admin');
             $this->request->data["User"]["role"] = "admin";
             $this->request->data["User"]["actived"] = 1;
-            if ($this->User->saveAll($this->request->data)) {
-
+            debug($this->request->data);
+            if ($this->User->saveAll($this->request->data)) 
+            {
+                $ipAdmin = array();
+                $this->uses = array("IpAdmin");
+                $ipAdmin['admin_id'] =  $this->request->data["User"]['id'];
+                $ipAdmin['ip_address'] = $this->request->data["Admin"]["ip_address"];
+                 if ($this->IpAdmin->saveAll($ipAdmin) )
+            {
+                
                 $this->Session->setFlash(__('新しい管理者が追加された'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));
                 return $this->redirect(array('controller' => 'admins', 'action' => 'add_admin'));
             }
-            $this->Session->setFlash(__('新しい管理者を追加できない'), 'alert', array(
+            else{
+                $this->Session->setFlash(__('新しい管理者を追加できない'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-warning'
             ));
+            }
+            
+            }
+            }
         }
-    }
+    
 
     public function remove_admin() {
         $this->uses = array('User', 'Admin');

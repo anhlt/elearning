@@ -1,10 +1,15 @@
 <div class="row">
-<?php echo $this->Session->flash(); ?>
+
 
 <?php echo $this->element('admin_menus');?>
-<div class="col-xs-13 col-md-9">
 
+<div class="col-xs-13 col-md-9">
+    <h2>管理者の管理</h2>
+    <?php echo $this->Session->flash(); ?>
 		<div class="well">
+                    
+                    <br>   <?php
+                echo $this->html->link('管理者の追加', array('controller' => "admins", 'action' => "add_admin"));?></br>                    
 			<?php echo $this->Paginator->pagination(array(
 				'ul' => 'pagination'
 				)); ?>
