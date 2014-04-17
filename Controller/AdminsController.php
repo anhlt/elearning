@@ -1123,7 +1123,6 @@ class AdminsController extends AppController {
     $this->Session->setFlash(__('Database has been backuped'), 'alert', array(
         'plugin' => 'BoostCake',
         'class' => 'alert-success'));
-
     $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));
     }
 
