@@ -6,3 +6,5 @@ webroot/mp3/*
 webroot/pdf/*
 webroot/files/*
 webroot/tsv/*
+webroot/index.php
+Config/database.php
