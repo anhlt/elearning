@@ -25,18 +25,18 @@ $i=1;
 foreach($data as $item){
     echo "<tr>";
         echo "<td>".$i++."</td>";
-        echo "<td>".$item['Users']['username']."</td>";
-        echo "<td>".$item['Students']['full_name']."</td>";
-        echo "<td><a href =''>".$this->html->link('見る',array('controller'=>'admins','action'=>'view_infor_student',$item['Students']['id']))."</a></td>";
-if($item['Users']['actived'] == 0){
-        echo "<td><a href =''>".$this->html->link('無効',array('controller'=>'admins','action'=>'unlock_student',$item['Students']['id']))."</a></td>";
+        echo "<td>".$item['users']['username']."</td>";
+        echo "<td>".$item['students']['full_name']."</td>";
+        echo "<td><a href =''>".$this->html->link('見る',array('controller'=>'admins','action'=>'view_infor_student',$item['students']['id']))."</a></td>";
+if($item['users']['actived'] == 0){
+        echo "<td><a href =''>".$this->html->link('無効',array('controller'=>'admins','action'=>'unlock_student',$item['students']['id']))."</a></td>";
 }
-if($item['Users']['actived'] == 1){
-        echo "<td><a href =''>".$this->html->link('可用',array('controller'=>'admins','action'=>'lock_student',$item['Students']['id']))."</a></td>";
+if($item['users']['actived'] == 1){
+        echo "<td><a href =''>".$this->html->link('可用',array('controller'=>'admins','action'=>'lock_student',$item['students']['id']))."</a></td>";
 }
-        echo "<td><a href =''>".$this->html->link('リセット',array('controller'=>'admins','action'=>'reset_password_student',$item['Students']['id'],$item['Students']['init_password']))."</a></td>";
-        echo "<td><a href =''>".$this->html->link('リセット',array('controller'=>'admins','action'=>'reset_verifycode_student',$item['Students']['id'],$item['Students']['init_verifycode']))."</a></td>";
-        echo "<td><a href =''>".$this->html->link('削除',array('controller'=>'admins','action'=>'delete_student',$item['Students']['id']))."</a></td>";
+        echo "<td><a href =''>".$this->html->link('リセット',array('controller'=>'admins','action'=>'reset_password_student',$item['students']['id'],$item['students']['init_password']))."</a></td>";
+        echo "<td><a href =''>".$this->html->link('リセット',array('controller'=>'admins','action'=>'reset_verifycode_student',$item['students']['id'],$item['students']['init_verifycode']))."</a></td>";
+        echo "<td><a href =''>".$this->html->link('削除',array('controller'=>'admins','action'=>'delete_student',$item['students']['id']))."</a></td>";
     echo "</tr>";
 }
 ?>

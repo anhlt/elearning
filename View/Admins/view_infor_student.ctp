@@ -11,34 +11,34 @@ else{
 <table class="table">
     <tr>
         <td>ユーザ名</td>
-        <td><?php echo $infor[0]['Users']['username'];?></td>
+        <td><?php echo $infor[0]['users']['username'];?></td>
     </tr>
     <tr>
         <td>初期パスワード</td>
-        <td><?php echo $infor[0]['Students']['init_password'];?></td>
+        <td><?php echo $infor[0]['students']['init_password'];?></td>
     </tr>
         <td>氏名</td>
-        <td><?php echo $infor[0]['Students']['full_name'];?></td>
+        <td><?php echo $infor[0]['students']['full_name'];?></td>
     </tr>
     </tr>
         <td>生年月日</td>
-        <td><?php echo $infor[0]['Students']['date_of_birth'];?></td>
+        <td><?php echo $infor[0]['students']['date_of_birth'];?></td>
     </tr>
     </tr>
         <td>住所</td>
-        <td><?php echo $infor[0]['Students']['address'];?></td>
+        <td><?php echo $infor[0]['students']['address'];?></td>
     </tr>
     </tr>
         <td>電話番号</td>
-        <td><?php echo $infor[0]['Students']['phone_number'];?></td>
+        <td><?php echo $infor[0]['students']['phone_number'];?></td>
     </tr>
     </tr>
         <td>銀行口座情報</td>
-        <td><?php echo $infor[0]['Students']['credit_card_number'];?></td>
+        <td><?php echo $infor[0]['students']['credit_card_number'];?></td>
     </tr>
     </tr>
         <td>初期Verifycode</td>
-        <td><?php echo $infor[0]['Students']['init_verifycode'];?></td>
+        <td><?php echo $infor[0]['students']['init_verifycode'];?></td>
     </tr>
 </table>    
 <?php

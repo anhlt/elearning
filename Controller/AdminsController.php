@@ -203,7 +203,7 @@ class AdminsController extends AppController {
         //echo $id_lecturer;
         $this->loadModel('User');
         $this->loadModel('Lecturer');
-        $sql = "SELECT * FROM Lecturers, Users WHERE (Lecturers.id = Users.id and Users.id = '$id_lecturer')";
+        $sql = "SELECT * FROM lecturers, users WHERE (lecturers.id = users.id and users.id = '$id_lecturer')";
         $infor = $this->Lecturer->User->query($sql);
         //echo "<pre>";
         //var_dump($infor);
@@ -250,7 +250,7 @@ class AdminsController extends AppController {
         //echo $id;
         //echo $init_password;
         $this->loadModel('Lecturer');
-        $sql = "UPDATE Lecturers SET current_verifycode = '$init_verifycode' WHERE Lecturers.id = '$id_lecturer'";
+        $sql = "UPDATE lecturers SET current_verifycode = '$init_verifycode' WHERE lecturers.id = '$id_lecturer'";
         if (!$this->User->query($sql)) {
             //$this->Session->setFlash(__('verifycodeのリセットが成功された'));
             $this->Session->setFlash(__('verifycodeのリセットが成功された'), 'alert', array(
@@ -299,8 +299,8 @@ class AdminsController extends AppController {
             //echo $username;
             //die();
             if ($username != NULL) {
-                $sql1 = "SELECT * FROM Students, Users WHERE (Students.id = Users.id and 
-                    Users.username = '$username')";
+                $sql1 = "SELECT * FROM students, users WHERE (students.id = users.id and 
+                    users.username = '$username')";
                 //$sql = "SELECT * FROM users";
                 $data = $this->Student->User->query($sql1);
                 if ($data != NULL) {
@@ -314,7 +314,7 @@ class AdminsController extends AppController {
                     //$this->redirect(array('action'=>'manage_lecturer'));
                 }
             } else {
-                $sql = "SELECT * FROM Students, Users WHERE (Students.id = Users.id and Users.role = 'student')";
+                $sql = "SELECT * FROM students, users WHERE (students.id = users.id and users.role = 'student')";
                 //$sql = "SELECT * FROM users";
                 $data = $this->Student->User->query($sql);
                 //$data = $this->Admin->printfStudent();
@@ -325,7 +325,7 @@ class AdminsController extends AppController {
                 }
             }
         } else {
-            $sql = "SELECT * FROM Students, Users WHERE (Students.id = Users.id and Users.role = 'student')";
+            $sql = "SELECT * FROM students, users WHERE (students.id = users.id and users.role = 'student')";
             //$sql = "SELECT * FROM users";
             $data = $this->Student->User->query($sql);
             //$data = $this->Admin->printfStudent();
@@ -340,8 +340,8 @@ class AdminsController extends AppController {
     public function view_infor_student($id_student) {
         //echo $id_lecturer;
         $this->loadModel('User');
-        $this->loadModel('Students');
-        $sql = "SELECT * FROM Students, Users WHERE (Students.id = Users.id and Users.id = '$id_student')";
+        $this->loadModel('students');
+        $sql = "SELECT * FROM students, users WHERE (students.id = users.id and users.id = '$id_student')";
         $infor = $this->Lecturer->User->query($sql);
         //echo "<pre>";
         //var_dump($infor);
@@ -388,7 +388,7 @@ class AdminsController extends AppController {
         //echo $id;
         //echo $init_password;
         $this->loadModel('Student');
-        $sql = "UPDATE Students SET current_verifycode = '$init_verifycode' WHERE   Students.id = '$id_student'";
+        $sql = "UPDATE students SET current_verifycode = '$init_verifycode' WHERE   students.id = '$id_student'";
         if (!$this->User->query($sql)) {
             //$this->Session->setFlash(__('verifycodeのリセットが成功された'));
             $this->Session->setFlash(__('verifycodeのリセットが成功された'), 'alert', array(
