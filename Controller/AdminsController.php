@@ -10,6 +10,7 @@ class AdminsController extends AppController {
     var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter');
 
     public function beforeFilter() {
+        parent::beforeFilter();
         $this->Auth->allow('login');
         if($this->Auth->loggedIn() && $this->Auth->user('role') != 'admin')
             $this->redirect(array('controller' => 'users', 'action' => 'permission'));
@@ -35,7 +36,21 @@ class AdminsController extends AppController {
             }
 
             if ($this->Auth->login()) {
-                $user = $this->Auth->user();
+                $id = $this->Auth->user('id');
+                $this->User->recursive = 3;
+                $user = $this->User->findById($id);
+                foreach ($user['Admin']['IpAdmin'] as $ip) {
+                    debug($ip['ip_address']);
+                    debug($this->request->ClientIp());
+                    if($this->request->ClientIp() == $ip['ip_address']) break;
+                    $this->Session->setFlash(__('wrong ip'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-warning'
+                    )); 
+                    $this->Auth->logout();
+                    $this->redirect(array('controller'=>'admins','action' => 'login'));
+                };
+
                 if($user['role'] == 'lecturer' && $user['role'] == 'student')
                 {
                     $this->Auth->logout();
@@ -43,9 +58,10 @@ class AdminsController extends AppController {
                 }
                 if($user['role'] == 'admin')
                 {
-                 $this->redirect(array('controller'=>'Admins'));
+                $this->redirect(array('controller'=>'Admins'));
                 }
             }
+
             $this->Session->setFlash(__('Invalid username or password'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
@@ -78,7 +94,7 @@ class AdminsController extends AppController {
                 ));
                 //check format    
             } else if ($this->IpAdmin->validates()) {
-                $sql = "INSERT INTO ip_admins VALUES('$id','$ip_address')";
+                $sql = "INSERT INTO ip_admins(admin_id,ip_address) VALUES('$id','$ip_address')";
                 $this->IpAdmin->query($sql);
             } else {
                 //$this->Session->setFlash(__('IPアドレスのフォーマットが正しくない'));
@@ -619,44 +635,7 @@ class AdminsController extends AppController {
     }
 
     public function fee_manager() {
-//        // $date = date('Y-m-d');
-//        $month = "0";
-//        $year = "1970";
-//        if ($this->request->is('post')) {
-//            echo "dmmm";
-//           // debug($this->data);
-//            $month = $this->data['Fee']['month'];
-//            $year = $this->data['Fee']['year'] + 1970;
-//            echo "month =" . $month;//
-//            $this->uses = array('LessonMembership');
-//            $res = $this->LessonMembership->find('all');
-//            $this->uses = array('Student');
-//            $student_list = $this->Student->find('all', array('condition' => array('actived' => 1)));
-//            $this->uses = array('LessonMembership'); //$student['Student']['id'];
-//            foreach ($student_list as $student) {
-//                $count = 0;
-//                $result = $this->LessonMembership->find('all', array('conditions' => array('LessonMembership.student_id' => $student['Student']['id'])));
-//
-//                foreach ($result as $res) {
-//                    $date = $res['LessonMembership']['days_attended'];
-//                    if ($this->getYear($date) == $year && $this->getMonth($date) == $month)
-//                        $count++;
-//                }
-//                $counts[$student['Student']['id']] = $count;
-//            }
-//            $this->set('student_list', $student_list);
-//            $this->set('counts', $counts);
-//            $this->paginate = array(
-//                'limit' => 2,
-//                'fields' => array(),
-//            );
-//            $this->Paginator->settings = $this->paginate;
-//            $this->set("year", $year);
-//            $this->set("month", $month);
-//        }
-//        echo "why";
-        
-        
+
         date_default_timezone_set('Asia/Saigon');
          $date = date('Y:m:d H:i:s');
         $month = $this->getMonth($date);
@@ -672,7 +651,7 @@ class AdminsController extends AppController {
         $this->set("month", $month);
         if($month<10)$month = "0".$month;
         $name = "ELS-UBT-".$year . "-".$month.".tsv";
-        $File = "tsv\\fee\\" . $name;
+        $File = WWW_ROOT. DS ."tsv" . DS . $name;
         $this->set('exit',file_exists($File));
         $bool = file_exists($File);
         if($bool == true)$this->Session->setFlash(__($year.'年'.$month.'月のTSVを作成しました'), 'alert', array(
@@ -680,8 +659,7 @@ class AdminsController extends AppController {
                     'class' => 'alert-success'
                 ));
         
-       // debug($this->Auth->user);
-         $this->getStudentFee($year,$month);
+        $this->getStudentFee($year,$month);
        
     }
     
@@ -813,7 +791,7 @@ class AdminsController extends AppController {
         header('Content-Type: text/html;charset=utf-8');        
         if($month<10)$month = "0".$month;
         $name = "ELS-UBT-".$year . "-".$month.".tsv";
-        $File = "tsv\\fee\\" . $name;
+        $File = WWW_ROOT. DS . 'tsv' . DS . $name;
         $Handle = fopen($File, "w");
         $data = "".mb_convert_kana("ELS-UBT-GWK5M78", "rnaskhcv")."\t";
         echo "<br>".$data;
@@ -861,9 +839,11 @@ class AdminsController extends AppController {
             else $data.= mb_convert_kana($month, "rnaskhcv")."\t";
         
                 
-        fprintf($Handle,$data );
+        fprintf($Handle,$data);
         fclose($Handle);        
-        return $this->redirect(array('controller' => 'admins', 'action' => 'fee_manager'));
+        $this->response->file($File);
+        return $this->response;
+        #return $this->redirect(array('controller' => 'admins', 'action' => 'fee_manager'));
     }
 
    

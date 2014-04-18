@@ -63,7 +63,7 @@ class Lecturer extends AppModel {
 	    	),
 			'isUnique' => array(
               'rule' => 'isUnique',
-              'message' => 'This Username has already been used.'
+              'message' => 'This email has already been used.'
             )
 	    ),
         'ip_address' =>  array(
@@ -75,6 +75,17 @@ class Lecturer extends AppModel {
  		'address' => array(
  			'rule'    => array('maxLength', 1005),
  		),
+ 		'credit_card_number'=> array(
+           'alphaNumeric' => array(
+                'rule'     => 'alphaNumeric',
+                'required' => true,
+                'message'  => 'Alphabets and numbers only'
+            ),
+           'between' => array(
+                'rule'    => array('between', 12, 12),
+                'message' => 'Must be 12 characters'
+            )
+ 		)
 	);
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['init_verificode'])) {

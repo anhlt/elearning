@@ -24,6 +24,7 @@ class PagesController extends AppController {
 
 	public function beforeFilter($value='')
 	{
+        parent::beforeFilter();
 		$this->Auth->allow("display");
 	}
 /**

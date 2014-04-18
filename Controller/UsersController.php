@@ -67,6 +67,8 @@ class UsersController extends AppController {
 					'plugin' => 'BoostCake',
 					'class' => 'alert-warning'
 				));
+				$this->redirect(array('controller'=>'admins','action' => 'login'));
+
 	    	}
 
 	        if ($this->Auth->login()) {
@@ -103,18 +105,19 @@ class UsersController extends AppController {
 	        }else
 	        {
 	        	$failedTime = $this->Session->read('failedTime');
-	        	if(!empty($user)){
-		        	if(isset($failedTime))
-			        	$this->Session->write('failedTime',$failedTime+1);
-			        else
-			        	$this->Session->write('failedTime',1);
-	            	if($failedTime >= $this->Parameter->getWrongPasswordTimes()){
-	    				$this->mc->set($user['User']['username'],time() + 50, time() + 50);
-	    				$user['User']['actived'] = '-1';	
-	    				unset($user['User']['password']);
-	    				$this->User->save($user);
-	    			}
-				}
+	        	if(isset($failedTime))
+		        	$this->Session->write('failedTime',$failedTime+1);
+		        else
+		        	$this->Session->write('failedTime',1);
+
+            	if($failedTime >= $this->Parameter->getWrongPasswordTimes()){
+            		if(isset($user)){
+    					$this->mc->set($user['User']['username'],time() + 50, time() + 50);
+    					$user['User']['actived'] = '-1';	
+    					unset($user['User']['password']);
+    					$this->User->save($user);
+    				}
+    			}
 		        $this->Session->setFlash(__('Invalid username or password, try again '.$failedTime .' time(s)'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-warning'
