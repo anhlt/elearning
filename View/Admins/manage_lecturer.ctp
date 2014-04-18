@@ -2,7 +2,7 @@
 <?php echo $this->element('admin_menus');?>
 <div class="col-xs-13 col-md-9"> 
 <h2>先生管理</h2>
-<?php //echo $this->element('admin_search');?>
+<?php echo $this->element('admin_search');?>
 <?php echo $this->Session->flash();    ?>
 <?php
 if(isset($data))

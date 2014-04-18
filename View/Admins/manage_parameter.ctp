@@ -16,22 +16,22 @@
 )); ?> 
 <table class="table">
   <tr>
-      <td>課金の金額</td>
+      <td>1回の受講料</td>
        <td><?php echo $this->Form->input('lesson_cost', array('style' => 'width:100px;', 'value' => $_LESSON_COST)); ?></td> 
        <td>万 ドン</td>
   </tr> 
   <tr>
-      <td>先生に支払った課金</td>
+      <td>報酬％</td>
       <td><?php echo $this->Form->input('lecturer_money_percent', array('style' => 'width:100px;', 'value' => $_LECTURER_MONEY_PERCENT)); ?></td>
       <td>％</td>
   </tr>
   <tr>
-      <td>受講可能の時間</td>
+      <td>受講可能時間</td>
       <td><?php echo $this->Form->input('enable_lesson_time', array('style' => 'width:100px;', 'value' => $_ENABLE_LESSON_TIME)); ?></td>
       <td>日</td>
   </tr>
   <tr>
-      <td>間違えるログインの回数</td>
+      <td>ログイン誤り回数</td>
       <td><?php echo $this->Form->input('wrong_password_times', array('style' => 'width:100px;', 'value' => $_WRONG_PASSWORD_TIMES)); ?></td>
       <td>回</td>
   </tr>
@@ -41,16 +41,16 @@
       <td>分</td>
   </tr>
   <tr>
-      <td>操作がない場合はセションが終了する時間</td>
+      <td>自動セション終了時間</td>
       <td><?php echo $this->Form->input('session_time', array('style' => 'width:100px;', 'value' => $_SESSION_TIME)); ?></td>
       <td>分</td>
   </tr>
   <tr>
-      <td>違犯時、アカウントを削除</td>
+      <td>違犯の最大回数</td>
       <td><?php echo $this->Form->input('violations_times', array('style' => 'width:100px;', 'value' => $_VIOLATIONS_TIMES)); ?></td>
       <td>回</td>
   </tr>
-  <tr>
+  <tr>   
       <td></td>
       <td></td>
       <td><?php echo $this->Form->submit('セーブ', array( 

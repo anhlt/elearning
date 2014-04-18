@@ -1,11 +1,8 @@
 <div class='col-xs-5 col-md-3'>
 	<ul class='nav nav-pills nav-stacked'>
+
 		<li><?php
-                echo $this->html->link('管理者の追加', array('controller' => "admins", 'action' => "add_admin"
-                ));
-?></li>
-		<li><?php
-                echo $this->html->link('管理者の削除', array('controller' => "admins", 'action' => "remove_admin"
+                echo $this->html->link('管理者の管理', array('controller' => "admins", 'action' => "remove_admin"
                 ));
 ?></li>
 		<li><?php

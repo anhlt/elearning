@@ -1,8 +1,9 @@
 <div class="row">
-    <?php echo $this->Session->flash(); ?>
+    
     <?php echo $this->element('admin_menus');?>
     <div class="col-xs-13 col-md-9">
         <h2>管理者の追加</h2>  
+        <?php echo $this->Session->flash(); ?>
         <?php
         echo $this->Form->create('User', array(
             'inputDefaults' => array(
@@ -18,18 +19,18 @@
         <div class="form-group">
             <?php
             echo $this->Form->input('username', array(
-                'placeholder' => 'Username',
+                'placeholder' => 'ユーザ名',
                 'style' => 'width:180px;',
-                'label' => 'Username',
+                'label' => 'ユーザ名',
             ));
             ?>  
         </div>
         <div class="form-group">
             <?php
             echo $this->Form->input('password', array(
-                'placeholder' => 'Password',
+                'placeholder' => 'パスワード',
                 'style' => 'width:180px;',
-                'label' => 'Password'
+                'label' => 'パスワード'
             ));
             ?>  
         </div>
@@ -37,19 +38,19 @@
         <div class="form-group">
             <?php
             echo $this->Form->input('Admin.email', array(
-                'placeholder' => 'Email',
+                'placeholder' => 'メール',
                 'style' => 'width:180px;',
-                'label' => 'Email'
+                'label' => 'メール'
             ));
             ?>  
         </div>
 
         <div class="form-group">
             <?php
-            echo $this->Form->input('IpAdmin.ip_address', array(
-                'placeholder' => 'IP',
+            echo $this->Form->input('Admin.ip_address', array(
+                'placeholder' => 'IPアドレス',
                 'style' => 'width:180px;',
-                'label' => 'IP'
+                'label' => 'IPアドレス'
             ));
             ?>  
         </div>
