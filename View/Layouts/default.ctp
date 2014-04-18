@@ -70,12 +70,12 @@ $(document).ready(function(){
         <?php if ($this->Session->read('Auth.User')):?>
                 <?php if (AuthComponent::user('role')=='student'):?>
                 <li class="navbar-form" role="search">
-                    <div class="input-group">
+               <!--      <div class="input-group">
                         <input type="text" class="form-control" placeholder="smart search" name="srch-term" id = 'searchip'>
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
-                    </div>
+                    </div> -->
                 </li>
                 <?php endif ?>
             <li><a href='/users/changepassword'>Change Password</a></li>
@@ -102,6 +102,7 @@ $(document).ready(function(){
     </div>
     <div class="container">
     <?php echo $this->fetch('content'); ?>
+    <?php echo $this->element('sql_dump');?>
     </div> <!-- /container -->
     <!-- Le javascript
     ================================================== -->
