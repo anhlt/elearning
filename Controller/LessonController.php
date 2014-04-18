@@ -360,12 +360,29 @@ class LessonController extends AppController {
             }
         }
         if ($this->request->is('get')) {
-            $this->Tag->recursive = 3;
+            // $this->Tag->recursive = 3;
+            // if (isset($this->params['url']['search_value'])) {
+            //     $tag_value = $this->params['url']['search_value'];
+            //     $options['conditions'] = array("Tag.name LIKE" => "%".$tag_value."%");
+            //     $tags = $this->Tag->find("all", $options); 
+            //     $this->set("tags", $tags);
+            // }
+
+            
             if (isset($this->params['url']['search_value'])) {
-                $tag_value = $this->params['url']['search_value'];
-                $options['conditions'] = array("Tag.name LIKE" => "%".$tag_value."%");
-                $tags = $this->Tag->find("all", $options); 
-                $this->set("tags", $tags);
+        		$this->Lesson->recursive =3; 
+            	$search_value =  $this->params['url']['search_value'];
+            	$keyword_r = explode(";", $search_value);
+            	$lesson_or_r = array();
+            	foreach ($keyword_r as $row) {
+            	 	array_push($lesson_or_r, array("Lesson.name like"=>"%".$row."%"));
+            	 	array_push($lesson_or_r, array("Lecturer.full_name like"=>"%".$row."%"));
+            	 	// array_push($lesson_or_r, array("Tag.name like"=>"%".$row."%"));
+            	 	// array_push($lesson_or_r, array("User.username like"=>"%".$row."%"));
+            	}
+            	$options['conditions'] = array("OR"=>$lesson_or_r);
+            	$lesson_search = $this->Lesson->find("all", $options);
+            	$this->set("lesson_search", $lesson_search);
             }
         }
     }   

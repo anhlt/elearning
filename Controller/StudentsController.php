@@ -116,32 +116,60 @@ class StudentsController extends AppController {
     public function search(){
         $keyword = $this->params['url']['search_value'];
         $this->loadModel("Document");
-        $option['conditions'] = array("Document.title like "=>"%".$keyword."%"); 
+        $keyword_r = explode(";", $keyword);
+        $document_or_r = array();
+        foreach ($keyword_r as $row) {
+            array_push($document_or_r, array("Document.title like"=>"%".$row."%"));
+        }
+
+    //    $option['conditions'] = array("Document.title like "=>"%".$keyword."%"); 
+    //    debug($document_or_r);
+        $option['conditions'] = array("OR"=>$document_or_r); 
         $documents =$this->Document->find("all", $option);
         $this->set("documents", $documents);
    
         $this->loadModel("Lesson");
-        $option['conditions'] = array("OR"=>array(
-            array("Lesson.name like "=>"%".$keyword."%"), 
-            array("Lesson.summary like "=>"%".$keyword."%")
-        )); 
+        $lesson_or_r = array();
+        foreach ($keyword_r as $row) {
+            array_push($lesson_or_r, array("Lesson.name like"=>"%".$row."%"));
+            array_push($lesson_or_r, array("Lesson.summary like"=>"%".$row."%"));
+        }
+
+        // $option['conditions'] = array("OR"=>array(
+        //     array("Lesson.name like "=>"%".$keyword."%"), 
+        //     array("Lesson.summary like "=>"%".$keyword."%")
+        // )); 
+        $option['conditions'] = array("OR"=>$lesson_or_r);
         $lessons =$this->Lesson->find("all", $option);
         $this->set("lessons", $lessons);
     
+
+        $lecturer_or_r = array();
+        foreach ($keyword_r as $row) {
+            array_push($lecturer_or_r, array("Lecturer.full_name like"=>"%".$row."%"));
+            array_push($lecturer_or_r, array("User.username like"=>"%".$row."%"));
+        }
         $this->loadModel("Lecturer");
-        $option['conditions'] =  array("OR"=>array(
-            array("Lecturer.full_name like "=>"%".$keyword."%"),
-            array("User.username like "=>"%".$keyword."%")
-        ));
+        // $option['conditions'] =  array("OR"=>array(
+        //     array("Lecturer.full_name like "=>"%".$keyword."%"),
+        //     array("User.username like "=>"%".$keyword."%")
+        // ));
+        $option['conditions'] = array("OR"=>$lecturer_or_r);
         
         $lecturers =$this->Lecturer->find("all", $option);
         $this->set("lecturers", $lecturers);
      
         $this->loadModel("Student");
-        $option['conditions'] =  array("OR"=>array(
-            array("Student.full_name like "=>"%".$keyword."%"), 
-            array("User.username like "=>"%".$keyword."%")
-        )) ;
+        $student_or_r = array();
+        foreach ($keyword_r as $row) {
+            array_push($student_or_r, array("Student.full_name like"=>"%".$row."%"));
+            array_push($student_or_r, array("User.username like"=>"%".$row."%"));
+        }
+        $option['conditions'] = array("OR"=>$student_or_r);
+        // $option['conditions'] =  array("OR"=>array(
+        //     array("Student.full_name like "=>"%".$keyword."%"), 
+        //     array("User.username like "=>"%".$keyword."%")
+        // )) ;
 
         $students =$this->Student->find("all", $option);
         $this->set("students", $students);

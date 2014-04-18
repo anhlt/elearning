@@ -52,10 +52,17 @@ $documents = $lessons['Document'];
 foreach($documents as $row){
     $document = $row;
     $link = $document['link'];
-    if (stripos(strrev($link),strrev(PDF))===0) echo $this->Html->image("icon/pdf.png", array("height"=>"20", "width"=>"20"))." ";
-    if (stripos(strrev($link),strrev(MP3))===0) echo $this->Html->image("icon/mp3.png", array("height"=>"20", "width"=>"20"))." ";
-    if (stripos(strrev($link),strrev(MP4))===0) echo $this->Html->image("icon/mp4.png", array("height"=>"20", "width"=>"20"))." ";
-    if (stripos(strrev($link),strrev(PDF))===0) {
+    $link_downcase = strtolower($link);
+    if (stripos(strrev($link_downcase),strrev(PDF))===0) echo $this->Html->image("icon/pdf.png", array("height"=>"20", "width"=>"20"))." ";
+    if (stripos(strrev($link_downcase),strrev(MP3))===0) echo $this->Html->image("icon/mp3.png", array("height"=>"20", "width"=>"20"))." ";
+    if (stripos(strrev($link_downcase),strrev(MP4))===0) echo $this->Html->image("icon/mp4.png", array("height"=>"20", "width"=>"20"))." ";
+    if (stripos(strrev($link_downcase),strrev(PNG))===0) echo $this->Html->image("icon/png.png", array("height"=>"20", "width"=>"20"))." ";
+    if (stripos(strrev($link_downcase),strrev(JPG))===0) echo $this->Html->image("icon/jpg.png", array("height"=>"20", "width"=>"20"))." ";
+    if (stripos(strrev($link_downcase),strrev(GIF))===0) echo $this->Html->image("icon/gif.png", array("height"=>"20", "width"=>"20"))." ";
+    if (stripos(strrev($link_downcase),strrev(WAV))===0) echo $this->Html->image("icon/wav.png", array("height"=>"20", "width"=>"20"))." ";
+ 
+
+    if (stripos(strrev($link_downcase),strrev(PDF))===0) {
         echo $this->Html->link($document['title'], array("controller"=>"document", "action"=>"show", $document['id'] ));
     }else if ($student_lesson_id == -1){
         echo $document['title'];
