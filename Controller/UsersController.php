@@ -27,6 +27,8 @@ class UsersController extends AppController {
         parent::beforeFilter();
         $this->Auth->allow('add');
         $this->Auth->allow('verifycode');
+        $this->mc = new Memcached();
+        $this->mc->addServer("localhost", 11211);
     }
 
 	public function index($value='')
@@ -56,26 +58,39 @@ class UsersController extends AppController {
 	   	if($this->Auth->loggedIn()){
       	  $this->redirect('/');
     	}
-    	$failedTime = $this->Session->read('failedTime');
-    	if($failedTime >= $this->Parameter->getWrongPasswordTimes()){
-    		$this->redirect(array('controller'=>'Users','action'=>'verifycode'));
-    	}
+    	
 	    if ($this->request->is('post')) {
 	    	$data = ($this->request->data);
 	    	$user = $this->User->findByUsername($data['User']['username']);
-	    	if ($user['User']['role'] =='admin') {
+	    	if (isset($user['User']) && $user['User']['role'] =='admin') {
 		        $this->Session->setFlash(__('Manager cant not login here'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-warning'
-				));	
-				$this->redirect(array('controller'=>'users','action' => 'login'));
+				));
 	    	}
-	  
 
 	        if ($this->Auth->login()) {
 	        	$this->Session->write('failedTime',0);
-
 	        	$user = $this->Auth->user();
+
+		  		if($pause = $this->mc->get($user['username'])){
+	        		$this->Auth->logout();
+		  			$this->Session->setFlash(__('This account have been locked until'. date('Y-m-d H:i:s', $pause)), 'alert', array(
+							'plugin' => 'BoostCake',
+							'class' => 'alert-warning'
+						));
+					$this->redirect(array('controller'=>'users','action' => 'login'));
+
+		  		}
+	        	if ($user['actived'] == -1 ) {
+	        		$this->Auth->logout();
+			        $this->Session->setFlash(__('This account have been locked'), 'alert', array(
+						'plugin' => 'BoostCake',
+						'class' => 'alert-warning'
+					));	
+					$this->redirect(array('controller'=>'users','action' => 'verifycode'));
+	        	}
+
 	        	if($user['role'] == 'lecturer' && $this->request->clientIp() != $user['Lecturer']['ip_address'])
 	        	{
 	        		$this->redirect(array('controller'=>'Users','action'=>'verifycode'));
@@ -84,23 +99,25 @@ class UsersController extends AppController {
 	        	{
 	        		$this->redirect(array('controller'=>'Students','action'=>'profile'));
 	        	}
-	        	// if($user['role'] == 'admin')
-	        	// {
-	        	// 	$this->redirect(array('controller'=>'Admins'));
-	        	// }
 	        	if ($user['role'] == 'lecturer') {
 	        		return $this->redirect(array('controller' => "lecturer" ));
 	        	}	            
 	            return $this->redirect(array('controller' => "lecturer" ));
 	        }else
 	        {
-
-	        	$failedTime = $this->Session->read('failedTime');
-	        	if(isset($failedTime))
-		        	$this->Session->write('failedTime',$failedTime+1);
-		        else
-		        	$this->Session->write('failedTime',1);
-
+	        	if(!empty($user)){
+		        	$failedTime = $this->Session->read('failedTime');
+		        	if(isset($failedTime))
+			        	$this->Session->write('failedTime',$failedTime+1);
+			        else
+			        	$this->Session->write('failedTime',1);
+	            	if($failedTime >= $this->Parameter->getWrongPasswordTimes()){
+	    				$this->mc->set($user['User']['username'],time() + 50, time() + 50);
+	    				$user['User']['actived'] = '-1';	
+	    				unset($user['User']['password']);
+	    				$this->User->save($user);
+	    			}
+				}
 		        $this->Session->setFlash(__('Invalid username or password, try again '.$failedTime .' time(s)'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-warning'
@@ -129,6 +146,9 @@ class UsersController extends AppController {
 			if ($this->Auth->login()) {
 	        	$this->Session->write('failedTime',0);
 				$user = $this->Auth->user();
+				$user['actived'] = 1;
+				unset($user['password']);
+				$this->User->save($user);
 				if($user['role'] == 'lecturer' && $data['Lecturer']['question_verifycode_id'] == $user['Lecturer']['question_verifycode_id'] 
 					 && $data['Lecturer']['current_verifycode'] == $user['Lecturer']['current_verifycode']){
 					$this->Lecturer->id = $this->Auth->user('id');
@@ -148,8 +168,14 @@ class UsersController extends AppController {
 							'plugin' => 'BoostCake',
 							'class' => 'alert-success'));
 				}
-				else
+				else{
 					$this->Auth->logout();
+					$this->Session->setFlash(__('Wrong verifycode, try again'), 'alert', array(
+						'plugin' => 'BoostCake',
+						'class' => 'alert-warning'));
+	        		$this->redirect(array('controller'=>'Users','action'=>'verifycode'));
+
+				}
 	            return $this->redirect('/');
 			}
 
@@ -159,6 +185,8 @@ class UsersController extends AppController {
 			));
 		}
 	}
+
+
 	public function permission($value='')
 	{
 		$this->Session->setFlash(__("You don't have permission to visit this page"), 'alert', array(
