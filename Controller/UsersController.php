@@ -102,6 +102,7 @@ class UsersController extends AppController {
 	            return $this->redirect('/');
 	        }else
 	        {
+	        	$failedTime = $this->Session->read('failedTime');
 	        	if(!empty($user)){
 		        	if(isset($failedTime))
 			        	$this->Session->write('failedTime',$failedTime+1);
