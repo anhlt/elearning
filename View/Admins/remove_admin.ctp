@@ -8,9 +8,10 @@
     <?php echo $this->Session->flash(); ?>
 		<div class="well">
                     
-                    <br>   <?php
-                echo $this->html->link('>>>管理者の追加', array('controller' => "admins", 'action' => "add_admin"));?></br> 
-                <br></br>
+            <br>   
+            <?php echo $this->html->link('管理者の追加', array('controller' => "admins", 'action' => "add_admin"),array('class' => 'btn btn-info'));?></br> 
+            <br>
+
 			<?php echo $this->Paginator->pagination(array(
 				'ul' => 'pagination'
 				)); ?>
@@ -25,10 +26,8 @@
 			  <tr>
 			  	<td><?php echo($result['User']['id']) ?> </td>
 			  	<td><?php echo($result['User']['username']) ?> </td>
-                                <td><?php echo $this->html->link('更新',array('controller'=>"admins", 'action'=>"edit_admin_process"
-                                    , $result['User']["id"]));?></td>
-                                <td><?php echo $this->html->link('削除',array('controller'=>"admins", 'action'=>"remove_admin_process"
-                                    , $result['User']["id"]));?></td>
+                <td><?php echo $this->html->link('更新',array('controller'=>"admins", 'action'=>"edit_admin_process",$result['User']["id"]),array('class'=>'btn btn-info'));?></td>
+                <td><?php echo $this->html->link('削除',array('controller'=>"admins", 'action'=>"remove_admin_process", $result['User']["id"]),array('class'=>'btn btn-danger'));?></td>
 			  </tr>
 			 <?php }?>
 			</table>
