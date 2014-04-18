@@ -80,9 +80,9 @@ class UsersController extends AppController {
 							'class' => 'alert-warning'
 						));
 					$this->redirect(array('controller'=>'users','action' => 'login'));
-
 		  		}
-	        	if ($user['actived'] == -1 ) {
+
+	        	if ($user['actived'] == -1 && $user['role'] == 'lecturer') {
 	        		$this->Auth->logout();
 			        $this->Session->setFlash(__('This account have been locked'), 'alert', array(
 						'plugin' => 'BoostCake',
@@ -93,20 +93,16 @@ class UsersController extends AppController {
 
 	        	if($user['role'] == 'lecturer' && $this->request->clientIp() != $user['Lecturer']['ip_address'])
 	        	{
+			        $this->Session->setFlash(__('Wrong IP'), 'alert', array(
+						'plugin' => 'BoostCake',
+						'class' => 'alert-warning'
+					));
 	        		$this->redirect(array('controller'=>'Users','action'=>'verifycode'));
-	        	}
-	        	if($user['role'] == 'student')
-	        	{
-	        		$this->redirect(array('controller'=>'Students','action'=>'profile'));
-	        	}
-	        	if ($user['role'] == 'lecturer') {
-	        		return $this->redirect(array('controller' => "lecturer" ));
-	        	}	            
-	            return $this->redirect(array('controller' => "lecturer" ));
+	        	}            
+	            return $this->redirect('/');
 	        }else
 	        {
 	        	if(!empty($user)){
-		        	$failedTime = $this->Session->read('failedTime');
 		        	if(isset($failedTime))
 			        	$this->Session->write('failedTime',$failedTime+1);
 			        else
@@ -147,28 +143,12 @@ class UsersController extends AppController {
 	        	$this->Session->write('failedTime',0);
 				$user = $this->Auth->user();
 				$user['actived'] = 1;
-				unset($user['password']);
 				$this->User->save($user);
 				if($user['role'] == 'lecturer' && $data['Lecturer']['question_verifycode_id'] == $user['Lecturer']['question_verifycode_id'] 
 					 && $data['Lecturer']['current_verifycode'] == $user['Lecturer']['current_verifycode']){
 					$this->Lecturer->id = $this->Auth->user('id');
-					if ($this->Lecturer->saveField('ip_address',$this->request->clientIp())) {
-						$this->Session->setFlash(__('The new ip address has been saved'),'alert', array(
-							'plugin' => 'BoostCake',
-							'class' => 'alert-success'));
-					} else {
-						$this->Session->setFlash(__('The user could not be saved. Please, try again.'), 'alert', array(
-													'plugin' => 'BoostCake',
-													'class' => 'alert-warning'
-												));
-					}
-				}elseif ($user['role'] == 'student' && $data['Student']['question_verifycode_id'] == $user['Student']['question_verifycode_id'] 
-					 && $data['Lecturer']['current_verifycode'] == $user['Student']['current_verifycode']) {
-						$this->Session->setFlash(__('OK'),'alert', array(
-							'plugin' => 'BoostCake',
-							'class' => 'alert-success'));
-				}
-				else{
+					$this->Lecturer->saveField('ip_address',$this->request->clientIp());
+				}else{
 					$this->Auth->logout();
 					$this->Session->setFlash(__('Wrong verifycode, try again'), 'alert', array(
 						'plugin' => 'BoostCake',
@@ -185,6 +165,7 @@ class UsersController extends AppController {
 			));
 		}
 	}
+
 
 
 	public function permission($value='')

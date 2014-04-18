@@ -65,7 +65,6 @@ class Lecturer extends AppModel {
               'rule' => 'isUnique',
               'message' => 'This Username has already been used.'
             )
-<<<<<<< HEAD
 	    ),
         'ip_address' =>  array(
  			'ip_address' => array(
@@ -77,13 +76,6 @@ class Lecturer extends AppModel {
  			'rule'    => array('maxLength', 1005),
  		),
 	);
-=======
-        ),
-        'address' => array(
-            'rule' => array('maxLength', 1005),
-        ),
-    );
->>>>>>> f75aef9... Add lock after5 times
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['init_verificode'])) {
         	$this->data[$this->alias]['current_verifycode'] = md5($this->data[$this->alias]['current_verifycode']);
@@ -91,10 +83,4 @@ class Lecturer extends AppModel {
         }
         return true;
     }
-<<<<<<< HEAD
 }
-
-
-=======
-}
->>>>>>> f75aef9... Add lock after5 times
