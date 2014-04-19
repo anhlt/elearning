@@ -8,19 +8,19 @@ class Test extends AppModel {
 		'title' => array(
 			'required' => array(
 				'rule' => array('notEmpty'),
-				'message' => 'Title is required'
+				'message' => 'タイトルを入力してお願い'
 			)
 		),
 		'link' => array(
 			'required' => array(
 				'rule' => array('notEmpty'),
-				'message' => 'File upload is required'
+				'message' => 'ファイルがない'
 			)
 		),
 		'test_time' => array(
 			'required' => array(
 				'rule'    => 'numeric',
-				'message' => 'Require a number'
+				'message' => '数字を入力してお願い'
 			)
 		),		
 	);

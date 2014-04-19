@@ -18,58 +18,58 @@ class Lecturer extends AppModel {
 		'full_name' => array(
 			'required' => array(
 				'rule' => array('notEmpty'),
-				'message' => 'A full_name is required'
+				'message' => '氏名を入力してお願い'
 			)
 		),
 		'init_password' => array(
 			'required' => array(
 				'rule' => array('notEmpty'),
-				'message' => 'A password is required'
+				'message' => 'パスワードを入力してお願い'
 			)
 		),
 		'init_verificode' => array(
 			'required' => array(
 				'rule' => array('notEmpty'),
-				'message' => 'A verificode is required'
+				'message' => 'verificodeを入力してお願い'
 			)
 		),
 		'question_verifycode_id' => array(
 			'required' => array(
 				'rule' => array('notEmpty'),
-				'message' => 'A verificode is required'
+				'message' => 'verificodeを入力してお願い'
 			)
 		),
 		'current_verifycode' => array(
 			'required' => array(
 				'rule' => array('notEmpty'),
-				'message' => 'A verificode is required'
+				'message' => 'verificodeを入力してお願い'
 			)
 		),
         'date_of_birth' =>array(        	
         	'date' => array(
             	'rule'       => 'date',
-            	'message'    => 'Enter a valid date',
+            	'message'    => '生年月日を入力してお願い',
             	'allowEmpty' => true
         	),
         	'required' => array(
 				'rule' => array('notEmpty'),
-				'message' => 'A password is required'
+				'message' => 'パスワードを入力してお願い'
 			)
                     ),
         'email' => array(
 	    	'email' => array(
 	        	'rule'    => array('email'),
-	        	'message' => 'Please supply a valid email address.'
+	        	'message' => 'メールのフォーマットが正しくない'
 	    	),
 			'isUnique' => array(
               'rule' => 'isUnique',
-              'message' => 'This email has already been used.'
+              'message' => 'このメールが存在した'
             )
 	    ),
         'ip_address' =>  array(
  			'ip_address' => array(
      	   	'rule'    => array('ip', 'both'), // or 'IPv6' or 'both' (default)
-        	'message' => 'Please supply a valid IP address.'
+        	'message' => 'IPアドレスのフォーマットが正しくない'
     		)
  		),
  		'address' => array(

@@ -27,8 +27,8 @@ class UsersController extends AppController {
         parent::beforeFilter();
         $this->Auth->allow('add');
         $this->Auth->allow('verifycode');
-        $this->mc = new Memcached();
-        $this->mc->addServer("localhost", 11211);
+        //$this->mc = new Memcached();
+        //$this->mc->addServer("localhost", 11211);
     }
 
 	public function index($value='')
@@ -39,13 +39,13 @@ class UsersController extends AppController {
     	if($this->request->is('post')){
     		$this->User->create();
     		if($this->User->save($this->request->data)){
-    			$this->Session->setFlash(__('The user has been saved'), 'alert', array(
+    			$this->Session->setFlash(__('登録が成功した'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-success'
 				));
     			return $this->redirect(array('controller' => 'user', 'action' => 'login'));
     		}
-			$this->Session->setFlash(__('The User could not be saved. Plz try again'), 'alert', array(
+			$this->Session->setFlash(__('登録できない、もう一度お願い'), 'alert', array(
 				'plugin' => 'BoostCake',
 				'class' => 'alert-warning'
 			));
@@ -63,7 +63,7 @@ class UsersController extends AppController {
 	    	$data = ($this->request->data);
 	    	$user = $this->User->findByUsername($data['User']['username']);
 	    	if (isset($user['User']) && $user['User']['role'] =='admin') {
-		        $this->Session->setFlash(__('Manager cant not login here'), 'alert', array(
+		        $this->Session->setFlash(__('管理者はこの画面でロクインできない'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-warning'
 				));
@@ -74,19 +74,19 @@ class UsersController extends AppController {
 	        if ($this->Auth->login()) {
 	        	$this->Session->write('failedTime',0);
 	        	$user = $this->Auth->user();
-
-		  		if($pause = $this->mc->get($user['username'])){
-	        		$this->Auth->logout();
-		  			$this->Session->setFlash(__('This account have been locked until'. date('Y-m-d H:i:s', $pause)), 'alert', array(
-							'plugin' => 'BoostCake',
-							'class' => 'alert-warning'
-						));
-					$this->redirect(array('controller'=>'users','action' => 'login'));
-		  		}
+//
+//		  		if($pause = $this->mc->get($user['username'])){
+//	        		$this->Auth->logout();
+//		  			$this->Session->setFlash(__('このアカウントは'.date('Y-m-d H:i:s', $pause).'　までロックされる'), 'alert', array(
+//							'plugin' => 'BoostCake',
+//							'class' => 'alert-warning'
+//						));
+//					$this->redirect(array('controller'=>'users','action' => 'login'));
+//		  		}
 
 	        	if ($user['actived'] == -1 && $user['role'] == 'lecturer') {
 	        		$this->Auth->logout();
-			        $this->Session->setFlash(__('This account have been locked'), 'alert', array(
+			        $this->Session->setFlash(__('このアカウントはロックされた'), 'alert', array(
 						'plugin' => 'BoostCake',
 						'class' => 'alert-warning'
 					));	
@@ -95,7 +95,7 @@ class UsersController extends AppController {
 
 	        	if($user['role'] == 'lecturer' && $this->request->clientIp() != $user['Lecturer']['ip_address'])
 	        	{
-			        $this->Session->setFlash(__('Wrong IP'), 'alert', array(
+			        $this->Session->setFlash(__('IPアドレスが違う'), 'alert', array(
 						'plugin' => 'BoostCake',
 						'class' => 'alert-warning'
 					));
@@ -118,7 +118,7 @@ class UsersController extends AppController {
     					$this->User->save($user);
     				}
     			}
-		        $this->Session->setFlash(__('Invalid username or password, try again '.$failedTime .' time(s)'), 'alert', array(
+		        $this->Session->setFlash(__('ユーザ名、パスワードが違う'.$failedTime .' time(s)'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-warning'
 				));	
@@ -154,7 +154,7 @@ class UsersController extends AppController {
 					$this->Lecturer->saveField('ip_address',$this->request->clientIp());
 				}else{
 					$this->Auth->logout();
-					$this->Session->setFlash(__('Wrong verifycode, try again'), 'alert', array(
+					$this->Session->setFlash(__('verifycodeが違う'), 'alert', array(
 						'plugin' => 'BoostCake',
 						'class' => 'alert-warning'));
 	        		$this->redirect(array('controller'=>'Users','action'=>'verifycode'));
@@ -163,7 +163,7 @@ class UsersController extends AppController {
 	            return $this->redirect('/');
 			}
 
-			$this->Session->setFlash(__('Invalid username or password, try again'), 'alert', array(
+			$this->Session->setFlash(__('ユーザ名、パスワードが違う'), 'alert', array(
 				'plugin' => 'BoostCake',
 				'class' => 'alert-warning'
 			));
@@ -174,7 +174,7 @@ class UsersController extends AppController {
 
 	public function permission($value='')
 	{
-		$this->Session->setFlash(__("You don't have permission to visit this page"), 'alert', array(
+		$this->Session->setFlash(__("あなたはこのページにアクセス権がない"), 'alert', array(
 		'plugin' => 'BoostCake',
 		'class' => 'alert-warning'
 		));
@@ -182,7 +182,7 @@ class UsersController extends AppController {
 
 	public function deactive($value='')
 	{
-		$this->Session->setFlash(__("You account haven't been actived"), 'alert', array(
+		$this->Session->setFlash(__("このアカウントはまだアクティブされない"), 'alert', array(
 		'plugin' => 'BoostCake',
 		'class' => 'alert-warning'
 		));
@@ -202,22 +202,22 @@ class UsersController extends AppController {
 			                'class' => 'alert-success'));
 							return $this->redirect($this->referer());
 		                } else {
-		                    $this->Session->setFlash(__('Could not change your password due a server problem, try again latter'), 'alert', array(
+		                    $this->Session->setFlash(__('パスワードを更新できない。もう一度おねがい'), 'alert', array(
           	 				'plugin' => 'BoostCake',
             				'class' => 'alert-warning'));
 		                }
 		            } else {
-		                $this->Session->setFlash(__('Your password and your retype must match'), 'alert', array(
+		                $this->Session->setFlash(__('パスワードと再パスワードが同じ'), 'alert', array(
           	 				'plugin' => 'BoostCake',
             				'class' => 'alert-warning'));
 		            }
 		        } else {
-		            $this->Session->setFlash(__('Password or retype not sent'), 'alert', array(
+		            $this->Session->setFlash(__('パスワードが送られない'), 'alert', array(
           	 				'plugin' => 'BoostCake',
             				'class' => 'alert-warning'));
 		        }
 		    }else{
-	            $this->Session->setFlash(__('Current pw wrong'), 'alert', array(
+	            $this->Session->setFlash(__('現在のパスワードが違う'), 'alert', array(
           	 				'plugin' => 'BoostCake',
             				'class' => 'alert-warning'));
 

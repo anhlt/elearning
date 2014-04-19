@@ -18,35 +18,35 @@ class Admin extends AppModel {
         'username' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
-                'message' => 'A username is required'
+                'message' => 'ユーザ名を入力してお願い'
             )
         ),
         'password' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
-                'message' => 'A password is required'
+                'message' => 'パスワードを入力してお願い'
             )
         ),
         'repassword' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
-                'message' => 'A password is required'
+                'message' => '再パスワードを入力してお願い'
             )
         ),
         'email' => array(
             'email' => array(
                 'rule' => array('email'),
-                'message' => 'Please supply a valid email address.'
+                'message' => 'メールを入力してお願い'
             ),
             'isUnique' => array(
                 'rule' => 'isUnique',
-                'message' => 'This email has already been used.'
+                'message' => 'このメールが存在した'
             )
         ),
         'ip_address' => array(
             'ip_address' => array(
                 'rule' => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)
-                'message' => 'Please supply a valid IP address.'
+                'message' => 'IPアドレスを入力してお願い'
             )
         ),
     );

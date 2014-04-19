@@ -15,91 +15,91 @@
 
     <div class="form-group">
 <?php echo $this->Form->input('Student.full_name', array(  
-    'placeholder' => 'Full name',  
+    'placeholder' => '氏名',  
     'style' => 'width:180px;',
     'label' => 'Full name',
 )); ?>  
     </div>
  <div class="form-group">
 <?php echo $this->Form->input('username', array(  
-    'placeholder' => 'Username',  
+    'placeholder' => 'ユーザ名',  
     'style' => 'width:180px;',
-    'label' => 'Username',
+    'label' => 'ユーザ名',
 )); ?>  
     </div>
     <div class="form-group">
 
 <?php echo $this->Form->input('password', array(  
-    'placeholder' => 'Password',  
+    'placeholder' => 'パスワード',  
     'style' => 'width:180px;',
-    'label' => 'Password'
+    'label' => 'パスワード'
 )); ?>  
     </div>
 
     <div class="form-group">
 <?php echo $this->Form->input('rePassword', array(  
-    'placeholder' => 'Re Password',  
+    'placeholder' => '再パスワード',  
     'style' => 'width:180px;',
-    'label' => 'Re Password',
+    'label' => '再パスワード',
     'type'=>'password'
 )); ?>  
     </div>
     <div class="form-group">
 <?php echo $this->Form->input('Student.email', array(  
-    'placeholder' => 'Email',  
+    'placeholder' => 'メール',  
     'style' => 'width:180px;',
-    'label' => 'Email'
+    'label' => 'メール'
 )); ?>  
     </div>
     <div class="form-group">
 <?php echo $this->Form->input('Student.date_of_birth', array(  
     'type'=>'date',
-    'placeholder' => 'Birthday', 
+    'placeholder' => '生年月日', 
     //    'dateFormat'=>'DMY',
     'minYear' => date('Y') -USER_AGE_MAX ,
     'maxYear' => date('Y') -USER_AGE_MIN, 
     'style' => 'width:100px;',
-    'label' => 'Birthday',
+    'label' => '生年月日',
     'class' => 'inline'
 )); ?>  
     </div>	
     <div class="form-group">
 <?php echo $this->Form->input('Student.address', array(  
-    'placeholder' => 'Address',  
+    'placeholder' => 'アドレス',  
     'style' => 'width:180px;',
-    'label' => 'Address',
+    'label' => 'アドレス',
 )); ?>  
     </div>	
     <div class="form-group">
 <?php echo $this->Form->input('Student.phone_number', array(  
-    'placeholder' => 'Phone',  
+    'placeholder' => '電話番号',  
     'style' => 'width:180px;',
-    'label' => 'Phone',
+    'label' => '電話番号',
 )); ?>  
     </div>
 
     <div class="form-group">
 <?php echo $this->Form->input('Student.credit_card_number', array(  
-    'placeholder' => 'Credit Card Number',  
+    'placeholder' => '銀行口座情報',  
     'style' => 'width:180px;',
-    'label' => 'Credit Card Number',
+    'label' => '銀行口座情報',
 )); ?>
     </div>  
     <div class="form-group">
 <?php echo $this->Form->input('Student.question_verifycode_id', array(    
     'style' => 'width:180px;',
-    'label' => 'Question',
+    'label' => '質問',
     'options' => $droplist,
 )); ?>  
     </div>
     <div class="form-group">
 <?php echo $this->Form->input('Student.current_verifycode', array(  
-    'placeholder' => 'Answer',  
+    'placeholder' => '答え',  
     'style' => 'width:180px;',
-    'label' => 'Answer'
+    'label' => '答え'
 )); ?>  
     </div>
-<?php echo $this->Form->submit('Sign up', array(  
+<?php echo $this->Form->submit('登録', array(  
     'div' => false,  
     'class' => 'btn btn-default'  
 )); ?>  

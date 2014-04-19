@@ -24,12 +24,12 @@ class DocumentController extends AppController {
 					$data['Document']['lesson_id'] = $lesson_id;
 					$this->Document->create();
 					if ($this->Document->save($data)) {
-						$this->Session->setFlash(__('The document has been uploaded'), 'alert', array(
+						$this->Session->setFlash(__('ドキュメントがアップロードされた'), 'alert', array(
 							'plugin' => 'BoostCake',
 							'class' => 'alert-success'));
 					}
 					else {
-	                	$this->Session->setFlash(__('The document could not be uploaded. Plz try again'), 'alert', array(
+	                	$this->Session->setFlash(__('ドキュメントをアップロードできない、もう一度お願い'), 'alert', array(
           	 				'plugin' => 'BoostCake',
             				'class' => 'alert-warning'));
 	                }
@@ -75,13 +75,13 @@ class DocumentController extends AppController {
 					$this->Report->create();
 			    	$this->Report->save($report);		    	
 				}
-                $this->Session->setFlash(__('The document file has been update'), 'alert', array(
+                $this->Session->setFlash(__('ドキュメントが更新された'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));		
 
             } else {
-                $this->Session->setFlash(__('The document file could not be update. Plz try again'), 'alert', array(
+                $this->Session->setFlash(__('ドキュメントを更新できない、もう一度お願い'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
             	));	
@@ -105,7 +105,7 @@ class DocumentController extends AppController {
         if ($this->Document->delete($id)) 
         {
             unlink(WWW_ROOT.DS.$name);    		
-            $this->Session->setFlash(__('The document has been deleted'), 'alert', array(
+            $this->Session->setFlash(__('ドキュメントが削除された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
             )); 

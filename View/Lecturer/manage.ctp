@@ -24,8 +24,8 @@
 				<td><?php echo($result['Lesson']['Name']) ?> </td>
 				<td><?php echo($result['Lesson']['summary']) ?> </td>
 				<td>
-					<?php echo $this->html->link('Edit', array('controller' => 'lesson', 'action' => 'edit', "id"=>$result['Lesson']['id']),array('class' => 'btn'))?>
-					<?php echo $this->html->link('Manage', array('controller' => 'lesson', 'action' => 'doc', "id"=>$result['Lesson']['id']), array('class' => 'btn btn-info'))?>
+					<?php echo $this->html->link('更新', array('controller' => 'lesson', 'action' => 'edit', "id"=>$result['Lesson']['id']),array('class' => 'btn'))?>
+					<?php echo $this->html->link('管理', array('controller' => 'lesson', 'action' => 'doc', "id"=>$result['Lesson']['id']), array('class' => 'btn btn-info'))?>
 				</td>
 			</tr>
 			<?php endforeach;?>

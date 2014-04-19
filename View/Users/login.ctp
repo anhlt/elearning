@@ -12,14 +12,14 @@
   'class' => 'well form-inline',  
 )); ?>  
   <?php echo $this->Form->input('username', array(  
-    'placeholder' => 'Email',  
+    'placeholder' => 'ユーザ名',  
     'style' => 'width:180px;'
   )); ?>  
   <?php echo $this->Form->input('password', array(  
-    'placeholder' => 'Password',  
+    'placeholder' => 'パスワード',  
     'style' => 'width:180px;' 
   )); ?> 
-  <?php echo $this->Form->submit('Sign in', array(  
+  <?php echo $this->Form->submit('ロクイン', array(  
     'div' => false,  
     'class' => 'btn btn-default'  
   )); ?>  

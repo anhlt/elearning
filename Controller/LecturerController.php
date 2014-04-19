@@ -35,13 +35,13 @@ class LecturerController extends AppController {
 
 			$this->request->data['User']['role'] = 'lecturer';
 			if($this->User->saveAll($this->request->data)){
-				$this->Session->setFlash(__('The user has been saved'), 'alert', array(
+				$this->Session->setFlash(__('ユーザがセーブされた'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-success'
 				));
 				return $this->redirect(array('controller' => 'pages', 'action' => 'display'));
 			}
-			$this->Session->setFlash(__('The User could not be saved. Plz try again'), 'alert', array(
+			$this->Session->setFlash(__('ユーザをセーブできない、もう一度お願い'), 'alert', array(
 				'plugin' => 'BoostCake',
 				'class' => 'alert-warning'
 			));
@@ -63,13 +63,13 @@ class LecturerController extends AppController {
     	}else{
 			$this->request->data['Lecturer']['ip_address'] = $this->request->clientIp();
 			if($this->Lecturer->save($this->request->data)){
-				$this->Session->setFlash(__('The user has been saved'), 'alert', array(
+				$this->Session->setFlash(__('ユーザがセーブされた'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-success'
 				));
 				return $this->redirect(array('controller' => 'lecturer', 'action' => 'manage'));
 			}
-			$this->Session->setFlash(__('The User could not be saved. Plz try again'), 'alert', array(
+			$this->Session->setFlash(__('ユーザをセーブできない、もう一度お願い'), 'alert', array(
 				'plugin' => 'BoostCake',
 				'class' => 'alert-warning'
 			));
@@ -134,13 +134,13 @@ class LecturerController extends AppController {
 
 			$this->Comment->create();
 			if($this->Comment->save($data)){
-                $this->Session->setFlash(__('Your comment has been uploaded'), 'alert', array(
+                $this->Session->setFlash(__('あなたのコメントがアップロードされた'), 'alert', array(
 	                'plugin' => 'BoostCake',
 	                'class' => 'alert-success'
             	));       	
 				
 			} else {
-                $this->Session->setFlash(__('Your comment could not be uploaded. Plz try again'), 'alert', array(
+                $this->Session->setFlash(__('あなたのコメントをアップロードできない、もう一度お願い'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
             	));	

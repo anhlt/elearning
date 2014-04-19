@@ -30,13 +30,13 @@ class Lesson extends AppModel {
         'name' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
-                'message' => 'A name is required'
+                'message' => 'ユーザ名を入力してお願い'
             )
         ),
         'summary' => array(
             'lenght' => array(
                 'rule'    => array('maxLength', '2000'),
-                'message' => 'Maximum 2000 characters long'
+                'message' => '最大限は2000つのキャラクタだ'
             ),   
         )
     );
