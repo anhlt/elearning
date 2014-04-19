@@ -1,6 +1,9 @@
 tmp/cache
 tmp/logs/*
 tmp/
+webroot/index.php
+webroot/test.php
+phpmyadmin/
 /nbproject
 webroot/mp3/*
 webroot/pdf/*

@@ -1,4 +1,3 @@
-
 <?php
 
 /*
@@ -7,15 +6,14 @@
  */
 
 /**
- * Description of Violate
+ * Description of Checkviolate
  *
  * @author Tha
  */
-class Violate extends AppModel {
+class Checkviolate extends AppModel {
     //put your code here
     
     
 }
 
 ?>
-

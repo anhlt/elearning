@@ -20,7 +20,9 @@ class DocumentController extends AppController {
 				$data['Document']['link'] =  $name;
 				if (is_uploaded_file($Document['link']['tmp_name'])) {
 					$data['Document']['title'] = $Document['title'];
+
 					move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT."files".DS.$name);
+
 					$data['Document']['lesson_id'] = $lesson_id;
 					$this->Document->create();
 					if ($this->Document->save($data)) {

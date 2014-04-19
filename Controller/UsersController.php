@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Static content controller.
  *
@@ -19,16 +20,17 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
 class UsersController extends AppController {
-	var $uses = array('User', 'Lecturer','Admin','Student','Question','Parameter');
+
+    var $uses = array('User', 'Lecturer', 'Admin', 'Student', 'Question', 'Parameter');
     var $components = array("Auth");
+
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('add');
         $this->Auth->allow('verifycode');
-        //$this->mc = new Memcached();
-        //$this->mc->addServer("localhost", 11211);
+        $this->mc = new Memcached();
+        $this->mc->addServer("localhost", 11211);
     }
 
 	public function index($value='')
@@ -50,9 +52,7 @@ class UsersController extends AppController {
 				'class' => 'alert-warning'
 			));
     	}
-
     }
- 
 	public function login() {
 
 	   	if($this->Auth->loggedIn()){
@@ -74,15 +74,15 @@ class UsersController extends AppController {
 	        if ($this->Auth->login()) {
 	        	$this->Session->write('failedTime',0);
 	        	$user = $this->Auth->user();
-//
-//		  		if($pause = $this->mc->get($user['username'])){
-//	        		$this->Auth->logout();
-//		  			$this->Session->setFlash(__('このアカウントは'.date('Y-m-d H:i:s', $pause).'　までロックされる'), 'alert', array(
-//							'plugin' => 'BoostCake',
-//							'class' => 'alert-warning'
-//						));
-//					$this->redirect(array('controller'=>'users','action' => 'login'));
-//		  		}
+
+		  		if($pause = $this->mc->get($user['username'])){
+	        		$this->Auth->logout();
+		  			$this->Session->setFlash(__('このアカウントは'.date('Y-m-d H:i:s', $pause).'　までロックされる'), 'alert', array(
+							'plugin' => 'BoostCake',
+							'class' => 'alert-warning'
+						));
+					$this->redirect(array('controller'=>'users','action' => 'login'));
+		  		}
 
 	        	if ($user['actived'] == -1 && $user['role'] == 'lecturer') {
 	        		$this->Auth->logout();
@@ -173,9 +173,6 @@ class UsersController extends AppController {
 			));
 		}
 	}
-
-
-
 	public function permission($value='')
 	{
 		$this->Session->setFlash(__("あなたはこのページにアクセス権がない"), 'alert', array(
