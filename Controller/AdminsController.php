@@ -298,28 +298,21 @@ class AdminsController extends AppController {
         if ($this->request->is('post')) {
             $this->set('data', NULL);
             $username = $this->request->data["search"]["username"];
-            //echo $username;
-            //die();
             if ($username != NULL) {
                 $sql1 = "SELECT * FROM students, users WHERE (students.id = users.id and 
                     users.username = '$username')";
-                //$sql = "SELECT * FROM users";
                 $data = $this->Student->User->query($sql1);
                 if ($data != NULL) {
                     $this->set('data', $data);
-                    // $this->redirect(array('action'=>'manage_lecturer'));
                 } else {
                     $this->Session->setFlash(__('見つけない'), 'alert', array(
                         'plugin' => 'BoostCake',
                         'class' => 'alert-warning'
                     ));
-                    //$this->redirect(array('action'=>'manage_lecturer'));
                 }
             } else {
                 $sql = "SELECT * FROM students, users WHERE (students.id = users.id and users.role = 'student')";
-                //$sql = "SELECT * FROM users";
                 $data = $this->Student->User->query($sql);
-                //$data = $this->Admin->printfStudent();
                 if ($data == NULL) {
                     $this->Session->setFlash(__('ダータがない'));
                 } else {
@@ -609,8 +602,12 @@ class AdminsController extends AppController {
             $this->request->data = $this->Admin->findById($id_admin);
         } else {
             $this->request->data['User']['id'] = $id_admin;
-            //var_dump($this->request->data);
             if ($this->Admin->save($this->request->data) && $this->User->save($this->request->data)) {
+                foreach ($this->request->data['IpAdmin'] as $key => $value) {
+                    $this->request->data['IpAdmin'][$key]['admin_id'] = $id_admin;
+                }
+                $this->IpAdmin->saveAll($this->request->data['IpAdmin']);
+
                 $this->Session->setFlash(__('セーブされた'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'

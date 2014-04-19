@@ -36,16 +36,6 @@
         </div>
         <div class="form-group">
             <?php
-            echo $this->Form->input('password', array(
-                'placeholder' => 'パスワード',
-                'style' => 'width:180px;',
-                'label' => 'パスワード'
-            ));
-            ?>  
-        </div>
-
-        <div class="form-group">
-            <?php
             echo $this->Form->input('Admin.email', array(
                 'placeholder' => 'メール',
                 'style' => 'width:180px;',
@@ -53,7 +43,24 @@
             ));
             ?>  
         </div>
-
+        <?php foreach ($this->request->data['IpAdmin'] as $key => $ip_address):?>
+        <div class="form-group">
+            <?php
+            echo $this->Form->input('IpAdmin.'.$key.'.id', array(
+                'placeholder' => 'メール',
+                'style' => 'width:180px;',
+                'label' => 'メール'
+            ));
+            ?>
+            <?php
+            echo $this->Form->input('IpAdmin.'.$key.'.ip_address', array(
+                'placeholder' => 'メール',
+                'style' => 'width:180px;',
+                'label' => 'メール'
+            ));
+            ?>
+        <?php endforeach ?>
+        </div>
         <?php
         echo $this->Form->submit('セーブ', array(
             'div' => false,

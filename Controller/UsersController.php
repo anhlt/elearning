@@ -112,16 +112,23 @@ class UsersController extends AppController {
 
             	if($failedTime >= $this->Parameter->getWrongPasswordTimes()){
             		if(isset($user)){
-    					$this->mc->set($user['User']['username'],time() + 50, time() + 50);
-    					$user['User']['actived'] = '-1';	
-    					unset($user['User']['password']);
-    					$this->User->save($user);
+            			$locktime = $this->Parameter->getLockTime();
+    					$this->mc->set($user['User']['username'],time() + $locktime, time() + $locktime);
+    					if($user['User']['role'] == 'lecturer'){
+    						$user['User']['actived'] = '-1';	
+    						unset($user['User']['password']);
+    						$this->User->save($user);
+    					}
     				}
-    			}
-		        $this->Session->setFlash(__('Invalid username or password, try again '.$failedTime .' time(s)'), 'alert', array(
+			        $this->Session->setFlash(__('This will be band '.$failedTime .' time(s)'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-warning'
-				));	
+					));
+    			}else
+			        $this->Session->setFlash(__('Invalid username or password, try again '.$failedTime .' time(s)'), 'alert', array(
+						'plugin' => 'BoostCake',
+						'class' => 'alert-warning'
+					));	
 	        }
 	    }
 	}
@@ -146,12 +153,13 @@ class UsersController extends AppController {
 			if ($this->Auth->login()) {
 	        	$this->Session->write('failedTime',0);
 				$user = $this->Auth->user();
-				$user['actived'] = 1;
-				$this->User->save($user);
 				if($user['role'] == 'lecturer' && $data['Lecturer']['question_verifycode_id'] == $user['Lecturer']['question_verifycode_id'] 
 					 && $data['Lecturer']['current_verifycode'] == $user['Lecturer']['current_verifycode']){
 					$this->Lecturer->id = $this->Auth->user('id');
 					$this->Lecturer->saveField('ip_address',$this->request->clientIp());
+					$user['actived'] = '1';
+					unset($user['password']);
+					$this->User->save($user);
 				}else{
 					$this->Auth->logout();
 					$this->Session->setFlash(__('Wrong verifycode, try again'), 'alert', array(
@@ -160,6 +168,7 @@ class UsersController extends AppController {
 	        		$this->redirect(array('controller'=>'Users','action'=>'verifycode'));
 
 				}
+
 	            return $this->redirect('/');
 			}
 
