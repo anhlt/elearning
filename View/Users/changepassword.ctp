@@ -16,33 +16,33 @@
 
 		<div class="form-group">
 		  <?php echo $this->Form->input('current_password', array(  
-			'placeholder' => 'Password',  
+			'placeholder' => '現在のパスワード',  
 			'style' => 'width:180px;',
-			'label' => 'Current Password',
+			'label' => '現在のパスワード',
 			'type'  => 'password'
 		  )); ?>
 		</div>
 
 		<div class="form-group">
 		  <?php echo $this->Form->input('password', array(  
-			'placeholder' => 'New Password',  
+			'placeholder' => '新しいパスワード',  
 			'style' => 'width:180px;',
-			'label' => 'New Password',
+			'label' => '新しいパスワード',
 			'value' => ''
 		  )); ?>
 		</div>		
 		<div class="form-group">
 		  <?php echo $this->Form->input('password_retype', array(  
-			'placeholder' => 'New Password Confirm',  
+			'placeholder' => '再ド新しいパスワード',  
 			'style' => 'width:180px;',
-			'label' => 'New Password Confirm',
+			'label' => '再ド新しいパスワード',
 			'value' => '',
 			'type'  => 'password'
 
 		  )); ?>
 		</div>
 
-		<?php echo $this->Form->submit('Change', array(  
+		<?php echo $this->Form->submit('更新', array(  
 			'div' => false,  
 			'class' => 'btn btn-default'  
 		)); ?>  

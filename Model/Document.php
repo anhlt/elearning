@@ -6,19 +6,19 @@ class Document extends AppModel {
 		'title' => array(
 			'required' => array(
 				'rule' => array('notEmpty'),
-				'message' => 'Title is required'
+				'message' => 'タイトルを入力してお願い'
 			)
 		),		
 		'link' => array(
 			'required' => array(
 				"rule" => "notEmpty",
-				"message" => "Please enter email !",
+				"message" => "メールを入力してお願い",
 			),
 			'extension' => array(
 				"rule" => array(
 	            	'extension', array('pdf', 'mp4', 'jpg','mp3','wav','gif','png','tsv')
 	        		),
-				"message" => "Please supply a valid file !",
+				"message" => "ファイルのフォーマットが正しくない",
 			),
 		)
 	);

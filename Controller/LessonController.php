@@ -31,14 +31,14 @@ class LessonController extends AppController {
             $this->Lesson->create();
             if($this->Lesson->saveAll($data)){
                 $id = $this->Lesson->getInsertID();
-                $this->Session->setFlash(__('The Lesson has been saved'), 'alert', array(
+                $this->Session->setFlash(__('授業がセーブされた'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));
                 return $this->redirect(array('controller' => 'Document', 'action' => 'add','id' =>  $id));
             }
             else{
-                $this->Session->setFlash(__('The User could not be saved. Plz try again'), 'alert', array(
+                $this->Session->setFlash(__('授業をセーブできない、もう一度お願い'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
                 ));	
@@ -67,13 +67,13 @@ class LessonController extends AppController {
 	    	}
 	    	$data['Tag'] = $tags;
 			if($this->Lesson->save($data)) {
-				$this->Session->setFlash(__('The Lesson Info has been saved'), 'alert', array(
+				$this->Session->setFlash(__('授業の情報がセーブされた'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-success'
 				));
 			}
 			else{
-				$this->Session->setFlash(__('The Lesson Info could not be saved. Plz try again'), 'alert', array(
+				$this->Session->setFlash(__('授業の情報をセーブできない、もう一度お願い'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-warning'
 				));	
@@ -327,7 +327,7 @@ class LessonController extends AppController {
 				'class' => 'alert-success'
 			));
     	}else{
-				$this->Session->setFlash(__('The User could not be baned. Plz try again'), 'alert', array(
+				$this->Session->setFlash(__('ユーザをロックできない'), 'alert', array(
 				'plugin' => 'BoostCake',
 				'class' => 'alert-warning'
 			));	
@@ -397,12 +397,12 @@ class LessonController extends AppController {
     		);
 
     	if($this->LessonMembership->delete($member['LessonMembership']['id'])){
-			$this->Session->setFlash(__('The user has been removed !'), 'alert', array(
+			$this->Session->setFlash(__('ユーザが削除された'), 'alert', array(
 				'plugin' => 'BoostCake',
 				'class' => 'alert-success'
 			));
     	}else{
-				$this->Session->setFlash(__('The User could not be deleted. Plz try again'), 'alert', array(
+				$this->Session->setFlash(__('ユーザを削除できない、もう一度お願い'), 'alert', array(
 				'plugin' => 'BoostCake',
 				'class' => 'alert-warning'
 			));	
@@ -445,7 +445,7 @@ class LessonController extends AppController {
 					// delete comment
 					$this->Comment->deleteAll(array('Comment.lesson_id' => $lesson_id), false);
 
-					$this->Session->setFlash(__('The lesson has been deleted'), 'alert', array(
+					$this->Session->setFlash(__('授業が削除された'), 'alert', array(
 	                'plugin' => 'BoostCake',
 	                'class' => 'alert-success'
 		            )); 		            

@@ -50,14 +50,14 @@ $(document).ready(function(){
     <div class="navbar navbar-default navbar-fixed-top">	
     <div class="container">
     <div class="navbar-header">
-    <a class="navbar-brand" href=<?php echo $this->webroot; ?>>Home</a>
+    <a class="navbar-brand" href=<?php echo $this->webroot; ?>>ホーム</a>
     <ul class="nav navbar-nav">
         <?php if(AuthComponent::user('role')=='lecturer'):?>
-            <li><a href='/lecturer/'>Lecturer</a></li>
+            <li><a href='/lecturer/'>先生</a></li>
         <?php elseif (AuthComponent::user('role')=='student'): ?>
-            <li><a href='/students/'>Student</a></li>
+            <li><a href='/students/'>学生</a></li>
         <?php elseif (AuthComponent::user('role')=='admin'): ?>
-            <li><a href='/Admins/'>Admins</a></li>
+            <li><a href='/Admins/'>管理者</a></li>
         <?php endif?>
     </ul>
 </div>
@@ -74,21 +74,21 @@ $(document).ready(function(){
                     </div>
                 </li>
                 <?php endif ?>
-            <li><a href='/users/changepassword'>Change Password</a></li>
-            <li><a href='/users/logout'>Logout</a></li>
+            <li><a href='/users/changepassword'>パスワードの更新</a></li>
+            <li><a href='/users/logout'>ログアウト</a></li>
         <?php else:?>
             <li class='dropdown'>
-                <a href='#' class='dropdown-toggle' data-toggle='dropdown'>Sign Up <b class='caret'></b></a>
+                <a href='#' class='dropdown-toggle' data-toggle='dropdown'>登録<b class='caret'></b></a>
                 <ul class='dropdown-menu'>
-                <li><a href='/students/register'>Student</a></li>
-                <li><a href='/lecturer/add'>Teacher</a></li>
+                <li><a href='/students/register'>学生</a></li>
+                <li><a href='/lecturer/add'>先生</a></li>
                 </ul>
             </li>
             <li class='dropdown'>
-                <a href='#' class='dropdown-toggle' data-toggle='dropdown'>Login <b class='caret'></b></a>
+                <a href='#' class='dropdown-toggle' data-toggle='dropdown'>ロクイン <b class='caret'></b></a>
                 <ul class='dropdown-menu'>
-                <li><a href='/admins/login'>Login as admin</a></li>
-                <li><a href='/users/login'>Login as user</a></li>
+                <li><a href='/admins/login'>管理者としてロクイン</a></li>
+                <li><a href='/users/login'>ユーザとしてロクイン</a></li>
                 </ul>
             </li>
         <?php endif ?>

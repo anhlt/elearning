@@ -59,7 +59,7 @@
         echo $test;
     //}
 ?>
-        <button type="button" class="btn btn-success" onclick="setDefault()">Kết thúc</button>
+        <button type="button" class="btn btn-success" onclick="setDefault()">終了</button>
     </div></div>
 <form name="formRusult" method="post" >
     <input name="data[Test][result]" type="hidden" value="">

@@ -51,7 +51,7 @@ class AppController extends Controller {
 	public function beforeFilter()
 	{
         if($this->Auth->loggedIn() && $this->Auth->user('actived') == 0){
-			$this->Session->setFlash(__("You account haven't been actived"), 'alert', array(
+			$this->Session->setFlash(__("あなたのアカウントがまだアクティブしない"), 'alert', array(
 				'plugin' => 'BoostCake',
 				'class' => 'alert-warning'
 				));

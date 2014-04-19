@@ -39,10 +39,10 @@
 	function checkFile(inputFile) {
 		var valid_extensions = /(.pdf)$/i;
 		if(!valid_extensions.test(inputFile.value)) {
-			alert('Loai file ko hop le!');
+			alert('ファイルのタイプが正しくない');
 			inputFile.value = '';
 		} else if(inputFile.files[0].size > 20480){ //2M
-			alert('kich thuoc file qua lon!');
+			alert('ファイルの容量が大き過ぎる');
 			inputFile.value = '';
 		}
 	}
@@ -128,7 +128,7 @@
 	        case 'tsv':		            
 	            break;
 	        default:
-	            alert('File invalid !');
+	            alert('ファイルを選択してお願い');
 	            this.value='';
 	    }		    
 	};

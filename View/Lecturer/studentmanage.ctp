@@ -28,9 +28,9 @@
 			  	<td><?php echo($result['Student']['full_name']) ?> </td>
 			  	<td><?php echo($result['LessonMembership']['baned']?"True":"false") ?> </td>
 			  	<td><?php echo($result['LessonMembership']['liked']?"True":"false") ?> </td>
-			  	<td><?php echo $this->html->link('Delete', array('controller' => 'lesson', 'action' => 'deletestudent',
+			  	<td><?php echo $this->html->link('削除', array('controller' => 'lesson', 'action' => 'deletestudent',
 			  		"student_id"=>$result['Student']['id'],"lesson_id"=>$result['LessonMembership']['lesson_id']),array('class' => 'btn btn-danger'))?>
-			  		<?php echo $this->html->link('Ban', array('controller' => 'lesson', 'action' => 'banstudent',"student_id"=>$result['Student']['id'],"lesson_id"=>$result['LessonMembership']['lesson_id']),array('class' => 'btn btn-warning'))?>
+			  		<?php echo $this->html->link('ロック', array('controller' => 'lesson', 'action' => 'banstudent',"student_id"=>$result['Student']['id'],"lesson_id"=>$result['LessonMembership']['lesson_id']),array('class' => 'btn btn-warning'))?>
 			  	</td>
 			  </tr>
 			 <?php }?>

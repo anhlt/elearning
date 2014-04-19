@@ -32,12 +32,12 @@ class TestsController extends AppController {
             $this->request->data['Test']['lesson_id'] = $lesson_id;
 
             if($this->Test->save($this->request->data['Test'])){
-                $this->Session->setFlash(__('The test file has been uploaded'), 'alert', array(
+                $this->Session->setFlash(__('テストファイルがアップロードされた'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));
             } else {
-                $this->Session->setFlash(__('The testfile could not be uploaded. Plz try again'), 'alert', array(
+                $this->Session->setFlash(__('テストファイルをアップロードできない。もう一度お願い'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
                 )); 
@@ -69,13 +69,13 @@ class TestsController extends AppController {
             }           
 
             if($this->Test->save($this->request->data['Test'])){
-                $this->Session->setFlash(__('The test file has been update'), 'alert', array(
+                $this->Session->setFlash(__('テストファイルが更新された'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));     
 
             } else {
-                $this->Session->setFlash(__('The testfile could not be update. Plz try again'), 'alert', array(
+                $this->Session->setFlash(__('テストファイルを更新できない。もう一度お願い'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
                 )); 
@@ -91,7 +91,7 @@ class TestsController extends AppController {
         
         if ($this->Test->delete($id)) {
             unlink(WWW_ROOT. DS . 'tsv' . DS . $data['Test']['link']);
-            $this->Session->setFlash(__('The test has been deleted'), 'alert', array(
+            $this->Session->setFlash(__('テストが削除された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
             )); 

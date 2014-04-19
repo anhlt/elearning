@@ -11,7 +11,7 @@ class Tag extends AppModel {
         'name' => array(
             'lenght' => array(
                 'rule'    => array('minLength', '2'),
-                'message' => 'Minimum 2 characters long'
+                'message' => '最低限は２つのキャラクタだ'
             ),
         )
     );

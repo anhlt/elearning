@@ -21,38 +21,38 @@
 
 		<div class="form-group">
 			<?php echo $this->Form->input('id', array(  
-				'placeholder' => 'Class name',  
+				'placeholder' => 'クラスコード',  
 				'style' => 'width:300px;',
-				'label' => 'Class name',
+				'label' => 'クラスコード',
 				'type'  => 'hidden',
 			)); ?>  
 		</div>
 
 		<div class="form-group">
 			<?php echo $this->Form->input('name', array(  
-				'placeholder' => 'Class name',  
+				'placeholder' => 'クラス名',  
 				'style' => 'width:300px;',
-				'label' => 'Class name',
+				'label' => 'クラス名',
 			)); ?>  
 		</div>
 
 		<div class="form-group">
 			<?php echo $this->Form->text('summary', array(  
-				'placeholder' => 'Description',  
+				'placeholder' => '説明',  
 				'style' => 'width:300px;',
-				'label' => 'Description',
+				'label' => '説明',
 			)); ?>  
 		</div>
 
 		<div class="form-group">
 			<?php echo $this->Form->text('Tag.name', array(  
-				'placeholder' => 'Tags',  
+				'placeholder' => 'タグ',  
 				'style' => 'width:300px;',
-				'label' => 'Tags',
+				'label' => 'タグ',
 				'class' => 'tm-input'
 			)); ?>
 		</div>
-		<?php echo $this->Form->submit('Add Class', array(  
+		<?php echo $this->Form->submit('追加', array(  
 		'div' => false,  
 		'class' => 'btn btn-default'  
 		)); ?>  

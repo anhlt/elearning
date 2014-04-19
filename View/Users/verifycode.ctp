@@ -12,28 +12,28 @@
   'class' => 'well',  
 )); ?>  
   <?php echo $this->Form->input('username', array(  
-    'placeholder' => 'Email',  
+    'placeholder' => 'ユーザ名',  
     'style' => 'width:180px;'
   )); ?>  
   <?php echo $this->Form->input('password', array(  
-    'placeholder' => 'Password',  
+    'placeholder' => 'パスワード',  
     'style' => 'width:180px;' 
   )); ?> 
   <div class="form-group">
     <?php echo $this->Form->input('Lecturer.question_verifycode_id', array(    
     'style' => 'width:180px;',
-    'label' => 'Question',
+    'label' => '質問',
     'options' => $droplist,
     )); ?>  
   </div>
   <div class="form-group">
     <?php echo $this->Form->input('Lecturer.current_verifycode', array(  
-    'placeholder' => 'Answer',  
+    'placeholder' => '答え',  
     'style' => 'width:180px;',
-    'label' => 'Answer'
+    'label' => '答え'
     )); ?>  
   </div>
-  <?php echo $this->Form->submit('Sign in', array(  
+  <?php echo $this->Form->submit('ロクイン', array(  
     'div' => false,  
     'class' => 'btn btn-default'  
   )); ?>  

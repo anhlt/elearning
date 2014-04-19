@@ -28,7 +28,7 @@ class AdminsController extends AppController {
             $data = ($this->request->data);
             $user = $this->User->findByUsername($data['User']['username']);
             if ($user['User']['role'] != 'admin') {
-                $this->Session->setFlash(__('User cant not login here'), 'alert', array(
+                $this->Session->setFlash(__('ユーザはこの画面でロクインできかい'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
                 ));
@@ -44,20 +44,21 @@ class AdminsController extends AppController {
                     if($this->request->ClientIp() == $ip['ip_address']) $has_ip = 1;
                 };
                 if($has_ip == 0){
-                    $this->Session->setFlash(__('wrong ip'), 'alert', array(
-                            'plugin' => 'BoostCake',
-                            'class' => 'alert-warning'
-                        )); 
+                    $this->Session->setFlash(__('IPアドレスが違う'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-warning'
+                    )); 
                     $this->Auth->logout();
                     $this->redirect(array('controller'=>'admins','action' => 'login'));
                 }
                 $this->redirect(array('controller'=>'Admins'));
-                
-            }else
-                $this->Session->setFlash(__('Invalid username or password'), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-warning'
-                ));
+                }
+            }
+
+            $this->Session->setFlash(__('ユーザ名、パスワードが正しくない'), 'alert', array(
+                'plugin' => 'BoostCake',
+                'class' => 'alert-warning'
+            ));
         }
     }
 
@@ -1155,7 +1156,7 @@ class AdminsController extends AppController {
 
         $command = "/home/action/.parts/bin/mysqldump --opt --skip-extended-insert --complete-insert --host=localhost --user=root --password=tuananh elearning > " . $fileName;
         exec($command);
-        $this->Session->setFlash(__('Database has been backuped'), 'alert', array(
+        $this->Session->setFlash(__('データベースがバックアップされた'), 'alert', array(
             'plugin' => 'BoostCake',
             'class' => 'alert-success'));
         $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));
@@ -1168,7 +1169,7 @@ class AdminsController extends AppController {
             var_dump($source);
             unlink($source);
         }
-        $this->Session->setFlash(__('The backup have been deleted'), 'alert', array(
+        $this->Session->setFlash(__('バックアップのファイルが削除された'), 'alert', array(
             'plugin' => 'BoostCake',
             'class' => 'alert-warning'));
         $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));
@@ -1183,7 +1184,7 @@ class AdminsController extends AppController {
         foreach ($files as $file) {
             unlink($dir->pwd() . DS . $file);
         }
-        $this->Session->setFlash(__('All The backup have been deleted'), 'alert', array(
+        $this->Session->setFlash(__('全部のバックアップのファイルが削除された'), 'alert', array(
             'plugin' => 'BoostCake',
             'class' => 'alert-warning'));
         $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));

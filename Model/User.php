@@ -8,27 +8,27 @@ class User extends AppModel {
         'username' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
-                'message' => 'A username is required'
+                'message' => 'ユーザ名を入力してお願い'
             ),
             'isUnique' => array(
                 'rule' => 'isUnique',
-                'message' => 'This Username has already been used.'
+                'message' => 'このユーザ名が存在した'
             )
         ),
         'password' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
-                'message' => 'A password is required'
+                'message' => 'パスワードを入力してお願い'
             ),
             'lenght' => array(
                 'rule' => array('minLength', '8'),
-                'message' => 'Minimum 8 characters long'
+                'message' => '最低限は８つのキャラクタだ'
             ),
         ),
         'role' => array(
             'valid' => array(
                 'rule' => array('inList', array('student', 'lecturer', 'admin')),
-                'message' => 'Please enter a valid role',
+                'message' => 'メールのフォーマットが正しくない',
                 'allowEmpty' => false
             )
         )
