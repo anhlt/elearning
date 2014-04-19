@@ -32,7 +32,7 @@ class AdminsController extends AppController {
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
                 ));
-                $this->redirect(array('controller' => 'users', 'action' => 'login'));
+                $this->redirect(array('controller' => 'admins', 'action' => 'login'));
             }
 
             if ($this->Auth->login()) {
@@ -40,8 +40,6 @@ class AdminsController extends AppController {
                 $this->User->recursive = 3;
                 $user = $this->User->findById($id);
                 foreach ($user['Admin']['IpAdmin'] as $ip) {
-                    debug($ip['ip_address']);
-                    debug($this->request->ClientIp());
                     if($this->request->ClientIp() == $ip['ip_address']) break;
                     $this->Session->setFlash(__('wrong ip'), 'alert', array(
                         'plugin' => 'BoostCake',
@@ -50,22 +48,14 @@ class AdminsController extends AppController {
                     $this->Auth->logout();
                     $this->redirect(array('controller'=>'admins','action' => 'login'));
                 };
-
-                if($user['role'] == 'lecturer' && $user['role'] == 'student')
-                {
-                    $this->Auth->logout();
-                    return $this->redirect(array('controller' => 'user', 'action' => 'login'));
-                }
-                if($user['role'] == 'admin')
-                {
+      
                 $this->redirect(array('controller'=>'Admins'));
-                }
-            }
-
-            $this->Session->setFlash(__('Invalid username or password'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-warning'
-            ));
+                
+            }else
+                $this->Session->setFlash(__('Invalid username or password'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
         }
     }
 
@@ -570,6 +560,7 @@ class AdminsController extends AppController {
             $admins = $this->Admin->find();
             if ($this->User->saveAll($this->request->data)) {
                 $this->request->data['IpAdmin']['admin_id'] = $this->User->id;
+                $this->request->data['IpAdmin']['ip_address'] =$this->request->data['Admin']['ip_address'];
                 $this->IpAdmin->save($this->request->data);
                 $this->Session->setFlash(__('新しい管理者が追加された'), 'alert', array(
                     'plugin' => 'BoostCake',

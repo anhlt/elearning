@@ -63,11 +63,11 @@ class UsersController extends AppController {
 	    	$data = ($this->request->data);
 	    	$user = $this->User->findByUsername($data['User']['username']);
 	    	if (isset($user['User']) && $user['User']['role'] =='admin') {
-		        $this->Session->setFlash(__('Manager cant not login here'), 'alert', array(
+		        $this->Session->setFlash(__('Manage cant not login here'), 'alert', array(
 					'plugin' => 'BoostCake',
 					'class' => 'alert-warning'
 				));
-				$this->redirect(array('controller'=>'admins','action' => 'login'));
+				$this->redirect(array('controller'=>'users','action' => 'login'));
 
 	    	}
 
