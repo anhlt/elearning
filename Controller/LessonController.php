@@ -163,6 +163,9 @@ class LessonController extends AppController {
 				$students = $this->Paginator->paginate("LessonMembership");
 				$this->set("results", $students);
 
+				$this->loadModel("Parameter");
+			  	$this->set("lesson_time",$this->Parameter->getEnableLessonTime()); 
+
 			} else {
 				$this->redirect(array('controller' => 'users' ,"action" => "permission" ));
 			}
@@ -217,12 +220,13 @@ class LessonController extends AppController {
 				$results = $this->LessonMembership->find('all', $sql);
 				$row = count($results);
 				$like = 0;
-				foreach ($results as $key => $liked) {					
-					if($key) {						
+				foreach ($results as $result) {									
+					if($result['LessonMembership']['liked']) {						
 						$like++;
 					}
-				}			
-				
+				}		
+
+				//echo $like . ' & ' . $row;
 				$this->set('row', $row);
 				if($row) {
 					$this->set('like', ceil(($like/$row) * 100));
@@ -356,12 +360,29 @@ class LessonController extends AppController {
             }
         }
         if ($this->request->is('get')) {
-            $this->Tag->recursive = 3;
+            // $this->Tag->recursive = 3;
+            // if (isset($this->params['url']['search_value'])) {
+            //     $tag_value = $this->params['url']['search_value'];
+            //     $options['conditions'] = array("Tag.name LIKE" => "%".$tag_value."%");
+            //     $tags = $this->Tag->find("all", $options); 
+            //     $this->set("tags", $tags);
+            // }
+
+            
             if (isset($this->params['url']['search_value'])) {
-                $tag_value = $this->params['url']['search_value'];
-                $options['conditions'] = array("Tag.name LIKE" => "%".$tag_value."%");
-                $tags = $this->Tag->find("all", $options); 
-                $this->set("tags", $tags);
+        		$this->Lesson->recursive =3; 
+            	$search_value =  $this->params['url']['search_value'];
+            	$keyword_r = explode(";", $search_value);
+            	$lesson_or_r = array();
+            	foreach ($keyword_r as $row) {
+            	 	array_push($lesson_or_r, array("Lesson.name like"=>"%".$row."%"));
+            	 	array_push($lesson_or_r, array("Lecturer.full_name like"=>"%".$row."%"));
+            	 	// array_push($lesson_or_r, array("Tag.name like"=>"%".$row."%"));
+            	 	// array_push($lesson_or_r, array("User.username like"=>"%".$row."%"));
+            	}
+            	$options['conditions'] = array("OR"=>$lesson_or_r);
+            	$lesson_search = $this->Lesson->find("all", $options);
+            	$this->set("lesson_search", $lesson_search);
             }
         }
     }   
@@ -421,6 +442,9 @@ class LessonController extends AppController {
 				    	}		    					
 					}	
 
+					// delete comment
+					$this->Comment->deleteAll(array('Comment.lesson_id' => $lesson_id), false);
+
 					$this->Session->setFlash(__('The lesson has been deleted'), 'alert', array(
 	                'plugin' => 'BoostCake',
 	                'class' => 'alert-success'
@@ -434,16 +458,16 @@ class LessonController extends AppController {
 		}          
     }
     
-    public function show($lesson_id){
-        $user_id = $this->Auth->user("id");
-        if ($this->Util->checkLessonAvailableWithStudent($lesson_id, $user_id)){
-            $this->redirect("/lesson/learn/".$lesson_id);     
-        } 
-        $this->Lesson->recursive = 2; 
-        $options['conditions'] = array("Lesson.id"=>$lesson_id); 
-        $lessons = $this->Lesson->find("first",$options); 
-        $this->set("lessons",  $lessons);
-    }
+    // public function show($lesson_id){
+    //     $user_id = $this->Auth->user("id");
+    //     if ($this->Util->checkLessonAvailableWithStudent($lesson_id, $user_id)){
+    //         $this->redirect("/lesson/learn/".$lesson_id);     
+    //     } 
+    //     $this->Lesson->recursive = 2; 
+    //     $options['conditions'] = array("Lesson.id"=>$lesson_id); 
+    //     $lessons = $this->Lesson->find("first",$options); 
+    //     $this->set("lessons",  $lessons);
+    // }
 
 
 

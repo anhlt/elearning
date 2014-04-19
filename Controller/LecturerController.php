@@ -12,6 +12,8 @@ class LecturerController extends AppController {
   	public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow("add");
+        if($this->Auth->loggedIn() && $this->Auth->user('role') != 'lecturer')
+        	$this->redirect(array('controller' => 'users', 'action' => 'permission'));
     }
 
     public function add(){
@@ -29,10 +31,9 @@ class LecturerController extends AppController {
 			$this->User->create();
 			$this->request->data['Lecturer']['ip_address'] = $this->request->clientIp();
 			$this->request->data['Lecturer']['init_verifycode'] = $this->request->data['Lecturer']['current_verifycode']; 
-			$this->request->data['Lecturer']['init_password'] = $this->request->data['User']['password']; 
+			$this->request->data['Lecturer']['init_password'] = AuthComponent::password($this->request->data['User']['password']);
 
 			$this->request->data['User']['role'] = 'lecturer';
-			var_dump($this->request->data);
 			if($this->User->saveAll($this->request->data)){
 				$this->Session->setFlash(__('The user has been saved'), 'alert', array(
 					'plugin' => 'BoostCake',
@@ -97,9 +98,6 @@ class LecturerController extends AppController {
 		);
 
 		$results = $this->paginate('Lesson');
-		if ($this->request->is('ajax')) {
- 			$this->render('manage', 'ajax'); // View, Layout
-		}
 		$this->set('results',$results);
 	}
 
@@ -132,10 +130,9 @@ class LecturerController extends AppController {
 			$data['Comment']['user_id'] = $user_id;
 			$data['Comment']['lesson_id'] = $lesson_id;
 			$data['Comment']['content'] = $this->request->data['Report']['content'];
+			$data['Comment']['time'] = date('Y-m-d H:i:s');
 
-			var_dump($data);
 			$this->Comment->create();
-
 			if($this->Comment->save($data)){
                 $this->Session->setFlash(__('Your comment has been uploaded'), 'alert', array(
 	                'plugin' => 'BoostCake',

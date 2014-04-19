@@ -9,9 +9,97 @@
 /**
  * Description of Tests
  *
- * @author DONG
+ * @author DONG + THANHBQ
  */
-class TestsController extends AppController {
+class TestsController extends AppController {    
+
+    public $components = array('Paginator');
+    public function add() {
+        $lesson_id = $this->params['named']['id'];
+        $this->set('id', $lesson_id);
+
+        if ($this->request->is('post'))
+        {               
+            $data = $this->request->data['Test'];           
+            
+            if (is_uploaded_file($data['link']['tmp_name'])) {
+                $name = uniqid() . $data['link']['name'];
+                move_uploaded_file($data['link']['tmp_name'], WWW_ROOT."tsv" . DS . $name);
+                $this->request->data['Test']['link'] = $name;                               
+            } 
+
+            $this->Test->create();
+            $this->request->data['Test']['lesson_id'] = $lesson_id;
+
+            if($this->Test->save($this->request->data['Test'])){
+                $this->Session->setFlash(__('The test file has been uploaded'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+            } else {
+                $this->Session->setFlash(__('The testfile could not be uploaded. Plz try again'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                )); 
+            }
+
+             $this->redirect(array('controller' => 'lesson', 'action' => 'test', 'id' => $lesson_id));
+        }
+    }
+
+    public function edit() {
+        $test_id = $this->params['named']['id'];
+        $this->set("id", $test_id);
+        $results = $this->Test->find("first", array("conditions"=>array('Test.id'=>$test_id)));
+        $this->set('result', $results['Test']);     
+
+        if ($this->request->is('post'))
+        {               
+            $data = $this->request->data['Test'];
+            $this->request->data['Test']['id'] = $test_id;      
+
+            if (is_uploaded_file($data['link']['tmp_name'])) {              
+                unlink(WWW_ROOT . DS . 'tsv'. DS . $results['Test']['link']);
+                $name = uniqid() . $data['link']['name'];
+                move_uploaded_file($data['link']['tmp_name'], WWW_ROOT . "tsv" . DS . $name);
+                $this->request->data['Test']['link'] = $name;                                       
+            } else {
+                $results = $this->Test->find("first", array("conditions"=>array('id'=>$test_id)));
+                $this->request->data['Test']['link'] = $results['Test']['link'];                
+            }           
+
+            if($this->Test->save($this->request->data['Test'])){
+                $this->Session->setFlash(__('The test file has been update'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));     
+
+            } else {
+                $this->Session->setFlash(__('The testfile could not be update. Plz try again'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                )); 
+            }
+
+            $this->redirect(array('controller' => 'lesson', 'action' => 'test', 'id' => $test_id));     
+        }
+    }
+
+    public function delete() {
+        $id = $this->params['named']['id'];
+        $data = $this->Test->find('first', $id);        
+        
+        if ($this->Test->delete($id)) {
+            unlink(WWW_ROOT. DS . 'tsv' . DS . $data['Test']['link']);
+            $this->Session->setFlash(__('The test has been deleted'), 'alert', array(
+                'plugin' => 'BoostCake',
+                'class' => 'alert-success'
+            )); 
+
+            return $this->redirect($this->referer());    
+        }
+    }
+
     public function show($id) {
         $data_tsv = $this->getDataTSV($id);
         $this->set('title', $data_tsv[0][1]);
@@ -77,6 +165,23 @@ class TestsController extends AppController {
             $this->redirect("/tests/result/".$result_id);
         }
     }
+
+    public function list_result($test_id){
+
+        $this->loadModel('Result');
+        $this->Result->recursive = 1;
+        $this->paginate = array(
+            'fields' => array('Result.id', 'Student.full_name','Result.point'),
+            'limit' => 10,
+            'conditions' => array(
+                'Result.test_id' => $test_id
+           )
+        );
+        $results = $this->Paginator->paginate('Result');
+        $this->set('results',$results);
+
+    }
+
 
     public function result($result_id) {
         $this->loadModel("Result");

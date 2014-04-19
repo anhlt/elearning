@@ -7,7 +7,9 @@ class Student extends AppModel{
         ),        
     );    
     public $hasMany = array(
-        'LessonMembership');
+        'LessonMembership',
+        'Result' => array('dependent' => True ));
+    
     public $hasAndBelongsToMany = array( 
         'Lesson'=>array(
             'joinTable'=> 'students_lessons', 
@@ -69,7 +71,7 @@ class Student extends AppModel{
         ),
         'ip_address' =>  array(
             'ip_address' => array(
-                'rule'    => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)
+                'rule'    => array('ip', 'both'), // or 'IPv6' or 'both' (default)
                 'message' => 'Please supply a valid IP address.'
             )
         ),

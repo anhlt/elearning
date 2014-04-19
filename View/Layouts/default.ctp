@@ -15,8 +15,6 @@
 		echo $this->Html->css('bootstrap.min');
 		echo $this->Html->css('style');
 	    echo $this->Html->script('jquery-1.11.0.js');
-	    //echo $this->Html->script('nocopy');
-
 	    echo $this->Html->css('bootstrap-responsive.min');
 	    echo $this->Html->css('bootstrap-responsive.min');
 	    echo $this->Html->css('tagmanager');
@@ -56,43 +54,58 @@ $(document).ready(function(){
     <div class="container">
     <div class="navbar-header">
     <a class="navbar-brand" href=<?php echo $this->webroot; ?>>Home</a>
+    <ul class="nav navbar-nav">
+        <?php if(AuthComponent::user('role')=='lecturer'):?>
+            <li><a href='/lecturer/'>Lecturer</a></li>
+        <?php elseif (AuthComponent::user('role')=='student'): ?>
+            <li><a href='/students/'>Student</a></li>
+        <?php elseif (AuthComponent::user('role')=='admin'): ?>
+            <li><a href='/Admins/'>Admins</a></li>
+        <?php endif?>
+    </ul>
 </div>
 
     <div class="navbar-collapse collapse" id="navbar-main">
-    <!--		<ul class="nav navbar-nav">
-    <li class="active"><a href="/posts/">Student</a></li>
-    <li><a href="/posts/add">Teacher</a></li>
-    </ul> -->
     <ul class="nav navbar-nav navbar-right">
-<?php if ($this->Session->read('Auth.User')){
-    echo "<li><a style = 'margin-right:420px'>";
-    //  echo "<div class='input-group'>";
-    //  echo "<span class = 'glyphicon-class'>iab</span>";
-    echo "<input id = 'searchip' class = 'form-control glyphicon-class' placeholder = 'smart search' style='height:25px'/>"; 
-    echo "</a></li>";
-    echo "<li><a href='/users/logout'>Logout</a></li>";
-} else{
-    echo "<li class='dropdown'>
-        <a href='#' class='dropdown-toggle' data-toggle='dropdown'>Sign Up <b class='caret'></b></a>
-        <ul class='dropdown-menu'>
-        <li><a href='/students/register'>Student</a></li>
-        <li><a href='/lecturer/add'>Teacher</a></li>
-        </ul>
-        </li>";
-
-    echo "<li><a href='/users/login'>Login</a></li>";
-}
-?>
-</ul>
+        <?php if ($this->Session->read('Auth.User')):?>
+                <?php if (AuthComponent::user('role')=='student'):?>
+                <li class="navbar-form" role="search">
+               <!--      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="smart search" name="srch-term" id = 'searchip'>
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div> -->
+                </li>
+                <?php endif ?>
+            <li><a href='/users/changepassword'>Change Password</a></li>
+            <li><a href='/users/logout'>Logout</a></li>
+        <?php else:?>
+            <li class='dropdown'>
+                <a href='#' class='dropdown-toggle' data-toggle='dropdown'>Sign Up <b class='caret'></b></a>
+                <ul class='dropdown-menu'>
+                <li><a href='/students/register'>Student</a></li>
+                <li><a href='/lecturer/add'>Teacher</a></li>
+                </ul>
+            </li>
+            <li class='dropdown'>
+                <a href='#' class='dropdown-toggle' data-toggle='dropdown'>Login <b class='caret'></b></a>
+                <ul class='dropdown-menu'>
+                <li><a href='/admins/login'>Login as admin</a></li>
+                <li><a href='/users/login'>Login as user</a></li>
+                </ul>
+            </li>
+        <?php endif ?>
+    </ul>
     </div><!--/.nav-collapse -->
     </div>
     </div>
     <div class="container">
     <?php echo $this->fetch('content'); ?>
+    <?php echo $this->element('sql_dump');?>
     </div> <!-- /container -->
     <!-- Le javascript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
 	<?php echo $this->Html->script('bootstrap.min'); ?>
 	<?php echo $this->Html->script('tagmanager'); ?>
 	<?php echo $this->Js->writeBuffer(); ?>

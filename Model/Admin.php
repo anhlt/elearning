@@ -5,7 +5,15 @@
  * @author Tha
  */
 class Admin extends AppModel {
-    public $hasOne = 'User';    
+    public $belongsTo = array(
+      'User' => array(
+          'className' => 'User',
+          'foreignKey' => 'id'
+      ));
+
+    public $hasMany = array(
+                'IpAdmin' => array('dependent' => True ));
+
     public $validate = array(
         'username' => array(
             'required' => array(
@@ -27,7 +35,7 @@ class Admin extends AppModel {
         ),
        'email' => array(
            'email' => array(
-               'rule' => array('email', true),
+               'rule' => array('email'),
                'message' => 'Please supply a valid email address.'
            ),
            'isUnique' => array(

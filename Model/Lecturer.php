@@ -11,6 +11,7 @@ class Lecturer extends AppModel {
            		 'className' => 'Lesson',
          		 'foreignKey' => 'lecturer_id',
         		 'dependent' => true
+
             ),
 		); 
 	public $validate = array(
@@ -67,7 +68,7 @@ class Lecturer extends AppModel {
 	    ),
         'ip_address' =>  array(
  			'ip_address' => array(
-     	   	'rule'    => array('ip', 'IPv4'), // or 'IPv6' or 'both' (default)
+     	   	'rule'    => array('ip', 'both'), // or 'IPv6' or 'both' (default)
         	'message' => 'Please supply a valid IP address.'
     		)
  		),
@@ -77,10 +78,9 @@ class Lecturer extends AppModel {
 	);
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['init_verificode'])) {
+        	$this->data[$this->alias]['current_verifycode'] = md5($this->data[$this->alias]['current_verifycode']);
             $this->data[$this->alias]['init_verificode'] = $this->data[$this->alias]['current_verifycode'];
         }
         return true;
     }
 }
-
-

@@ -4,7 +4,7 @@
 		<meta charset='utf-8'/>
 		<title> 新授業を作成する</title>	
 		<script>
-			$(":file").filestyle({input: false});	
+			$(":file").filestyle({input: false});
 		</script>		
 	</head>
 	<body>		
@@ -18,14 +18,14 @@
 				'class' => 'form-control'  
 				),  
 			'class' => 'well',
-		    'url' => array('controller' => 'Test', 'action' => 'add','id' => $id),
+		    'url' => array('controller' => 'tests', 'action' => 'edit','id' => $id),
 		    'method' => 'post',
 		    'enctype' => 'multipart/form-data'
 			)); ?>
 
 			<div class="form-group">
 				<?php echo $this->Form->input('title', array(  
-					'placeholder' => 'ファイルの名前',  
+					'value' => $result['title'],  
 					'style' => 'width: 300px;',
 					'label' => 'ファイルの名前',
 				)); ?>  
@@ -33,22 +33,22 @@
 
 			<div class='form-group'>
 				<?php echo $this->Form->input('link', array( 
-					'type'=> 'file', 
+					'type'=> 'file',					
+					'value' => $result['link'],
+					'placeholder' => 'ファイル',
+					'required' => false,
 					'id' => 'f',
-					'placeholder' => 'ファイル',  
-					'class' => 'btn-file',
-					'accept' => "image/gif, image/jpeg"
+					'class' => 'btn-file'
 				)); ?>
-
 			</div>
 
 			<div class="form-group">
-				<?php echo $this->Form->input('test_time', array(  
-					'placeholder' => 'テスト時間',  
+				<?php echo $this->Form->input('test_time', array(
+					'value' => $result['test_time'],  
 					'style' => 'width: 100px;',
-					'label' => '時間 （分）',
+					'label' => '時間 （分）',					
 				)); ?>				
-			</div>						
+			</div>					
 			
 			<div class='form-group'>					 
 				<?php echo $this->Form->submit('アップロード', array(

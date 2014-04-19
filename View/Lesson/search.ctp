@@ -53,7 +53,7 @@ echo $this->Form->end();
 ?>
 <!-- Phan button search -->
 <br>
-<label> タグで検索</label>
+<label>キーワードで検索<br>(;で分割できる)</label>
 <input size = 20p id = 'myinput'></input>
 <button style="margin-left:60px" id = 'searchbt'>検索</button>
 <br>
@@ -102,16 +102,23 @@ if (isset($rank_stt)){
             }
         }
     }
-}else if (isset($tags)){ //Truong hop search 
-   // debug($tags);
-    foreach($tags as $row){
-        $lessons = $row['Lesson'];
-        $tag = $row['Tag'];
-        echo $this->Html->tableHeaders(array("id", "タグ",   "授業の名前", "先生 のユーザ名", "先生の名前", "アップロードの日"));  
-        foreach ($lessons as $lesson) {
-            echo $this->Html->tableCells(array($lesson['id'],$tag['name'],   $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn",$lesson['id'] )), $lesson['Lecturer']['User']['username'], $lesson['Lecturer']['full_name'],  $lesson['update_date'])); 
+// }else if (isset($tags)){ //Truong hop search 
+//    // debug($tags);
+//      echo $this->Html->tableHeaders(array("id", "タグ",   "授業の名前", "先生 のユーザ名", "先生の名前", "アップロードの日"));  
+//     foreach($tags as $row){
+//         $lessons = $row['Lesson'];
+//         $tag = $row['Tag'];
+//         foreach ($lessons as $lesson) {
+//             echo $this->Html->tableCells(array($lesson['id'],$tag['name'],   $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn",$lesson['id'] )), $lesson['Lecturer']['User']['username'], $lesson['Lecturer']['full_name'],  $lesson['update_date'])); 
 
-        }
+//         }
+//     }
+// }
+}else if (isset($lesson_search)){
+     echo $this->Html->tableHeaders(array("id", "授業の名前", "先生 のユーザ名", "先生の名前", "アップロードの日")) ;  
+    foreach($lesson_search as $row){
+        $lesson = $row['Lesson'];
+        echo $this->Html->tableCells(array($lesson['id'], $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn",$lesson['id'] )), $row['Lecturer']['User']['username'], $row['Lecturer']['full_name'],  $lesson['update_date'])); 
     }
 }
 ?>

@@ -10,9 +10,9 @@ class  Parameter extends AppModel{
     'value' => array(
         'format'=>array(
             'rule' => array('numeric')
-        )
-     )
-);
+            )
+         )
+    );
 
     public function getLessonCost(){
         $data = $this->query("SELECT value FROM parameters WHERE name = 'LESSON_COST'");
@@ -47,8 +47,6 @@ class  Parameter extends AppModel{
     public function updateParameter($name, $value){
         $return = $this->query("UPDATE parameters SET value = '$value' WHERE name = '$name'");
         return $return;
-    }
-    
+    }    
 }
 ?>
-

@@ -25,6 +25,10 @@ define("PDF", "pdf");
 define("TSV", "tsv");
 define ("MP3", "mp3");
 define ("MP4", "mp4");
+define ("WAV", "wav");
+define ("PNG", "png");
+define ("JPG", "jpg");
+define ("GIF", "gif");
 define("O", "operation");
 define("D", "debug");
 define ("E", "error");
@@ -33,7 +37,10 @@ define ("STUDENT_CHOOSE_COURSE", 2);
 define ("STUDENT_STUDY_HISTORY", 3);
 define ("MAX_LEARN_DAY", 10);
 define ("DELETED", -1);
+define ("TEACHER_FIXED", 0);
+define ("TEACHER_UNFIX", 1);
 /**
+ *
  * The settings below can be used to set additional paths to models, views and controllers.
  *
  * App::build(array(
