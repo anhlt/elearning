@@ -229,17 +229,17 @@ class AdminsController extends AppController {
     public function reset_password_lecturer($id_lecturer, $init_password) {
         //echo $id;
         //echo $init_password;
-        $this->loadModel('User');
-        $sql = "UPDATE users SET password = '$init_password' WHERE users.id = '$id_lecturer'";
-        if (!$this->User->query($sql)) {
+        if(isset($id_lecturer) && isset($init_password)){
+            $this->loadModel('User');
+            $sql = "UPDATE users SET password = '$init_password' WHERE users.id = '$id_lecturer'";
+            $this->User->query($sql);
             //$this->Session->setFlash(__('パスワードのリセットが成功された'));
             $this->Session->setFlash(__('パスワードのリセットが成功された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
             ));
             $this->redirect(array('action' => 'manage_lecturer'));
-        } else {
-            //$this->Session->setFlash(__('パスワードのリセットができない'));
+        }else{
             $this->Session->setFlash(__('パスワードのリセットができない'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-warning'
@@ -251,21 +251,22 @@ class AdminsController extends AppController {
     public function reset_verifycode_lecturer($id_lecturer, $init_verifycode) {
         //echo $id;
         //echo $init_password;
-        $this->loadModel('Lecturer');
-        $sql = "UPDATE lecturers SET current_verifycode = '$init_verifycode' WHERE lecturers.id = '$id_lecturer'";
-        if (!$this->User->query($sql)) {
-            //$this->Session->setFlash(__('verifycodeのリセットが成功された'));
+        if(isset($id_lecturer) && isset($init_verifycode)){
+            $this->loadModel('Lecturer');
+            $sql = "UPDATE lecturers SET current_verifycode = '$init_verifycode' WHERE lecturers.id = '$id_lecturer'";
+            $this->User->query($sql); 
+             //$this->Session->setFlash(__('verifycodeのリセットが成功された'));
             $this->Session->setFlash(__('verifycodeのリセットが成功された'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-success'
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
             ));
             $this->redirect(array('action' => 'manage_lecturer'));
-        } else {
-            //$this->Session->setFlash(__('verifycodeのリセットができない'));
+            
+        }else{
             $this->Session->setFlash(__('verifycodeのリセットができない'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-warning'
-            ));
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
             $this->redirect(array('action' => 'manage_lecturer'));
         }
     }
@@ -379,16 +380,18 @@ class AdminsController extends AppController {
     public function reset_password_student($id_student, $init_password) {
         //echo $id;
         //echo $init_password;
-        $this->loadModel('User');
-        $sql = "UPDATE users SET password = '$init_password' WHERE users.id = '$id_student'";
-        if (!$this->User->query($sql)) {
+        if(isset($id_student) && isset($init_password)){
+            $this->loadModel('User');
+            $sql = "UPDATE users SET password = '$init_password' WHERE users.id = '$id_student'";
+            $this->User->query($sql);
             //$this->Session->setFlash(__('パスワードのリセットが成功された'));
             $this->Session->setFlash(__('パスワードのリセットが成功された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
             ));
             $this->redirect(array('action' => 'manage_student'));
-        } else {
+        
+        }else{
             //$this->Session->setFlash(__('パスワードのリセットができない'));
             $this->Session->setFlash(__('パスワードのリセットが成功された'), 'alert', array(
                 'plugin' => 'BoostCake',
@@ -401,16 +404,17 @@ class AdminsController extends AppController {
     public function reset_verifycode_student($id_student, $init_verifycode) {
         //echo $id;
         //echo $init_password;
+        if(isset($id_student) && isset($init_verifycode)){
         $this->loadModel('Student');
         $sql = "UPDATE students SET current_verifycode = '$init_verifycode' WHERE   students.id = '$id_student'";
-        if (!$this->User->query($sql)) {
+            $this->User->query($sql);
             //$this->Session->setFlash(__('verifycodeのリセットが成功された'));
             $this->Session->setFlash(__('verifycodeのリセットが成功された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
             ));
             $this->redirect(array('action' => 'manage_student'));
-        } else {
+        }else{
             //$this->Session->setFlash(__('verifycodeのリセットができない'));
             $this->Session->setFlash(__('verifycodeのリセットができない'), 'alert', array(
                 'plugin' => 'BoostCake',
