@@ -39,16 +39,18 @@ class AdminsController extends AppController {
                 $id = $this->Auth->user('id');
                 $this->User->recursive = 3;
                 $user = $this->User->findById($id);
+                $has_ip = 0;
                 foreach ($user['Admin']['IpAdmin'] as $ip) {
-                    if($this->request->ClientIp() == $ip['ip_address']) break;
+                    if($this->request->ClientIp() == $ip['ip_address']) $has_ip = 1;
+                };
+                if($has_ip == 0){
                     $this->Session->setFlash(__('wrong ip'), 'alert', array(
-                        'plugin' => 'BoostCake',
-                        'class' => 'alert-warning'
-                    )); 
+                            'plugin' => 'BoostCake',
+                            'class' => 'alert-warning'
+                        )); 
                     $this->Auth->logout();
                     $this->redirect(array('controller'=>'admins','action' => 'login'));
-                };
-      
+                }
                 $this->redirect(array('controller'=>'Admins'));
                 
             }else

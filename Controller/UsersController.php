@@ -109,9 +109,8 @@ class UsersController extends AppController {
 		        	$this->Session->write('failedTime',$failedTime+1);
 		        else
 		        	$this->Session->write('failedTime',1);
-
             	if($failedTime >= $this->Parameter->getWrongPasswordTimes()){
-            		if(isset($user)){
+            		if(!empty($user)){
             			$locktime = $this->Parameter->getLockTime();
     					$this->mc->set($user['User']['username'],time() + $locktime, time() + $locktime);
     					if($user['User']['role'] == 'lecturer'){

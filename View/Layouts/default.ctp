@@ -39,11 +39,6 @@ $(document).ready(function(){
     <?php echo $this->Html->css('docs.min'); ?>
     <?php echo $this->Html->css('tagmanager'); ?>	
 
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-
 	<?php
 	echo $this->fetch('meta');
 	echo $this->fetch('css');
@@ -70,12 +65,12 @@ $(document).ready(function(){
         <?php if ($this->Session->read('Auth.User')):?>
                 <?php if (AuthComponent::user('role')=='student'):?>
                 <li class="navbar-form" role="search">
-               <!--      <div class="input-group">
+                    <div class="input-group">
                         <input type="text" class="form-control" placeholder="smart search" name="srch-term" id = 'searchip'>
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
-                    </div> -->
+                    </div>
                 </li>
                 <?php endif ?>
             <li><a href='/users/changepassword'>Change Password</a></li>
