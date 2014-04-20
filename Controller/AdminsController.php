@@ -53,16 +53,14 @@ class AdminsController extends AppController {
                     $this->redirect(array('controller'=>'admins','action' => 'login'));
                 }
                 $this->redirect(array('controller'=>'Admins'));
-                }
-            }
-
-            $this->Session->setFlash(__('ユーザ名、パスワードが正しくない'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-warning'
-            ));
+                }else
+                    $this->Session->setFlash(__('ユーザ名、パスワードが正しくない'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-warning'
+                    ));
         }
     }
-
+    
     public function add_ip_address() {
         $id = $this->Auth->user('id');
         if ($this->request->is('post')) {

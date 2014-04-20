@@ -79,11 +79,11 @@ class Lecturer extends AppModel {
            'alphaNumeric' => array(
                 'rule'     => 'alphaNumeric',
                 'required' => true,
-                'message'  => 'Alphabets and numbers only'
+                'message'  => '数字'
             ),
            'between' => array(
-                'rule'    => array('between', 12, 12),
-                'message' => 'Must be 12 characters'
+                'rule'    => array('between', 15, 15),
+                'message' => '１５字しなけらばならない'
             )
  		)
 	);
