@@ -22331,3 +22331,116 @@ Stack Trace:
 #3 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(902): App::_checkFatalError()
 #4 [internal function]: App::shutdown()
 #5 {main}
+2014-04-20 14:22:34 Error: [MissingControllerException] Controller class MymemcachedadminController could not be found.
+Exception Attributes: array (
+  'class' => 'MymemcachedadminController',
+  'plugin' => NULL,
+)
+Request URL: /mymemcachedadmin
+Stack Trace:
+#0 /var/www/elearning/webroot/index.php(102): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-04-20 14:23:23 Error: [MissingControllerException] Controller class PhpMemcachedAdminController could not be found.
+Exception Attributes: array (
+  'class' => 'PhpMemcachedAdminController',
+  'plugin' => NULL,
+)
+Request URL: /phpMemcachedAdmin
+Stack Trace:
+#0 /var/www/elearning/webroot/index.php(102): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-04-20 14:23:29 Error: [MissingControllerException] Controller class PhpMemcachedAdminController could not be found.
+Exception Attributes: array (
+  'class' => 'PhpMemcachedAdminController',
+  'plugin' => NULL,
+)
+Request URL: /phpMemcachedAdmin/
+Stack Trace:
+#0 /var/www/elearning/webroot/index.php(102): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-04-20 14:24:12 Error: [MissingControllerException] Controller class PhpMemcachedAdminController could not be found.
+Exception Attributes: array (
+  'class' => 'PhpMemcachedAdminController',
+  'plugin' => NULL,
+)
+Request URL: /phpMemcachedAdmin/
+Stack Trace:
+#0 /var/www/elearning/webroot/index.php(102): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-04-20 14:24:40 Error: [MissingControllerException] Controller class PhpMemcachedAdminController could not be found.
+Exception Attributes: array (
+  'class' => 'PhpMemcachedAdminController',
+  'plugin' => NULL,
+)
+Request URL: /phpMemcachedAdmin/
+Stack Trace:
+#0 /var/www/elearning/webroot/index.php(102): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-04-20 14:24:49 Error: [MissingControllerException] Controller class PhpMemcachedAdminController could not be found.
+Exception Attributes: array (
+  'class' => 'PhpMemcachedAdminController',
+  'plugin' => NULL,
+)
+Request URL: /phpMemcachedAdmin/
+Stack Trace:
+#0 /var/www/elearning/webroot/index.php(102): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-04-20 14:24:53 Error: [MissingControllerException] Controller class PhpMemcachedAdminController could not be found.
+Exception Attributes: array (
+  'class' => 'PhpMemcachedAdminController',
+  'plugin' => NULL,
+)
+Request URL: /phpMemcachedAdmin/
+Stack Trace:
+#0 /var/www/elearning/webroot/index.php(102): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2014-04-20 14:50:25 Error: Fatal Error (4): syntax error, unexpected ',', expecting ')' in [/var/www/elearning/View/Lesson/search.ctp, line 50]
+2014-04-20 14:50:25 Error: [FatalErrorException] syntax error, unexpected ',', expecting ')'
+Request URL: /lesson/search
+Stack Trace:
+#0 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Error/ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/elearn...', 50)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/elearn...', 50, Array)
+#2 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/elearn...', 50, Array)
+#3 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-20 18:41:56 Error: Fatal Error (4): syntax error, unexpected T_DOUBLE_ARROW in [/var/www/elearning/View/Lesson/search.ctp, line 83]
+2014-04-20 18:41:56 Error: [FatalErrorException] syntax error, unexpected T_DOUBLE_ARROW
+Request URL: /lesson/search?search_value=tuy
+Stack Trace:
+#0 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Error/ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/elearn...', 83)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/elearn...', 83, Array)
+#2 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/elearn...', 83, Array)
+#3 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-20 21:17:11 Error: Fatal Error (4): syntax error, unexpected '{' in [/var/www/elearning/View/Lesson/search.ctp, line 145]
+2014-04-20 21:17:11 Error: [FatalErrorException] syntax error, unexpected '{'
+Request URL: /lesson/search?search_value=%E3%81%BF%EF%BC%8B%E3%81%AA
+Stack Trace:
+#0 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Error/ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/elearn...', 145)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/elearn...', 145, Array)
+#2 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/elearn...', 145, Array)
+#3 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-20 21:17:35 Error: Fatal Error (4): syntax error, unexpected '}' in [/var/www/elearning/View/Helper/UtilHelper.php, line 14]
+2014-04-20 21:17:35 Error: [FatalErrorException] syntax error, unexpected '}'
+Request URL: /lesson/search?search_value=%E3%81%BF%EF%BC%8B%E3%81%AA
+Stack Trace:
+#0 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Error/ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/elearn...', 14)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/elearn...', 14, Array)
+#2 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/elearn...', 14, Array)
+#3 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-20 21:46:10 Error: Fatal Error (4): syntax error, unexpected ';' in [/var/www/elearning/View/Lesson/search.ctp, line 55]
+2014-04-20 21:46:10 Error: [FatalErrorException] syntax error, unexpected ';'
+Request URL: /lesson/search
+Stack Trace:
+#0 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Error/ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/elearn...', 55)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/elearn...', 55, Array)
+#2 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/elearn...', 55, Array)
+#3 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}

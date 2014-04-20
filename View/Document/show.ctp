@@ -16,8 +16,8 @@ height: 650px;
     top:0px;
     left:0px;
     z-index:3;
-    width:90%;
-    height:100%;
+    width:95%;
+    height:95%;
 }
 .transimageBig{
     position:absolute;
@@ -73,7 +73,8 @@ if ($extension == 'pdf'){
     }else {
         echo $this->Html->image('icon/trans.png', array("class"=>"transimageBig"));
     }
-    echo "<iframe id = 'frame' style = 'z-index:-1' src='".$link."'></iframe>";
+    // echo "<iframe id = 'frame' style = 'z-index:-1' src='".$link."'></iframe>";
+    echo "<embed src=".$link." id = 'frame'>";
     echo "</div>";
 }else if ( $extension=='mp3' || $extension == 'wav'){
 
