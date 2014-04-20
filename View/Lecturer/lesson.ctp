@@ -49,7 +49,8 @@
 				'placeholder' => 'タグ',  
 				'style' => 'width:300px;',
 				'label' => 'タグ',
-				'class' => 'tm-input'
+				'class' => 'tm-input',
+				'value' => 'default'
 			)); ?>
 		</div>
 		<?php echo $this->Form->submit('追加', array(  
