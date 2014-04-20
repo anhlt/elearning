@@ -20,7 +20,7 @@ $i=1;
 foreach($datas as $data){
     echo "<tr>";
         echo "<td>".$i++."</td>";
-        echo "<td>".$this->html->link('見る　',array('controller'=>'admins','action'=>'view_infor_student',$data['Violate']['student_id'])).$data['Violate']['student_id']."</td>";
+        echo "<td>".$this->html->link('見る　',array('controller'=>'admins','action'=>'look_infor_student',$data['Violate']['student_id'])).$data['Violate']['student_id']."</td>";
         echo "<td>".$data['Violate']['content']."</td>";
         echo "<td>".$data['Violate']['time']."</td>";
         echo "<td>".$this->html->link('削除',array('controller'=>'admins','action'=>'delete_violate',$data['Violate']['document_id'],$data['Violate']['id']))."</td>";

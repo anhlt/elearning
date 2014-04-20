@@ -1289,6 +1289,36 @@ class AdminsController extends AppController {
         }
         $this->redirect(array('controller' => 'admins', 'action' => 'manage_document'));
     }
+    
+    public function look_infor_student($id_student) {
+
+        $questions = $this->Question->find('all');
+        $droplist = array();
+        foreach ($questions as $question) {
+            $droplist[$question['Question']['id']] = $question['Question']['question'];
+        }
+        $this->set('droplist', $droplist);
+        if (empty($this->request->data)) {
+            //$lecturer_id = $this->Auth->user('id');
+            $this->request->data = $this->Student->findById($id_student);
+            //var_dump($this->request->data);
+        } else {
+            $this->request->data['Student']['id'] = $id_student;
+            //var_dump($this->request->data);
+            if ($this->Student->save($this->request->data)) {
+                $this->Session->setFlash(__('セーブされた'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+                //$this->redirect(array('controller' => 'Admin', 'action' => 'manage_lecturer'));
+            } else {
+                $this->Session->setFlash(__('セーブできない、もう一度お願い'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
+            }
+        }
+    }
 }
 ?>
 
