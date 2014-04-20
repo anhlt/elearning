@@ -1,11 +1,8 @@
-
 <?php
-
 App::uses('Folder', 'Utility');
 App::uses('File', 'Utility');
 
 class AdminsController extends AppController {
-
     public $components = array('Paginator');
     public $helpers = array('Js');
     var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter', 'Question');
@@ -1239,7 +1236,6 @@ class AdminsController extends AppController {
         $this->autoRender = false;
         if (isset($this->params['named']['file'])) {
             $source = WWW_ROOT . 'files/db/' . $this->params['named']['file'];
-            var_dump($source);
             unlink($source);
         }
         $this->Session->setFlash(__('バックアップのファイルが削除された'), 'alert', array(

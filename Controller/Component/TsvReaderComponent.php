@@ -1,7 +1,7 @@
 <?php 
-    class TsvReaderHelper extends AppHelper {
+    class TsvReaderComponent extends Component {
    		public function getViewTSV($filename) {
-      	$link = $_SERVER['DOCUMENT_ROOT']. 'tsv' . DS . $filename;
+      	$link = $_SERVER['DOCUMENT_ROOT']. DS . 'webroot' . DS .'tsv' . DS . $filename;
         $data_tsv = array();
         if (($handle = fopen($link, "r")) !== FALSE) {
             $row = 0;

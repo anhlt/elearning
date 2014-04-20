@@ -13,12 +13,12 @@
 	<div class="col-xs-13 col-md-9">
 		<div class="well">
 			<table class="table table-condensed" >
-			Lessons
+			従業
 			<tr>
 				<td  class="col-sm-1"><?php echo $this->Paginator->sort('id'); ?></td>
-				<td  class="col-sm-1"><?php echo $this->Paginator->sort('Name');?></td>
-				<td  class="col-sm-3">Description</td>
-				<td  class="col-sm-3">Manage</td>
+				<td  class="col-sm-1"><?php echo $this->Paginator->sort('Name','名前');?></td>
+				<td  class="col-sm-3">説明</td>
+				<td  class="col-sm-3">管理</td>
 			</tr>
 			<?php foreach ($results as $result) :?>
 			<tr id="resultsDiv">
