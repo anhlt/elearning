@@ -17,6 +17,10 @@
                 echo $this->html->link('学生の管理', array('controller' => "admins", 'action' => "manage_student"
                 ));
 ?></li>
+                <li><?php
+                echo $this->html->link('ドキュメントの管理', array('controller' => "admins", 'action' => "manage_document"
+                ));
+?></li>
 		<li><?php
                 echo $this->html->link('先生のランキグ', array('controller' => "admins", 'action' => "ranking_lecturer"
                 ));
