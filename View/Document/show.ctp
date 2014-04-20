@@ -60,7 +60,9 @@ $(document).ready(function(){
 <?php
 
 echo "<h1 style='margin-top:0px'>".$document['title']."</h1>"; 
-echo $this->Html->link('違反レポート', '/document/report/'.$document['id'], array('class'=>'floatRight label label-default'));
+if(AuthComponent::user('role')!='admin'){
+    echo $this->Html->link('違反レポート', '/document/report/'.$document['id'], array('class'=>'floatRight label label-default'));
+}
 //echo "<input id = 'frame' type = 'text' oncontextmenu = 'return false' />"; 
 $link = $document['link'];
 if (stripos(strrev(strtolower($link)), strrev(PDF))===0){

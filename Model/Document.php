@@ -1,8 +1,13 @@
 <?php
 class Document extends AppModel {
 	public $name = 'document';
-	
-	public $validate = array(
+	public $hasMany = array(
+            'Violate' => array(
+                'className' => 'Violate',
+                'dependent' => true,
+            )
+        );
+        public $validate = array(
 		'title' => array(
 			'required' => array(
 				'rule' => array('notEmpty'),

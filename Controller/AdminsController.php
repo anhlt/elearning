@@ -7,7 +7,7 @@ class AdminsController extends AppController {
 
     public $components = array('Paginator');
     public $helpers = array('Js');
-    var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter', 'Question');
+    var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter', 'Question', 'Document', 'Violate');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -1210,6 +1210,85 @@ class AdminsController extends AppController {
         $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));
     }
 
+    public function manage_document(){
+        $sql= "SELECT documents.id, documents.link, documents.title, documents.baned, COUNT( violates.id ) as count
+                FROM  `violates` , documents
+                WHERE violates.document_id = documents.id
+                GROUP BY (documents.id)";
+        $datas = $this->Document->query($sql);
+        if($datas){
+        //debug($datas);
+            $this->set('datas', $datas);
+        }else{
+            $this->Session->setFlash(__('データがない'), 'alert', array(
+            'plugin' => 'BoostCake',
+            'class' => 'alert-warning'));
+        }    
+    }
+    public function see_document($document_id){
+        $datas = $this->Document->find('first',$document_id);
+        $this->redirect(array('controller' => 'Document', 'action' => 'show',$document_id));
+    }
+    
+    public function see_violate_document($document_id){
+        $datas = $this->Violate->find('all',array('conditions' =>array('document_id' => $document_id )));
+        //debug($datas);
+        if($datas){
+            $this->set('datas', $datas);
+        }else{
+            $this->Session->setFlash(__('違犯報告がない'), 'alert', array(
+            'plugin' => 'BoostCake',
+            'class' => 'alert-warning'));
+        }
+        //$this->redirect(array('controller' => 'admins', 'action' => 'manage_document'));
+    }
+    
+    public function ban_document($document_id){
+        $Document  = $this->Document->findById($document_id);
+        $Document ["Document"]['baned'] = 1;
+        var_dump($Document);
+        if($this->Document->save($Document)){
+            
+        }else{
+            $this->Session->setFlash(__('禁止できない'), 'alert', array(
+            'plugin' => 'BoostCake',
+            'class' => 'alert-warning'));
+        }
+        $this->redirect(array('controller' => 'admins', 'action' => 'manage_document'));
+    }
+    
+    public function delete_ban_document($document_id){
+         $Document  = $this->Document->findById($document_id);
+        $Document ["Document"]['baned'] = 0;
+        var_dump($Document);
+        if($this->Document->save($Document)){
+            
+        }else{
+            $this->Session->setFlash(__('禁止できない'), 'alert', array(
+            'plugin' => 'BoostCake',
+            'class' => 'alert-warning'));
+        }
+        $this->redirect(array('controller' => 'admins', 'action' => 'manage_document'));
+    }
+    
+    public function delete_violate($document_id,$id){
+        $this->Violate->delete($id);
+        $this->redirect(array('controller' => 'admins', 'action' => 'see_violate_document',$document_id));
+    }
+    
+    public function delete_document($document_id){
+        $data = $this->Document->find('first', $document_id);
+        $name = $data['Document']['link'];	
+        if ($this->Document->delete($document_id)) 
+        {
+            unlink(WWW_ROOT.DS.$name);    		
+            $this->Session->setFlash(__('ドキュメントが削除された'), 'alert', array(
+                'plugin' => 'BoostCake',
+                'class' => 'alert-success'
+            ));   	
+        }
+        $this->redirect(array('controller' => 'admins', 'action' => 'manage_document'));
+    }
 }
 ?>
 
