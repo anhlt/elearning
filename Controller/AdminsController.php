@@ -962,7 +962,6 @@ class AdminsController extends AppController {
         $data.= mb_convert_kana("END___END___END", "rnaskhcv") . "\t";
         $data.= mb_convert_kana($year, "rnaskhcv") . "\t";
         $data.= mb_convert_kana($month, "rnaskhcv") . "\t";
-        fclose($Handle);
         $this->response->body($data);
         $this->response->type('tsv');
         $this->response->download("ELS-UBT-" . $year . "-" . $month . ".tsv");
