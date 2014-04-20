@@ -66,7 +66,7 @@ $(document).ready(function(){
                 <?php if (AuthComponent::user('role')=='student'):?>
                 <li class="navbar-form" role="search">
                     <div class="input-group .col-md-4">
-                        <input type="text" class="form-control" placeholder="smart search" name="srch-term" id = 'searchip'>
+                        <input type="text" class="form-control" placeholder="スマート 検索" name="srch-term" id = 'searchip'>
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
