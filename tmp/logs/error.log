@@ -22331,3 +22331,65 @@ Stack Trace:
 #3 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(902): App::_checkFatalError()
 #4 [internal function]: App::shutdown()
 #5 {main}
+2014-04-20 15:05:10 Error: Fatal Error (1): Call to undefined method AuthComponent::findById() in [/home/action/Workspace/elearning/Controller/LecturerController.php, line 155]
+2014-04-20 15:05:10 Error: [FatalErrorException] Call to undefined method AuthComponent::findById()
+Request URL: /lecturer/delete
+Stack Trace:
+#0 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Error/ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to undefin...', '/home/action/Wo...', 155)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', '/home/action/Wo...', 155, Array)
+#2 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', '/home/action/Wo...', 155, Array)
+#3 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-20 15:05:20 Error: Fatal Error (1): Call to undefined method AuthComponent::findbyId() in [/home/action/Workspace/elearning/Controller/LecturerController.php, line 155]
+2014-04-20 15:05:20 Error: [FatalErrorException] Call to undefined method AuthComponent::findbyId()
+Request URL: /lecturer/delete
+Stack Trace:
+#0 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Error/ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to undefin...', '/home/action/Wo...', 155)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', '/home/action/Wo...', 155, Array)
+#2 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', '/home/action/Wo...', 155, Array)
+#3 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-20 15:05:23 Error: Fatal Error (1): Call to undefined method AuthComponent::findbyId() in [/home/action/Workspace/elearning/Controller/LecturerController.php, line 155]
+2014-04-20 15:05:23 Error: [FatalErrorException] Call to undefined method AuthComponent::findbyId()
+Request URL: /lecturer/delete
+Stack Trace:
+#0 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Error/ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to undefin...', '/home/action/Wo...', 155)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', '/home/action/Wo...', 155, Array)
+#2 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', '/home/action/Wo...', 155, Array)
+#3 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-20 15:05:29 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'findbyId' at line 1
+Request URL: /lecturer/delete
+Stack Trace:
+#0 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('findbyId', Array)
+#2 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Model/Datasource/DboSource.php(665): DboSource->execute('findbyId', Array, Array)
+#3 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Model/Datasource/DboSource.php(609): DboSource->fetchAll('findbyId', Array, Array)
+#4 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Model/Model.php(800): DboSource->query('findbyId', Array, Object(User))
+#5 /home/action/Workspace/elearning/Controller/LecturerController.php(155): Model->__call('findbyId', Array)
+#6 /home/action/Workspace/elearning/Controller/LecturerController.php(155): User->findbyId('28')
+#7 [internal function]: LecturerController->delete()
+#8 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(LecturerController), Array)
+#9 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Routing/Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#10 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Routing/Dispatcher.php(160): Dispatcher->_invoke(Object(LecturerController), Object(CakeRequest), Object(CakeResponse))
+#11 /home/action/Workspace/elearning/webroot/index.php(100): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}
+2014-04-20 15:05:36 Error: [PDOException] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'findbyId' at line 1
+Request URL: /lecturer/delete
+Stack Trace:
+#0 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Model/Datasource/DboSource.php(458): PDOStatement->execute(Array)
+#1 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Model/Datasource/DboSource.php(424): DboSource->_execute('findbyId', Array)
+#2 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Model/Datasource/DboSource.php(665): DboSource->execute('findbyId', Array, Array)
+#3 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Model/Datasource/DboSource.php(609): DboSource->fetchAll('findbyId', Array, Array)
+#4 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Model/Model.php(800): DboSource->query('findbyId', Array, Object(User))
+#5 /home/action/Workspace/elearning/Controller/LecturerController.php(155): Model->__call('findbyId', Array)
+#6 /home/action/Workspace/elearning/Controller/LecturerController.php(155): User->findbyId('28')
+#7 [internal function]: LecturerController->delete()
+#8 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(LecturerController), Array)
+#9 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Routing/Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#10 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Routing/Dispatcher.php(160): Dispatcher->_invoke(Object(LecturerController), Object(CakeRequest), Object(CakeResponse))
+#11 /home/action/Workspace/elearning/webroot/index.php(100): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#12 {main}

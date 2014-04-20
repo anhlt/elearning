@@ -31,7 +31,6 @@ class UsersController extends AppController {
         $this->Auth->allow('verifycode');
         $this->mc = new Memcached();
         $this->mc->addServer("localhost", 11211);
-    	var_dump($pause = $this->mc->get('T001'));
     }
 
 	public function index($value='')
@@ -105,7 +104,6 @@ class UsersController extends AppController {
 	        }else
 	        {
 	        	$failedTime = $this->Session->read('failedTime');
-	        	var_dump($failedTime);
 	        	if(isset($failedTime))
 		        	$this->Session->write('failedTime',$failedTime+1);
 		        else

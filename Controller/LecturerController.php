@@ -147,5 +147,19 @@ class LecturerController extends AppController {
 			}
 		}
 		return $this->redirect($this->referer());
-	}	
+	}
+
+	public function delete($value='')
+	{
+		$user_id = $this->Auth->user('id');
+		$User = $this->User->findById($user_id);
+		if($this->request->is('post') || $this->request->is('put')){
+			if(AuthComponent::password($this->request->data['User']['current_password']) == $User['User']['password']){
+				$user_id = $this->Auth->user('id');
+				$this->User->delete($user_id);
+				$this->Auth->logout();
+				$this->redirect('/');
+			}
+		}
+	}
 }
