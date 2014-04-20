@@ -117,6 +117,11 @@ class DocumentController extends AppController {
     }
 
     public function show($document_id){
+    	$doc  = $this->Document->findById($document_id);
+    	$lesson = $this->Lesson->findById($doc ["Document"]['lesson_id']);
+    	$lecturer_id = $lesson['Lecturer']['id'];
+    	if($this->Auth->user('role') == 'lecturer' && $this->Auth->user('id') != $lecturer_id)
+            $this->redirect(array('controller' => 'users', 'action' => 'permission'));
         $document = $this->Document->find("first", array("conditions"=>array("Document.id"=>$document_id)));
         $this->set("document", $document['Document']);
         $lesson_id = $document['Document']['lesson_id']; 

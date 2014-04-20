@@ -17,7 +17,6 @@ if($data != NULL){
         <td>登録情報</td>
         <td>状態</td>
         <td>パスワードリセット</td>
-        <td>verifycodeリセット</td>
         <td>アカウント削除</td>
     </tr>   
 <?php  
@@ -35,7 +34,7 @@ if($item['users']['actived'] == 1){
         echo "<td><a href =''>".$this->html->link('可用',array('controller'=>'admins','action'=>'lock_student',$item['students']['id']))."</a></td>";
 }
         echo "<td><a href =''>".$this->html->link('リセット',array('controller'=>'admins','action'=>'reset_password_student',$item['students']['id'],$item['students']['init_password']))."</a></td>";
-        echo "<td><a href =''>".$this->html->link('リセット',array('controller'=>'admins','action'=>'reset_verifycode_student',$item['students']['id'],$item['students']['init_verifycode']))."</a></td>";
+        
         echo "<td><a href =''>".$this->html->link('削除',array('controller'=>'admins','action'=>'delete_student',$item['students']['id']))."</a></td>";
     echo "</tr>";
 }
