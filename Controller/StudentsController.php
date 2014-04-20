@@ -23,8 +23,6 @@ class StudentsController extends AppController {
         if($this->request->is('post')){
             $user = $this->data['User'];
             $student = $this->data['Student'];
-            debug($user);
-            debug($student);
             $this->Student->id = $id;
             $this->Student->save($student);
             $this->loadModel("User");

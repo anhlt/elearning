@@ -543,18 +543,13 @@ class LessonController extends AppController {
 
     public function register($lesson_id){
         $user_id = $this->Auth->user('id');
-        if ($this->Util->checkLessonAvailableWithStudent($lesson_id, $user_id)){
-            $this->redirect("/lesson/learn/".$lesson_id);     
-        } 
+        if ($this->Util->checkLessonAvailableWithStudent($lesson_id, $user_id)==LEARNABLE){
+           $this->redirect("/lesson/learn/".$lesson_id);     
+        }
         if ($this->request->is('post')){
             $this->loadModel('StudentsLesson');
             $data = array("student_id"=>$user_id, "lesson_id"=>$lesson_id) ;   
-            $this->StudentsLesson->save($data);
-            /*
-             * save log, create hoa don
-             * 
-             */
-
+            var_dump($this->StudentsLesson->save($data));
             $this->redirect(array("controller"=>"lesson", "action"=>"learn", $lesson_id));
         }
     }

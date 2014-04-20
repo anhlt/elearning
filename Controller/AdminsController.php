@@ -1,11 +1,8 @@
-
 <?php
-
 App::uses('Folder', 'Utility');
 App::uses('File', 'Utility');
 
 class AdminsController extends AppController {
-
     public $components = array('Paginator');
     public $helpers = array('Js');
     var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter', 'Question');
@@ -53,16 +50,14 @@ class AdminsController extends AppController {
                     $this->redirect(array('controller'=>'admins','action' => 'login'));
                 }
                 $this->redirect(array('controller'=>'Admins'));
-                }
-            }
-
-            $this->Session->setFlash(__('ユーザ名、パスワードが正しくない'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-warning'
-            ));
+                }else
+                    $this->Session->setFlash(__('ユーザ名、パスワードが正しくない'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-warning'
+                    ));
         }
     }
-
+    
     public function add_ip_address() {
         $id = $this->Auth->user('id');
         if ($this->request->is('post')) {
@@ -1241,7 +1236,6 @@ class AdminsController extends AppController {
         $this->autoRender = false;
         if (isset($this->params['named']['file'])) {
             $source = WWW_ROOT . 'files/db/' . $this->params['named']['file'];
-            var_dump($source);
             unlink($source);
         }
         $this->Session->setFlash(__('バックアップのファイルが削除された'), 'alert', array(

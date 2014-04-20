@@ -106,8 +106,6 @@ class LecturerController extends AppController {
 	{
 		$lesson_id = $this->params['named']['lesson_id'];
 		$lesson = $this->Lesson->findById($lesson_id);
-		var_dump($lesson);
-		die();
 		$this->paginate = array(
 		    'fields' => array('Student.full_name','Student.id','LessonMembership.baned','LessonMembership.liked','LessonMembership.lesson_id'),
 			'limit' => 10,
@@ -147,5 +145,19 @@ class LecturerController extends AppController {
 			}
 		}
 		return $this->redirect($this->referer());
-	}	
+	}
+
+	public function delete($value='')
+	{
+		$user_id = $this->Auth->user('id');
+		$User = $this->User->findById($user_id);
+		if($this->request->is('post') || $this->request->is('put')){
+			if(AuthComponent::password($this->request->data['User']['current_password']) == $User['User']['password']){
+				$user_id = $this->Auth->user('id');
+				$this->User->delete($user_id);
+				$this->Auth->logout();
+				$this->redirect('/');
+			}
+		}
+	}
 }
