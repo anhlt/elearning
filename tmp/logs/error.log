@@ -22220,3 +22220,64 @@ Stack Trace:
 #3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
 #4 [internal function]: App::shutdown()
 #5 {main}
+2014-04-20 14:07:08 Error: [CakeException] Unknown status code
+Request URL: /admins/generate_tsv/2014/04
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(785): CakeResponse->statusCode('2014')
+#1 E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php(923): Controller->redirect(Array, '2014', '004')
+#2 [internal function]: AdminsController->generate_tsv('2014', '04')
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#4 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#5 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#6 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#7 {main}
+2014-04-20 20:36:13 Error: Fatal Error (1): Call to undefined method CakeResponse::setHeader() in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 928]
+2014-04-20 20:36:13 Error: [FatalErrorException] Call to undefined method CakeResponse::setHeader()
+Request URL: /admins/generate_tsv/2014/04
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'E:\Installs\Web...', 928)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'E:\Installs\Web...', 928, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'E:\Installs\Web...', 928, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-20 20:36:29 Error: Fatal Error (1): Call to undefined function setHeader() in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 928]
+2014-04-20 20:36:29 Error: [FatalErrorException] Call to undefined function setHeader()
+Request URL: /admins/generate_tsv/2014/04
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'E:\Installs\Web...', 928)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'E:\Installs\Web...', 928, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'E:\Installs\Web...', 928, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-20 20:36:37 Error: Fatal Error (1): Call to undefined function setHeader() in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 928]
+2014-04-20 20:36:37 Error: [FatalErrorException] Call to undefined function setHeader()
+Request URL: /admins/generate_tsv/2014/04
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'E:\Installs\Web...', 928)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'E:\Installs\Web...', 928, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'E:\Installs\Web...', 928, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-20 20:59:46 Error: Fatal Error (1): Call to undefined method CakeResponse::setFileToSend() in [E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php, line 928]
+2014-04-20 20:59:46 Error: [FatalErrorException] Call to undefined method CakeResponse::setFileToSend()
+Request URL: /admins/generate_tsv/2014/04
+Stack Trace:
+#0 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Error\ErrorHandler.php(203): ErrorHandler::handleFatalError(1, 'Call to undefin...', 'E:\Installs\Web...', 928)
+#1 [internal function]: ErrorHandler::handleError(1, 'Call to undefin...', 'E:\Installs\Web...', 928, Array)
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(929): call_user_func('ErrorHandler::h...', 1, 'Call to undefin...', 'E:\Installs\Web...', 928, Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Core\App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2014-04-20 21:24:13 Error: [NotFoundException] The requested file E:\Installs\WebServer\htdocs\elearning\ELS-UBT-2014-04.tsv was not found or not readable
+Request URL: /admins/generate_tsv/2014/04
+Stack Trace:
+#0 E:\Installs\WebServer\htdocs\elearning\Controller\AdminsController.php(933): CakeResponse->file('ELS-UBT-2014-04...', Array)
+#1 [internal function]: AdminsController->generate_tsv('2014', '04')
+#2 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Controller\Controller.php(490): ReflectionMethod->invokeArgs(Object(AdminsController), Array)
+#3 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(185): Controller->invokeAction(Object(CakeRequest))
+#4 E:\Workspace\Project\Vendor\pear-pear.cakephp.org\CakePHP\Cake\Routing\Dispatcher.php(160): Dispatcher->_invoke(Object(AdminsController), Object(CakeRequest), Object(CakeResponse))
+#5 E:\Installs\WebServer\htdocs\elearning\webroot\index.php(107): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#6 {main}

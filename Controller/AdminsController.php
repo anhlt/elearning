@@ -629,55 +629,82 @@ class AdminsController extends AppController {
         }
     }
 
-    public function fee_manager() {
+    public function downloadtsv($year, $month) {
+        
+    }
+
+    public function fee_manager($year_ = null, $month_ = null) {
+       
         $this->uses = array('Parameter');
         $result = $this->Parameter->find('all', array('conditions' => array('Parameter.name' => "LESSON_COST")));
         $lesson_cost = $result[0]["Parameter"]["value"];
         $result = $this->Parameter->find('all', array('conditions' => array('Parameter.name' => "LECTURER_MONEY_PERCENT")));
         $lecturer_money_percent = $result[0]["Parameter"]["value"];
-
         $this->set('lesson_cost', $lesson_cost * 10000);
         $this->set('lecturer_money_percent', $lecturer_money_percent / 100);
-
         if ($this->request->is('post')) {
+
             $month = $this->data['Fee']['month'];
             $year = $this->data['Fee']['year'];
-
-            $this->set('month', $month + 1);
-            $this->set('year', $year + 1970);
-
+            $month++;
+            if ($month < 10)
+                $month = "0" . $month;
+            $year = $year + 1970;
+            $this->set('month', $month);
+            $this->set('year', $year);
             $this->set('months', $this->getMonthSet());
             $this->set('years', $this->getYearSet());
-
             $object = $this->data['Fee']['choose'];
             $this->set('object', $object);
             if ($object == 1) {
-                $this->getStudentFee($year + 1970, $month + 1);
+                $this->getStudentFee($year, $month);
             } else {
-                $this->getLecturerFee($year + 1970, $month + 1);
+                $this->getLecturerFee($year, $month);
+            }
+            $name = "ELS-UBT-" . $year . "-" . $month . ".tsv";
+            $File = "tsv\\fee\\" . $name;
+            $this->set('exit', file_exists($File));
+            $this->set("checkyearover", $this->checkYearOver($year, $month));
+            if (file_exists($File)) {
+                $this->Session->setFlash(__($year . '年' . $month . '月のTSVが作成されました'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+            } else {
+                if ($this->checkYearOver($year, $month))
+                    $this->Session->setFlash(__($year . '年' . $month . '月のTSVが作成できません'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-warning'
+                    ));
             }
         } else {
+
             date_default_timezone_set('Asia/Saigon');
             $date = date('Y:m:d H:i:s');
             $month = $this->getMonth($date);
             $year = $this->getYear($date);
+            if (isset($year_) || isset($month_)) {
+                $month = $month_;
+                $year = $year_;
+            }
             $this->set('month', $month);
             $this->set('year', $year);
             $this->set('months', $this->getMonthSet());
             $this->set('years', $this->getYearSet());
             $this->getStudentFee($year, $month);
             $this->getLecturerFee($year, $month);
-            if ($month < 10)
-                $month = "0" . $month;
+            //if ($month < 10)
+            //  $month = "0" . $month;
             $name = "ELS-UBT-" . $year . "-" . $month . ".tsv";
             $File = "tsv\\fee\\" . $name;
             $this->set('exit', file_exists($File));
             $bool = file_exists($File);
-            if ($bool == true)
-                $this->Session->setFlash(__($year . '年' . $month . '月のTSVを作成しました'), 'alert', array(
+            if (file_exists($File)) {
+                $this->Session->setFlash(__(($year) . '年' . ($month) . '月のTSVが作成されました'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));
+            }
             // debug($this->Auth->user);
         }
     }
@@ -695,24 +722,20 @@ class AdminsController extends AppController {
             $count = 0;
             $result = $this->LessonMembership->find('all', array('conditions' => array('LessonMembership.student_id' => $student['Student']['id'])));
 
-
             foreach ($result as $res) {
-
                 $date = $res['LessonMembership']['days_attended'];
                 if ($this->getYear($date) == $year && $this->getMonth($date) == $month) {
                     $count++;
-                    echo "dmmm";
                 }
             }
             // $student['count'] = $count;
             $student_list_[$i] = $student;
             $student_list_[$i]['count'] = $count;
-            echo "list i = " . $student_list_[$i]['count'];
+            $student_list_[$i]['Student']['phone_number'] = $this->getPhoneNumberFormat($student_list_[$i]['Student']['phone_number']);
+            
             $i++;
         }
         $this->set('student_list', $student_list_);
-
-
         return $student_list_;
     }
 
@@ -744,6 +767,9 @@ class AdminsController extends AppController {
             }
             $lecturer_list_[$i] = $lecturer;
             $lecturer_list_[$i]['count'] = $count;
+            $lecturer_list_[$i]['Lecturer']['phone_number'] = $this->getPhoneNumberFormat($lecturer_list_[$i]['Lecturer']['phone_number']);
+            $lecturer_list_[$i]['Lecturer']["credit_card_number"] = 
+            $this->getBankLecturerAcountFormat($lecturer_list_[$i]['Lecturer']["credit_card_number"]) ;            
             $i++;
         }
         $this->set('lecturer_list', $lecturer_list_);
@@ -800,20 +826,32 @@ class AdminsController extends AppController {
         return $years;
     }
 
+    private function checkYearOver($year_, $month_) {
+        date_default_timezone_set('Asia/Saigon');
+        $date = date('Y:m:d H:i:s');
+        $month = $this->getMonth($date);
+        $year = $this->getYear($date);
+
+        if ($year < $year_)
+            return true;
+        if ($year == $year_ && $month < $month_)
+            return true;
+        return false;
+    }
+
     public function generate_tsv($year, $month) {
         $this->set('year', $year);
         $this->set('month', $month);
-
         date_default_timezone_set('Asia/Saigon');
         $date = date('Y:m:d H:i:s');
         echo $date;
         mb_internal_encoding('UTF-8');
         header('Content-Type: text/html;charset=utf-8');
-        if ($month < 10)
-            $month = "0" . $month;
+        // if ($month < 10)
+        //    $month = "0" . $month;
         $name = "ELS-UBT-" . $year . "-" . $month . ".tsv";
-        $File = "tsv\\fee\\" . $name;
-        $Handle = fopen($File, "w");
+//        $File = "tsv" . DS ."fee". DS . $name;
+//        $Handle = fopen($File, "w");
         $data = "" . mb_convert_kana("ELS-UBT-GWK5M78", "rnaskhcv") . "\t";
         echo "<br>" . $data;
         $data.= mb_convert_kana($year, "rnaskhcv") . "\t";
@@ -828,23 +866,24 @@ class AdminsController extends AppController {
         $data.= mb_convert_kana($this->getHour($date), "rnaskhcv") . "\t";
         $data.= mb_convert_kana($this->getMinus($date), "rnaskhcv") . "\t";
         $data.= mb_convert_kana($this->getSecond($date), "rnaskhcv") . "\t";
-       
+
         $result = $this->Parameter->find('all', array('conditions' => array('Parameter.name' => "LESSON_COST")));
         $lesson_cost = $result[0]["Parameter"]["value"];
         $result = $this->Parameter->find('all', array('conditions' => array('Parameter.name' => "LECTURER_MONEY_PERCENT")));
         $lecturer_money_percent = $result[0]["Parameter"]["value"];
-        
+
         $student_list = $this->getStudentFee($year, $month);
         foreach ($student_list as $student) {
             $data.= "\n";
             $data.= mb_convert_kana($student['Student']['id'], "rnaskhcv") . "\t";
             $data.= mb_convert_kana($student['Student']['full_name'], "rnaskhcv") . "\t";
-            $data.= mb_convert_kana($student['count'] * $lesson_cost*10000, "rnaskhcv") . "\t";
+            $data.= mb_convert_kana($student['count'] * $lesson_cost * 10000, "rnaskhcv") . "\t";
 
             $data.= mb_convert_kana($student['Student']['address'], "rnaskhcv") . "\t";
             $phone_number = mb_convert_kana($student['Student']['phone_number'], "rnaskhcv") . "\t";
-            $phone_number = substr_replace($phone_number, '-', 3, 0);
-            $phone_number = substr_replace($phone_number, '-', 7, 0);
+//            $phone_number = substr_replace($phone_number, '-', 3, 0);
+//            $phone_number = substr_replace($phone_number, '-', 7, 0);
+            //$phone_number = $this->getPhoneNumberFormat($phone_number);
             $data.= $phone_number . "\t";
             $data.= mb_convert_kana("18", "rnaskhcv") . "\t";
             $credit_number = mb_convert_kana($student['Student']['credit_card_number'], "rnaskhcv") . "\t";
@@ -855,44 +894,74 @@ class AdminsController extends AppController {
             $credit_number = substr_replace($credit_number, '-', 23, 0);
             $data.= $credit_number . "\t";
         }
-        
+
         $lecturer_list = $this->getLecturerFee($year, $month);
         foreach ($lecturer_list as $lecturer) {
             $data.= "\n";
             $data.= mb_convert_kana($lecturer['Lecturer']['id'], "rnaskhcv") . "\t";
             $data.= mb_convert_kana($lecturer['Lecturer']['full_name'], "rnaskhcv") . "\t";
-            $data.= mb_convert_kana($lecturer['count'] *  $lesson_cost*100*$lecturer_money_percent, "rnaskhcv") . "\t";
-
+            $data.= mb_convert_kana($lecturer['count'] * $lesson_cost * 100 * $lecturer_money_percent, "rnaskhcv") . "\t";
             $data.= mb_convert_kana($lecturer['Lecturer']['address'], "rnaskhcv") . "\t";
             $phone_number = mb_convert_kana($lecturer['Lecturer']['phone_number'], "rnaskhcv") . "\t";
-            $phone_number = substr_replace($phone_number, '-', 3, 0);
-            $phone_number = substr_replace($phone_number, '-', 7, 0);
+//            $phone_number = substr_replace($phone_number, '-', 3, 0);
+//            $phone_number = substr_replace($phone_number, '-', 7, 0);
+           // $phone_number = $this->getPhoneNumberFormat($phone_number);
             $data.= $phone_number . "\t";
-            $data.= mb_convert_kana("18", "rnaskhcv") . "\t";
+            $data.= mb_convert_kana("54", "rnaskhcv") . "\t";
             $credit_number = mb_convert_kana($lecturer['Lecturer']['credit_card_number'], "rnaskhcv") . "\t";
-            $credit_number = substr_replace($credit_number, '-', 3, 0);
-            $credit_number = substr_replace($credit_number, '-', 8, 0);
-            $credit_number = substr_replace($credit_number, '-', 13, 0);
-            $credit_number = substr_replace($credit_number, '-', 18, 0);
-            $credit_number = substr_replace($credit_number, '-', 23, 0);
+//            $credit_number = substr_replace($credit_number, '-', 3, 0);
+//            $credit_number = substr_replace($credit_number, '-', 8, 0);
+//            $credit_number = substr_replace($credit_number, '-', 13, 0);
+//            $credit_number = substr_replace($credit_number, '-', 18, 0);
+//            $credit_number = substr_replace($credit_number, '-', 23, 0);
             $data.= $credit_number . "\t";
         }
         $data.= "\n";
-        
-
-
         $data.= mb_convert_kana("END___END___END", "rnaskhcv") . "\t";
         // $data.= "END___END___END\t";
         $data.= mb_convert_kana($year, "rnaskhcv") . "\t";
-        if ($month < 10)
-            $data.= mb_convert_kana("0" . $month, "rnaskhcv") . "\t";
-        else
-            $data.= mb_convert_kana($month, "rnaskhcv") . "\t";
+//        if ($month < 10)
+//            $data.= mb_convert_kana("0" . $month, "rnaskhcv") . "\t";
+//        else
+        $data.= mb_convert_kana($month, "rnaskhcv") . "\t";
 
+//
+//        fprintf($Handle, $data);
+//        fclose($Handle);
+        $this->response->body($data);
+        $this->response->type('tsv');
+        // $this->response->setFileToSend("ELS-UBT-" . $year . "-" . $month . ".tsv");
+        //Optionally force file download
+        $this->response->download("ELS-UBT-" . $year . "-" . $month . ".tsv");
+        return $this->response;
+        #return $this->redirect(array('controller' => 'admins', 'action' => 'fee_manager', $year, $month));
+    }
 
-        fprintf($Handle, $data);
-        fclose($Handle);
-        return $this->redirect(array('controller' => 'admins', 'action' => 'fee_manager'));
+    private function getPhoneNumberFormat($phone) {
+        $n = strlen($phone);
+        $result = "";
+        for ($i = 0; $i < $n; $i++) {
+            $result.=$phone[$i];
+            if (($i + 1) % 3 == 0 && $i != $n - 1)
+                $result.="-";
+        }
+        return $result;
+    }
+
+    private function getBankLecturerAcountFormat($bank_acount) {
+        $n = strlen($bank_acount);
+        $result = "";
+        for ($i = 0; $i < $n; $i++) {
+            $result.=$bank_acount[$i];
+            
+            if ($i == 3)
+                $result.="-"."0";
+            if($i == 6)
+            $result.= ("-"."000");     
+            if($i == 7)
+            $result.= ("-");    
+        }
+        return $result;
     }
 
     private function monthToString($month) {
@@ -930,7 +999,6 @@ class AdminsController extends AppController {
             $ranking = $this->data['ranking']['choose_ranking'];
             $this->set('ranking', $ranking);
         }
-
         $this->uses = array('LessonMembership');
         $lessons = $this->LessonMembership->find('all', array('conditions' => array('LessonMembership.baned' => false,
                 'LessonMembership.liked' => true)));
@@ -944,22 +1012,15 @@ class AdminsController extends AppController {
         $i = 0;
         $teachers = array();
         foreach ($lecturers as $lecturer) {
-
             $teachers[$i]['id'] = $lecturer['User']['id'];
             $teachers[$i]['name'] = $lecturer['User']['username'];
-
             $this->uses = array('Lesson');
             $lessons_ = $this->Lesson->find('all', array('conditions' => array('Lesson.lecturer_id' => $teachers[$i]['id'])
             ));
-
             $teachers[$i]['count_like'] = $this->countLesson($lessons_, $lessons);
-
             //debug($teachers[$i]);
             $i++;
         }
-
-
-
         $teachers = $this->array_sort($teachers, 'count_like', SORT_DESC);
         if (!isset($ranking) || $ranking == 0) {
             
@@ -1006,9 +1067,7 @@ class AdminsController extends AppController {
         foreach ($lessons as $lesson) {
             $lessons_data[$i]['count_like'] = $this->countLikeLesson($lesson, $all_lessons);
             $lessons_data[$i]['id'] = $lesson['Lesson']['id'];
-
             $lessons_data[$i]['name'] = $lesson['Lesson']['name'];
-
             $i++;
         }
 
@@ -1041,7 +1100,6 @@ class AdminsController extends AppController {
                     arsort($sortable_array);
                     break;
             }
-
             foreach ($sortable_array as $k => $v) {
                 $new_array[$k] = $array[$k];
             }
