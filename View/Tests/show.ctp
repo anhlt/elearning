@@ -51,7 +51,7 @@ display();*/
     <div class="col-xs-13 col-md-9 well">  
  <h2 name="TestTitle"><?php echo $title ?></h2>
 <?php echo $content; ?>
- <button type="button" class="btn btn-success" onclick="setDefault()">Kết thúc</button>
+ <button type="button" class="btn btn-success" onclick="setDefault()">終わり</button>
 <form name="formRusult" method="post" >
     <input name="data[Test][result]" type="hidden" value="">
 </form>

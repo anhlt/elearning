@@ -7,15 +7,18 @@ class UtilComponent extends Component{
         $options['order'] = array("days_attended desc");
         $res =  $this->StudentsLesson->find("first", $options);
         if (count($res)==0){
-            return false; 
+            return UNREGISTER; 
         }else {
             $day_attended = $res['StudentsLesson']['days_attended'];
             $now = date("Y-m-d H:i:s");
             $days = floor((strtotime($now)- strtotime($day_attended))/24/3600);
             if ($days > MAX_LEARN_DAY){ 
-                return false;
+                return OVER_DAY;
+            }else {
+                if ($res['StudentsLesson']['baned']==1)
+                    return BANED; 
             }
         }
-        return true;
+        return LEARNABLE;
     }
 }

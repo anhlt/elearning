@@ -128,7 +128,7 @@ class TestsController extends AppController {
                     if ($data_tsv[$row][1] != "QS") {
 
 
-                        $error = "Thieu noi dung cau hoi $numberQuestion.";
+                        $error = $numberQuestion."の質問の内容がない.";
                         break;
                     } else {
                         $questionID = $data_tsv[$row][0];
@@ -138,7 +138,7 @@ class TestsController extends AppController {
                             $row++;
                         }
                         if ($data_tsv[$row][1] != "KS") {
-                            $error = "Thieu ket qua cau hoi $numberQuestion.";
+                            $error = $numberQuestion."の質問の内容がない.";
                             break;
                         } else {
                             if ($result[$numberQuestion * 2 - 2] == 0) {
@@ -245,7 +245,7 @@ class TestsController extends AppController {
                 if ($data[$row][1] != "QS") {
 
 
-                    $error = "Thieu noi dung cau hoi $numberQuestion.";
+                    $error = $numberQuestion."の質問の内容がない.";
                     break;
                 } else {
 
@@ -263,7 +263,7 @@ class TestsController extends AppController {
                     }
 
                     if ($data[$row][1] != "KS") {
-                        $error = "Thieu ket qua cau hoi $numberQuestion.";
+                        $error =  $numberQuestion."の質問の内容がない.";
                         break;
                     } else {
                         $row++;

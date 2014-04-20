@@ -120,11 +120,10 @@ class DocumentController extends AppController {
         $document = $this->Document->find("first", array("conditions"=>array("Document.id"=>$document_id)));
         $this->set("document", $document['Document']);
         $lesson_id = $document['Document']['lesson_id']; 
-        if ($this->Util->checkLessonAvailableWithStudent($lesson_id, $this->Auth->user("id"))){
-            $this->set("learnable", 1);
-        }else {
-            $this->set("learnable", -1);
-        }
+        $this->set("learnable", $this->Util->checkLessonAvailableWithStudent($lesson_id, $this->Auth->user("id")));
+        if ($this->Auth->user('role')=='lecturer'){
+			$this->set("learnable", LEARNABLE);
+		}
     }
 
     public function report( $document_id){
