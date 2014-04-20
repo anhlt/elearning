@@ -1432,7 +1432,7 @@ class AdminsController extends AppController {
                 GROUP BY (lessons.id)";
         $datas = $this->Document->query($sql);
         if($datas){
-        debug($datas);
+        //debug($datas);
             $this->set('datas', $datas);
         }else{
             $this->Session->setFlash(__('データがない'), 'alert', array(
