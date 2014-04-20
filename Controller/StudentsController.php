@@ -81,6 +81,7 @@ class StudentsController extends AppController {
             $user_id = $this->Auth->user("id");
             $this->loadModel("User");
             $this->User->updateAll(array("actived"=>DELETED.""), array("User.id"=>$user_id));
+            $this->Loger->writeLog(O,$this->Auth->user("username"), "Student", "学生がアカウントを削除する", "" );
             $this->redirect($this->Auth->logout());
         }
     }

@@ -2,7 +2,7 @@
 class DocumentController extends AppController {
 	var $name = "Document";
 	var $uses = array('Document','Lesson', 'Report');
-	public $components = array('Util'); 
+	public $components = array('Util', 'Loger'); 
 	public $helpers = array("TsvReader");
 
 	public function add() {
@@ -120,10 +120,11 @@ class DocumentController extends AppController {
         $document = $this->Document->find("first", array("conditions"=>array("Document.id"=>$document_id)));
         $this->set("document", $document['Document']);
         $lesson_id = $document['Document']['lesson_id']; 
+
         $this->set("learnable", $this->Util->checkLessonAvailableWithStudent($lesson_id, $this->Auth->user("id")));
-        if ($this->Auth->user('role')=='lecturer'){
-			$this->set("learnable", LEARNABLE);
-		}
+  //       if ($this->Auth->user('role')=='lecturer'){
+		// 	$this->set("learnable", LEARNABLE);
+		// }
     }
 
     public function report( $document_id){
@@ -140,6 +141,7 @@ class DocumentController extends AppController {
             $this->loadModel("Violate");
             $data = array("student_id"=>$this->Auth->user("id"), "document_id"=>$document_id, "content"=>$content); 
             $this->Violate->save($data);
+            $this->Loger->writeLog(O, $this->Auth->user("username"), $this->Auth->user("role"), "先生に違反レポートを通信する", "" );
             $this->redirect(array("controller"=>"lesson","action"=>"learn",$lesson_id));  
         } 
 

@@ -17,7 +17,7 @@
 <?php echo $this->Form->input('Student.full_name', array(  
     'placeholder' => '氏名',  
     'style' => 'width:180px;',
-    'label' => 'Full name',
+    'label' => 'フルネーム',
 )); ?>  
     </div>
  <div class="form-group">
@@ -85,20 +85,6 @@
     'label' => '銀行口座情報',
 )); ?>
     </div>  
-    <div class="form-group">
-<?php echo $this->Form->input('Student.question_verifycode_id', array(    
-    'style' => 'width:180px;',
-    'label' => '質問',
-    'options' => $droplist,
-)); ?>  
-    </div>
-    <div class="form-group">
-<?php echo $this->Form->input('Student.current_verifycode', array(  
-    'placeholder' => '答え',  
-    'style' => 'width:180px;',
-    'label' => '答え'
-)); ?>  
-    </div>
 <?php echo $this->Form->submit('登録', array(  
     'div' => false,  
     'class' => 'btn btn-default'  

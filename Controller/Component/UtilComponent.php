@@ -1,8 +1,15 @@
 <?php
 class UtilComponent extends Component{
-    var $uses = array('StudentsLesson');
-    public function checkLessonAvailableWithStudent($lesson_id, $student_id){
+    var $uses = array('StudentsLesson', 'Lecturer');
+    public function checkLessonAvailableWithStudent($lesson_id, $student_id){  //$student_id co the la teacher
         $this->StudentsLesson = ClassRegistry::init("StudentsLesson");
+        $this->Lesson = ClassRegistry::init("Lesson");
+        $lesson = $this->Lesson->findById($lesson_id); 
+        $lecturer_id = $lesson['Lesson']['lecturer_id'];
+
+        if ($lecturer_id == $student_id){
+            return LEARNABLE;
+        }
         $options['conditions'] = array("student_id"=>$student_id, "lesson_id"=>$lesson_id);
         $options['order'] = array("days_attended desc");
         $res =  $this->StudentsLesson->find("first", $options);

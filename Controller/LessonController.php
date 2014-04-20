@@ -2,8 +2,7 @@
 class LessonController extends AppController {
     var $name = "Lesson";
     var $uses = array('User', 'Lecturer','Question','Lesson','Tag', 'Document', 'Test', 'LessonMembership', 'Comment', 'Student', 'Report');
-    public $components = array('RequestHandler', 'Paginator','Util');
-
+    public $components = array('RequestHandler', 'Paginator','Util', 'Loger');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -561,6 +560,7 @@ class LessonController extends AppController {
         $this->StudentsLesson->id = $student_lesson_id; 
         $data = array("liked"=>1);
         $this->StudentsLesson->save($data);
+        $this->Loger->writeLog(O,$this->Auth->user("username"), "Student", "学生が「いい ね」のボタンを押す", "" );
         $this->redirect($this->referer());
     }
     public function dislike($student_lesson_id){
@@ -568,6 +568,7 @@ class LessonController extends AppController {
         $this->StudentsLesson->id = $student_lesson_id; 
         $data = array("liked"=>0);
         $this->StudentsLesson->save($data);
+        $this->Loger->writeLog(O,$this->Auth->user("username"), "Student", "学生が「いい ねじゃない」のボタンを押す", "" );
         $this->redirect($this->referer());
     }
 

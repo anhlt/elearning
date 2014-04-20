@@ -83,20 +83,7 @@ $this->LeftMenu->leftMenuStudent(STUDENT_PROFILE, "更新");
     'value' =>$student['credit_card_number']
 )); ?>
     </div>  
-    <div class="form-group">
-<?php echo $this->Form->input('Student.question_verifycode_id', array(    
-    'style' => 'width:180px;',
-    'label' => '質問',
-    'options' => $droplist,
-)); ?>  
-    </div>
-    <div class="form-group">
-<?php echo $this->Form->input('Student.answer_verifycode', array(  
-    'placeholder' => '答え',  
-    'style' => 'width:180px;',
-    'label' => '答え'
-)); ?>  
-    </div>
+
 <?php echo $this->Form->submit('更新', array(  
     'div' => false,  
     'class' => 'btn btn-default'  
