@@ -23,6 +23,7 @@ $(document).ready(function(){
 }
 </style>
 <?php
+echo $this->Session->flash(); 
 if (AuthComponent::user('role')=="student") {
     $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE); 
 }

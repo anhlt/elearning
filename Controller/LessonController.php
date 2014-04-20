@@ -584,7 +584,7 @@ class LessonController extends AppController {
         if ($this->request->is('post')){
             debug($this->data);
             $content = $this->data['report']['content'];
-            $data_save = array("lecturer_id"=>$this->Auth->user("id"), "content"=>$content);
+            $data_save = array("lecturer_id"=>$this->Auth->user("id"), "content"=>$content, "lesson_id"=>$lesson_id);
             $this->loadModel("Ihan");
             $this->Ihan->save($data_save);
             $this->Session->setFlash(__('違犯レポートが管理者に送れた'), 'alert', array(

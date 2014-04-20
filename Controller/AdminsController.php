@@ -1424,6 +1424,22 @@ class AdminsController extends AppController {
             }
         }
     }
+
+    public function manage_lesson(){
+        $sql= "SELECT lessons.id, lessons.name, lessons.lecturer_Id, COUNT( ihans.lesson_Id ) as count
+                FROM  ihans , lessons
+                WHERE lessons.id = ihans.lesson_id
+                GROUP BY (lessons.id)";
+        $datas = $this->Document->query($sql);
+        if($datas){
+        debug($datas);
+            $this->set('datas', $datas);
+        }else{
+            $this->Session->setFlash(__('データがない'), 'alert', array(
+            'plugin' => 'BoostCake',
+            'class' => 'alert-warning'));
+        }    
+    }
 }
 ?>
 
