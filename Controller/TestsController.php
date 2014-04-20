@@ -13,7 +13,7 @@
  */
 class TestsController extends AppController {    
 
-    public $components = array('Paginator','TsvReader');
+    public $components = array('Paginator','TsvReader', 'Loger');
     public function add() {
         $lesson_id = $this->params['named']['id'];
         $this->set('id', $lesson_id);
@@ -191,6 +191,7 @@ class TestsController extends AppController {
         $dataTest = $this->Result->find('first', array('conditions' => array('Result.id' => $result_id)));
         $this->set('result', $dataTest['Result']['student_of_choice']);
         $this->set('data', $this->getDataTSV($dataTest['Result']["test_id"]));
+        $this->Loger->writeLog(O, $this->Auth->user("username"), $this->Auth->user("role"), "テストする", "" );
     }
 
     private function getDataTSV($id) {

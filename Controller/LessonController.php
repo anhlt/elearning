@@ -549,6 +549,8 @@ class LessonController extends AppController {
             $this->loadModel('StudentsLesson');
             $data = array("student_id"=>$user_id, "lesson_id"=>$lesson_id) ;   
             var_dump($this->StudentsLesson->save($data));
+
+            $this->Loger->writeLog(O,$this->Auth->user("username"), $this->Auth->user("role"), "授業を参加する", "" );
             $this->redirect(array("controller"=>"lesson", "action"=>"learn", $lesson_id));
         }
     }

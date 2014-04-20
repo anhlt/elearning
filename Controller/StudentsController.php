@@ -77,11 +77,17 @@ class StudentsController extends AppController {
     }
 
     public function delete(){
-        if ($this->request->is("post")){
+       if ($this->request->is("post")){
             $user_id = $this->Auth->user("id");
             $this->loadModel("User");
-            $this->User->updateAll(array("actived"=>DELETED.""), array("User.id"=>$user_id));
-            $this->Loger->writeLog(O,$this->Auth->user("username"), "Student", "学生がアカウントを削除する", "" );
+            $this->User->delete($user_id);
+            $this->Student->delete($user_id);
+            $this->loadModel("Comment");
+            $this->Comment->deleteAll(array("user_id"=>$user_id));
+            $this->loadModel("Result");
+            $this->Result->deleteAll(array("student_id"=>$user_id));
+            $this->loadModel("Violate");
+            $this->Violate->deleteAll(array("student_id"=>$user_id));
             $this->redirect($this->Auth->logout());
         }
     }
@@ -135,10 +141,6 @@ class StudentsController extends AppController {
             array_push($lesson_or_r, array("Lesson.summary like"=>"%".$row."%"));
         }
 
-        // $option['conditions'] = array("OR"=>array(
-        //     array("Lesson.name like "=>"%".$keyword."%"), 
-        //     array("Lesson.summary like "=>"%".$keyword."%")
-        // )); 
         $option['conditions'] = array("OR"=>$lesson_or_r);
         $lessons =$this->Lesson->find("all", $option);
         $this->set("lessons", $lessons);
@@ -150,10 +152,7 @@ class StudentsController extends AppController {
             array_push($lecturer_or_r, array("User.username like"=>"%".$row."%"));
         }
         $this->loadModel("Lecturer");
-        // $option['conditions'] =  array("OR"=>array(
-        //     array("Lecturer.full_name like "=>"%".$keyword."%"),
-        //     array("User.username like "=>"%".$keyword."%")
-        // ));
+      
         $option['conditions'] = array("OR"=>$lecturer_or_r);
         
         $lecturers =$this->Lecturer->find("all", $option);
@@ -166,15 +165,9 @@ class StudentsController extends AppController {
             array_push($student_or_r, array("User.username like"=>"%".$row."%"));
         }
         $option['conditions'] = array("OR"=>$student_or_r);
-        // $option['conditions'] =  array("OR"=>array(
-        //     array("Student.full_name like "=>"%".$keyword."%"), 
-        //     array("User.username like "=>"%".$keyword."%")
-        // )) ;
-
         $students =$this->Student->find("all", $option);
         $this->set("students", $students);
 
 $this->set("keyword", $keyword);
-    //    debug($documents);
     }
 }

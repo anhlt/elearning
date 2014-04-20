@@ -3,7 +3,7 @@ App::uses('Folder', 'Utility');
 App::uses('File', 'Utility');
 
 class AdminsController extends AppController {
-    public $components = array('Paginator');
+    public $components = array('Paginator', 'Loger');
     public $helpers = array('Js');
     var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter', 'Question');
 

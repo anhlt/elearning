@@ -23,7 +23,7 @@
 class UsersController extends AppController {
 
     var $uses = array('User', 'Lecturer', 'Admin', 'Student', 'Question', 'Parameter');
-    var $components = array("Auth");
+    var $components = array("Auth", "Loger");
 
     public function beforeFilter() {
         parent::beforeFilter();
