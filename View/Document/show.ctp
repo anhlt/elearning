@@ -60,9 +60,9 @@ $(document).ready(function(){
 <?php
 
 echo "<h1 style='margin-top:0px'>".$document['title']."</h1>"; 
-if(AuthComponent::user('role')=='student')
+if(AuthComponent::user('role')!='admin'){
     echo $this->Html->link('違反レポート', '/document/report/'.$document['id'], array('class'=>'floatRight label label-default'));
-//echo "<input id = 'frame' type = 'text' oncontextmenu = 'return false' />"; 
+}
 $link = $this->html->url('/', true) . 'files' . DS . $document['link'];
 $path_parts = pathinfo($link);
 $extension = $path_parts['extension'];
