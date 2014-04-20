@@ -68,7 +68,7 @@ $path_parts = pathinfo($link);
 $extension = $path_parts['extension'];
 $extension = strtolower($extension);
 if ($extension == 'pdf'){
-    if ($learnable==1) {
+    if ($learnable==LEARNABLE) {
         echo $this->Html->image('icon/trans.png', array("class"=>"transimage"));
     }else {
         echo $this->Html->image('icon/trans.png', array("class"=>"transimageBig"));

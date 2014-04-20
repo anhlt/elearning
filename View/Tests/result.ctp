@@ -1,6 +1,6 @@
 <div class='row'>
     <div class="col-xs-2 col-md-2">
-    <a class='btn btn-info' href="javascript:history.go(-1)">Back</a>
+    <a class='btn btn-info' href="javascript:history.go(-1)">戻る</a>
     </div>
     <div class="col-xs-15 col-md-10 well">
         <h2 name="TestTitle"><?php echo $data[0][1] ?></h2>
@@ -23,7 +23,7 @@ $sumQuestion = 0;
         } else {
         $sumQuestion++;
         if ($data[$row][1] != "QS") {
-            $error = "Thieu noi dung cau hoi $numberQuestion.";
+            $error = $numberQuestion."の質問の内容がない";
             break;
         } else {
         $questionID = $data[$row][0];
@@ -38,7 +38,7 @@ $sumQuestion = 0;
         }
         echo "</ol>";
         if ($data[$row][1] != "KS") {
-            $error = "Thieu ket qua cau hoi $numberQuestion.";
+            $error = $numberQuestion."の質問の内容がない";
             break;
         } else {
         if($result[$numberQuestion*2 - 2] == 0) {

@@ -29,18 +29,28 @@ $(document).ready(function(){
 $lesson = $lessons['Lesson'];
 $lesson_id = $lesson['id'];
 echo "<h1 style='margin-top:0px'>".$lesson['name']."</h1>"; 
-if ($student_lesson_id != -1){
+if ($learnable == LEARNABLE){
     if (isset($liked) && $liked == 1) {
         echo $this->Html->image("icon/unlike.png", array("url"=>"/lesson/dislike/".$student_lesson_id, "width"=>"20", "height"=>"20"));
     }else {
         echo $this->Html->image("icon/like.png", array("url"=>"/lesson/like/".$student_lesson_id, "width"=>"20", "height"=>"20"));
     }
+}else {
+    if ($learnable == BANED) {
+        echo "<div class='alert alert-danger'>あなたは先生に禁止された</div>";
+    }
+
+    if ($learnable == OVER_DAY){
+         echo "<div class='alert alert-danger'>勉強の時間は".MAX_LEARN_DAY."日以上だ</div>";
+    }
 }
 $learnedPeople = $lessons['Student'];
 $learnedPeopleNumber = count($learnedPeople); 
 echo " <span class='label label-primary'>".$likePeople."人/".$learnedPeopleNumber."人いいねした</span>";
-if ($student_lesson_id ==-1){
+if ($learnable==UNREGISTER){
     echo "   <span class = 'label label-danger'>".$this->Html->link('登録', "/lesson/register/".$lesson_id)."</span>";
+}else if ($learnable == OVER_DAY){
+     echo "   <span class = 'label label-danger'>".$this->Html->link('再登録', "/lesson/register/".$lesson_id)."</span>";
 }
 echo "<br>";
 
@@ -52,19 +62,23 @@ $documents = $lessons['Document'];
 foreach($documents as $row){
     $document = $row;
     $link = $document['link'];
-    $link_downcase = strtolower($link);
-    if (stripos(strrev($link_downcase),strrev(PDF))===0) echo $this->Html->image("icon/pdf.png", array("height"=>"20", "width"=>"20"))." ";
-    if (stripos(strrev($link_downcase),strrev(MP3))===0) echo $this->Html->image("icon/mp3.png", array("height"=>"20", "width"=>"20"))." ";
-    if (stripos(strrev($link_downcase),strrev(MP4))===0) echo $this->Html->image("icon/mp4.png", array("height"=>"20", "width"=>"20"))." ";
-    if (stripos(strrev($link_downcase),strrev(PNG))===0) echo $this->Html->image("icon/png.png", array("height"=>"20", "width"=>"20"))." ";
-    if (stripos(strrev($link_downcase),strrev(JPG))===0) echo $this->Html->image("icon/jpg.png", array("height"=>"20", "width"=>"20"))." ";
-    if (stripos(strrev($link_downcase),strrev(GIF))===0) echo $this->Html->image("icon/gif.png", array("height"=>"20", "width"=>"20"))." ";
-    if (stripos(strrev($link_downcase),strrev(WAV))===0) echo $this->Html->image("icon/wav.png", array("height"=>"20", "width"=>"20"))." ";
+    $path_parts = pathinfo($link);
+    $extension = $path_parts['extension'];
+    $extension = strtolower($extension);
+
+    //$link_downcase = strtolower($link);
+    if ($extension == PDF) echo $this->Html->image("icon/pdf.png", array("height"=>"20", "width"=>"20"))." ";
+    if ($extension == MP3) echo $this->Html->image("icon/mp3.png", array("height"=>"20", "width"=>"20"))." ";
+    if ($extension == MP4) echo $this->Html->image("icon/mp4.png", array("height"=>"20", "width"=>"20"))." ";
+    if ($extension == PNG) echo $this->Html->image("icon/png.png", array("height"=>"20", "width"=>"20"))." ";
+    if ($extension == JPG) echo $this->Html->image("icon/jpg.png", array("height"=>"20", "width"=>"20"))." ";
+    if ($extension == GIF) echo $this->Html->image("icon/gif.png", array("height"=>"20", "width"=>"20"))." ";
+    if ($extension == WAV) echo $this->Html->image("icon/wav.png", array("height"=>"20", "width"=>"20"))." ";
  
 
-    if (stripos(strrev($link_downcase),strrev(PDF))===0) {
+    if ($extension == PDF) {
         echo $this->Html->link($document['title'], array("controller"=>"document", "action"=>"show", $document['id'] ));
-    }else if ($student_lesson_id == -1){
+    }else if ($learnable != LEARNABLE){
         echo $document['title'];
     }else {
         echo $this->Html->link($document['title'], array("controller"=>"document", "action"=>"show", $document['id'] ));
@@ -82,7 +96,7 @@ foreach($tests as $row){
     $test = $row;
     $link = $test['link'];
     if (stripos(strrev($link),strrev(TSV))===0) echo $this->Html->image("icon/tsv.png", array("height"=>"20", "width"=>"20"))." ";
-    if ($student_lesson_id != -1){ 
+    if ($learnable == LEARNABLE){ 
         echo $this->Html->link($test['title'], array("controller"=>"tests", "action"=>"show", $test['id'] ));
     }else {
         echo $test['title'];
@@ -92,7 +106,7 @@ foreach($tests as $row){
 echo "</div>";
 ?>
 <?php if (isset($scroll)) echo "<div id = 'scroll'></div>";?>
-<?php if ($student_lesson_id != -1){ ?>
+<?php if ($learnable == LEARNABLE){ ?>
 <ul class="nav nav-tabs">
   <li class="active"><a href="#hyouka" data-toggle="tab">評価</a></li>
 </ul>
