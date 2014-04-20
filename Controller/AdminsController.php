@@ -155,7 +155,7 @@ class AdminsController extends AppController {
             //die();
             if ($username != NULL) {
                 $sql1 = "SELECT * FROM lecturers, users WHERE (lecturers.id = users.id and 
-                    users.username = '$username')";
+                    users.username like '%$username%')";
 
                 $data = $this->Lecturer->User->query($sql1);
                 if ($data != NULL) {
@@ -312,7 +312,7 @@ class AdminsController extends AppController {
             //die();
             if ($username != NULL) {
                 $sql1 = "SELECT * FROM students, users WHERE (students.id = users.id and 
-                    users.username = '$username')";
+                    users.username like '%$username%')";
                 //$sql = "SELECT * FROM users";
                 $data = $this->Student->User->query($sql1);
                 if ($data != NULL) {
