@@ -112,12 +112,9 @@
 //                            $credit_number = substr_replace($credit_number, '-', 23, 0);
                             echo '<td align="center">' . $phone_number . "</td>";
                             echo '<td align="center">' . $credit_number . "</td>";
-
                             echo '<td align="center">' . ($lecturer['count']) . "</td>";
                             echo '<td align="center">' . ($lecturer['count'] * $lesson_cost) * $lecturer_money_percent . "</td>";
-
-                            echo "</tr>";
-                       
+                            echo "</tr>";                       
                     }
                 }
             } else {
