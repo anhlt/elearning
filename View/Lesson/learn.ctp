@@ -23,8 +23,10 @@ $(document).ready(function(){
 }
 </style>
 
-<?php $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE, "勉強");?>
+<?php 
+if (AuthComponent::user('role')=='student') $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE, "勉強");?>
     <div class="col-xs-13 col-md-9 well">  
+        <?php echo $this->Session->flash(); ?>
 <?php
 $lesson = $lessons['Lesson'];
 $lesson_id = $lesson['id'];
@@ -48,7 +50,11 @@ $learnedPeople = $lessons['Student'];
 $learnedPeopleNumber = count($learnedPeople); 
 echo " <span class='label label-primary'>".$likePeople."人/".$learnedPeopleNumber."人いいねした</span>";
 if ($learnable==UNREGISTER){
-    echo "   <span class = 'label label-danger'>".$this->Html->link('登録', "/lesson/register/".$lesson_id)."</span>";
+    if (AuthComponent::user('role')=='student'){
+        echo "   <span class = 'label label-danger'>".$this->Html->link('登録', "/lesson/register/".$lesson_id)."</span>";
+    }else{
+        echo "   <span class = 'label label-danger'>".$this->Html->link('違犯レポート', "/lesson/report_violate/".$lesson_id)."</span>";
+    }
 }else if ($learnable == OVER_DAY){
      echo "   <span class = 'label label-danger'>".$this->Html->link('再登録', "/lesson/register/".$lesson_id)."</span>";
 }
@@ -118,7 +124,7 @@ foreach($comments as $comment){
     $username = $comment['User']['username'];
     $user_id = $comment['User']['id'];
     //  echo $this->Html->image("icon/student.jpg", array("width"=>30, "height"=>30));
-    echo $this->Html->link($username.":", "/students/profile/".$user_id).$comment['content'];
+    echo "<span style='color:blue'>".$username."</span>".$comment['content'];
     echo "<br>";
 }
 echo "<input id = 'commentIp' type ='text' size = '70' placeholder

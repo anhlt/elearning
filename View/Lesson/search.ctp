@@ -44,14 +44,18 @@ $(document).ready(function(){
     })
 }); 
 </script>
-<?php $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE); ?>
+<?php 
+if (AuthComponent::user('role')=="student") {
+    $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE); 
+}
+?>
 
-<div class="col-xs-13 col-md-9 well">
+<div class="col-xs-13 col-md-9 well" style='float:right'>
 <?php
 echo $this->Form->create("Lessons");
 ?>
 <?php
-echo $this->Form->input("searchOption", array('id'=>'searchOption', "label"=>"並ぶ方", 'class'=>'form-control', 'style'=>'width:20%', "options"=>array("先生の名前", "授業の名前", "カテゴリの名前")));
+echo $this->Form->input("searchOption", array('id'=>'searchOption', "label"=>"並ぶ方", 'class'=>'form-control', 'style'=>'width:20%;', "options"=>array("先生の名前", "授業の名前", "カテゴリの名前")));
 echo $this->Form->input("rankOption", array('id'=>'rankOption', 'label'=>'',  'class'=>'form-control', 'style'=>'width:20%', "options"=>array("ASC", "DESC")));
 echo "<br>";
 echo $this->Form->submit("リスト", array('id'=>'listBt', "class"=>"btn btn-success"));
