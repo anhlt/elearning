@@ -22,9 +22,18 @@ $(document).ready(function(){
     background: orange;
 }
 </style>
-
-<?php $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE, "勉強");?>
-    <div class="col-xs-13 col-md-9 well">  
+<?php
+if (AuthComponent::user('role')=="student") {
+    $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE); 
+}
+else{
+    echo'
+    <div class="col-xs-3 col-md-3">
+    <a class="btn btn-info" href="/lecturer/">戻る</a>
+    </div>
+    ';
+}?>    
+<div class="col-xs-13 col-md-9 well">  
 <?php
 $lesson = $lessons['Lesson'];
 $lesson_id = $lesson['id'];
@@ -48,7 +57,11 @@ $learnedPeople = $lessons['Student'];
 $learnedPeopleNumber = count($learnedPeople); 
 echo " <span class='label label-primary'>".$likePeople."人/".$learnedPeopleNumber."人いいねした</span>";
 if ($learnable==UNREGISTER){
-    echo "   <span class = 'label label-danger'>".$this->Html->link('登録', "/lesson/register/".$lesson_id)."</span>";
+    if (AuthComponent::user('role')=='student'){
+        echo "   <span class = 'label label-danger'>".$this->Html->link('登録', "/lesson/register/".$lesson_id)."</span>";
+    }else{
+        echo "   <span class = 'label label-danger'>".$this->Html->link('違犯レポート', "/lesson/report_violate/".$lesson_id)."</span>";
+    }
 }else if ($learnable == OVER_DAY){
      echo "   <span class = 'label label-danger'>".$this->Html->link('再登録', "/lesson/register/".$lesson_id)."</span>";
 }

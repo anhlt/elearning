@@ -578,4 +578,18 @@ class LessonController extends AppController {
         $this->Session->write("scroll", "1");
         $this->redirect($this->referer());
     }
+    public function report_violate($lesson_id){
+        $lesson= $this->Lesson->findById($lesson_id);
+        $this->set("lesson", $lesson['Lesson']);
+        if ($this->request->is('post')){
+            debug($this->data);
+            $content = $this->data['report']['content'];
+            $data_save = array("lecturer_id"=>$this->Auth->user("id"), "content"=>$content);
+            $this->loadModel("Ihan");
+            $this->Ihan->save($data_save);
+            $this->Session->setFlash(__('違犯レポートが管理者に送れた'), 'alert', array(
+                'plugin'=>'BoostCake','class' =>'alert-warning'));
+            $this->redirect("/lesson/learn/".$lesson_id);
+        } 
+    }
 }
