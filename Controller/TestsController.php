@@ -45,7 +45,6 @@ class TestsController extends AppController {
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'));
                     unlink(WWW_ROOT . 'tsv' .DS. $name);
-                ));
             }
             $this->redirect(array('controller' => 'lesson', 'action' => 'test', 'id' => $lesson_id));
         }
