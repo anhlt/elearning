@@ -43,6 +43,8 @@ define ("OVER_DAY", 1);
 define ("BANED", 2);
 define ("LEARNABLE", 3);
 define ("UNREGISTER", 4);
+define ("ASC", 1);
+define ('DESC', 2);
 /**
  
  * The settings below can be used to set additional paths to models, views and controllers.

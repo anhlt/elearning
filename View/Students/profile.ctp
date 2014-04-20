@@ -4,7 +4,7 @@
     <div class="col-xs-13 col-md-9">  
         <div class="well">        
 <?php
-    echo ("<h1>".$student['full_name']."くんのプロファイル</h1>");
+    echo ("<h1>".$student['full_name']."君のプロファイル</h1>");
     echo $this->Html->image("icon/student.jpg", array("height"=>"100", "width"=>"100"))."<br>";
     echo $student['full_name']."</br>"."<br>"."<br>";
     echo "<table class='table table-bordered'>";
