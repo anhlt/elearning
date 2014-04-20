@@ -122,7 +122,9 @@ class DocumentController extends AppController {
         $lesson_id = $document['Document']['lesson_id']; 
         if ($this->Util->checkLessonAvailableWithStudent($lesson_id, $this->Auth->user("id"))){
             $this->set("learnable", 1);
-        }else {
+        }else if ($this->Auth->user('role')=='lecturer'){
+			$this->set("learnable", 1);
+		}else {
             $this->set("learnable", -1);
         }
     }

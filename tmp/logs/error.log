@@ -22230,3 +22230,13 @@ Stack Trace:
 #3 /home/action/Workspace/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(902): App::_checkFatalError()
 #4 [internal function]: App::shutdown()
 #5 {main}
+2014-04-20 10:30:23 Error: Fatal Error (4): syntax error, unexpected T_VARIABLE, expecting '(' in [/var/www/elearning/Controller/DocumentController.php, line 125]
+2014-04-20 10:30:23 Error: [FatalErrorException] syntax error, unexpected T_VARIABLE, expecting '('
+Request URL: /document/show/3
+Stack Trace:
+#0 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Error/ErrorHandler.php(203): ErrorHandler::handleFatalError(4, 'syntax error, u...', '/var/www/elearn...', 125)
+#1 [internal function]: ErrorHandler::handleError(4, 'syntax error, u...', '/var/www/elearn...', 125, Array)
+#2 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(929): call_user_func('ErrorHandler::h...', 4, 'syntax error, u...', '/var/www/elearn...', 125, Array)
+#3 /var/www/Vendor/pear-pear.cakephp.org/CakePHP/Cake/Core/App.php(902): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}

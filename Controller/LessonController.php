@@ -89,7 +89,6 @@ class LessonController extends AppController {
 		$this->Session->write('lesson_id', $lesson_id);
 
 		$this->set("id", $lesson_id);			
-
 		if($user["role"] == 'lecturer') {
 			$lesson_id = $this->params['named']['id'];
 			$sql = array("conditions"=> array("Lesson.id =" => $lesson_id, "Lesson.lecturer_id =" => $user['id']));
