@@ -20,7 +20,7 @@
         $review = '';
         $error = '';
         if ($data_tsv[0][0][3] != 'T' || !isset($data_tsv[0][1])) {
-            $error = $error . "Thieu Test title";
+            $error = $error . "タイトルがない";
             throw new Exception($error);
         } else {
             $review = "<div name=\"TestTitle\">" . $data_tsv[0][1] . "</div>";
@@ -39,7 +39,7 @@
                     break;
                 } else {
                     if ($data_tsv[$row][1] != "QS") {
-                        $error = "Thieu noi dung cau hoi $numberQuestion.";
+                        $error = "質問の内容がない $numberQuestion.";
                         throw new Exception($error);
                         break;
                     } else {
@@ -58,7 +58,7 @@
                         $review = $review . "</ol>";
 
                         if ($data_tsv[$row][1] != "KS" || !isset($data_tsv[$row][2]) || !isset($data_tsv[$row][3])) {
-                            $error = "Thieu ket qua cau hoi $numberQuestion.";
+                            $error = "質問の結果がない $numberQuestion.";
                             throw new Exception($error);
                             break;
                         } else {
