@@ -119,6 +119,10 @@ class UsersController extends AppController {
     						$this->User->save($user);
     					}
     				}
+    					$this->Session->setFlash(__('このアカウントは までロックされる'), 'alert', array(
+							'plugin' => 'BoostCake',
+							'class' => 'alert-warning'
+							));
     			}else
 			        $this->Session->setFlash(__('ユーザ名、パスワードが違う'.$failedTime .' time(s)'), 'alert', array(
 						'plugin' => 'BoostCake',
