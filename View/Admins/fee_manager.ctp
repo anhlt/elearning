@@ -3,7 +3,7 @@
 
     <div class="col-xs-13 col-md-9">
         <h2>TSVファイルの管理</h2>  
-        <?php echo $this->Session->flash(); ?>     
+
         <?php
         echo $this->Form->create('Fee', array(
             //'controller' => "admins", 
@@ -55,7 +55,6 @@
             ));
             ?>                 
         </div>  
-
         <div class="form-group">
             <?php
             echo $this->Form->submit('リスト', array(
@@ -70,13 +69,14 @@
 
 
 
+ <?php echo $this->Session->flash(); ?>
+<div class="col-xs-13 col-md-9">  
 
-<div class="col-xs-13 col-md-9">
     <?php
     if (!isset($object) || $object == 0) {
         ?>     
         <h2>先生課金</h2>  
-        <?php echo $this->Session->flash(); ?>
+
         <div class="well">
             <table class="table table-condensed">
                 <tr>
@@ -85,7 +85,7 @@
                     <td align="center">住所</td>
                     <td align="center">電話番号</td>
                     <td align="center">銀行口座</td>     
-                    <td align="center">学生に登録されたコマ数</td>
+                    <td align="center">学生に登録された授業数</td>
                     <td align="center">課金</td>
                 </tr>
 
@@ -96,26 +96,28 @@
 //                    echo "<pre>";
 //                    var_dump($array);
                     foreach ($lecturer_list as $lecturer) {
-                        echo "<tr>";
-                        echo '<td align="center">' . ($lecturer['Lecturer']['id']) . "</td>";
-                        echo '<td align="center">' . ($lecturer['Lecturer']["full_name"]) . "</td>";
-                        echo '<td align="center">' . ($lecturer['Lecturer']["address"]) . "</td>";
-                        $phone_number = $lecturer['Lecturer']["phone_number"];
-                        $phone_number = substr_replace($phone_number, '-', 3, 0);
-                        $phone_number = substr_replace($phone_number, '-', 7, 0);
-                        $credit_number = $lecturer['Lecturer']["credit_card_number"];
-                        $credit_number = substr_replace($credit_number, '-', 3, 0);
-                        $credit_number = substr_replace($credit_number, '-', 8, 0);
-                        $credit_number = substr_replace($credit_number, '-', 13, 0);
-                        $credit_number = substr_replace($credit_number, '-', 18, 0);
-                        $credit_number = substr_replace($credit_number, '-', 23, 0);
-                        echo '<td align="center">' . $phone_number . "</td>";
-                        echo '<td align="center">' . ($lecturer['Lecturer']["address"]) . "</td>";
+                       
+                            echo "<tr>";
+                            echo '<td align="center">' . ($lecturer['Lecturer']['id']) . "</td>";
+                            echo '<td align="center">' . ($lecturer['Lecturer']["full_name"]) . "</td>";
+                            echo '<td align="center">' . ($lecturer['Lecturer']["address"]) . "</td>";
+                            $phone_number = $lecturer['Lecturer']["phone_number"];
+//                            $phone_number = substr_replace($phone_number, '-', 3, 0);
+//                            $phone_number = substr_replace($phone_number, '-', 7, 0);
+                            $credit_number = $lecturer['Lecturer']["credit_card_number"];
+//                            $credit_number = substr_replace($credit_number, '-', 3, 0);
+//                            $credit_number = substr_replace($credit_number, '-', 8, 0);
+//                            $credit_number = substr_replace($credit_number, '-', 13, 0);
+//                            $credit_number = substr_replace($credit_number, '-', 18, 0);
+//                            $credit_number = substr_replace($credit_number, '-', 23, 0);
+                            echo '<td align="center">' . $phone_number . "</td>";
+                            echo '<td align="center">' . $credit_number . "</td>";
 
-                        echo '<td align="center">' . ($lecturer['count']) . "</td>";
-                        echo '<td align="center">' . ($lecturer['count'] * $lesson_cost) * $lecturer_money_percent . "</td>";
+                            echo '<td align="center">' . ($lecturer['count']) . "</td>";
+                            echo '<td align="center">' . ($lecturer['count'] * $lesson_cost) * $lecturer_money_percent . "</td>";
 
-                        echo "</tr>";
+                            echo "</tr>";
+                       
                     }
                 }
             } else {
@@ -123,7 +125,7 @@
                     ?>
 
                     <h2>学生課金</h2>  
-                    <?php echo $this->Session->flash(); ?>
+                   
 
                     <div class="well">
 
@@ -134,35 +136,37 @@
                                 <td align="center">住所ID</td>
                                 <td align="center">電話番号ID</td>
                                 <td align="center">クレジットカード番号</td>
-                                <td align="center">登録したコマ数</td>
+                                <td align="center">登録した授業数</td>
                                 <td align="center">課金</td>
 
                             </tr>
 
                             <?php
                             foreach ($student_list as $student) {
-                                echo "<tr>";
-                                echo '<td align="center">' . ($student['Student']['id']) . "</td>";
-                                echo '<td align="center">' . ($student['Student']['full_name']) . "</td>";
+                                
+                                    echo "<tr>";
+                                    echo '<td align="center">' . ($student['Student']['id']) . "</td>";
+                                    echo '<td align="center">' . ($student['Student']['full_name']) . "</td>";
 
-                                echo '<td align="center">' . ($student['Student']['address']) . "</td>";
+                                    echo '<td align="center">' . ($student['Student']['address']) . "</td>";
 
-                                $phone_number = $student['Student']["phone_number"];
-                                $phone_number = substr_replace($phone_number, '-', 3, 0);
-                                $phone_number = substr_replace($phone_number, '-', 7, 0);
+                                    $phone_number = $student['Student']["phone_number"];
+//                                    $phone_number = substr_replace($phone_number, '-', 3, 0);
+//                                    $phone_number = substr_replace($phone_number, '-', 7, 0);
 
-                                $credit_number = $student['Student']["credit_card_number"];
-                                $credit_number = substr_replace($credit_number, '-', 3, 0);
-                                $credit_number = substr_replace($credit_number, '-', 8, 0);
-                                $credit_number = substr_replace($credit_number, '-', 13, 0);
-                                $credit_number = substr_replace($credit_number, '-', 18, 0);
-                                $credit_number = substr_replace($credit_number, '-', 23, 0);
+                                    $credit_number = $student['Student']["credit_card_number"];
+                                    $credit_number = substr_replace($credit_number, '-', 3, 0);
+                                    $credit_number = substr_replace($credit_number, '-', 8, 0);
+                                    $credit_number = substr_replace($credit_number, '-', 13, 0);
+                                    $credit_number = substr_replace($credit_number, '-', 18, 0);
+                                    $credit_number = substr_replace($credit_number, '-', 23, 0);
 
-                                echo '<td align="center">' . $phone_number . "</td>";
-                                echo '<td align="center">' . $credit_number . "</td>";
-                                echo '<td align="center">' . ($student['count']) . "</td>";
-                                echo '<td align="center">' . ($student['count'] * $lesson_cost) . "</td>";
-                                echo "</tr>";
+                                    echo '<td align="center">' . $phone_number . "</td>";
+                                    echo '<td align="center">' . $credit_number . "</td>";
+                                    echo '<td align="center">' . ($student['count']) . "</td>";
+                                    echo '<td align="center">' . ($student['count'] * $lesson_cost) . "</td>";
+                                    echo "</tr>";
+                                
                             }
                         }
                     }
@@ -171,12 +175,18 @@
 
 
                 <?php
-                echo "<br><br>";
-                
-                
-                echo $this->html->link($year."年".$month.'月のTSVを作成しませんか?', array('controller' => "admins", 'action' => "generate_tsv", $year, $month
-                ));
-                ?></td>
+                echo "<br>";
+                if (!$exit && (!isset($checkyearover) || !$checkyearover)) {
+                    echo $this->html->link($year . "年" . $month . '月のTSVを作成しませんか?', array('controller' => "admins", 'action' => "generate_tsv", $year, $month
+                    ));
+                }
+                ?> 
+                <?php
+                echo $this->Session->flash();
+                if ($exit) {
+                    echo $this->html->link($year . "年" . $month . '月のTSVをdownload?', array('controller' => "admins", 'action' => "downloadtsv", $year, $month));
+                }
+                ?>  
 
             </div>
     </div>
