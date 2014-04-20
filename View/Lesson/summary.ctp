@@ -21,28 +21,27 @@
 				<h4><b>サマリー情報</b></h4>
 			</div>
 
-			<div style="margin-left: 100px">
-				<div class='row'>
-					<div class='col-md-2'><b>参加した人</b></div>
-					<div class='col-md-2'><?php echo $row?>人</div>
-				</div>
-				<br>
-				<div class='row'>
-					<div class='col-md-2'><b>いいね</b></div>
-					<div class='col-md-2'><?php echo $like?> %</div>
-				</div>
-				<br>
-				<div class='row'>
-					<div class='col-md-2'><b>課金</b></div>
-					<div class='col-md-2'><?php echo ($row * 20000)?>　VND</div>
-				</div>
-				<br>
-			</div>			
+			<div style="width: 600px; margin: auto;">
+				<table class="table table-bordered table-hover">			
+				<tr>
+					<td>参加者数</td>
+					<td><?php echo $row . '人' ?> </td>				
+				</tr>
+				<tr>
+					<td>いいね</td>
+					<td><?php echo $like . ' %'?></td>
+				</tr>
+				<tr>
+					<td>課金</td>
+					<td><?php echo ($row * 20000) . ' VND'?></td>
+				</tr>			
+				</table>
 
-			<div class='row'>				
-				<span style='margin: 10px 40px 0px 115px;'>授業を削除する</span>
-				<?php echo $this->html->link('Delete', array('controller' => 'lesson', 'action' => 'delete'), array('class' => 'btn btn-primary'))?>				
-			</div>			
+				<div class='row'>				
+					<span style='margin: 10px 40px 0px 410px;'>授業を削除する</span>
+					<?php echo $this->html->link('Delete', array('controller' => 'lesson', 'action' => 'delete'), array('class' => 'btn btn-primary'))?>				
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

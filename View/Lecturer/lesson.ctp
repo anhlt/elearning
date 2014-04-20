@@ -3,7 +3,7 @@
 
 	<div class="col-xs-5 col-md-3">
 		<ul class="nav nav-pills nav-stacked" id="myTab">
-			<li><a href="/lecturer/">従業管理</a></li>
+			<li><a href="/lecturer/">授業管理</a></li>
 			<li><a href="/lecturer/lesson">新しい従業</a></li>
 			<li><a href="/lecturer/edit">情報を更新</a></li>
 			<li><a href="/lecturer/delete">アクアウートを削除</a></li>
@@ -52,8 +52,7 @@
 				'placeholder' => 'タグ',  
 				'style' => 'width:300px;',
 				'label' => 'タグ',
-				'class' => 'tm-input',
-				'value' => 'default'
+				'class' => 'tm-input'
 			)); ?>
 		</div>
 		<?php echo $this->Form->submit('追加', array(  

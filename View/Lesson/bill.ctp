@@ -27,9 +27,9 @@
 
 			<table class="table table-condensed">
 				<tr>										
-					<td  class="col-sm-3"><?php echo $this->Paginator->sort('Name');?></td>
-					<td  class="col-sm-3"><?php echo $this->Paginator->sort('Start time');?></td>
-					<td  class="col-sm-3"><?php echo $this->Paginator->sort('End time');?></td>					
+					<td  class="col-sm-4"><?php echo $this->Paginator->sort('Name', '名前');?></td>
+					<td  class="col-sm-4"><?php echo $this->Paginator->sort('Start time', '開始時');?></td>
+					<td 　class="col-sm-4"><?php echo $this->Paginator->sort('End time', '終了時間');?></td>				
 				</tr>
 			 <?php foreach ($results as $result) {?>
 			  <tr>			  		  	

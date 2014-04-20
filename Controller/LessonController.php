@@ -266,8 +266,9 @@ class LessonController extends AppController {
                     }	    					
                 }	
                 $this->set('reports', $reports);
-                //debug($reports);
-                //echo "<pre>";
+
+                $bans = $this->Document->find('all', array('conditions'=> array('Document.baned' => 1)));
+                $this->set('bans', $bans);               
 
                 $sql = array(
                     'fields' => array('Comment.id', 'Comment.user_id', 'Comment.content', 'Comment.time'),
