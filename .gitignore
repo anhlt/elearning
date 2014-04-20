@@ -1,6 +1,6 @@
 tmp/cache/*
 tmp/logs/*
-tmp/
+tmp/*
 webroot/index.php
 webroot/test.php
 phpmyadmin/
