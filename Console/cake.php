@@ -17,14 +17,14 @@
  */
 
 $ds = DIRECTORY_SEPARATOR;
-$dispatcher = 'Cake' . $ds . 'Console' . $ds . 'ShellDispatcher.php';
-
+$dispatcher = $ds . 'home' . $ds . 'action' . $ds . 'Workspace' . $ds . 'Vendor' . $ds . 'pear-pear.cakephp.org' . $ds . 'CakePHP' . $ds .'Cake' . $ds . 'Console' . $ds . 'ShellDispatcher.php';
+print($dispatcher);
 if (function_exists('ini_set')) {
 	$root = dirname(dirname(dirname(__FILE__)));
 
 	// the following line differs from its sibling
 	// /app/Console/cake.php
-	ini_set('include_path', $root . PATH_SEPARATOR .  $ds . 'home' . $ds . 'action' . $ds . 'workspace' . $ds . 'Vendor' . $ds . 'pear-pear.cakephp.org' . $ds . 'CakePHP' . PATH_SEPARATOR . ini_get('include_path'));
+	ini_set('include_path', $root . PATH_SEPARATOR .  $ds . 'home' . $ds . 'action' . $ds . 'Workspace' . $ds . 'Vendor' . $ds . 'pear-pear.cakephp.org' . $ds . 'CakePHP' . PATH_SEPARATOR . ini_get('include_path'));
 }
 
 if (!include $dispatcher) {
