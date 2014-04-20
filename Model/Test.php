@@ -15,7 +15,13 @@ class Test extends AppModel {
 			'required' => array(
 				'rule' => array('notEmpty'),
 				'message' => 'ファイルがない'
-			)
+			),
+			'extension' => array(
+				"rule" => array(
+	            	'extension', array('tsv')
+	        		),
+				"message" => "ファイルのフォーマットが正しくない",
+			),
 		),
 		'test_time' => array(
 			'required' => array(
