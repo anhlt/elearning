@@ -13,37 +13,40 @@
  */
 class TestsController extends AppController {    
 
-    public $components = array('Paginator');
+    public $components = array('Paginator','TsvReader');
     public function add() {
         $lesson_id = $this->params['named']['id'];
         $this->set('id', $lesson_id);
-
         if ($this->request->is('post'))
         {               
             $data = $this->request->data['Test'];           
-            
             if (is_uploaded_file($data['link']['tmp_name'])) {
                 $name = uniqid() . $data['link']['name'];
-                move_uploaded_file($data['link']['tmp_name'], WWW_ROOT."tsv" . DS . $name);
+                move_uploaded_file($data['link']['tmp_name'], WWW_ROOT. "tsv" . DS . $name);
                 $this->request->data['Test']['link'] = $name;                               
-            } 
-
-            $this->Test->create();
-            $this->request->data['Test']['lesson_id'] = $lesson_id;
-
-            if($this->Test->save($this->request->data['Test'])){
-                $this->Session->setFlash(__('テストファイルがアップロードされた'), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-success'
-                ));
-            } else {
-                $this->Session->setFlash(__('テストファイルをアップロードできない。もう一度お願い'), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-warning'
-                )); 
             }
-
-             $this->redirect(array('controller' => 'lesson', 'action' => 'test', 'id' => $lesson_id));
+            try {
+                $this->TsvReader->getViewTSV($name);
+                $this->Test->create();
+                $this->request->data['Test']['lesson_id'] = $lesson_id;
+                if($this->Test->save($this->request->data['Test'])){
+                    $this->Session->setFlash(__('テストファイルがアップロードされた'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-success'
+                    ));
+                } else {
+                    $this->Session->setFlash(__('テストファイルをアップロードできない。もう一度お願い'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-warning'
+                    )); 
+                }
+            } catch (Exception $e) {
+                $this->Session->setFlash(__($e->getMessage()), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'));
+                    unlink(WWW_ROOT . 'tsv' .DS. $name);
+            }
+            $this->redirect(array('controller' => 'lesson', 'action' => 'test', 'id' => $lesson_id));
         }
     }
 
@@ -128,7 +131,7 @@ class TestsController extends AppController {
                     if ($data_tsv[$row][1] != "QS") {
 
 
-                        $error = "Thieu noi dung cau hoi $numberQuestion.";
+                        $error = $numberQuestion."の質問の内容がない.";
                         break;
                     } else {
                         $questionID = $data_tsv[$row][0];
@@ -138,7 +141,7 @@ class TestsController extends AppController {
                             $row++;
                         }
                         if ($data_tsv[$row][1] != "KS") {
-                            $error = "Thieu ket qua cau hoi $numberQuestion.";
+                            $error = $numberQuestion."の質問の内容がない.";
                             break;
                         } else {
                             if ($result[$numberQuestion * 2 - 2] == 0) {
@@ -245,7 +248,7 @@ class TestsController extends AppController {
                 if ($data[$row][1] != "QS") {
 
 
-                    $error = "Thieu noi dung cau hoi $numberQuestion.";
+                    $error = $numberQuestion."の質問の内容がない.";
                     break;
                 } else {
 
@@ -263,7 +266,7 @@ class TestsController extends AppController {
                     }
 
                     if ($data[$row][1] != "KS") {
-                        $error = "Thieu ket qua cau hoi $numberQuestion.";
+                        $error =  $numberQuestion."の質問の内容がない.";
                         break;
                     } else {
                         $row++;

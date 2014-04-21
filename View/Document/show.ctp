@@ -16,8 +16,8 @@ height: 650px;
     top:0px;
     left:0px;
     z-index:3;
-    width:90%;
-    height:100%;
+    width:95%;
+    height:95%;
 }
 .transimageBig{
     position:absolute;
@@ -63,23 +63,27 @@ echo "<h1 style='margin-top:0px'>".$document['title']."</h1>";
 if(AuthComponent::user('role')!='admin'){
     echo $this->Html->link('違反レポート', '/document/report/'.$document['id'], array('class'=>'floatRight label label-default'));
 }
-//echo "<input id = 'frame' type = 'text' oncontextmenu = 'return false' />"; 
-$link = $document['link'];
-if (stripos(strrev(strtolower($link)), strrev(PDF))===0){
-    if ($learnable==1) {
+$link = $this->html->url('/', true) . 'files' . DS . $document['link'];
+$path_parts = pathinfo($link);
+$extension = $path_parts['extension'];
+$extension = strtolower($extension);
+if ($extension == 'pdf'){
+    if ($learnable==LEARNABLE) {
         echo $this->Html->image('icon/trans.png', array("class"=>"transimage"));
     }else {
         echo $this->Html->image('icon/trans.png', array("class"=>"transimageBig"));
     }
-    echo "<iframe id = 'frame' style = 'z-index:-1' src='/files/".$link."'></iframe>";
+    // echo "<iframe id = 'frame' style = 'z-index:-1' src='".$link."'></iframe>";
+    echo "<embed src=".$link." id = 'frame'>";
     echo "</div>";
-}else if (stripos(strrev(strtolower($link)),strrev(MP3)) ||stripos(strrev(strtolower($link)),strrev(WAV))===0){
- //   echo "<div oncontextmenu='return false;'>"."<iframe id = 'frameMusic' src='/files/".$link."'></iframe>"."</div>";
-     echo "<div oncontextmenu='return false;'>".$this->Html->media('/files/'.$link,  array("controls", "autoplay", "id"=>"frameMusic"))."</div>";
-}else if (stripos(strrev(strtolower($link)),strrev(MP4))===0){
-    echo "<div oncontextmenu='return false;'>".$this->Html->media('/files/'.$link,  array("controls", "autoplay", "id"=>"frameClip"))."</div>";
-}else if (stripos(strrev(strtolower($link)),strrev(GIF))===0  || stripos(strrev(strtolower($link)),strrev(JPG))===0 || stripos(strrev(strtolower($link)),strrev(PNG))===0){
-    echo "<div oncontextmenu='return false;'>".$this->Html->image('/files/'.$link,  array('width'=>'670', 'height'=>'690'))."</div>";
+}else if ( $extension=='mp3' || $extension == 'wav'){
+
+    echo "<div oncontextmenu='return false;'>".$this->Html->media($link,  array("controls", "autoplay", "id"=>"frameMusic"))."</div>";
+
+}else if ($extension == 'mp4'){
+    echo "<div oncontextmenu='return false;'>".$this->Html->media($link,  array("controls", "autoplay", "id"=>"frameClip"))."</div>";
+}else if ($extension == 'gif'|| $extension == 'jpg'|| $extension == 'png'){
+    echo "<div oncontextmenu='return false;'>".$this->Html->image($link,  array('width'=>'670', 'height'=>'690'))."</div>";
 }
 ?>
 </div>

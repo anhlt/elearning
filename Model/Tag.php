@@ -7,12 +7,12 @@ class Tag extends AppModel {
 			'foreignKey'=>'tag_id',
 			'associationForeignKey'=>'lesson_id'
 	));
-	public $validate = array(
-        'name' => array(
-            'lenght' => array(
-                'rule'    => array('minLength', '2'),
-                'message' => '最低限は２つのキャラクタだ'
-            ),
-        )
-    );
+	// public $validate = array(
+ //        'name' => array(
+ //            'lenght' => array(
+ //                'rule'    => array('minLength', '2'),
+ //                'message' => '最低限は２つのキャラクタだ'
+ //            ),
+ //        )
+ //    );
 }

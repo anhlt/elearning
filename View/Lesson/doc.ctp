@@ -29,11 +29,11 @@
 			
 			<table class="table">
 				<tr>
-					<td  class="col-sm-1">Order</td>
-					<td  class="col-sm-3"><?php echo $this->Paginator->sort('Title'); ?></td>					
-					<td  class="col-sm-1">Edit</td>					
-					<td  class="col-sm-1">Delete</td>
-					<td  class="col-sm-1">View</td>		
+					<td  class="col-sm-1">ID</td>
+					<td  class="col-sm-3"><?php echo $this->Paginator->sort('Title','名前'); ?></td>					
+					<td  class="col-sm-1">更新</td>					
+					<td  class="col-sm-1">削除</td>
+					<td  class="col-sm-1">見る</td>		
 				</tr>
 				 <?php foreach ($results as $result) {?>
 				  <tr>

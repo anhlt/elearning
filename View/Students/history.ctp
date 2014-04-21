@@ -12,8 +12,11 @@ foreach($lessons as $lesson){
     $lesson_id = $lesson['id'];
     $learn_state = "<font color=blue>勉強中</font>";
     $date = $this->Util->calDate($days_attended);
-    if ($date > MAX_LEARN_DAY)
+    if ($date > MAX_LEARN_DAY){
         $learn_state = "<font color=red>勉強した</font>";
+    }else if( $lesson['StudentsLesson']['baned'] == 1){
+        $learn_state = "<font color=red>禁止された</font>";
+    }
     echo $this->Html->tableCells(array($days_attended, $this->Html->link($lesson_name, "/lesson/learn/".$lesson_id), $learn_state));     
 } 
 echo "</table>";

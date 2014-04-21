@@ -1,10 +1,8 @@
 <?php
-
 App::uses('Folder', 'Utility');
 App::uses('File', 'Utility');
 
 class AdminsController extends AppController {
-
     public $components = array('Paginator');
     public $helpers = array('Js');
     var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter', 'Question', 'Document', 'Violate');
@@ -32,43 +30,34 @@ class AdminsController extends AppController {
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
                 ));
-                $this->redirect(array('controller' => 'users', 'action' => 'login'));
+                $this->redirect(array('controller' => 'admins', 'action' => 'login'));
             }
 
             if ($this->Auth->login()) {
                 $id = $this->Auth->user('id');
                 $this->User->recursive = 3;
                 $user = $this->User->findById($id);
+                $has_ip = 0;
                 foreach ($user['Admin']['IpAdmin'] as $ip) {
-                    debug($ip['ip_address']);
-                    debug($this->request->ClientIp());
-                    if($this->request->ClientIp() == $ip['ip_address']) break;
+                    if($this->request->ClientIp() == $ip['ip_address']) $has_ip = 1;
+                };
+                if($has_ip == 0){
                     $this->Session->setFlash(__('IPアドレスが違う'), 'alert', array(
                         'plugin' => 'BoostCake',
                         'class' => 'alert-warning'
                     )); 
                     $this->Auth->logout();
                     $this->redirect(array('controller'=>'admins','action' => 'login'));
-                };
-
-                if($user['role'] == 'lecturer' && $user['role'] == 'student')
-                {
-                    $this->Auth->logout();
-                    return $this->redirect(array('controller' => 'user', 'action' => 'login'));
                 }
-                if($user['role'] == 'admin')
-                {
                 $this->redirect(array('controller'=>'Admins'));
-                }
-            }
-
-            $this->Session->setFlash(__('ユーザ名、パスワードが正しくない'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-warning'
-            ));
+                }else
+                    $this->Session->setFlash(__('ユーザ名、パスワードが正しくない'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-warning'
+                    ));
         }
     }
-
+    
     public function add_ip_address() {
         $id = $this->Auth->user('id');
         if ($this->request->is('post')) {
@@ -154,8 +143,10 @@ class AdminsController extends AppController {
             //echo $username;
             //die();
             if ($username != NULL) {
+
                 $sql1 = "SELECT * FROM lecturers, users WHERE (lecturers.id = users.id and 
                     users.username like '%$username%')";
+
 
                 $data = $this->Lecturer->User->query($sql1);
                 if ($data != NULL) {
@@ -169,7 +160,9 @@ class AdminsController extends AppController {
                     //$this->redirect(array('action'=>'manage_lecturer'));
                 }
             } else {
+
                 $sql2 = "SELECT * FROM lecturers, users WHERE (lecturers.id = users.id and users.role = 'lecturer')";
+
                 //$sql = "SELECT * FROM users";
                 $data = $this->Lecturer->User->query($sql2);
                 //var_dump($data);
@@ -180,7 +173,9 @@ class AdminsController extends AppController {
                 }
             }
         } else {
+
             $sql2 = "SELECT * FROM lecturers, users WHERE (lecturers.id = users.id and users.role = 'lecturer')";
+
             //$sql = "SELECT * FROM users";
             $data = $this->Lecturer->User->query($sql2);
             //var_dump($data);
@@ -239,17 +234,17 @@ class AdminsController extends AppController {
     public function reset_password_lecturer($id_lecturer, $init_password) {
         //echo $id;
         //echo $init_password;
-        $this->loadModel('User');
-        $sql = "UPDATE users SET password = '$init_password' WHERE users.id = '$id_lecturer'";
-        if (!$this->User->query($sql)) {
+        if(isset($id_lecturer) && isset($init_password)){
+            $this->loadModel('User');
+            $sql = "UPDATE users SET password = '$init_password' WHERE users.id = '$id_lecturer'";
+            $this->User->query($sql);
             //$this->Session->setFlash(__('パスワードのリセットが成功された'));
             $this->Session->setFlash(__('パスワードのリセットが成功された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
             ));
             $this->redirect(array('action' => 'manage_lecturer'));
-        } else {
-            //$this->Session->setFlash(__('パスワードのリセットができない'));
+        }else{
             $this->Session->setFlash(__('パスワードのリセットができない'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-warning'
@@ -261,21 +256,22 @@ class AdminsController extends AppController {
     public function reset_verifycode_lecturer($id_lecturer, $init_verifycode) {
         //echo $id;
         //echo $init_password;
-        $this->loadModel('Lecturer');
-        $sql = "UPDATE lecturers SET current_verifycode = '$init_verifycode' WHERE lecturers.id = '$id_lecturer'";
-        if (!$this->User->query($sql)) {
-            //$this->Session->setFlash(__('verifycodeのリセットが成功された'));
+        if(isset($id_lecturer) && isset($init_verifycode)){
+            $this->loadModel('Lecturer');
+            $sql = "UPDATE lecturers SET current_verifycode = '$init_verifycode' WHERE lecturers.id = '$id_lecturer'";
+            $this->User->query($sql); 
+             //$this->Session->setFlash(__('verifycodeのリセットが成功された'));
             $this->Session->setFlash(__('verifycodeのリセットが成功された'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-success'
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
             ));
             $this->redirect(array('action' => 'manage_lecturer'));
-        } else {
-            //$this->Session->setFlash(__('verifycodeのリセットができない'));
+            
+        }else{
             $this->Session->setFlash(__('verifycodeのリセットができない'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-warning'
-            ));
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
             $this->redirect(array('action' => 'manage_lecturer'));
         }
     }
@@ -283,6 +279,7 @@ class AdminsController extends AppController {
     public function delete_lecturer($id_lecturer) {
         $this->uses = array('Lecturer', 'User');
         if ($this->User->delete($id_lecturer)) {
+
             //$this->Session->setFlash(__('アカウントの削除が成功された'));        
             $this->Session->setFlash(__('アカウントの削除が成功された'), 'alert', array(
                 'plugin' => 'BoostCake',
@@ -308,28 +305,21 @@ class AdminsController extends AppController {
         if ($this->request->is('post')) {
             $this->set('data', NULL);
             $username = $this->request->data["search"]["username"];
-            //echo $username;
-            //die();
             if ($username != NULL) {
                 $sql1 = "SELECT * FROM students, users WHERE (students.id = users.id and 
                     users.username like '%$username%')";
-                //$sql = "SELECT * FROM users";
                 $data = $this->Student->User->query($sql1);
                 if ($data != NULL) {
                     $this->set('data', $data);
-                    // $this->redirect(array('action'=>'manage_lecturer'));
                 } else {
                     $this->Session->setFlash(__('見つけない'), 'alert', array(
                         'plugin' => 'BoostCake',
                         'class' => 'alert-warning'
                     ));
-                    //$this->redirect(array('action'=>'manage_lecturer'));
                 }
             } else {
                 $sql = "SELECT * FROM students, users WHERE (students.id = users.id and users.role = 'student')";
-                //$sql = "SELECT * FROM users";
                 $data = $this->Student->User->query($sql);
-                //$data = $this->Admin->printfStudent();
                 if ($data == NULL) {
                     $this->Session->setFlash(__('ダータがない'));
                 } else {
@@ -338,9 +328,7 @@ class AdminsController extends AppController {
             }
         } else {
             $sql = "SELECT * FROM students, users WHERE (students.id = users.id and users.role = 'student')";
-            //$sql = "SELECT * FROM users";
             $data = $this->Student->User->query($sql);
-            //$data = $this->Admin->printfStudent();
             if ($data == NULL) {
                 $this->Session->setFlash(__('ダータがない'));
             } else {
@@ -396,16 +384,18 @@ class AdminsController extends AppController {
     public function reset_password_student($id_student, $init_password) {
         //echo $id;
         //echo $init_password;
-        $this->loadModel('User');
-        $sql = "UPDATE users SET password = '$init_password' WHERE users.id = '$id_student'";
-        if (!$this->User->query($sql)) {
+        if(isset($id_student) && isset($init_password)){
+            $this->loadModel('User');
+            $sql = "UPDATE users SET password = '$init_password' WHERE users.id = '$id_student'";
+            $this->User->query($sql);
             //$this->Session->setFlash(__('パスワードのリセットが成功された'));
             $this->Session->setFlash(__('パスワードのリセットが成功された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
             ));
             $this->redirect(array('action' => 'manage_student'));
-        } else {
+        
+        }else{
             //$this->Session->setFlash(__('パスワードのリセットができない'));
             $this->Session->setFlash(__('パスワードのリセットが成功された'), 'alert', array(
                 'plugin' => 'BoostCake',
@@ -418,16 +408,17 @@ class AdminsController extends AppController {
     public function reset_verifycode_student($id_student, $init_verifycode) {
         //echo $id;
         //echo $init_password;
+        if(isset($id_student) && isset($init_verifycode)){
         $this->loadModel('Student');
         $sql = "UPDATE students SET current_verifycode = '$init_verifycode' WHERE   students.id = '$id_student'";
-        if (!$this->User->query($sql)) {
+            $this->User->query($sql);
             //$this->Session->setFlash(__('verifycodeのリセットが成功された'));
             $this->Session->setFlash(__('verifycodeのリセットが成功された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
             ));
             $this->redirect(array('action' => 'manage_student'));
-        } else {
+        }else{
             //$this->Session->setFlash(__('verifycodeのリセットができない'));
             $this->Session->setFlash(__('verifycodeのリセットができない'), 'alert', array(
                 'plugin' => 'BoostCake',
@@ -440,6 +431,7 @@ class AdminsController extends AppController {
     public function delete_student($id_student) {
         $this->uses = array('Student', 'User');
         if ($this->User->delete($id_student)) {
+
             //$this->Session->setFlash(__('アカウントの削除が成功された'));
             $this->Session->setFlash(__('アカウントの削除が成功された'), 'alert', array(
                 'plugin' => 'BoostCake',
@@ -561,7 +553,6 @@ class AdminsController extends AppController {
 
     //tha
     public function add_admin() {
-
         $this->uses = array('User', 'Admin', 'IpAdmin');
 
         if ($this->request->is('post')) {
@@ -570,7 +561,9 @@ class AdminsController extends AppController {
             $admins = $this->Admin->find();
             if ($this->User->saveAll($this->request->data)) {
                 $this->request->data['IpAdmin']['admin_id'] = $this->User->id;
+                $this->request->data['IpAdmin']['ip_address'] =$this->request->data['Admin']['ip_address'];
                 $this->IpAdmin->save($this->request->data);
+
                 $this->Session->setFlash(__('新しい管理者が追加された'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
@@ -619,8 +612,12 @@ class AdminsController extends AppController {
             $this->request->data = $this->Admin->findById($id_admin);
         } else {
             $this->request->data['User']['id'] = $id_admin;
-            //var_dump($this->request->data);
             if ($this->Admin->save($this->request->data) && $this->User->save($this->request->data)) {
+                foreach ($this->request->data['IpAdmin'] as $key => $value) {
+                    $this->request->data['IpAdmin'][$key]['admin_id'] = $id_admin;
+                }
+                $this->IpAdmin->saveAll($this->request->data['IpAdmin']);
+
                 $this->Session->setFlash(__('セーブされた'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
@@ -671,12 +668,14 @@ class AdminsController extends AppController {
     }
 
     public function view_violation_content_process() {
+
         $this->uses = array('Report');
         $document_id = $this->params['named']['id'];
         if ($this->checkContainKey($this->data, "accept")) {
             $data['Report']['document_id'] = $document_id;
             $data['Report']['state'] = 1;
             $this->Report->saveAll($data);
+
             $this->uses = array('Violate');
             $this->Violate->deleteAll(array('Violate.document_id' => $document_id), false);
 
@@ -690,27 +689,84 @@ class AdminsController extends AppController {
         }
     }
 
-    public function fee_manager() {
-        date_default_timezone_set('Asia/Saigon');
-        $date = date('Y:m:d H:i:s');
-        $month = $this->getMonth($date);
-        $year = $this->getYear($date);
-        if ($month == 1) {
-            $month = 12;
-            $year--;
-        }
-        else
-            $month--;
+    public function downloadtsv($year, $month) {
+        
+    }
 
-        $this->set("year", $year);
-        $this->set("month", $month);
-        if($month<10)$month = "0".$month;
-        $name = "ELS-UBT-".$year . "-".$month.".tsv";
-        $File = WWW_ROOT. DS ."tsv" . DS . $name;
-        $this->set('exit',file_exists($File));
-        $bool = file_exists($File);
-        $this->getStudentFee($year,$month);
+    public function fee_manager($year_ = null, $month_ = null) {
        
+        $this->uses = array('Parameter');
+        $result = $this->Parameter->find('all', array('conditions' => array('Parameter.name' => "LESSON_COST")));
+        $lesson_cost = $result[0]["Parameter"]["value"];
+        $result = $this->Parameter->find('all', array('conditions' => array('Parameter.name' => "LECTURER_MONEY_PERCENT")));
+        $lecturer_money_percent = $result[0]["Parameter"]["value"];
+        $this->set('lesson_cost', $lesson_cost * 10000);
+        $this->set('lecturer_money_percent', $lecturer_money_percent / 100);
+        if ($this->request->is('post')) {
+
+            $month = $this->data['Fee']['month'];
+            $year = $this->data['Fee']['year'];
+            $month++;
+            if ($month < 10)
+                $month = "0" . $month;
+            $year = $year + 1970;
+            $this->set('month', $month);
+            $this->set('year', $year);
+            $this->set('months', $this->getMonthSet());
+            $this->set('years', $this->getYearSet());
+            $object = $this->data['Fee']['choose'];
+            $this->set('object', $object);
+            if ($object == 1) {
+                $this->getStudentFee($year, $month);
+            } else {
+                $this->getLecturerFee($year, $month);
+            }
+            $name = "ELS-UBT-" . $year . "-" . $month . ".tsv";
+            $File = "tsv\\fee\\" . $name;
+            $this->set('exit', file_exists($File));
+            $this->set("checkyearover", $this->checkYearOver($year, $month));
+            if (file_exists($File)) {
+                $this->Session->setFlash(__($year . '年' . $month . '月のTSVが作成されました'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+            } else {
+                if ($this->checkYearOver($year, $month))
+                    $this->Session->setFlash(__($year . '年' . $month . '月のTSVが作成できません'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-warning'
+                    ));
+            }
+        } else {
+
+            date_default_timezone_set('Asia/Saigon');
+            $date = date('Y:m:d H:i:s');
+            $month = $this->getMonth($date);
+            $year = $this->getYear($date);
+            if (isset($year_) || isset($month_)) {
+                $month = $month_;
+                $year = $year_;
+            }
+            $this->set('month', $month);
+            $this->set('year', $year);
+            $this->set('months', $this->getMonthSet());
+            $this->set('years', $this->getYearSet());
+            $this->getStudentFee($year, $month);
+            $this->getLecturerFee($year, $month);
+            //if ($month < 10)
+            //  $month = "0" . $month;
+            $name = "ELS-UBT-" . $year . "-" . $month . ".tsv";
+            $File = "tsv\\fee\\" . $name;
+            $this->set('exit', file_exists($File));
+            $bool = file_exists($File);
+            if (file_exists($File)) {
+                $this->Session->setFlash(__(($year) . '年' . ($month) . '月のTSVが作成されました'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+            }
+            // debug($this->Auth->user);
+        }
     }
 
     private function getStudentFee($year, $month) {
@@ -719,27 +775,25 @@ class AdminsController extends AppController {
         $this->uses = array('Student');
         $student_list = $this->Student->find('all', array('condition' => array('actived' => 1)));
         $this->uses = array('LessonMembership'); //$student['Student']['id'];
-
         $student_list_ = array();
         $i = 0;
         foreach ($student_list as $student) {
             $count = 0;
             $result = $this->LessonMembership->find('all', array('conditions' => array('LessonMembership.student_id' => $student['Student']['id'])));
-
             foreach ($result as $res) {
                 $date = $res['LessonMembership']['days_attended'];
-                if ($this->getYear($date) == $year && $this->getMonth($date) == $month)
+                if ($this->getYear($date) == $year && $this->getMonth($date) == $month) {
                     $count++;
+                }
             }
-            $student['count'] = $count;
+            // $student['count'] = $count;
             $student_list_[$i] = $student;
+            $student_list_[$i]['count'] = $count;
+            $student_list_[$i]['Student']['phone_number'] = $this->getPhoneNumberFormat($student_list_[$i]['Student']['phone_number']);
+            
             $i++;
         }
-        $this->set('student_list', $student_list);
-        $this->paginate = array(
-            'limit' => 2,
-            'fields' => array(),
-        );
+        $this->set('student_list', $student_list_);
         return $student_list_;
     }
 
@@ -758,7 +812,6 @@ class AdminsController extends AppController {
             $count = 0;
             $this->uses = array('Lesson');
             $lesson_list = $this->Lesson->find('all', array('condition' => array('Lesson.lecturer_id' => 11)));
-            //debug($lesson_list);
             $this->uses = array('LessonMembership');
             $result = $this->LessonMembership->find('all');
             foreach ($result as $res) {
@@ -769,23 +822,20 @@ class AdminsController extends AppController {
                             $count++;
                     }
             }
-            $lecturer['count'] = $count;
             $lecturer_list_[$i] = $lecturer;
+            $lecturer_list_[$i]['count'] = $count;
+            $lecturer_list_[$i]['Lecturer']['phone_number'] = $this->getPhoneNumberFormat($lecturer_list_[$i]['Lecturer']['phone_number']);
+            $lecturer_list_[$i]['Lecturer']["credit_card_number"] = 
+            $this->getBankLecturerAcountFormat($lecturer_list_[$i]['Lecturer']["credit_card_number"]) ;            
             $i++;
         }
-        $this->set('$lecturer_list', $lecturer_list_);
-        $this->paginate = array(
-            'limit' => 2,
-            'fields' => array(),
-        );
-
+        $this->set('lecturer_list', $lecturer_list_);
         $this->uses = array('Lesson');
         $lesson_list = $this->Lesson->find('all', array('conditions' => array('Lesson.lecturer_id' => 10)));
         return $lecturer_list_;
     }
 
     private function getCurrentYear() {
-
         $date = date('Y-m-d');
         $years = array();
         for ($i = 1970; $i < $date; $i++) {
@@ -809,26 +859,53 @@ class AdminsController extends AppController {
         $months[9] = "October";
         $months[10] = "November";
         $months[11] = "December";
-
-
-        debug($months);
+        //  debug($months);
         return $months;
+    }
+
+    private function getYearSet() {
+        date_default_timezone_set('Asia/Saigon');
+        $date = date('Y:m:d H:i:s');
+        $month = $this->getMonth($date);
+        $year = $this->getYear($date);
+        if ($month == 1) {
+            $month = 12;
+            $year--;
+        }
+        else
+            $month--;
+
+        $years = array();
+        for ($i = 1970; $i <= $year; $i++)
+            $years[$i - 1970] = $i;
+        // debug($years);
+        return $years;
+    }
+
+    private function checkYearOver($year_, $month_) {
+        date_default_timezone_set('Asia/Saigon');
+        $date = date('Y:m:d H:i:s');
+        $month = $this->getMonth($date);
+        $year = $this->getYear($date);
+
+        if ($year < $year_)
+            return true;
+        if ($year == $year_ && $month < $month_)
+            return true;
+        return false;
     }
 
     public function generate_tsv($year, $month) {
         $this->set('year', $year);
         $this->set('month', $month);
-
-
         date_default_timezone_set('Asia/Saigon');
         $date = date('Y:m:d H:i:s');
         echo $date;
         mb_internal_encoding('UTF-8');
-        header('Content-Type: text/html;charset=utf-8');        
-        if($month<10)$month = "0".$month;
-        $name = "ELS-UBT-".$year . "-".$month.".tsv";
-        $File = WWW_ROOT. DS . 'tsv' . DS . $name;
-        $Handle = fopen($File, "w");
+        header('Content-Type: text/html;charset=utf-8');
+        // if ($month < 10)
+        //    $month = "0" . $month;
+        $name = "ELS-UBT-" . $year . "-" . $month . ".tsv";
         $data = "" . mb_convert_kana("ELS-UBT-GWK5M78", "rnaskhcv") . "\t";
         echo "<br>" . $data;
         $data.= mb_convert_kana($year, "rnaskhcv") . "\t";
@@ -843,18 +920,19 @@ class AdminsController extends AppController {
         $data.= mb_convert_kana($this->getHour($date), "rnaskhcv") . "\t";
         $data.= mb_convert_kana($this->getMinus($date), "rnaskhcv") . "\t";
         $data.= mb_convert_kana($this->getSecond($date), "rnaskhcv") . "\t";
-        $student_list = $this->getStudentFee($year, $month);
+        $result = $this->Parameter->find('all', array('conditions' => array('Parameter.name' => "LESSON_COST")));
+        $lesson_cost = $result[0]["Parameter"]["value"];
+        $result = $this->Parameter->find('all', array('conditions' => array('Parameter.name' => "LECTURER_MONEY_PERCENT")));
+        $lecturer_money_percent = $result[0]["Parameter"]["value"];
 
+        $student_list = $this->getStudentFee($year, $month);
         foreach ($student_list as $student) {
             $data.= "\n";
             $data.= mb_convert_kana($student['Student']['id'], "rnaskhcv") . "\t";
             $data.= mb_convert_kana($student['Student']['full_name'], "rnaskhcv") . "\t";
-            $data.= mb_convert_kana($student['count'] * 20000, "rnaskhcv") . "\t";
-
+            $data.= mb_convert_kana($student['count'] * $lesson_cost * 10000, "rnaskhcv") . "\t";
             $data.= mb_convert_kana($student['Student']['address'], "rnaskhcv") . "\t";
             $phone_number = mb_convert_kana($student['Student']['phone_number'], "rnaskhcv") . "\t";
-            $phone_number = substr_replace($phone_number, '-', 3, 0);
-            $phone_number = substr_replace($phone_number, '-', 7, 0);
             $data.= $phone_number . "\t";
             $data.= mb_convert_kana("18", "rnaskhcv") . "\t";
             $credit_number = mb_convert_kana($student['Student']['credit_card_number'], "rnaskhcv") . "\t";
@@ -865,21 +943,55 @@ class AdminsController extends AppController {
             $credit_number = substr_replace($credit_number, '-', 23, 0);
             $data.= $credit_number . "\t";
         }
+
+        $lecturer_list = $this->getLecturerFee($year, $month);
+        foreach ($lecturer_list as $lecturer) {
+            $data.= "\n";
+            $data.= mb_convert_kana($lecturer['Lecturer']['id'], "rnaskhcv") . "\t";
+            $data.= mb_convert_kana($lecturer['Lecturer']['full_name'], "rnaskhcv") . "\t";
+            $data.= mb_convert_kana($lecturer['count'] * $lesson_cost * 100 * $lecturer_money_percent, "rnaskhcv") . "\t";
+            $data.= mb_convert_kana($lecturer['Lecturer']['address'], "rnaskhcv") . "\t";
+            $phone_number = mb_convert_kana($lecturer['Lecturer']['phone_number'], "rnaskhcv") . "\t";
+            $data.= $phone_number . "\t";
+            $data.= mb_convert_kana("54", "rnaskhcv") . "\t";
+            $credit_number = mb_convert_kana($lecturer['Lecturer']['credit_card_number'], "rnaskhcv") . "\t";
+            $data.= $credit_number . "\t";
+        }
         $data.= "\n";
-        $this->getLecturerFee($year, $month);
-
-
         $data.= mb_convert_kana("END___END___END", "rnaskhcv") . "\t";
-        // $data.= "END___END___END\t";
-        $data.= mb_convert_kana($year, "rnaskhcv")."\t";
-        if($month<10)$data.= mb_convert_kana("0".$month, "rnaskhcv")."\t";
-            else $data.= mb_convert_kana($month, "rnaskhcv")."\t";
-        
-                
-        fprintf($Handle,$data);
-        fclose($Handle);        
-        $this->response->file($File);
+        $data.= mb_convert_kana($year, "rnaskhcv") . "\t";
+        $data.= mb_convert_kana($month, "rnaskhcv") . "\t";
+        $this->response->body($data);
+        $this->response->type('tsv');
+        $this->response->download("ELS-UBT-" . $year . "-" . $month . ".tsv");
         return $this->response;
+    }
+
+    private function getPhoneNumberFormat($phone) {
+        $n = strlen($phone);
+        $result = "";
+        for ($i = 0; $i < $n; $i++) {
+            $result.=$phone[$i];
+            if (($i + 1) % 3 == 0 && $i != $n - 1)
+                $result.="-";
+        }
+        return $result;
+    }
+
+    private function getBankLecturerAcountFormat($bank_acount) {
+        $n = strlen($bank_acount);
+        $result = "";
+        for ($i = 0; $i < $n; $i++) {
+            $result.=$bank_acount[$i];
+            
+            if ($i == 3)
+                $result.="-"."0";
+            if($i == 6)
+            $result.= ("-"."000");     
+            if($i == 7)
+            $result.= ("-");    
+        }
+        return $result;
     }
 
     private function monthToString($month) {
@@ -917,7 +1029,6 @@ class AdminsController extends AppController {
             $ranking = $this->data['ranking']['choose_ranking'];
             $this->set('ranking', $ranking);
         }
-
         $this->uses = array('LessonMembership');
         $lessons = $this->LessonMembership->find('all', array('conditions' => array('LessonMembership.baned' => false,
                 'LessonMembership.liked' => true)));
@@ -936,14 +1047,10 @@ class AdminsController extends AppController {
             $this->uses = array('Lesson');
             $lessons_ = $this->Lesson->find('all', array('conditions' => array('Lesson.lecturer_id' => $teachers[$i]['id'])
             ));
-
             $teachers[$i]['count_like'] = $this->countLesson($lessons_, $lessons);
-
             //debug($teachers[$i]);
             $i++;
         }
-
-
         $teachers = $this->array_sort($teachers, 'count_like', SORT_DESC);
         if (!isset($ranking) || $ranking == 0) {
             
@@ -1023,7 +1130,6 @@ class AdminsController extends AppController {
                     arsort($sortable_array);
                     break;
             }
-
             foreach ($sortable_array as $k => $v) {
                 $new_array[$k] = $array[$k];
             }
@@ -1172,7 +1278,6 @@ class AdminsController extends AppController {
         $this->autoRender = false;
         if (isset($this->params['named']['file'])) {
             $source = WWW_ROOT . 'files/db/' . $this->params['named']['file'];
-            var_dump($source);
             unlink($source);
         }
         $this->Session->setFlash(__('バックアップのファイルが削除された'), 'alert', array(
@@ -1319,6 +1424,22 @@ class AdminsController extends AppController {
                 ));
             }
         }
+    }
+
+    public function manage_lesson(){
+        $sql= "SELECT lessons.id, lessons.name, lessons.lecturer_Id, COUNT( ihans.lesson_Id ) as count
+                FROM  ihans , lessons
+                WHERE lessons.id = ihans.lesson_id
+                GROUP BY (lessons.id)";
+        $datas = $this->Document->query($sql);
+        if($datas){
+        debug($datas);
+            $this->set('datas', $datas);
+        }else{
+            $this->Session->setFlash(__('データがない'), 'alert', array(
+            'plugin' => 'BoostCake',
+            'class' => 'alert-warning'));
+        }    
     }
 }
 ?>

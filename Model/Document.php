@@ -21,7 +21,7 @@ class Document extends AppModel {
 			),
 			'extension' => array(
 				"rule" => array(
-	            	'extension', array('pdf', 'mp4', 'jpg','mp3','wav','gif','png','tsv')
+	            	'extension', array('pdf', 'mp4', 'jpg','mp3','wav','gif','png')
 	        		),
 				"message" => "ファイルのフォーマットが正しくない",
 			),

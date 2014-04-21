@@ -20,7 +20,9 @@ class DocumentController extends AppController {
 				$data['Document']['link'] =  $name;
 				if (is_uploaded_file($Document['link']['tmp_name'])) {
 					$data['Document']['title'] = $Document['title'];
+
 					move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT."files".DS.$name);
+
 					$data['Document']['lesson_id'] = $lesson_id;
 					$this->Document->create();
 					if ($this->Document->save($data)) {
@@ -115,14 +117,18 @@ class DocumentController extends AppController {
     }
 
     public function show($document_id){
+    	$doc  = $this->Document->findById($document_id);
+    	$lesson = $this->Lesson->findById($doc ["Document"]['lesson_id']);
+    	$lecturer_id = $lesson['Lecturer']['id'];
+    	if($this->Auth->user('role') == 'lecturer' && $this->Auth->user('id') != $lecturer_id)
+            $this->redirect(array('controller' => 'users', 'action' => 'permission'));
         $document = $this->Document->find("first", array("conditions"=>array("Document.id"=>$document_id)));
         $this->set("document", $document['Document']);
         $lesson_id = $document['Document']['lesson_id']; 
-        if ($this->Util->checkLessonAvailableWithStudent($lesson_id, $this->Auth->user("id"))){
-            $this->set("learnable", 1);
-        }else {
-            $this->set("learnable", -1);
-        }
+        $this->set("learnable", $this->Util->checkLessonAvailableWithStudent($lesson_id, $this->Auth->user("id")));
+        if ($this->Auth->user('role')=='lecturer'){
+			$this->set("learnable", LEARNABLE);
+		}
     }
 
     public function report( $document_id){
@@ -137,7 +143,7 @@ class DocumentController extends AppController {
         if ($this->request->is('post')){
             $content = $this->data['report']['content'];
             $this->loadModel("Violate");
-            $data = array("student_id"=>$this->Auth->user("id"), "document_id"=>"document_id", "content"=>$content); 
+            $data = array("student_id"=>$this->Auth->user("id"), "document_id"=>$document_id, "content"=>$content); 
             $this->Violate->save($data);
             $this->redirect(array("controller"=>"lesson","action"=>"learn",$lesson_id));  
         } 

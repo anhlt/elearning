@@ -1,6 +1,7 @@
 <div class="row">
-    
+    <?php echo $this->Session->flash(); ?>
     <?php echo $this->element('admin_menus');?>
+
     <div class="col-xs-13 col-md-9">
         <h2>管理者の追加</h2>  
         <?php echo $this->Session->flash(); ?>

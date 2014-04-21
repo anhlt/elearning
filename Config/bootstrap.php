@@ -39,8 +39,14 @@ define ("MAX_LEARN_DAY", 10);
 define ("DELETED", -1);
 define ("TEACHER_FIXED", 0);
 define ("TEACHER_UNFIX", 1);
+define ("OVER_DAY", 1);
+define ("BANED", 2);
+define ("LEARNABLE", 3);
+define ("UNREGISTER", 4);
+define ("ASC", 1);
+define ('DESC', 2);
 /**
- *
+ 
  * The settings below can be used to set additional paths to models, views and controllers.
  *
  * App::build(array(

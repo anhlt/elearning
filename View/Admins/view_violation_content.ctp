@@ -25,34 +25,33 @@
 			 <?php }?>
 			</table>
 		</div>
-	</div>
-</div> 
 
 
 <?php                             
 
-echo $this->Form->create('Admin', array(
-    'inputDefaults' => array(
-        'div' => false,
-        'label' => false,
-        'wrapInput' => false,
-        'class' => 'form-control'
-    ),
-    'class' => 'well',
-    'url' => array('controller' => 'Admins', 'action' => 'view_violation_content_process','id' => $document_id
-       )
-));
+        echo $this->Form->create('Admin', array(
+            'inputDefaults' => array(
+                'div' => false,
+                'label' => false,
+                'wrapInput' => false,
+                'class' => 'form-control'
+            ),
+            'class' => 'well',
+            'url' => array('controller' => 'Admins', 'action' => 'view_violation_content_process','id' => $document_id
+               )
+        ));
 
-echo $this->Form->submit('確認', array(
-    'div' => false,
-    'class' => 'btn btn-default',
-    'name' => 'accept'
-));
-echo $this->Form->submit('削除', array(
-    'div' => false,
-    'class' => 'btn btn-default',
-    'name' => 'checkout'
-));
-echo $this->Form->end();
-
-?>
+        echo $this->Form->submit('確認', array(
+            'div' => false,
+            'class' => 'btn btn-default',
+            'name' => 'accept'
+        ));
+        echo $this->Form->submit('削除', array(
+            'div' => false,
+            'class' => 'btn btn-default',
+            'name' => 'checkout'
+        ));
+        echo $this->Form->end();
+        ?>
+    </div>
+</div> 

@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <title>
-        <?php echo __('CakePHP: the rapid development php framework:'); ?>
         <?php echo $title_for_layout; ?>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,15 +33,12 @@ $(document).ready(function(){
     body {
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
     }
+    .navbar-form{max-width: 250px;}
+
     </style>
     <?php echo $this->Html->css('bootstrap-responsive.min'); ?>
     <?php echo $this->Html->css('docs.min'); ?>
     <?php echo $this->Html->css('tagmanager'); ?>	
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
 
 	<?php
 	echo $this->fetch('meta');
@@ -64,18 +60,17 @@ $(document).ready(function(){
         <?php endif?>
     </ul>
 </div>
-
     <div class="navbar-collapse collapse" id="navbar-main">
     <ul class="nav navbar-nav navbar-right">
         <?php if ($this->Session->read('Auth.User')):?>
                 <?php if (AuthComponent::user('role')=='student'):?>
                 <li class="navbar-form" role="search">
-               <!--      <div class="input-group">
-                        <input type="text" class="form-control" placeholder="smart search" name="srch-term" id = 'searchip'>
+                    <div class="input-group .col-md-4">
+                        <input type="text" class="form-control" placeholder="スマート 検索" name="srch-term" id = 'searchip'>
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                         </div>
-                    </div> -->
+                    </div>
                 </li>
                 <?php endif ?>
             <li><a href='/users/changepassword'>パスワードの更新</a></li>
@@ -102,7 +97,7 @@ $(document).ready(function(){
     </div>
     <div class="container">
     <?php echo $this->fetch('content'); ?>
-    <?php //echo $this->element('sql_dump');?>
+    <?php #echo $this->element('sql_dump');?>
     </div> <!-- /container -->
     <!-- Le javascript
     ================================================== -->

@@ -1,14 +1,8 @@
 <?php 
     class TsvReaderHelper extends AppHelper {
    		public function getViewTSV($filename) {
-      //  $filename = time() . $this->data['TSV']['file']['name'];
-      		$link = $_SERVER['DOCUMENT_ROOT']. 'tsv' . DS . $filename;
-   		
-   		// 	$link = WEBROOT_DIR . DS . 'tsv' . DS . $filename;
-      	//	echo $link;
-
+      	$link = $_SERVER['DOCUMENT_ROOT']. 'tsv' . DS . $filename;
         $data_tsv = array();
-
         if (($handle = fopen($link, "r")) !== FALSE) {
             $row = 0;
             while (($data = fgetcsv($handle, 1000, "\t")) !== FALSE) {
@@ -16,21 +10,18 @@
                 for ($i = 0; $i < $num; $i++) {
                     $data[$i] = mb_convert_encoding($data[$i], 'utf-8');
                 }
-                //$review = $review."row $row:".$data[0][2]."<br/>";
                 if ($data[0] != null && strcmp($data[0][0], '#') != 0 && ($row != 0 || strcmp($data[0][3], '#') != 0)) {
-                    //print_r($data);
                     $data_tsv[] = $data;
                 }
                 $row++;
             }
-
             fclose($handle);
         }
         $review = '';
         $error = '';
-        //echo $data_tsv[0][0][3];
         if ($data_tsv[0][0][3] != 'T' || !isset($data_tsv[0][1])) {
             $error = $error . "Thieu Test title";
+            throw new Exception($error);
         } else {
             $review = "<div name=\"TestTitle\">" . $data_tsv[0][1] . "</div>";
 
@@ -48,9 +39,8 @@
                     break;
                 } else {
                     if ($data_tsv[$row][1] != "QS") {
-
-
                         $error = "Thieu noi dung cau hoi $numberQuestion.";
+                        throw new Exception($error);
                         break;
                     } else {
 
@@ -69,6 +59,7 @@
 
                         if ($data_tsv[$row][1] != "KS" || !isset($data_tsv[$row][2]) || !isset($data_tsv[$row][3])) {
                             $error = "Thieu ket qua cau hoi $numberQuestion.";
+                            throw new Exception($error);
                             break;
                         } else {
                             $review = $review . "<div class=\"result\">結果：" . $data_tsv[$row][2][2] . "    " . $data_tsv[$row][3] . "点</div>";
@@ -80,9 +71,7 @@
         }
         return $review;
     }
-
     private function getDataTSV($filename) {
-        //$link = $_SERVER['DOCUMENT_ROOT'] . DS . 'elearning' . DS . WEBROOT_DIR . DS . 'tsv' . DS . $filename;
         $link = 	$link = $_SERVER['DOCUMENT_ROOT']. 'tsv' . DS . $filename;
         $data_tsv = array();
 
@@ -93,9 +82,7 @@
                 for ($i = 0; $i < $num; $i++) {
                     $data[$i] = mb_convert_encoding($data[$i], 'utf-8');
                 }
-
                 if ($data[0] != null && strcmp($data[0][0], '#') != 0 && ($row != 0 || strcmp($data[0][3], '#') != 0)) {
-                    //print_r($data);
                     $data_tsv[] = $data;
                 }
                 $row++;
