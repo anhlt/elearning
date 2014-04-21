@@ -89,7 +89,7 @@ class UsersController extends AppController {
 						'plugin' => 'BoostCake',
 						'class' => 'alert-warning'
 					));	
-					$this->redirect(array('controller'=>'users','action' => 'verifycode'));
+					$this->redirect(array('controller'=>'users','action' => 'verifycode',$user['username']));
 	        	}
 
 	        	if($user['role'] == 'lecturer' && $this->request->clientIp() != $user['Lecturer']['ip_address'])
@@ -118,6 +118,7 @@ class UsersController extends AppController {
     						$this->User->save($user);
     					}
     				}
+    					$this->set('locktime',$locktime);
     					$this->Session->setFlash(__('このアカウントは までロックされる'), 'alert', array(
 							'plugin' => 'BoostCake',
 							'class' => 'alert-warning'
@@ -137,43 +138,37 @@ class UsersController extends AppController {
 
 	public function verifycode($value='')
 	{
-	
-		$this->Auth->logout();
-		$questions = $this->Question->find('all');
-    	$droplist = array();
-    	foreach ($questions as $question) {
-     		$droplist[$question['Question']['id']] = $question['Question']['question'];
-    	}
-    	$this->set('droplist', $droplist);
-
-		if ($this->request->is('post')) {
+		$user = $this->User->findByUsername($value);
+		if ($this->request->is('post') ||$this->request->is('put') ) {
 			$data = ($this->request->data);
-			if ($this->Auth->login()) {
-	        	$this->Session->write('failedTime',0);
-				$user = $this->Auth->user();
-				if($user['role'] == 'lecturer' && $data['Lecturer']['question_verifycode_id'] == $user['Lecturer']['question_verifycode_id'] 
-					 && $data['Lecturer']['current_verifycode'] == $user['Lecturer']['current_verifycode']){
-					$this->Lecturer->id = $this->Auth->user('id');
-					$this->Lecturer->saveField('ip_address',$this->request->clientIp());
-					$user['actived'] = '1';
-					unset($user['password']);
-					$this->User->save($user);
-				}else{
-					$this->Auth->logout();
-					$this->Session->setFlash(__('verifycodeが違う'), 'alert', array(
-						'plugin' => 'BoostCake',
-						'class' => 'alert-warning'));
-	        		$this->redirect(array('controller'=>'Users','action'=>'verifycode'));
-
-				}
-
-	            return $this->redirect('/');
+        	$this->Session->write('failedTime',0);
+        	
+        	debug($user);
+        	debug($data);
+			if($user['User']['role'] == 'lecturer' && $data['User']['username']== $user['User']['username']&& $data['Lecturer']['verifycode'] == $user['Lecturer']['current_verifycode']){
+				$this->Lecturer->id = $user['User']['id'];
+				$this->Lecturer->saveField('ip_address',$this->request->clientIp());
+				$user['User']['actived'] = '1';
+				unset($user['User']['password']);
+				$this->User->save($user);
+        		$this->redirect(array('controller'=>'Users','action'=>'login'));
+			}else{
+				$this->Session->setFlash(__('verifycodeが違う'), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-warning'));
+        		$this->redirect(array('controller'=>'Users','action'=>'verifycode',$user['User']['username']));
 			}
-
-			$this->Session->setFlash(__('ユーザ名、パスワードが違う'), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-			));
+            return $this->redirect('/');
+		
+		$this->Session->setFlash(__('ユーザ名、パスワードが違う'), 'alert', array(
+			'plugin' => 'BoostCake',
+			'class' => 'alert-warning'
+		));
+		}
+		else{
+			$this->Auth->logout();
+			$user = $this->User->findByUsername($value);
+			$this->request->data = $user;
 		}
 	}
 	public function permission($value='')

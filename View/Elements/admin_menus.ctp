@@ -29,10 +29,7 @@
                 echo $this->html->link('先生のランキグ', array('controller' => "admins", 'action' => "ranking_lecturer"
                 ));
 ?></li>
-		<li><?php
-                echo $this->html->link('違犯報告', array('controller' => "admins", 'action' => "view_violation"
-                ));
-?></li>
+
 		<li><?php
                 echo $this->html->link('仕様の管理', array('controller' => "admins", 'action' => "manage_parameter"
                 ));

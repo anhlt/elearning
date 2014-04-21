@@ -4,7 +4,6 @@ class DocumentController extends AppController {
 	var $uses = array('Document','Lesson', 'Report');
 	public $components = array('Util'); 
 	public $helpers = array("TsvReader");
-
 	public function add() {
 		$lesson_id = $this->params['named']['id'];
 		$this->set('id', $lesson_id);
