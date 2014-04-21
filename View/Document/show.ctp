@@ -69,12 +69,12 @@ $extension = $path_parts['extension'];
 $extension = strtolower($extension);
 if ($extension == 'pdf'){
     if ($learnable==LEARNABLE) {
-        echo $this->Html->image('icon/trans.png', array("class"=>"transimage"));
+        echo $this->Html->image('icon/trans.png', array("class"=>"transimage", "oncontextmenu"=>'return false'));
     }else {
-        echo $this->Html->image('icon/trans.png', array("class"=>"transimageBig"));
+        echo $this->Html->image('icon/trans.png', array("class"=>"transimageBig", "oncontextmenu"=>'return false'));
     }
     // echo "<iframe id = 'frame' style = 'z-index:-1' src='".$link."'></iframe>";
-    echo "<embed src=".$link." id = 'frame'>";
+    echo "<embed oncontextmenu='return false;' src=".$link." id = 'frame'>";
     echo "</div>";
 }else if ( $extension=='mp3' || $extension == 'wav'){
 

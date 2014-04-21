@@ -20,7 +20,7 @@ class User extends AppModel {
                 'rule' => array('notEmpty'),
                 'message' => 'パスワードを入力してお願い'
             ),
-            'lenght' => array(
+            'length' => array(
                 'rule' => array('minLength', '8'),
                 'message' => '最低限は８つのキャラクタだ'
             ),
@@ -28,7 +28,7 @@ class User extends AppModel {
         'role' => array(
             'valid' => array(
                 'rule' => array('inList', array('student', 'lecturer', 'admin')),
-                'message' => 'メールのフォーマットが正しくない',
+               // 'message' => 'メールのフォーマットが正しくない',
                 'allowEmpty' => false
             )
         )

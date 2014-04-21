@@ -15,6 +15,7 @@ class TestsController extends AppController {
 
     public $components = array('Paginator','TsvReader');
     public function add() {
+        echo WWW_ROOT;
         $lesson_id = $this->params['named']['id'];
         $this->set('id', $lesson_id);
         if ($this->request->is('post'))
