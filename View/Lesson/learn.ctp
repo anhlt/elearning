@@ -132,7 +132,7 @@ foreach($comments as $comment){
     $username = $comment['User']['username'];
     $user_id = $comment['User']['id'];
     //  echo $this->Html->image("icon/student.jpg", array("width"=>30, "height"=>30));
-    echo $this->Html->link($username.":", "/students/profile/".$user_id).$comment['content'];
+    echo "<span style='color:blue'>".$username."</span>:".$comment['content'];
     echo "<br>";
 }
 echo "<input id = 'commentIp' type ='text' size = '70' placeholder
