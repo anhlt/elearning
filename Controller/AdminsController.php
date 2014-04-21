@@ -145,7 +145,7 @@ class AdminsController extends AppController {
             if ($username != NULL) {
 
                 $sql1 = "SELECT * FROM lecturers, users WHERE (lecturers.id = users.id and 
-                    users.username = '$username')";
+                    users.username like '%$username%')";
 
 
                 $data = $this->Lecturer->User->query($sql1);
@@ -307,7 +307,7 @@ class AdminsController extends AppController {
             $username = $this->request->data["search"]["username"];
             if ($username != NULL) {
                 $sql1 = "SELECT * FROM students, users WHERE (students.id = users.id and 
-                    users.username = '$username')";
+                    users.username like '%$username%')";
                 $data = $this->Student->User->query($sql1);
                 if ($data != NULL) {
                     $this->set('data', $data);
@@ -328,9 +328,7 @@ class AdminsController extends AppController {
             }
         } else {
             $sql = "SELECT * FROM students, users WHERE (students.id = users.id and users.role = 'student')";
-            //$sql = "SELECT * FROM users";
             $data = $this->Student->User->query($sql);
-            //$data = $this->Admin->printfStudent();
             if ($data == NULL) {
                 $this->Session->setFlash(__('ダータがない'));
             } else {
@@ -1395,6 +1393,52 @@ class AdminsController extends AppController {
             ));   	
         }
         $this->redirect(array('controller' => 'admins', 'action' => 'manage_document'));
+    }
+    
+    public function look_infor_student($id_student) {
+
+        $questions = $this->Question->find('all');
+        $droplist = array();
+        foreach ($questions as $question) {
+            $droplist[$question['Question']['id']] = $question['Question']['question'];
+        }
+        $this->set('droplist', $droplist);
+        if (empty($this->request->data)) {
+            //$lecturer_id = $this->Auth->user('id');
+            $this->request->data = $this->Student->findById($id_student);
+            //var_dump($this->request->data);
+        } else {
+            $this->request->data['Student']['id'] = $id_student;
+            //var_dump($this->request->data);
+            if ($this->Student->save($this->request->data)) {
+                $this->Session->setFlash(__('セーブされた'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+                //$this->redirect(array('controller' => 'Admin', 'action' => 'manage_lecturer'));
+            } else {
+                $this->Session->setFlash(__('セーブできない、もう一度お願い'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
+            }
+        }
+    }
+
+    public function manage_lesson(){
+        $sql= "SELECT lessons.id, lessons.name, lessons.lecturer_Id, COUNT( ihans.lesson_Id ) as count
+                FROM  ihans , lessons
+                WHERE lessons.id = ihans.lesson_id
+                GROUP BY (lessons.id)";
+        $datas = $this->Document->query($sql);
+        if($datas){
+        debug($datas);
+            $this->set('datas', $datas);
+        }else{
+            $this->Session->setFlash(__('データがない'), 'alert', array(
+            'plugin' => 'BoostCake',
+            'class' => 'alert-warning'));
+        }    
     }
 }
 ?>
