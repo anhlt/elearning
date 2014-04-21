@@ -25,7 +25,6 @@ function timeLogout() {
     if(timeSecond > 0) {
         timeSecond -= 1;
         setTimeout("timeLogout()",1000);
-        console.log(timeSecond);
     } else {
         window.location.assign("/users/logout");
     }

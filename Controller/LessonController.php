@@ -41,7 +41,9 @@ class LessonController extends AppController {
                 $this->Session->setFlash(__('授業をセーブできない、もう一度お願い'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
-                ));	
+                ));
+                return $this->redirect(array('controller' => 'lecturer', 'action' => 'lesson'));
+
             }
         }
     }
