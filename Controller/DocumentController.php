@@ -4,7 +4,6 @@ class DocumentController extends AppController {
 	var $uses = array('Document','Lesson', 'Report');
 	public $components = array('Util'); 
 	public $helpers = array("TsvReader");
-
 	public function add() {
 		$lesson_id = $this->params['named']['id'];
 		$this->set('id', $lesson_id);
@@ -21,11 +20,12 @@ class DocumentController extends AppController {
 				if (is_uploaded_file($Document['link']['tmp_name'])) {
 					$data['Document']['title'] = $Document['title'];
 
-					move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT."files".DS.$name);
+					
 
 					$data['Document']['lesson_id'] = $lesson_id;
 					$this->Document->create();
 					if ($this->Document->save($data)) {
+						move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT."files".DS.$name);
 						$this->Session->setFlash(__('ドキュメントがアップロードされた'), 'alert', array(
 							'plugin' => 'BoostCake',
 							'class' => 'alert-success'));
@@ -60,7 +60,7 @@ class DocumentController extends AppController {
 
 			echo WWW_ROOT;
 			if (is_uploaded_file($data['link']['tmp_name'])) {				
-				unlink(WWW_ROOT . DS . 'pdf' . DS . $results['Document']['link']);
+				unlink(WWW_ROOT . 'files' . DS . $results['Document']['link']);
 				$name = uniqid() . $data['link']['name'];
 				move_uploaded_file($data['link']['tmp_name'], WWW_ROOT. 'pdf' . DS . $name);
 				$this->request->data['Document']['link'] = $name;										
@@ -106,7 +106,7 @@ class DocumentController extends AppController {
         $name = $data['Document']['link'];	
         if ($this->Document->delete($id)) 
         {
-            unlink(WWW_ROOT.DS.$name);    		
+            unlink(WWW_ROOT.'files'.DS.$name);    		
             $this->Session->setFlash(__('ドキュメントが削除された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'

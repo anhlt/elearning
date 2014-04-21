@@ -28,23 +28,29 @@
 			<div class='table-responsive'>
 			<table class="table">
 				<tr>
-					<td  class="col-sm-1">ID</td>	
+					<td  class="col-sm-1">順番</td>	
 					<td  class="col-sm-2"><?php echo $this->Paginator->sort('Title','名前'); ?></td>					
 					<td  class="col-sm-1"><?php echo $this->Paginator->sort('Time','時間'); ?></td>
 					<td  class="col-sm-1">更新</td>
 					<td  class="col-sm-1">削除</td>
-					<td  class="col-sm-1">見る</td>		
+					<td  class="col-sm-1">見る</td>
+					<td  class="col-sm-1">結果</td>	
 				</tr>
 			 <?php foreach ($results as $result) {?>
 			  <tr>
-			  	<td><?php echo ++$index; ?> </td>
+			  	<td><?php if($index < 9) echo '0'; echo ++$index; ?> </td>
 			  	<td><?php echo($result['Test']['title']) ?></td>			  	
 			  	<td><?php echo($result['Test']['test_time']) ?> </td>
-			  	<td><?php echo $this->Html->image("edit.png", array("alt" => "edit",'url' => array('controller' => 'tests', 'action' => 'edit', "id"=>$result['Test']['id']))); ?>
+			  	<td>
+			  		<?php echo $this->Html->link("", array('controller' => 'tests', 'action' => 'edit', "id"=>$result['Test']['id']), array('class' => 'glyphicon glyphicon-edit')); ?>
 			  	</td>
-			  	<td><?php echo $this->Html->image("trash.png", array("alt" => "delete",'url' => array('controller' => 'tests', 'action' => 'delete', "id"=>$result['Test']['id']))); ?>
+			  	<td>
+			  		<?php echo $this->Html->link("", array('controller' => 'tests', 'action' => 'delete', "id"=>$result['Test']['id']), array('class' => 'glyphicon glyphicon-remove-sign')); ?>
 			  	</td>
-			  	<td><?php echo $this->Html->link("", array('controller' => 'tests', 'action' => 'list_result',$result['Test']['id']), array('class' => 'glyphicon glyphicon-folder-open')); ?>
+			  	<td>
+			  		<?php echo $this->Html->link("", array('controller' => 'tests', 'action' => 'show', $result['Test']['id']), array('class' => 'glyphicon glyphicon-folder-open')); ?>
+			  	</td>
+			  	<td><?php echo $this->Html->link("", array('controller' => 'tests', 'action' => 'list_result',$result['Test']['id']), array('class' => 'glyphicon glyphicon-list-alt')); ?>
 			  	</td>
 			  </tr>
 			 <?php }?>

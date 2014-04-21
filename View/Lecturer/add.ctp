@@ -52,7 +52,9 @@
 		'placeholder' => '生年月日',  
 		'style' => 'width:100px;',
 		'label' => '生年月日',
-		'class' => 'inline'
+		'class' => 'inline',
+		'minYear' => date('Y') -USER_AGE_MAX ,
+    	'maxYear' => date('Y') -USER_AGE_MIN
 		)); ?>  
 	</div>	
 	<div class="form-group">
@@ -70,10 +72,9 @@
 		)); ?>  
 	</div>
 	<div class="form-group">
-		<?php echo $this->Form->input('Lecturer.question_verifycode_id', array(    
+		<?php echo $this->Form->input('Lecturer.question_verifycode', array(    
 		'style' => 'width:180px;',
 		'label' => '質問',
-		'options' => $droplist,
 		)); ?>  
 	</div>
 	<div class="form-group">

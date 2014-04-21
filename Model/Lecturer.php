@@ -33,7 +33,7 @@ class Lecturer extends AppModel {
 				'message' => 'verificodeを入力してお願い'
 			)
 		),
-		'question_verifycode_id' => array(
+		'question_verifycode' => array(
 			'required' => array(
 				'rule' => array('notEmpty'),
 				'message' => 'verificodeを入力してお願い'

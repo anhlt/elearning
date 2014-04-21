@@ -47,22 +47,32 @@ class StudentsController extends AppController {
         $this->loadModel('Question');
         $this->loadModel('User');
         $this->loadModel('Student');
+
         if($this->request->is("post")){
-        $this->User->create();
-        $this->request->data['Student']['ip_address'] = $this->request->clientIp();
-        $this->request->data['User']['role'] = 'student';
-	    $this->request->data['Student']['init_password'] = AuthComponent::password($this->request->data['User']['password']);
-            if($this->User->saveAll($this->request->data)){
-                $this->Session->setFlash(__('ユーザがセーブされた'), 'alert', array(
+            if ($this->request->data['User']['password'] != $this->request->data['User']['rePassword']){
+                  $this->Session->setFlash(__('パスワードと再パスワードが違いました。もう一度お願いします！'), 'alert', array(
                     'plugin' => 'BoostCake',
-                    'class' => 'alert-success'
-                ));
-                return $this->redirect(array('controller' => 'users', 'action' => 'login'));
+                    'class' => 'alert-warning'
+                    ));
+            }else {
+                $this->User->create();
+                $this->request->data['Student']['ip_address'] = $this->request->clientIp();
+                $this->request->data['User']['role'] = 'student';
+                $this->request->data['Student']['init_password'] = AuthComponent::password($this->request->data['User']['password']);
+                unset($this->request->data['User']['rePassword']); 
+                $this->request->data['Student']['date_of_birth']  = implode("-", $this->request->data['Student']['date_of_birth'] );
+                if($this->User->saveAll($this->request->data)){
+                    $this->Session->setFlash(__('登録が成功した、ログインしてください'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-success'
+                        ));
+                    return $this->redirect(array('controller' => 'users', 'action' => 'login'));
+                }
+                $this->Session->setFlash(__('登録が失敗した、もう一度お願い'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                    ));
             }
-            $this->Session->setFlash(__('ユーザをセーブできない、もう一度お願い'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-warning'
-            ));
         }
     }
 
