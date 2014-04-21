@@ -197,7 +197,7 @@ class UsersController extends AppController {
 		            if($this->request->data['User']['password'] == $this->request->data['User']['password_retype']){
 		                $this->User->id=$this->Auth->user('id');
 		                if($this->User->save($this->request->data)){
-		                    $this->Session->setFlash(__('changed'), 'alert', array(
+		                    $this->Session->setFlash(__('更新された'), 'alert', array(
           	 				'plugin' => 'BoostCake',
 			                'class' => 'alert-success'));
 							return $this->redirect($this->referer());

@@ -591,14 +591,15 @@ class AdminsController extends AppController {
             'limit' => 10,
             'fields' => array(),
             'conditions' => array(
-                'User.id !=' => $this->Auth->user('id'),
+               // 'User.id !=' => $this->Auth->user('id'),
                 "User.role" => "admin")
         );
 
         $this->Paginator->settings = $this->paginate;
         $res = $this->Paginator->paginate("User");
         $this->set('res', $res);
-        //debug($res);
+        $this->set('flag', $this->Auth->user('id'));
+        //debug($flag);
     }
 
     public function remove_admin_process($id) {
