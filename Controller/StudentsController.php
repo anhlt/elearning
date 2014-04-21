@@ -61,7 +61,6 @@ class StudentsController extends AppController {
                 $this->request->data['Student']['init_password'] = AuthComponent::password($this->request->data['User']['password']);
                 unset($this->request->data['User']['rePassword']); 
                 $this->request->data['Student']['date_of_birth']  = implode("-", $this->request->data['Student']['date_of_birth'] );
-                debug($this->request->data);
                 if($this->User->saveAll($this->request->data)){
                     $this->Session->setFlash(__('登録が成功した、ログインしてください'), 'alert', array(
                         'plugin' => 'BoostCake',
