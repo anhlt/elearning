@@ -38,7 +38,9 @@
 		'placeholder' => '生年月日',  
 		'style' => 'width:100px;',
 		'label' => '生年月日',
-		'class' => 'inline'
+		'class' => 'inline',
+		'minYear' => date('Y') - 70,
+		'maxYear' => date('Y') - 18 ));
 		)); ?>  
 	</div>	
 	<div class="form-group">

@@ -1275,7 +1275,7 @@ class AdminsController extends AppController {
     public function delete_file() {
         $this->autoRender = false;
         if (isset($this->params['named']['file'])) {
-            $source = WWW_ROOT . 'files/db/' . $this->params['named']['file'];
+            $source = WWW_ROOT . 'files' . DS . 'db' . DS . $this->params['named']['file'];
             unlink($source);
         }
         $this->Session->setFlash(__('バックアップのファイルが削除された'), 'alert', array(
@@ -1298,7 +1298,7 @@ class AdminsController extends AppController {
             'class' => 'alert-warning'));
         $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));
     }
-
+    
     public function restore_database() {
         $this->autoRender = false;
         if (isset($this->params['named']['file'])) {

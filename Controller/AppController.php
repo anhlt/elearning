@@ -58,14 +58,15 @@ class AppController extends Controller {
         			));
         		$this->Auth->logout();
         		$this->redirect('/users/login');
-        	}else {
-        		$user_id = $this->Auth->user("id");
-        		$now = date("Y-m-d H:i:s");
-        		$this->loadModel("User");
-        		$query = "update `users` set login_time = '$now' where id = '$user_id' ";
-        	//	echo $query; 
-        		$this->User->query($query);
         	}
+        	// else {
+        	// 	$user_id = $this->Auth->user("id");
+        	// 	$now = date("Y-m-d H:i:s");
+        	// 	$this->loadModel("User");
+        	// 	$query = "update `users` set login_time = '$now' where id = '$user_id' ";
+        	// //	echo $query; 
+        	// 	$this->User->query($query);
+        	// }
         }
 
 

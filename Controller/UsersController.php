@@ -68,9 +68,7 @@ class UsersController extends AppController {
 					'class' => 'alert-warning'
 				));
 				$this->redirect(array('controller'=>'users','action' => 'login'));
-
 	    	}
-
 	        if ($this->Auth->login()) {
 	        	$this->Session->write('failedTime',0);
 	        	$user = $this->Auth->user();
@@ -103,6 +101,7 @@ class UsersController extends AppController {
 	            return $this->redirect('/');
 	        }else
 	        {
+	        	$locktime = $this->Parameter->getLockTime();
 	        	$failedTime = $this->Session->read('failedTime');
 	        	if(isset($failedTime))
 		        	$this->Session->write('failedTime',$failedTime+1);
@@ -110,7 +109,6 @@ class UsersController extends AppController {
 		        	$this->Session->write('failedTime',1);
             	if($failedTime >= $this->Parameter->getWrongPasswordTimes()){
             		if(!empty($user)){
-            			$locktime = $this->Parameter->getLockTime();
     					$this->mc->set($user['User']['username'],time() + $locktime, time() + $locktime);
     					if($user['User']['role'] == 'lecturer'){
     						$user['User']['actived'] = '-1';	
@@ -118,7 +116,6 @@ class UsersController extends AppController {
     						$this->User->save($user);
     					}
     				}
-    					$this->set('locktime',$locktime);
     					$this->Session->setFlash(__('このアカウントは までロックされる'), 'alert', array(
 							'plugin' => 'BoostCake',
 							'class' => 'alert-warning'
