@@ -452,6 +452,15 @@ class AdminsController extends AppController {
     public function manage_parameter() {
         //$this->Session->setFlash(NULL);
         if ($this->request->is('post')) {
+            
+            $LessonCost = $this->Parameter->getLessonCost();
+            $LecturerMoneyPercent = $this->Parameter->getLecturerMoneyPercent();
+            $EnableLessonTime = $this->Parameter->getEnableLessonTime();
+            $WrongPasswordTimes = $this->Parameter->getWrongPasswordTimes();
+            $LockTime = $this->Parameter->getLockTime();
+            $SessionTime = $this->Parameter->getSessionTime();
+            $ViolationsTimes = $this->Parameter->getViolationsTimes();
+            
             $LESSON_COST = $this->request->data['parameter']['lesson_cost'];
             $LECTURER_MONEY_PERCENT = $this->request->data['parameter']['lecturer_money_percent'];
             $ENABLE_LESSON_TIME = $this->request->data['parameter']['enable_lesson_time'];
@@ -518,6 +527,23 @@ class AdminsController extends AppController {
                     $error = $error . "<br>違犯の最大回数 >= 1</br>";
                 } else {
                     $this->Parameter->updateParameter('VIOLATIONS_TIMES', $VIOLATIONS_TIMES);
+                    
+                    
+        $flag = ($LessonCost == $LESSON_COST
+                )&&($LecturerMoneyPercent == $LECTURER_MONEY_PERCENT
+                )&&($EnableLessonTime == $ENABLE_LESSON_TIME
+                )&&($WrongPasswordTimes == $WRONG_PASSWORD_TIMES
+                )&&($LockTime == $LOCK_TIME
+                )&&($SessionTime == $SESSION_TIME
+                )&&($ViolationsTimes == $VIOLATIONS_TIMES);
+        //debug($flag);
+        if($flag == false){
+            $this->Session->setFlash(__('セーブされた'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+        }
+                    
                 }
                 //$this->Session->setFlash($error);
                 if ($error != '') {
@@ -536,8 +562,6 @@ class AdminsController extends AppController {
             }
         }
 
-
-
         $this->loadModel('Parameter');
         //$data = $this->Parameter->query("SELECT value FROM parameters WHERE name = 'LESSON_COST'");
         //$_LESSON_COST = $data[0]['parameters']['value'];
@@ -549,6 +573,7 @@ class AdminsController extends AppController {
         $this->set('_LOCK_TIME', $this->Parameter->getLockTime());
         $this->set('_SESSION_TIME', $this->Parameter->getSessionTime());
         $this->set('_VIOLATIONS_TIMES', $this->Parameter->getViolationsTimes());
+        
     }
 
     //tha
@@ -616,9 +641,9 @@ class AdminsController extends AppController {
                 foreach ($this->request->data['IpAdmin'] as $key => $value) {
                     $this->request->data['IpAdmin'][$key]['admin_id'] = $id_admin;
                 }
-                $this->IpAdmin->saveAll($this->request->data['IpAdmin']);
+                if($this->IpAdmin->saveAll($this->request->data['IpAdmin']))
 
-                $this->Session->setFlash(__('セーブされた'), 'alert', array(
+                    $this->Session->setFlash(__('セーブされた'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));

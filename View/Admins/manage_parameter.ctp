@@ -38,7 +38,7 @@
     <tr>
       <td>ロック時間</td>
       <td><?php echo $this->Form->input('lock_time', array('style' => 'width:100px;', 'value' => $_LOCK_TIME)); ?></td>
-      <td>分</td>
+      <td>秒</td>
   </tr>
   <tr>
       <td>自動セション終了時間</td>
