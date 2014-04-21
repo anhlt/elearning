@@ -23,7 +23,7 @@ class TestsController extends AppController {
             if (is_uploaded_file($data['link']['tmp_name'])) {
                 $name = uniqid() . $data['link']['name'];
                 move_uploaded_file($data['link']['tmp_name'], WWW_ROOT. "tsv" . DS . $name);
-                $this->request->data['Test']['link'] = $name;                               
+                $this->request->data['Test']['link'] = $name;                            
             }
             try {
                 $this->TsvReader->getViewTSV($name);
