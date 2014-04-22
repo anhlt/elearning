@@ -81,7 +81,7 @@ class LecturerController extends AppController {
 	public function manage($value='')
 	{
 		$this->paginate = array(
-		    'fields' => array('Lesson.id', 'Lesson.Name','Lesson.summary'),
+		    'fields' => array('Lesson.id', 'Lesson.Name','Lesson.summary', 'Lesson.update_date'),
 			'limit' => 5,
 			'conditions' => array(
 				'Lesson.lecturer_id' => $this->Auth->user('id')

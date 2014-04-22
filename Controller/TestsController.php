@@ -69,7 +69,7 @@ class TestsController extends AppController {
             } else {
                 $results = $this->Test->find("first", array("conditions"=>array('id'=>$test_id)));
                 $this->request->data['Test']['link'] = $results['Test']['link'];                
-            }           
+            }
 
             if($this->Test->save($this->request->data['Test'])){
                 $this->Session->setFlash(__('テストファイルが更新された'), 'alert', array(

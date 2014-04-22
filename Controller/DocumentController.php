@@ -18,12 +18,14 @@ class DocumentController extends AppController {
 			foreach ($data as $Document) {
 				if(!is_uploaded_file($Document['link']['tmp_name'])) {
 					$upload_invalid = false;
+					break;
 					$this->Session->setFlash(__('ドキュメントをアップロードできない、もう一度お願い'), 'alert', array(
           	 			'plugin' => 'BoostCake',
             			'class' => 'alert-warning'));
 				}
 			}
 
+			if($upload_invalid)
 			foreach ($data as $Document)
 			{				
 				$name = uniqid() . $Document['link']['name'];			
@@ -47,7 +49,7 @@ class DocumentController extends AppController {
 	        }
 
 	        if($upload_invalid)
- 			$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $lesson_id));	
+ 				$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $lesson_id));	
 		}		
 	}
 
@@ -75,12 +77,11 @@ class DocumentController extends AppController {
 				$this->request->data['Document']['link'] = $results['Document']['link'];							
 			}			
 
+			if($uploaded)
 			if($this->Document->save($this->request->data['Document']))
-			{	
-				if($uploaded) {
-					unlink(WWW_ROOT . 'files' . DS . $results['Document']['link']);
-					move_uploaded_file($data['link']['tmp_name'], WWW_ROOT. 'files' . DS . $name);
-				}
+			{				 
+				unlink(WWW_ROOT . 'files' . DS . $results['Document']['link']);
+				move_uploaded_file($data['link']['tmp_name'], WWW_ROOT. 'files' . DS . $name);				
 
 				if($ihan == 'true') {		
 					$report = $this->Report->find("first", array('conditions' => array('document_id' => $document_id)));

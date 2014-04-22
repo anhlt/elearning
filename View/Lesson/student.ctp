@@ -45,7 +45,7 @@
 			  	<td><?php echo($result['LessonMembership']['liked']?"True":"false") ?> </td>
 			  	<td>
 			  		<?php
-			  			$s = $result['LessonMembership']['baned'] ? "ban" : "ok";
+			  			$s = $result['LessonMembership']['baned'] ? "ok" : "ban";
 			  			echo $this->html->link('', array('controller' => 'lesson', 'action' => 'banstudent',"student_id"=>$result['Student']['id'],"lesson_id"=>$result['LessonMembership']['lesson_id']),array('class' => 'glyphicon glyphicon-' . $s . '-circle'))?>	  		
 			  	</td>
 			  	<td>

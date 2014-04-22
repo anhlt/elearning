@@ -50,11 +50,15 @@ if (AuthComponent::user('role')=="student") {
     $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE); 
 }
 else{
-    echo'
-    <div class="col-xs-3 col-md-3">
-    <a class="btn btn-info" href="javascript:history.go(-1)">戻る</a>
-    </div>
-    ';
+    echo "<div class='col-xs-5 col-md-3'>
+        <ul class='nav nav-pills nav-stacked' id='myTab'>
+            <li><a href='/lesson/search'>検索</a></li>
+            <li><a href='/lecturer/'>授業管理</a></li>
+            <li><a href='/lecturer/lesson'>新しい従業</a></li>
+            <li><a href='/lecturer/edit'>情報を更新</a></li>
+            <li><a href='/lecturer/delete'>アクアウートを削除</a></li>
+        </ul>
+    </div>";
 }
 ?>
 <div class="col-xs-13 col-md-9 well">

@@ -1,5 +1,8 @@
 <div class="row">
-	<?php echo $this->Session->flash(); ?>
+	<?php
+		echo $this->Session->flash(); 
+		$index = 0;
+	?>
 
 	<div class="col-xs-5 col-md-3">
 		<ul class="nav nav-pills nav-stacked" id="myTab">
@@ -23,7 +26,7 @@
 			</tr>
 			<?php foreach ($results as $result) :?>
 			<tr id="resultsDiv">
-				<td><?php echo($result['Lesson']['id']) ?> </td>
+				<td><?php if($index < 9) echo '0'; echo ++$index; ?> </td>
 				<td><?php echo($result['Lesson']['Name']) ?> </td>
 				<td><?php echo($result['Lesson']['summary']) ?> </td>
 				<td>
