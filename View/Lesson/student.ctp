@@ -29,15 +29,15 @@
 			?>
 			<table class="table table-condensed">
 				<tr>
-					<td  class="col-sm-1">Order</td>					
-					<td  class="col-sm-2"><?php echo $this->Paginator->sort('Name');?></td>
-					<td  class="col-sm-1"><?php echo $this->Paginator->sort('baned');?></td>
-					<td  class="col-sm-1"><?php echo $this->Paginator->sort('liked');?></td>
-					<td  class="col-sm-2">Manage</td>
+					<td  class="col-sm-1">順番</td>					
+					<td  class="col-sm-2"><?php echo $this->Paginator->sort('Name', '名前');?></td>
+					<td  class="col-sm-1"><?php echo $this->Paginator->sort('baned', '禁止');?></td>
+					<td  class="col-sm-1"><?php echo $this->Paginator->sort('liked', 'いいね');?></td>
+					<td  class="col-sm-2">管理</td>
 				</tr>
 			 <?php foreach ($results as $result) {?>
 			  <tr>
-			  	<td><?php echo ++$index; ?> </td>			  	
+			  	<td><?php if($index < 9) echo '0'; echo ++$index; ?> </td>			  	
 			  	<td><?php echo($result['Student']['full_name']) ?> </td>
 			  	<td><?php echo($result['LessonMembership']['baned']?"True":"false") ?> </td>
 			  	<td><?php echo($result['LessonMembership']['liked']?"True":"false") ?> </td>

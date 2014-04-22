@@ -1,6 +1,6 @@
 <?php
 class Test extends AppModel {    
-    public $belongsTo = array('Lesson');
+    //public $belongsTo = array('Lesson');
     public $hasMany = array(
                 'Result' => array('dependent' => True ));
     
@@ -27,6 +27,10 @@ class Test extends AppModel {
 			'required' => array(
 				'rule'    => 'numeric',
 				'message' => '数字を入力してお願い'
+			),
+			'time' => array(
+				'rule'    => array('comparison', '>=', 0),
+				'message' => 'ゼロよりも大きい時間'
 			)
 		),		
 	);

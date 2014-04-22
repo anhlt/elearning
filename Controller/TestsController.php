@@ -15,7 +15,6 @@ class TestsController extends AppController {
 
     public $components = array('Paginator','TsvReader');
     public function add() {
-        echo WWW_ROOT;
         $lesson_id = $this->params['named']['id'];
         $this->set('id', $lesson_id);
         if ($this->request->is('post'))
@@ -94,7 +93,7 @@ class TestsController extends AppController {
         $data = $this->Test->find('first', $id);        
         
         if ($this->Test->delete($id)) {
-            unlink(WWW_ROOT. DS . 'tsv' . DS . $data['Test']['link']);
+            unlink(WWW_ROOT. 'tsv' . DS . $data['Test']['link']);
             $this->Session->setFlash(__('テストが削除された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'

@@ -72,10 +72,9 @@
 			)); ?>  
 		</div>
 		<div class="form-group">
-			<?php echo $this->Form->input('Lecturer.question_verifycode_id', array(    
+			<?php echo $this->Form->input('Lecturer.question_verifycode', array(    
 			'style' => 'width:180px;',
 			'label' => '質問',
-			'options' => $droplist,
 			)); ?>  
 		</div>
 		<div class="form-group">

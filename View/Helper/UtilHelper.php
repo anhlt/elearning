@@ -15,7 +15,7 @@ class UtilHelper extends AppHelper{
     	return $string; 
     }
     public function changeString($stringBig, $keyword){
-    	$string = str_replace($keyword, "<b style='color:red'>".$keyword."</b>", $stringBig);
+        $string = str_replace($keyword, "<b style='color:red'>".$keyword."</b>", $stringBig);
     	return $string; 
     }
 }

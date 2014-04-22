@@ -41,7 +41,9 @@ class LessonController extends AppController {
                 $this->Session->setFlash(__('授業をセーブできない、もう一度お願い'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
-                ));	
+                ));
+                return $this->redirect(array('controller' => 'lecturer', 'action' => 'lesson'));
+
             }
         }
     }
@@ -266,8 +268,9 @@ class LessonController extends AppController {
                     }	    					
                 }	
                 $this->set('reports', $reports);
-                //debug($reports);
-                //echo "<pre>";
+
+                $bans = $this->Document->find('all', array('conditions'=> array('Document.baned' => 1)));
+                $this->set('bans', $bans);               
 
                 $sql = array(
                     'fields' => array('Comment.id', 'Comment.user_id', 'Comment.content', 'Comment.time'),

@@ -4,7 +4,6 @@ class DocumentController extends AppController {
 	var $uses = array('Document','Lesson', 'Report');
 	public $components = array('Util'); 
 	public $helpers = array("TsvReader");
-
 	public function add() {
 		$lesson_id = $this->params['named']['id'];
 		$this->set('id', $lesson_id);
@@ -19,13 +18,11 @@ class DocumentController extends AppController {
 				$name = uniqid() . $Document['link']['name'];			
 				$data['Document']['link'] =  $name;
 				if (is_uploaded_file($Document['link']['tmp_name'])) {
-					$data['Document']['title'] = $Document['title'];
-
-					move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT."files".DS.$name);
-
+					$data['Document']['title'] = $Document['title'];					
 					$data['Document']['lesson_id'] = $lesson_id;
 					$this->Document->create();
 					if ($this->Document->save($data)) {
+						move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT . "files". DS . $name);
 						$this->Session->setFlash(__('ドキュメントがアップロードされた'), 'alert', array(
 							'plugin' => 'BoostCake',
 							'class' => 'alert-success'));
@@ -57,25 +54,33 @@ class DocumentController extends AppController {
 		{				
 			$data = $this->request->data['Document'];
 			$this->request->data['Document']['id'] = $document_id;
-
-			echo WWW_ROOT;
-			if (is_uploaded_file($data['link']['tmp_name'])) {				
-				unlink(WWW_ROOT . DS . 'pdf' . DS . $results['Document']['link']);
-				$name = uniqid() . $data['link']['name'];
-				move_uploaded_file($data['link']['tmp_name'], WWW_ROOT. 'pdf' . DS . $name);
+			$uploaded = false;
+			if (is_uploaded_file($data['link']['tmp_name'])) {
+				$uploaded = true;			
+				$name = uniqid() . $data['link']['name'];				
 				$this->request->data['Document']['link'] = $name;										
 			} else {
-				$results = $this->Document->find("first", array("conditions"=>array('id'=>$document_id)));
 				$this->request->data['Document']['link'] = $results['Document']['link'];							
 			}			
 
-			if($this->Document->save($this->request->data['Document'])){	
+			if($this->Document->save($this->request->data['Document']))
+			{	
+				if($uploaded) {
+					unlink(WWW_ROOT . 'files' . DS . $results['Document']['link']);
+					move_uploaded_file($data['link']['tmp_name'], WWW_ROOT. 'files' . DS . $name);
+				}
 
 				if($ihan == 'true') {		
 					$report = $this->Report->find("first", array('conditions' => array('document_id' => $document_id)));
 					$report['Report']['state'] = 0;
 					$this->Report->create();
-			    	$this->Report->save($report);		    	
+			    	$this->Report->save($report);
+
+			    	$doc = $this->Document->find("first", array('conditions' => array('id' => $document_id)));
+					$doc['Document']['baned'] = 0;
+					debug($doc);
+					$this->Document->create();
+			    	$this->Document->save($doc);	    	
 				}
                 $this->Session->setFlash(__('ドキュメントが更新された'), 'alert', array(
                     'plugin' => 'BoostCake',
@@ -89,13 +94,10 @@ class DocumentController extends AppController {
             	));	
 			}
 	
-			if($ihan == 'true') {
-				$this->redirect(array('controller' => 'lesson', 'action' => 'report', 'id' => $id));
-				//echo "_True";
-			}
-			else {
-				$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $id));
-			}
+			if($ihan == 'true')
+				$this->redirect(array('controller' => 'lesson', 'action' => 'report', 'id' => $id));	
+			else
+				$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $id));		
 		}
 	}
 
@@ -106,7 +108,7 @@ class DocumentController extends AppController {
         $name = $data['Document']['link'];	
         if ($this->Document->delete($id)) 
         {
-            unlink(WWW_ROOT.DS.$name);    		
+            unlink(WWW_ROOT . 'files' . DS . $name);    		
             $this->Session->setFlash(__('ドキュメントが削除された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'

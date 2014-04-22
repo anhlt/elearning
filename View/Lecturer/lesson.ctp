@@ -3,7 +3,7 @@
 
 	<div class="col-xs-5 col-md-3">
 		<ul class="nav nav-pills nav-stacked" id="myTab">
-			<li><a href="/lecturer/">従業管理</a></li>
+			<li><a href="/lecturer/">授業管理</a></li>
 			<li><a href="/lecturer/lesson">新しい従業</a></li>
 			<li><a href="/lecturer/edit">情報を更新</a></li>
 			<li><a href="/lecturer/delete">アクアウートを削除</a></li>
@@ -16,7 +16,7 @@
 				'div' => false,  
 				'label' => false,  
 				'wrapInput' => false,  
-				'class' => 'form-control'  
+				'class' => 'form-control',
 				),  
 			'class' => 'well',
 		    'url' => array('controller' => 'Lesson', 'action' => 'add')
@@ -52,13 +52,13 @@
 				'placeholder' => 'タグ',  
 				'style' => 'width:300px;',
 				'label' => 'タグ',
-				'class' => 'tm-input',
-				'value' => 'タグ'
+				'class' => 'tm-input'
 			)); ?>
 		</div>
 		<?php echo $this->Form->submit('追加', array(  
 		'div' => false,  
-		'class' => 'btn btn-default'  
+		'class' => 'btn btn-default',
+		'id' => 'button'  
 		)); ?>  
 
 
@@ -67,8 +67,23 @@
 
 	<script type="text/javascript">    
 	window.onload = function WindowLoad(event) {
-		jQuery(".tm-input").tagsManager();
-		console.debug("aa");
+			jQuery(".tm-input").tagsManager({
+		});
 	}
+
+	$("#button").click(function(event){
+		event.preventDefault()
+		console.log( "Handler for .submit() called.");
+		var tag = ($('.tm-input').tagsManager('tags'));
+		console.log(tag);
+		console.log(tag.length);
+		if (tag.length != 0 || $('.tm-input').val().length != 0){
+			$('.tm-input').tagsManager('pushTag',$('.tm-input').val());
+			$('#LessonLessonForm').submit();
+		}else if(tag.length == 0 && $('.tm-input').val().length == 0)
+		{
+			alert('タグを入力してください');
+		}
+	});
 	</script>
 </div>

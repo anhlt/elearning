@@ -189,33 +189,29 @@ class AdminsController extends AppController {
     }
 
     public function view_infor_lecturer($lecturer_id) {
-        $questions = $this->Question->find('all');
-        $droplist = array();
-        foreach ($questions as $question) {
-            $droplist[$question['Question']['id']] = $question['Question']['question'];
-        }
-        $this->set('droplist', $droplist);
         if (empty($this->request->data)) {
-            //$lecturer_id = $this->Auth->user('id');
             $this->request->data = $this->Lecturer->findById($lecturer_id);
-            //var_dump($this->request->data);
+            $this->request->data['Lecturer']['question_verifycode'] = base64_decode($this->request->data['Lecturer']['question_verifycode']);
+            $this->request->data['Lecturer']['current_verifycode'] = base64_decode($this->request->data['Lecturer']['current_verifycode']);
         } else {
             $this->request->data['Lecturer']['id'] = $lecturer_id;
-            //var_dump($this->request->data);
+            $this->request->data['Lecturer']['current_verifycode'] = base64_encode($this->request->data['Lecturer']['current_verifycode']);
+            $this->request->data['Lecturer']['question_verifycode'] = base64_encode($this->request->data['Lecturer']['question_verifycode']);
             if ($this->Lecturer->save($this->request->data)) {
                 $this->Session->setFlash(__('セーブされた'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));
-                //$this->redirect(array('controller' => 'Admin', 'action' => 'manage_lecturer'));
             } else {
                 $this->Session->setFlash(__('セーブできない、もう一度お願い'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
                 ));
             }
+            return $this->redirect(array('action' => 'manage_lecturer'));
         }
     }
+
 
     public function unlock_lecturer($id_lecturer) {
         $this->loadModel('User');
@@ -588,7 +584,6 @@ class AdminsController extends AppController {
                 $this->request->data['IpAdmin']['admin_id'] = $this->User->id;
                 $this->request->data['IpAdmin']['ip_address'] =$this->request->data['Admin']['ip_address'];
                 $this->IpAdmin->save($this->request->data);
-
                 $this->Session->setFlash(__('新しい管理者が追加された'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
@@ -1302,7 +1297,7 @@ class AdminsController extends AppController {
     public function delete_file() {
         $this->autoRender = false;
         if (isset($this->params['named']['file'])) {
-            $source = WWW_ROOT . 'files/db/' . $this->params['named']['file'];
+            $source = WWW_ROOT . 'files' . DS . 'db' . DS . $this->params['named']['file'];
             unlink($source);
         }
         $this->Session->setFlash(__('バックアップのファイルが削除された'), 'alert', array(
@@ -1325,7 +1320,7 @@ class AdminsController extends AppController {
             'class' => 'alert-warning'));
         $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));
     }
-
+    
     public function restore_database() {
         $this->autoRender = false;
         if (isset($this->params['named']['file'])) {
@@ -1452,13 +1447,12 @@ class AdminsController extends AppController {
     }
 
     public function manage_lesson(){
-        
         $sql_0= "SELECT *
                 FROM  lessons";
         $datas = $this->Lesson->query($sql_0);
         //debug($datas);
         if($datas){
-          
+
             $this->set('datas', $datas);
         }else{
             $this->Session->setFlash(__('データがない'), 'alert', array(

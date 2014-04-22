@@ -57,21 +57,6 @@
 			'label' => '電話番号',
 			)); ?>  
 		</div>
-		<div class="form-group">
-			<?php echo $this->Form->input('Student.question_verifycode_id', array(    
-			'style' => 'width:180px;',
-			'label' => '質問',
-			'type' => 'hidden',
-			'options' => $droplist,
-			)); ?>  
-		</div>
-		<div class="form-group">
-		  <?php echo $this->Form->input('Student.current_verifycode', array(  
-			'placeholder' => '答え',  
-			'type' => 'hidden',
-			'style' => 'width:180px;',
-			'label' => '答え'
-		  )); ?>  
 		</div>
 		<?php echo $this->Form->submit('セーブ', array(  
 		'div' => false,  

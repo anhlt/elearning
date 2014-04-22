@@ -20,19 +20,13 @@ class LecturerController extends AppController {
     	if($this->Auth->loggedIn()){
       	  $this->redirect('/');
     	}
-    	$questions = $this->Question->find('all');
-    	$droplist = array();
-    	foreach ($questions as $question) {
-     		$droplist[$question['Question']['id']] = $question['Question']['question'];
-    	}
-    	$this->set('droplist', $droplist);
-
 		if($this->request->is('post')){
 			$this->User->create();
 			$this->request->data['Lecturer']['ip_address'] = $this->request->clientIp();
+			$this->request->data['Lecturer']['question_verifycode'] = base64_encode($this->request->data['Lecturer']['question_verifycode']);
+			$this->request->data['Lecturer']['current_verifycode'] = base64_encode($this->request->data['Lecturer']['current_verifycode']); 
 			$this->request->data['Lecturer']['init_verifycode'] = $this->request->data['Lecturer']['current_verifycode']; 
 			$this->request->data['Lecturer']['init_password'] = AuthComponent::password($this->request->data['User']['password']);
-
 			$this->request->data['User']['role'] = 'lecturer';
 			if($this->User->saveAll($this->request->data)){
 				$this->Session->setFlash(__('ユーザがセーブされた'), 'alert', array(
@@ -40,6 +34,9 @@ class LecturerController extends AppController {
 					'class' => 'alert-success'
 				));
 				return $this->redirect(array('controller' => 'pages', 'action' => 'display'));
+			}else{
+				unset($this->request->data['Lecturer']['question_verifycode']);
+				unset($this->request->data['Lecturer']['current_verifycode']);
 			}
 			$this->Session->setFlash(__('ユーザをセーブできない、もう一度お願い'), 'alert', array(
 				'plugin' => 'BoostCake',
@@ -49,19 +46,16 @@ class LecturerController extends AppController {
 	}
 
     public function edit(){
-		$questions = $this->Question->find('all');
-		$droplist = array();
-		foreach ($questions as $question) {
-			$droplist[$question['Question']['id']] = $question['Question']['question'];
-		}
-		$this->set('droplist', $droplist);
     	if (empty($this->request->data)) {
-
 	        $lecturer_id = $this->Auth->user('id');
 	        $this->request->data = $this->Lecturer->findById($lecturer_id);
-
+			$this->request->data['Lecturer']['question_verifycode'] = base64_decode($this->request->data['Lecturer']['question_verifycode']);
+		    $this->request->data['Lecturer']['current_verifycode'] = base64_decode($this->request->data['Lecturer']['current_verifycode']);
     	}else{
 			$this->request->data['Lecturer']['ip_address'] = $this->request->clientIp();
+			$this->request->data['Lecturer']['current_verifycode'] = base64_encode($this->request->data['Lecturer']['current_verifycode']);
+			$this->request->data['Lecturer']['question_verifycode'] = base64_encode($this->request->data['Lecturer']['question_verifycode']);
+
 			if($this->Lecturer->save($this->request->data)){
 				$this->Session->setFlash(__('ユーザがセーブされた'), 'alert', array(
 					'plugin' => 'BoostCake',
