@@ -338,90 +338,64 @@ class LessonController extends AppController {
     }
 
     public function search(){
-        if($this->request->is("post")){
+        if ($this->request->is('post')){
             $lesson = $this->data['Lessons'];
-            if (isset( $lesson['searchOption'])){
-                $rank_stt = $lesson['searchOption'];
-                $rankOption = $lesson['rankOption'];
-                $this->set("rank_stt", $rank_stt);
-                $this->Lesson->recursive = 2;
-                if($rank_stt == RANK_BY_LECTURER){ 
-                    if ($rankOption == ASC) {
-                        $options['order'] = array('Lecturer.full_name ASC'); 
-                    }else {
-                        $options['order'] = array('Lecturer.full_name DESC'); 
-                    }
-                    $lessons = $this->Lesson->find("all", $options);
-                    $this->set("lessons", $lessons);
-                }else if ($rank_stt==RANK_BY_LESSON){//rank by lessons's name
-                    if ($rankOption == ASC) {
-                        $options['order'] = array('Lesson.name ASC'); 
-                    }else {
-                        $options['order'] = array('Lesson.name DESC'); 
-                    }
-                    $lessons = $this->Lesson->find("all", $options);
-                    $this->set("lessons", $lessons);
+            $rank_stt = $lesson['searchOption'];
+            $rankOption = $lesson['rankOption'];
+            $search_value = $lesson['keyword'];
+            $this->set("rank_stt", $rank_stt);
+            $this->Lesson->recursive = 2;
 
-                }else if ($rank_stt==RANK_BY_TAG){
-                    $this->Tag->recursive = 3; 
-                    if ($rankOption == ASC) {
-                        $options['order'] = array('Tag.name ASC'); 
-                    }else {
-                        $options['order'] = array('Tag.name DESC'); 
-                    }
-                    $lessons = $this->Tag->find("all", $options);
-                    $this->set("lessons", $lessons);
-                }
+            if (strpos($search_value, "＋")){
+                $keyword_r = explode("＋", $search_value);
+                $operation = 'AND';
+            }else {
+                 $keyword_r = explode("｜", $search_value);
+                 $operation = 'OR';
             }
-        }
-        if ($this->request->is('get')) {
-            // $this->Tag->recursive = 3;
-            // if (isset($this->params['url']['search_value'])) {
-            //     $tag_value = $this->params['url']['search_value'];
-            //     $options['conditions'] = array("Tag.name LIKE" => "%".$tag_value."%");
-            //     $tags = $this->Tag->find("all", $options); 
-            //     $this->set("tags", $tags);
-            // }
+            $lesson_and_r1 = array();
 
-
-            if (isset($this->params['url']['search_value'])) {
-                $this->Lesson->recursive =3; 
-                $search_value =  $this->params['url']['search_value'];
-                if (strpos($search_value, "＋")){
-                    $keyword_r = explode("＋", $search_value);
-                    $lesson_and_r1 = array();
-                    foreach ($keyword_r as $row) {
-                        array_push($lesson_and_r1, array("Lesson.name like"=>"%".$row."%"));
-                     //   array_push($lesson_or_r, array("Lecturer.full_name like"=>"%".$row."%"));
-                    // array_push($lesson_or_r, array("Tag.name like"=>"%".$row."%"));
-                    // array_push($lesson_or_r, array("User.username like"=>"%".$row."%"));
-                    }
-
-                    $lesson_and_r2 = array();
-                    foreach ($keyword_r as $row) {
-                        array_push($lesson_and_r2, array("Lecturer.full_name like"=>"%".$row."%"));
-                    }
-                    $options['conditions'] = array("OR"=>array(array("AND"=>$lesson_and_r1), array("AND"=>$lesson_and_r2)));
-                  //  debug($options);
-                    $lesson_search = $this->Lesson->find("all", $options);
-                    $this->set("lesson_search", $lesson_search);
+            if ($rank_stt == RANK_BY_LECTURER) {
+                foreach ($keyword_r as $row) {
+                    array_push($lesson_and_r1, array("Lecturer.full_name like"=>"%".$row."%"));
+                } 
+                $options['conditions'] = array($operation=>$lesson_and_r1);
+                if ($rankOption == ASC) {
+                    $options['order'] = array('Lecturer.full_name ASC'); 
                 }else {
-                    $keyword_r = explode("｜", $search_value);
-                    $lesson_or_r = array();
-                    foreach ($keyword_r as $row) {
-                        array_push($lesson_or_r, array("Lesson.name like"=>"%".$row."%"));
-                        array_push($lesson_or_r, array("Lecturer.full_name like"=>"%".$row."%"));
-                    // array_push($lesson_or_r, array("Tag.name like"=>"%".$row."%"));
-                    // array_push($lesson_or_r, array("User.username like"=>"%".$row."%"));
-                    }
-                    $options['conditions'] = array("OR"=>$lesson_or_r);
-                    $lesson_search = $this->Lesson->find("all", $options);
-                    $this->set("lesson_search", $lesson_search);
+                    $options['order'] = array('Lecturer.full_name DESC'); 
                 }
-                $this->set("search_value", $search_value);
+                $lessons = $this->Lesson->find("all", $options);
+            }else if ($rank_stt == RANK_BY_LESSON){
+                foreach ($keyword_r as $row) {
+                    array_push($lesson_and_r1, array("Lesson.name like"=>"%".$row."%"));
+                }
+                $options['conditions'] = array($operation=>$lesson_and_r1);  
+                if ($rankOption == ASC) {
+                    $options['order'] = array('Lesson.name ASC'); 
+                }else {
+                    $options['order'] = array('Lesson.name DESC'); 
+                }
+                $lessons = $this->Lesson->find("all", $options);
+            }else if ($rank_stt == RANK_BY_TAG){
+                foreach ($keyword_r as $row) {
+                    array_push($lesson_and_r1, array("Tag.name like"=>"%".$row."%"));
+                }
+                $options['conditions'] = array($operation=>$lesson_and_r1);  
+                if ($rankOption == ASC) {
+                    $options['order'] = array('Tag.name ASC'); 
+                }else {
+                    $options['order'] = array('Tag.name DESC'); 
+                }
+
+                $this->loadModel("LessonsTag");
+                $this->LessonsTag->recursive = 3;
+                $lessons = $this->LessonsTag->find("all", $options);
             }
+          //  debug($lessons);
+            $this->set("lessons", $lessons);
         }
-    }   
+    }
 
     public function deletestudent($value=''){
         $lesson_id = $this->params['named']['lesson_id'];

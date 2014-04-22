@@ -22,6 +22,7 @@ class Lesson extends AppModel {
         ));
     public $hasMany = array(
                 'LessonMembership' => array('dependent' => True ),
+                'LessonsTag' => array('dependent' => True ),
                 'Document' => array('dependent' => True ), 
                 'Comment'=> array('dependent' => True ), 
                 'Test'=> array('dependent' => True )

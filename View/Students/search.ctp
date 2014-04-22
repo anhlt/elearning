@@ -27,27 +27,22 @@ foreach ($lessons as $row){
 foreach ($lecturers as $row){
     $lecturer = $row['Lecturer'];
     if (strpos($lecturer['full_name'], $keyword)!= false){
-        $lecturer_fullname = str_replace($keyword, "<b>".$keyword."</b>", $lecturer['full_name']);
-       // echo "flag";
-       // $lecturer_fullname = $this->Util->changeString($lecturer['full_name'], $keyword);
-       // echo $this->Html->tableCells(array($lecturer_fullname, "先生", $this->Html->link("表示", "/lecturer/profile/".$lecturer['id'])));
+       $lecturer_fullname = $this->Util->changeString($lecturer['full_name'], $keyword);
+       echo $this->Html->tableCells(array($lecturer_fullname, "先生", ""));
     }else {
         $lecturer_username = $this->Util->changeString($row['User']['username'], $keyword);
-       // $lecturer_username = str_replace($keyword, "<b>".$keyword."</b>", $row['User']['username']);
-       // echo $this->Html->tableCells(array($lecturer_username, "先生", $this->Html->link("表示", "/lecturer/profile/".$lecturer['id'])));
+        echo $this->Html->tableCells(array($lecturer_username, "先生", ""));
     }
 }
 
 foreach ($students as $row){
     $student = $row['Student'];
     if (strpos($student['full_name'], $keyword)!= false){
-    //    $student_fullname = str_replace($keyword, "<b>".$keyword."</b>", $student['full_name']);
          $student_fullname = $this->Util->changeString($student['full_name'], $keyword);
-        echo $this->Html->tableCells(array($student_fullname, "学生", $this->Html->link("表示", "/students/profile/".$student['id'])));
+        echo $this->Html->tableCells(array($student_fullname, "学生", ""));
     }else {
-   //     $student_username = str_replace($keyword, "<b>".$keyword."</b>", $row['User']['username']);
         $student_username = $this->Util->changeString($row['User']['username'], $keyword);
-        echo $this->Html->tableCells(array($student_username, "学生", $this->Html->link("表示", "/students/profile/".$student['id'])));
+        echo $this->Html->tableCells(array($student_username, "学生", ""));
     }
 }
 echo "</table>";

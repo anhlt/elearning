@@ -90,18 +90,12 @@ class StudentsController extends AppController {
             $this->redirect($this->Auth->logout());
         }
     }
-    public function profile($user_id=0){
-        if ($user_id==0){
-            $this->loadModel('Question');
-            $id = $this->Auth->user("id");
-            $student = $this->Student->find('first', array('conditions'=>array('Student.id'=>$id)));  
-            $this->set('student', $student['Student']);
-            $this->set('user', $student['User']);
-        }else{
-            $student = $this->Student->findById($user_id);  
-            $this->set('student', $student['Student']);
-            $this->set('user', $student['User']);
-        }
+    public function profile(){
+        $this->loadModel('Question');
+        $id = $this->Auth->user("id");
+        $student = $this->Student->find('first', array('conditions'=>array('Student.id'=>$id)));  
+        $this->set('student', $student['Student']);
+        $this->set('user', $student['User']);
     }
 
     public function history(){
