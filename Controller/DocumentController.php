@@ -14,6 +14,17 @@ class DocumentController extends AppController {
 
 			$data = $this->request->data['Document'];
 			unset($data['check']);
+
+			$upload_invalid = true;
+			foreach ($data as $Document) {
+				if(!is_uploaded_file($Document['link']['tmp_name'])) {
+					$upload_invalid = false;
+					$this->Session->setFlash(__('ドキュメントをアップロードできない、もう一度お願い'), 'alert', array(
+          	 			'plugin' => 'BoostCake',
+            			'class' => 'alert-warning'));
+				}
+			}
+
 			foreach ($data as $Document)
 			{				
 				$name = uniqid() . $Document['link']['name'];			
@@ -29,13 +40,14 @@ class DocumentController extends AppController {
 							'class' => 'alert-success'));
 					}
 					else {
-	                	$this->Session->setFlash(__('ドキュメントをアップロードできない、もう一度お願い'), 'alert', array(
+	                	$this->Session->setFlash(__('ドキュメントを保存できない、もう一度お願い'), 'alert', array(
           	 				'plugin' => 'BoostCake',
             				'class' => 'alert-warning'));
 	                }
-				}     
+				}
 	        }
 
+	        if($upload_invalid)
  			$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $lesson_id));	
 		}		
 	}
@@ -108,7 +120,7 @@ class DocumentController extends AppController {
 	{
         $id = $this->params['named']['id'];
         $data = $this->Document->find('first', $id);
-        $name = $data['Document']['link'];	
+        $name = $data['Document']['link'];
         if ($this->Document->delete($id)) 
         {
             unlink(WWW_ROOT . 'files' . DS . $name);    		

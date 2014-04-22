@@ -66,7 +66,7 @@
 		</form>
 	</body>
 	<script>
-	var fl = document.getElementById('f');					
+		var fl = document.getElementById('f');					
 
 			fl.onchange = function(e){ 
 			    var ext = this.value.match(/\.(.+)$/)[1];			    

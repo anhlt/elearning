@@ -16,7 +16,8 @@
 	<div class="col-xs-13 col-md-9">		
 		<div class="well">
 			<div class='form-group'>
-				<b><?php echo $this->Html->link("授業管理", array('controller' => 'lecturer', 'action' => 'manage')); ?></b>	  
+				<b><?php echo $this->Html->link("授業管理", array('controller' => 'lecturer', 'action' => 'manage'),
+					array('class' => 'btn btn-info')); ?></b>	  
 			</div>
 			<div style='text-align: center; margin-bottom: 20px;'>
 				<h4><b>レポート</b></h4>
@@ -24,10 +25,10 @@
 			<div style='width: 600px; margin: auto;'>
 				<?php
 					$index = 0;
-					if(count($reports) == 0) {
-						echo 'レポートがない <br>';
-					} else {
+					if(count($reports) > 0) {
+						print '<b>違反ドキュメント</b>';
 				?>
+				<div style='margin: 10px 0px 10px 0px;'>
 				<table class="table table-bordered">
 				<tr>
 					<td  class="col-sm-2">順番</td>
@@ -46,12 +47,13 @@
 					</tr>
 				 <?php }?>
 				</table>
+				</div>
 				<?php }?>
-
 
 				<?php
 					$index = 0;
-					if(count($bans) >= 0) {					
+					if(count($bans) >= 0) {
+						print '<b>禁止ドキュメント</b>';					
 				?>
 				<table class="table table-bordered">
 				<tr>
@@ -77,9 +79,9 @@
 				<p>返事</p>			
 				<?php
 					if(count($results) >= 0) {
-						echo "<div style='width: 600px; background: #FFFFFF; border : 1px solid #3276B1; border-radius: 4px; padding: 10px;'>";
+						echo "<div style='width: 600px; background: #FFFFFF; border : 1px solid #94E5FF; border-radius: 4px; padding: 10px;'>";
 						foreach ($results as $result) {
-							echo '<b><font color="#3276B1">'.$result['Comment']['full_name'].':   '.'</font></b>';
+							echo '<i><font color="#3276B1">'.$result['Comment']['full_name'].':   '.'</font></i>';
 							echo '<span>'.$result['Comment']['content'].'</span>';
 							echo '</br>';
 						}

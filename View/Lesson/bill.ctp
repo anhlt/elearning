@@ -16,7 +16,8 @@
 	<div class="col-xs-13 col-md-9">
 		<div class="well">
 			<div class='form-group'>
-				<b><?php echo $this->Html->link("授業管理", array('controller' => 'lecturer', 'action' => 'manage')); ?></b>	  
+				<b><?php echo $this->Html->link("授業管理", array('controller' => 'lecturer', 'action' => 'manage'), 
+					array('class' => 'btn btn-info')); ?></b>	  
 			</div>
 			<div style='text-align: center; margin-bottom: 20px;'>
 				<h4><b>課金情報</b></h4>
@@ -27,9 +28,10 @@
 
 			<table class="table table-condensed">
 				<tr>										
-					<td  class="col-sm-4"><?php echo $this->Paginator->sort('Name', '名前');?></td>
+					<td  class="col-sm-3"><?php echo $this->Paginator->sort('Name', '名前');?></td>
 					<td  class="col-sm-4"><?php echo $this->Paginator->sort('Start time', '開始時');?></td>
-					<td 　class="col-sm-4"><?php echo $this->Paginator->sort('End time', '終了時間');?></td>				
+					<td 　class="col-sm-4"><?php echo $this->Paginator->sort('End time', '終了時間');?></td>
+					<td  class="col-sm-1"><?php echo $this->Paginator->sort('End', '終わり');?><td>	
 				</tr>
 			 <?php foreach ($results as $result) {?>
 			  <tr>			  		  	
@@ -41,6 +43,13 @@
 						$datetime->modify("+". $lesson_time . "day");
 						echo $datetime->format('Y-m-d H:i:s');
 			  		?> 
+			  	</td>
+			  	<td>
+			  		<?php
+			  			$today = date("Y-m-d H:i:s");
+						$date2='31_12_11';
+						echo (strtotime($datetime->format('Y-m-d H:i:s')) < strtotime($today)) ? "True" : "False";
+			  		?>
 			  	</td>			  	
 			  </tr>
 			 <?php }?>
