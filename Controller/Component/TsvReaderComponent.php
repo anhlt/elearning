@@ -1,7 +1,21 @@
 <?php 
     class TsvReaderComponent extends Component {
-   		public function getViewTSV($filename) {
+
+    public function remove_utf8_bom($filename)
+    {
+        $file = $_SERVER['DOCUMENT_ROOT']. DS . 'webroot' . DS .'tsv' . DS . $filename;
+        // Open the file to get existing content
+        $current = file_get_contents($file);
+        // Append a new person to the file
+        $bom = pack('H*','EFBBBF');
+        $current = preg_replace("/^$bom/", '', $current);
+        // Write the contents back to the file
+        file_put_contents($file, $current);
+    }
+
+	public function getViewTSV($filename) {
       	$link = $_SERVER['DOCUMENT_ROOT']. DS . 'webroot' . DS .'tsv' . DS . $filename;
+        $this->remove_utf8_bom($filename);
         $data_tsv = array();
         if (($handle = fopen($link, "r")) !== FALSE) {
             $row = 0;
@@ -19,36 +33,41 @@
         }
         $review = '';
         $error = '';
-        if ($data_tsv[0][0][3] != 'T' || !isset($data_tsv[0][1])) {
+        debug($data_tsv);
+        if ($data_tsv[0][0] != 'TestTitle' || !isset($data_tsv[0][1])) {
             $error = $error . "タイトルがない";
             throw new Exception($error);
+        // }elseif ($data_tsv[1][0] != 'TestSunTitle') {
+        //     $error = $error . "TestSunTitleがない";
+        //     throw new Exception($error);
         } else {
             $review = "<div name=\"TestTitle\">" . $data_tsv[0][1] . "</div>";
-
             $row = 1;
             $num = count($data_tsv);
             if ($data_tsv[1][0] == "TestSunTitle") {
                 $review = $review . "<div name=\"TestSunTitle\">" . $data_tsv[1][1] . "</div>";
                 $row++;
             }
-
-            //$review = $review.$num;
             while ($row < $num) {
                 $numberQuestion = substr($data_tsv[$row][0], 2, -1);
+                if (!is_numeric($numberQuestion) && $numberQuestion !='') {
+                    throw new Exception("question number wrong", 1);
+                }
                 if ($data_tsv[$row][0] == "End") {
                     break;
                 } else {
-                    if ($data_tsv[$row][1] != "QS") {
+                    if (!isset($data_tsv[$row][1]) || $data_tsv[$row][1] != "QS") {
                         $error = "質問の内容がない $numberQuestion.";
                         throw new Exception($error);
                         break;
                     } else {
-
                         $questionID = $data_tsv[$row][0];
                         $review = $review . "<div class=\"question\">問題 " . $numberQuestion . ":" . $data_tsv[$row][2] . "</div>";
                         $review = $review . "<ol>";
                         $row++;
-
+                        if (sizeof($data_tsv[$row])!=3) {
+                            throw new Exception("Error when parse answer", 1);
+                        }
                         while ($row < $num && $data_tsv[$row][0] == $questionID && $data_tsv[$row][1][0] == 'S') {
                             $review = $review . "<li>";
                             $review = $review . $data_tsv[$row][2];
@@ -57,6 +76,10 @@
                         }
                         $review = $review . "</ol>";
 
+                        if (sizeof($data_tsv[$row])!=4) {
+                            var_dump($data_tsv[$row]);
+                            throw new Exception("Error when parse result", 1);
+                        }
                         if ($data_tsv[$row][1] != "KS" || !isset($data_tsv[$row][2]) || !isset($data_tsv[$row][3])) {
                             $error = "質問の結果がない $numberQuestion.";
                             throw new Exception($error);
