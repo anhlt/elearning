@@ -5,7 +5,8 @@ class DATABASE_CONFIG {
 		'persistent' => false,
 		'host' => 'localhost',
 		'login' => 'root',
-		'password' => 'tuananh',
+		'password' => '123456',
  		'database' => 'elearning'
 		);
 }
+		
