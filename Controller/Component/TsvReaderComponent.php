@@ -33,7 +33,6 @@
         }
         $review = '';
         $error = '';
-        debug($data_tsv);
         if ($data_tsv[0][0] != 'TestTitle' || !isset($data_tsv[0][1])) {
             $error = $error . "タイトルがない";
             throw new Exception($error);
@@ -65,19 +64,21 @@
                         $review = $review . "<div class=\"question\">問題 " . $numberQuestion . ":" . $data_tsv[$row][2] . "</div>";
                         $review = $review . "<ol>";
                         $row++;
-                        if (sizeof($data_tsv[$row])!=3) {
+                        if (sizeof($data_tsv[$row]) < 3) {
                             throw new Exception("Error when parse answer", 1);
                         }
                         while ($row < $num && $data_tsv[$row][0] == $questionID && $data_tsv[$row][1][0] == 'S') {
                             $review = $review . "<li>";
+                            if (empty($data_tsv[$row][2])) {
+                                throw new Exception("empty answer", 1);
+                            }
                             $review = $review . $data_tsv[$row][2];
                             $review = $review . "</li>";
                             $row++;
                         }
                         $review = $review . "</ol>";
 
-                        if (sizeof($data_tsv[$row])!=4) {
-                            var_dump($data_tsv[$row]);
+                        if (sizeof($data_tsv[$row]) <4) {
                             throw new Exception("Error when parse result", 1);
                         }
                         if ($data_tsv[$row][1] != "KS" || !isset($data_tsv[$row][2]) || !isset($data_tsv[$row][3])) {
