@@ -9,10 +9,10 @@ class Tag extends AppModel {
 	));
 	// public $validate = array(
  //        'name' => array(
- //            'lenght' => array(
- //                'rule'    => array('minLength', '2'),
- //                'message' => '最低限は２つのキャラクタだ'
- //            ),
- //        )
+ //            'required' => array(
+ //                'rule' => array('notEmpty'),
+ //                'message' => '入力してお願い'
+ //            )
+ //        ),
  //    );
 }

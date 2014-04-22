@@ -16,7 +16,7 @@
 				'div' => false,  
 				'label' => false,  
 				'wrapInput' => false,  
-				'class' => 'form-control'  
+				'class' => 'form-control',
 				),  
 			'class' => 'well',
 		    'url' => array('controller' => 'Lesson', 'action' => 'add')
@@ -57,7 +57,8 @@
 		</div>
 		<?php echo $this->Form->submit('追加', array(  
 		'div' => false,  
-		'class' => 'btn btn-default'  
+		'class' => 'btn btn-default',
+		'id' => 'button'  
 		)); ?>  
 
 
@@ -66,8 +67,23 @@
 
 	<script type="text/javascript">    
 	window.onload = function WindowLoad(event) {
-		jQuery(".tm-input").tagsManager();
-		console.debug("aa");
+			jQuery(".tm-input").tagsManager({
+		});
 	}
+
+	$("#button").click(function(event){
+		event.preventDefault()
+		console.log( "Handler for .submit() called.");
+		var tag = ($('.tm-input').tagsManager('tags'));
+		console.log(tag);
+		console.log(tag.length);
+		if (tag.length != 0 || $('.tm-input').val().length != 0){
+			$('.tm-input').tagsManager('pushTag',$('.tm-input').val());
+			$('#LessonLessonForm').submit();
+		}else if(tag.length == 0 && $('.tm-input').val().length == 0)
+		{
+			alert('タグを入力してください');
+		}
+	});
 	</script>
 </div>

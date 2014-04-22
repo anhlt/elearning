@@ -1,6 +1,6 @@
 <div class='row'>
     <div class="col-xs-2 col-md-2">
-    <a class='btn btn-info' href="javascript:history.go(-1)">戻る</a>
+    <a class='btn btn-info' href="javascript:history.go(-2)">戻る</a>
     </div>
     <div class="col-xs-15 col-md-10 well">
         <h2 name="TestTitle"><?php echo $data[0][1] ?></h2>

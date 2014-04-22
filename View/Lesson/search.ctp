@@ -44,8 +44,19 @@ $(document).ready(function(){
     })
 }); 
 </script>
-<?php $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE); ?>
+<?php 
 
+if (AuthComponent::user('role')=="student") {
+    $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE); 
+}
+else{
+    echo'
+    <div class="col-xs-3 col-md-3">
+    <a class="btn btn-info" href="javascript:history.go(-1)">戻る</a>
+    </div>
+    ';
+}
+?>
 <div class="col-xs-13 col-md-9 well">
 <?php
 echo $this->Form->create("Lessons");

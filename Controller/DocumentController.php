@@ -4,7 +4,6 @@ class DocumentController extends AppController {
 	var $uses = array('Document','Lesson', 'Report');
 	public $components = array('Util'); 
 	public $helpers = array("TsvReader");
-
 	public function add() {
 		$lesson_id = $this->params['named']['id'];
 		$this->set('id', $lesson_id);
@@ -67,14 +66,12 @@ class DocumentController extends AppController {
 		{				
 			$data = $this->request->data['Document'];
 			$this->request->data['Document']['id'] = $document_id;
-			
 			$uploaded = false;
 			if (is_uploaded_file($data['link']['tmp_name'])) {
 				$uploaded = true;			
 				$name = uniqid() . $data['link']['name'];				
 				$this->request->data['Document']['link'] = $name;										
 			} else {
-				//$results = $this->Document->find("first", array("conditions"=>array('id'=>$document_id)));
 				$this->request->data['Document']['link'] = $results['Document']['link'];							
 			}			
 
@@ -134,6 +131,11 @@ class DocumentController extends AppController {
     }
 
     public function show($document_id){
+    	$doc  = $this->Document->findById($document_id);
+    	$lesson = $this->Lesson->findById($doc ["Document"]['lesson_id']);
+    	$lecturer_id = $lesson['Lecturer']['id'];
+    	if($this->Auth->user('role') == 'lecturer' && $this->Auth->user('id') != $lecturer_id)
+            $this->redirect(array('controller' => 'users', 'action' => 'permission'));
         $document = $this->Document->find("first", array("conditions"=>array("Document.id"=>$document_id)));
         $this->set("document", $document['Document']);
         $lesson_id = $document['Document']['lesson_id']; 
