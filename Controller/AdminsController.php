@@ -189,33 +189,29 @@ class AdminsController extends AppController {
     }
 
     public function view_infor_lecturer($lecturer_id) {
-        $questions = $this->Question->find('all');
-        $droplist = array();
-        foreach ($questions as $question) {
-            $droplist[$question['Question']['id']] = $question['Question']['question'];
-        }
-        $this->set('droplist', $droplist);
         if (empty($this->request->data)) {
-            //$lecturer_id = $this->Auth->user('id');
             $this->request->data = $this->Lecturer->findById($lecturer_id);
-            //var_dump($this->request->data);
+            $this->request->data['Lecturer']['question_verifycode'] = base64_decode($this->request->data['Lecturer']['question_verifycode']);
+            $this->request->data['Lecturer']['current_verifycode'] = base64_decode($this->request->data['Lecturer']['current_verifycode']);
         } else {
             $this->request->data['Lecturer']['id'] = $lecturer_id;
-            //var_dump($this->request->data);
+            $this->request->data['Lecturer']['current_verifycode'] = base64_encode($this->request->data['Lecturer']['current_verifycode']);
+            $this->request->data['Lecturer']['question_verifycode'] = base64_encode($this->request->data['Lecturer']['question_verifycode']);
             if ($this->Lecturer->save($this->request->data)) {
                 $this->Session->setFlash(__('セーブされた'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));
-                //$this->redirect(array('controller' => 'Admin', 'action' => 'manage_lecturer'));
             } else {
                 $this->Session->setFlash(__('セーブできない、もう一度お願い'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
                 ));
             }
+            return $this->redirect(array('action' => 'manage_lecturer'));
         }
     }
+
 
     public function unlock_lecturer($id_lecturer) {
         $this->loadModel('User');
