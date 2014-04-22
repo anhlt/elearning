@@ -20,6 +20,16 @@
     ?>
     <!-- Le styles -->
 <script>
+var timeSecond = 20;
+function timeLogout() {
+    if(timeSecond > 0) {
+        timeSecond -= 1;
+        setTimeout("timeLogout()",1000);
+    } else {
+        window.location.assign("/users/logout");
+    }
+}
+
 $(document).ready(function(){
     $("#searchip").keypress(function(e){
         if (e.which==13){
@@ -27,6 +37,16 @@ $(document).ready(function(){
             window.location = "/students/search?search_value="+tag_value; 
         }
     });
+
+    session_time = $("#session_time").text();
+    if (session_time > 0){
+        timeSecond = session_time
+        timeLogout();
+    }
+
+
+
+
 }); 
 </script>
     <style>
@@ -60,6 +80,12 @@ $(document).ready(function(){
         <?php endif?>
     </ul>
 </div>
+    <?php if (AuthComponent::user('id')){
+        echo "<div id = 'session_time' style='display:none'>".SESSION_TIME."</div>";
+    }else {
+        echo "<div id = 'session_time' style='display:none'>-1</div>";
+    }
+    ?>
     <div class="navbar-collapse collapse" id="navbar-main">
     <ul class="nav navbar-nav navbar-right">
         <?php if ($this->Session->read('Auth.User')):?>
@@ -68,7 +94,7 @@ $(document).ready(function(){
                     <div class="input-group .col-md-4">
                         <input type="text" class="form-control" placeholder="スマート 検索" name="srch-term" id = 'searchip'>
                         <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                            <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>   
                         </div>
                     </div>
                 </li>

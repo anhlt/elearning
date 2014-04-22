@@ -20,84 +20,107 @@
 			</div>
 			<div style='text-align: center; margin-bottom: 20px;'>
 				<h4><b>レポート</b></h4>
-			</div>
-
-			<div class='row'>				
+			</div>				
+			<div style='width: 600px; margin: auto;'>
 				<?php
-					echo "<div style='margin-left: 60px;'>";
-					if($reports) {
-						echo "<p>Invalid uploaded file</p>";
-						foreach ($reports as $report) {
-							echo "<div class='row'> <div class='col-sm-4'>";
-							echo "<font color='green'>" . $report['Document']['title'] . '</font></div>';							
-							echo "<div class='col-sm-8'>";
-							echo $this->Html->image("edit.png", array('alt' => 'edit', 'url' => array('controller' => 
-								'document', 'action' => 'edit', 'id' => $id, "document_id"=>$report['Document']['id'], 
-								'ihan' => 'true')));
-							echo "</div></div>";								
-						}
-					}					
-					else {
-						echo '<b>レポートがない</b>';
-					}
-					echo "</div>";
+					$index = 0;
+					if(count($reports) == 0) {
+						echo 'レポートがない <br>';
+					} else {
 				?>
-			</div>
-			<br><br> <br>	
-			<div class='row' style='margin-left: 43px;'><b>返事</b></div>
-			<br>			
+				<table class="table table-bordered">
+				<tr>
+					<td  class="col-sm-2">順番</td>
+					<td  class="col-sm-4">名前</td>					
+					<td  class="col-sm-2">編集</td>		
+				</tr>
+				 <?php foreach ($reports as $report) {?>
+					<tr>
+					  	<td><?php if($index < 9) echo '0'; echo ++$index ?> </td>
+					  	<td><?php echo($report['Document']['title']) ?> </td>				  					  	
+					  	<td>
+					  		<?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'edit', 'id' => $id, 
+					  			"document_id"=>$report['Document']['id'], 'ihan' => 'true'), array('class' => 
+					  			'glyphicon glyphicon-edit')); ?>
+					  	</td>		  	
+					</tr>
+				 <?php }?>
+				</table>
+				<?php }?>
+
+
+				<?php
+					$index = 0;
+					if(count($bans) >= 0) {					
+				?>
+				<table class="table table-bordered">
+				<tr>
+					<td  class="col-sm-2">順番</td>
+					<td  class="col-sm-4">名前</td>					
+					<td  class="col-sm-2">編集</td>		
+				</tr>
+				 <?php foreach ($bans as $ban) {?>
+					<tr>
+					  	<td><?php if($index < 9) echo '0'; echo ++$index ?> </td>
+					  	<td><?php echo($ban['Document']['title']) ?> </td>				  					  	
+					  	<td>
+					  		<?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'edit', 'id' => $id, 
+					  			"document_id"=>$ban['Document']['id'], 'ihan' => 'true'), array('class' => 
+					  			'glyphicon glyphicon-edit')); ?>
+					  	</td>		  	
+					</tr>
+				 <?php }?>
+				</table>
+				<?php }?>		
 			
-			<?php
-				if($results)
-				echo "<div style='width: 700px; margin: auto; border: 1px solid #428BCA; background-color: #FFF; border-radius: 4px; padding: 10px;'>";
-				foreach ($results as $result) {
-					echo '<b><font color="#3276B1">'.$result['Comment']['full_name'].':   '.'</font></b>';
-					echo '<span>'.$result['Comment']['content'].'</span>';
-					echo '</br>';
-				}
-			?>				
-			</div>
-			<br><br>
-
-			<div class='row'>
-			<?php echo $this->Form->create('Report',array(
-				'inputDefaults' => array(  
-					'div' => false,  
-					'label' => false,  
-					'wrapInput' => false,  
-					'class' => 'form-control'  
-					),  
-				'style' => 'margin-left: 45px;',
-			    'url' => array('controller' => 'lecturer', 'action' => 'reply', 'id' => $id),
-			    'method' => 'post',
-			    'enctype' => 'multipart/form-data'
-				)); ?>
-
-				<div class="form-group">
-					<div class="col-xs-13 col-md-8">
-					<?php echo $this->Form->input('content', array(  
-						'placeholder' => '返事の内容',  
-						'style' => 'width: 400px;',
-						'required' => true						
-					)); ?>
-					</div>
-					<div class="col-xs-13 col-md-1">
+				
+				<p>返事</p>			
+				<?php
+					if(count($results) >= 0) {
+						echo "<div style='width: 600px; background: #FFFFFF; border : 1px solid #3276B1; border-radius: 4px; padding: 10px;'>";
+						foreach ($results as $result) {
+							echo '<b><font color="#3276B1">'.$result['Comment']['full_name'].':   '.'</font></b>';
+							echo '<span>'.$result['Comment']['content'].'</span>';
+							echo '</br>';
+						}
+						echo "</div>";
+					}
+				?>				
+				
+				<br><br>
+				<?php echo $this->Form->create('Report',array(
+					'inputDefaults' => array(  
+						'div' => false,  
+						'label' => false,  
+						'wrapInput' => false,  
+						'class' => 'form-control'  
+						),
+				    'url' => array('controller' => 'lecturer', 'action' => 'reply', 'id' => $id),
+				    'method' => 'post',
+				    'enctype' => 'multipart/form-data'
+					)); ?>		
+						
+						<?php echo $this->Form->input('content', array(  
+							'placeholder' => '返事の内容',							
+							'required' => true,
+							'style' => 'width: 400px; float: left;'						
+						)); ?>						
+						
 						<?php echo $this->Form->submit('返事', array(
 						'class' => 'btn btn-primary',
-						'div' => false
+						'div' => false,
+						'style' => 'margin-left: 45px; float: left;',
 						)); ?>
-					</div>
-					<div class="col-xs-13 col-md-1">
-					<?php echo $this->Form->reset('キャンセル',array(
-							'class' => 'btn btn-primary',
-							'div' => false, 
-							'value' => 'キャンセル'
-							));?>	
+						
+						<?php echo $this->Form->reset('キャンセル',array(
+								'class' => 'btn btn-primary',
+								'div' => false, 
+								'value' => 'キャンセル',
+								'style' => 'margin-left: 10px;',
+							));?>						
+						 						
 					
-					</div> 						
-				</div>
-			</form>
-			</div>
-		</div>		
+				<?php echo '</form>';?>		
+		</div>
 	</div>
 </div>

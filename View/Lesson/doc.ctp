@@ -29,7 +29,7 @@
 			
 			<table class="table">
 				<tr>
-					<td  class="col-sm-1">ID</td>
+					<td  class="col-sm-1">順番</td>
 					<td  class="col-sm-3"><?php echo $this->Paginator->sort('Title','名前'); ?></td>					
 					<td  class="col-sm-1">更新</td>					
 					<td  class="col-sm-1">削除</td>
@@ -37,25 +37,22 @@
 				</tr>
 				 <?php foreach ($results as $result) {?>
 				  <tr>
-				  	<td><?php echo ++$index ?> </td>
+				  	<td><?php if($index < 9) echo '0'; echo ++$index ?> </td>
 				  	<td><?php echo($result['Document']['title']) ?> </td>				  					  	
-				  	<td><?php echo $this->Html->image("edit.png", array("alt" => "edit",'url' => array('controller' => 'document', 'action' => 'edit', 'id' => $id, "document_id"=>$result['Document']['id'], 'ihan' => 'false'))); ?>
+				  	<td>
+				  		<?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'edit', 'id' => $id, "document_id"=>$result['Document']['id'], 'ihan' => 'false'), array('class' => 'glyphicon glyphicon-edit')); ?>
 				  	</td>		  	
-				  	<td><?php echo $this->Html->image("trash.png", array("alt" => "delete",'url' => array('controller' => 'document', 'action' => 'delete', "id"=>$result['Document']['id']))); ?>
+				  	<td>
+				  		<?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'delete', "id"=>$result['Document']['id']), array('class' => 'glyphicon glyphicon-remove-sign')); ?>
 				  	</td>
 				  	<td><?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'show',$result['Document']['id']), array('class' => 'glyphicon glyphicon-folder-open')); ?>
 			  	</td>
 				  	</tr>
 				 <?php }?>
-			</table>			
+			</table>				
+				<span style='margin: 10px 20px 20px 570px;'> ドキュメントを追加する</span>
+				<?php echo $this->html->link('追加', array('controller' => 'document', 'action' => 'add', 'id' => $id),
+					array('class' => 'btn btn-primary'));?>					
 		</div>		
-	</div>
-
-	<div style='float: right; margin-right: 15px;'>
-		<div class="form-group">
-			<span style='margin-right: 20px;'> ドキュメントを追加する</span>
-			<?php echo $this->html->link('追加', array('controller' => 'document', 'action' => 'add', 'id' => $id),
-				array('class' => 'btn btn-primary'));?>		
-		</div>	
-	</div>
+	</div>	
 </div>
