@@ -60,7 +60,7 @@ $(document).ready(function(){
 <?php
 
 echo "<h1 style='margin-top:0px'>".$document['title']."</h1>"; 
-if(AuthComponent::user('role')!='admin'){
+if(AuthComponent::user('role')=='student'){
     echo $this->Html->link('違反レポート', '/document/report/'.$document['id'], array('class'=>'floatRight label label-default'));
 }
 $link = $this->html->url('/', true) . 'files' . DS . $document['link'];
