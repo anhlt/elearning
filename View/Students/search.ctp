@@ -43,11 +43,11 @@ foreach ($students as $row){
     if (strpos($student['full_name'], $keyword)!= false){
     //    $student_fullname = str_replace($keyword, "<b>".$keyword."</b>", $student['full_name']);
          $student_fullname = $this->Util->changeString($student['full_name'], $keyword);
-        echo $this->Html->tableCells(array($student_fullname, "学生", $this->Html->link("表示", "/students/profile/".$student['id'])));
+        echo $this->Html->tableCells(array($student_fullname, "学生", ""));
     }else {
    //     $student_username = str_replace($keyword, "<b>".$keyword."</b>", $row['User']['username']);
         $student_username = $this->Util->changeString($row['User']['username'], $keyword);
-        echo $this->Html->tableCells(array($student_username, "学生", $this->Html->link("表示", "/students/profile/".$student['id'])));
+        echo $this->Html->tableCells(array($student_username, "学生", ""));
     }
 }
 echo "</table>";
