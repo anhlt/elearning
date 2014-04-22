@@ -60,21 +60,21 @@ $(document).ready(function(){
 <?php
 
 echo "<h1 style='margin-top:0px'>".$document['title']."</h1>"; 
-if(AuthComponent::user('role')=='student')
+if(AuthComponent::user('role')=='student'){
     echo $this->Html->link('違反レポート', '/document/report/'.$document['id'], array('class'=>'floatRight label label-default'));
-//echo "<input id = 'frame' type = 'text' oncontextmenu = 'return false' />"; 
+}
 $link = $this->html->url('/', true) . 'files' . DS . $document['link'];
 $path_parts = pathinfo($link);
 $extension = $path_parts['extension'];
 $extension = strtolower($extension);
 if ($extension == 'pdf'){
     if ($learnable==LEARNABLE) {
-        echo $this->Html->image('icon/trans.png', array("class"=>"transimage"));
+        echo $this->Html->image('icon/trans.png', array("class"=>"transimage", "oncontextmenu"=>'return false'));
     }else {
-        echo $this->Html->image('icon/trans.png', array("class"=>"transimageBig"));
+        echo $this->Html->image('icon/trans.png', array("class"=>"transimageBig", "oncontextmenu"=>'return false'));
     }
     // echo "<iframe id = 'frame' style = 'z-index:-1' src='".$link."'></iframe>";
-    echo "<embed src=".$link." id = 'frame'>";
+    echo "<embed oncontextmenu='return false;' src=".$link." id = 'frame'>";
     echo "</div>";
 }else if ( $extension=='mp3' || $extension == 'wav'){
 
