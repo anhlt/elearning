@@ -52,7 +52,7 @@
 
 		<div class='form-group'>
 			<input onclick="addRow(this.form);" type="button" value='追加' class='btn btn-primary'/>
-		</div>
+		</div>		
 
 		<div class="form-group">
 			<?php echo $this->Form->input('Document.0.title', array(

@@ -52,7 +52,7 @@
 
 				<?php
 					$index = 0;
-					if(count($bans) >= 0) {
+					if(count($bans) > 0) {
 						print '<b>禁止ドキュメント</b>';					
 				?>
 				<table class="table table-bordered">
@@ -73,12 +73,11 @@
 					</tr>
 				 <?php }?>
 				</table>
-				<?php }?>		
-			
+				<?php }?>
 				
 				<p>返事</p>			
 				<?php
-					if(count($results) >= 0) {
+					if(count($results) > 0) {
 						echo "<div style='width: 600px; background: #FFFFFF; border : 1px solid #94E5FF; border-radius: 4px; padding: 10px;'>";
 						foreach ($results as $result) {
 							echo '<i><font color="#3276B1">'.$result['Comment']['full_name'].':   '.'</font></i>';

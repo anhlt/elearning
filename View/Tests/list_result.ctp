@@ -9,9 +9,9 @@
 			<br>
 			<tr>
 				<td  class="col-sm-1"><?php echo $this->Paginator->sort('id', '順番'); ?></td>
-				<td  class="col-sm-1"><?php echo $this->Paginator->sort('Student.full_name','学生の名前');?></td>
-				<td  class="col-sm-3"><?php echo $this->Paginator->sort('point','点数')?></td>
-				<td  class="col-sm-3">細部</td>
+				<td  class="col-sm-4"><?php echo $this->Paginator->sort('Student.full_name','学生の名前');?></td>
+				<td  class="col-sm-2"><?php echo $this->Paginator->sort('point','点数')?></td>
+				<td  class="col-sm-2">細部</td>
 			</tr>
 			<?php foreach ($results as $result) :?>
 			<tr id="resultsDiv">
@@ -19,7 +19,7 @@
 				<td><?php echo($result['Student']['full_name']) ?> </td>
 				<td><?php echo($result['Result']['point']) ?> </td>
 				<td>
-					<?php echo $this->html->link('Detail', array('controller' => 'tests', 'action' => 'result',$result['Result']['id']), array('class' => 'btn btn-info'))?>
+					<?php echo $this->html->link('', array('controller' => 'tests', 'action' => 'result',$result['Result']['id']), array('class' => 'glyphicon glyphicon-list'))?>
 				</td>
 			</tr>
 			<?php endforeach;?>

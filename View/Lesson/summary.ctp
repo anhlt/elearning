@@ -40,7 +40,7 @@
 
 				<div class='row'>				
 					<span style='margin: 10px 40px 0px 410px;'>授業を削除する</span>
-					<?php echo $this->html->link('Delete', array('controller' => 'lesson', 'action' => 'delete'), array('class' => 'btn btn-primary'))?>				
+					<?php echo $this->html->link('削除', array('controller' => 'lesson', 'action' => 'delete'), array('class' => 'btn btn-primary'))?>				
 				</div>
 			</div>
 		</div>
