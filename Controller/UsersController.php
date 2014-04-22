@@ -96,7 +96,7 @@ class UsersController extends AppController {
 						'plugin' => 'BoostCake',
 						'class' => 'alert-warning'
 					));
-	        		$this->redirect(array('controller'=>'Users','action'=>'verifycode'));
+	        		$this->redirect(array('controller'=>'Users','action'=>'verifycode',$user['username']));
 	        	}            
 	            return $this->redirect('/');
 	        }else
