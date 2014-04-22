@@ -510,7 +510,6 @@ class LessonController extends AppController {
     public function learn($lesson_id){
 
         $user_id = $this->Auth->user("id");
-
         if ($this->Session->read("scroll")== "1"){
             $this->set("scroll", "1");
             $this->Session->delete("scroll");
@@ -519,7 +518,11 @@ class LessonController extends AppController {
         $options['conditions'] = array("Lesson.id"=>$lesson_id); 
         $lessons = $this->Lesson->find("first",$options); 
         $this->set("lessons",  $lessons);
-
+        if($lessons['Lesson']['baned'] == 1){
+            $this->Session->setFlash(__('この授業は禁止された'), 'alert', array(
+                'plugin'=>'BoostCake','class' =>'alert-warning'));
+            $this->redirect(array('controller' =>'lesson' ,'action' =>'search' ));
+        }
         $learnedStudents = $lessons['Student'];
         $likedNumber = 0;
         $liked = 0;
