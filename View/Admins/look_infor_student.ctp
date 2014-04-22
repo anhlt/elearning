@@ -62,23 +62,6 @@
                         'readonly' => 'readonly',    
 			'label' => '電話番号',
 			)); ?>  
-		</div>
-		<div class="form-group">
-			<?php echo $this->Form->input('Student.question_verifycode_id', array(    
-			'style' => 'width:180px;',
-			'label' => '質問',
-                        'readonly' => 'readonly',    
-			'options' => $droplist,
-			)); ?>  
-		</div>
-		<div class="form-group">
-		  <?php echo $this->Form->input('Student.current_verifycode', array(  
-			'placeholder' => '答え',  
-			'style' => 'width:180px;',
-                        'readonly' => 'readonly',
-			'label' => '答え'
-		  )); ?>  
-		</div>
 		<?php echo $this->Form->end(); ?>  
 		</div>
 </div>    
