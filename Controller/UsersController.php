@@ -29,8 +29,8 @@ class UsersController extends AppController {
         parent::beforeFilter();
         $this->Auth->allow('add');
         $this->Auth->allow('verifycode');
-        //$this->mc = new Memcached();
-        //$this->mc->addServer("localhost", 11211);
+       $this->mc = new Memcached();
+       $this->mc->addServer("localhost", 11211);
     }
 
 	public function index($value='')
@@ -72,14 +72,14 @@ class UsersController extends AppController {
 	        if ($this->Auth->login()) {
 	        	$this->Session->write('failedTime',0);
 	        	$user = $this->Auth->user();
-		  		/*if($pause = $this->mc->get($user['username'])){
+		  		if($pause = $this->mc->get($user['username'])){
 	        		$this->Auth->logout();
 		  			$this->Session->setFlash(__('このアカウントは'.date('Y-m-d H:i:s', $pause).'　までロックされる'), 'alert', array(
 							'plugin' => 'BoostCake',
 							'class' => 'alert-warning'
 						));
 					$this->redirect(array('controller'=>'users','action' => 'login'));
-		  		}*/
+		  		}
 
 	        	if ($user['actived'] == -1 && $user['role'] == 'lecturer') {
 	        		$this->Auth->logout();

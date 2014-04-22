@@ -1,3 +1,4 @@
+<?php echo $this->Session->flash(); ?>
 <style>
 #myinput{
     background-color: #fff;
