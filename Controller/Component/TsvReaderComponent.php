@@ -69,6 +69,9 @@
                         }
                         while ($row < $num && $data_tsv[$row][0] == $questionID && $data_tsv[$row][1][0] == 'S') {
                             $review = $review . "<li>";
+                            if (empty($data_tsv[$row][2])) {
+                                throw new Exception("empty answer", 1);
+                            }
                             $review = $review . $data_tsv[$row][2];
                             $review = $review . "</li>";
                             $row++;
