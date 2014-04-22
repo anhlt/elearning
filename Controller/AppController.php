@@ -73,7 +73,8 @@ class AppController extends Controller {
         $res = $this->Parameter->find("all");
         foreach ($res as $row) {
         	$paramater = $row['Parameter'];
-        	define($paramater['name'], $paramater['value']);
+        	// if(!isset($paramater['name']))
+        		define($paramater['name'], $paramater['value']);
         }
         
 	}

@@ -34,6 +34,9 @@ class LecturerController extends AppController {
 					'class' => 'alert-success'
 				));
 				return $this->redirect(array('controller' => 'pages', 'action' => 'display'));
+			}else{
+				unset($this->request->data['Lecturer']['question_verifycode']);
+				unset($this->request->data['Lecturer']['current_verifycode']);
 			}
 			$this->Session->setFlash(__('ユーザをセーブできない、もう一度お願い'), 'alert', array(
 				'plugin' => 'BoostCake',

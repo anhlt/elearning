@@ -54,9 +54,9 @@
             ?>
             <?php
             echo $this->Form->input('IpAdmin.'.$key.'.ip_address', array(
-                'placeholder' => 'メール',
+                'placeholder' => 'IPアドレス',
                 'style' => 'width:180px;',
-                'label' => 'メール'
+                'label' => 'IPアドレス'
             ));
             ?>
         <?php endforeach ?>

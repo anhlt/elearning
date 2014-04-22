@@ -120,7 +120,6 @@ class DocumentController extends AppController {
 	                    'class' => 'alert-warning'
 	            	));	
 				}
-
 				
 				if($ihan == 'true')
 					$this->redirect(array('controller' => 'lesson', 'action' => 'report', 'id' => $id));	

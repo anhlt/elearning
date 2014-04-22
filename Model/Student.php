@@ -78,6 +78,18 @@ class Student extends AppModel{
         'address' => array(
             'rule'    => array('maxLength', 1005),
         ),
+        'credit_card_number'=> array(
+           'alphaNumeric' => array(
+                'rule'     => 'alphaNumeric',
+                'required' => true,
+                'message'  => '数字'
+            ),
+           'between' => array(
+                'rule'    => array('between', 15, 15),
+                'message' => '15字しなけらばならない'
+            )
+        )
+
     );
 }
 ?>
