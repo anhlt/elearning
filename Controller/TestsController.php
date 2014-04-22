@@ -61,8 +61,9 @@ class TestsController extends AppController {
             $data = $this->request->data['Test'];
             $this->request->data['Test']['id'] = $test_id;      
 
-            if (is_uploaded_file($data['link']['tmp_name'])) {              
-                unlink(WWW_ROOT . DS . 'tsv'. DS . $results['Test']['link']);
+            $upload = false;
+            if (is_uploaded_file($data['link']['tmp_name'])) {
+                $upload = true;
                 $name = uniqid() . $data['link']['name'];
                 move_uploaded_file($data['link']['tmp_name'], WWW_ROOT . "tsv" . DS . $name);
                 $this->request->data['Test']['link'] = $name;                                       
@@ -71,22 +72,35 @@ class TestsController extends AppController {
                 $this->request->data['Test']['link'] = $results['Test']['link'];                
             }
 
-            if($this->Test->save($this->request->data['Test'])){
-                $this->Session->setFlash(__('テストファイルが更新された'), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-success'
-                ));     
+            try {
+                if($upload)
+                    $this->TsvReader->getViewTSV($name);          
+                if($this->Test->save($this->request->data['Test'])) {
+                    if($upload)
+                    unlink(WWW_ROOT . 'tsv'. DS . $results['Test']['link']);
+                    $this->Session->setFlash(__('テストファイルが更新された'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-success'
+                    ));     
 
-            } else {
-                $this->Session->setFlash(__('テストファイルを更新できない。もう一度お願い'), 'alert', array(
+                } else {                    
+                    $this->Session->setFlash(__('テストファイルを更新できない。もう一度お願い'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-warning'
+                    )); 
+                }
+            } catch (Exception $e) {
+                $this->Session->setFlash(__($e->getMessage()), 'alert', array(
                     'plugin' => 'BoostCake',
-                    'class' => 'alert-warning'
-                )); 
+                    'class' => 'alert-warning'));
+                    unlink(WWW_ROOT . 'tsv' .DS. $name);
             }
 
             $this->redirect(array('controller' => 'lesson', 'action' => 'test', 'id' => $test_id));     
         }
     }
+
+
 
     public function delete() {
         $id = $this->params['named']['id'];
@@ -217,7 +231,7 @@ class TestsController extends AppController {
 #        $link = $_SERVER['DOCUMENT_ROOT'] . DS . 'tsv' . DS . $filename;
 
 #        $link = $_SERVER['DOCUMENT_ROOT'] . DS . 'tsv' . DS . $filename;
-        $link = WWW_ROOT . DS . 'tsv' . DS . $filename;
+        $link = WWW_ROOT . 'tsv' . DS . $filename;
         $data_tsv = array();
 
         if (($handle = fopen($link, "r")) !== FALSE) {

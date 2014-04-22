@@ -17,11 +17,11 @@ class DocumentController extends AppController {
 			$upload_invalid = true;
 			foreach ($data as $Document) {
 				if(!is_uploaded_file($Document['link']['tmp_name'])) {
-					$upload_invalid = false;
-					break;
+					$upload_invalid = false;					
 					$this->Session->setFlash(__('ドキュメントをアップロードできない、もう一度お願い'), 'alert', array(
           	 			'plugin' => 'BoostCake',
             			'class' => 'alert-warning'));
+					break;
 				}
 			}
 
@@ -68,49 +68,66 @@ class DocumentController extends AppController {
 		{				
 			$data = $this->request->data['Document'];
 			$this->request->data['Document']['id'] = $document_id;
-			$uploaded = false;
-			if (is_uploaded_file($data['link']['tmp_name'])) {
-				$uploaded = true;			
-				$name = uniqid() . $data['link']['name'];				
-				$this->request->data['Document']['link'] = $name;										
-			} else {
-				$this->request->data['Document']['link'] = $results['Document']['link'];							
-			}			
+			
+			$uploaded = 0;
+			//debug($data['link']);
 
-			if($uploaded)
-			if($this->Document->save($this->request->data['Document']))
-			{				 
-				unlink(WWW_ROOT . 'files' . DS . $results['Document']['link']);
-				move_uploaded_file($data['link']['tmp_name'], WWW_ROOT. 'files' . DS . $name);				
-
-				if($ihan == 'true') {		
-					$report = $this->Report->find("first", array('conditions' => array('document_id' => $document_id)));
-					$report['Report']['state'] = 0;
-					$this->Report->create();
-			    	$this->Report->save($report);
-
-			    	$doc = $this->Document->find("first", array('conditions' => array('id' => $document_id)));
-					$doc['Document']['baned'] = 0;
-					debug($doc);
-					$this->Document->create();
-			    	$this->Document->save($doc);	    	
+			if($data['link']['name'] != '') {
+				$uploaded = 1;
+				if (is_uploaded_file($data['link']['tmp_name'])) {							
+					$name = uniqid() . $data['link']['name'];				
+					$this->request->data['Document']['link'] = $name;										
+				} else {
+					$uploaded = 2;
+					$this->Session->setFlash(__('ドキュメントをアップロードできない、もう一度お願い'), 'alert', array(
+	                    'plugin' => 'BoostCake',
+	                    'class' => 'alert-warning'
+	            	));	
 				}
-                $this->Session->setFlash(__('ドキュメントが更新された'), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-success'
-                ));		
-
-            } else {
-                $this->Session->setFlash(__('ドキュメントを更新できない、もう一度お願い'), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-warning'
-            	));	
 			}
-	
-			if($ihan == 'true')
-				$this->redirect(array('controller' => 'lesson', 'action' => 'report', 'id' => $id));	
-			else
-				$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $id));		
+			else {
+				$this->request->data['Document']['link'] = $results['Document']['link'];							
+			}
+			
+			//debug($uploaded);
+			if($uploaded != 2) {
+				if($this->Document->save($this->request->data['Document']))
+				{	
+					if($uploaded == 1) {			 
+						unlink(WWW_ROOT . 'files' . DS . $results['Document']['link']);
+						move_uploaded_file($data['link']['tmp_name'], WWW_ROOT. 'files' . DS . $name);
+					}			
+
+					if($ihan == 'true') {
+				    	$sql = "UPDATE reports SET state = '0' WHERE document_id = '$document_id'";
+				    	$this->Report->query($sql);
+
+				    	$doc = $this->Document->find("first", array('conditions' => array('id' => $document_id)));
+						$doc['Document']['baned'] = 0;
+						debug($doc);
+						$this->Document->create();
+				    	$this->Document->save($doc);	    	
+					}
+
+	                $this->Session->setFlash(__('ドキュメントが更新された'), 'alert', array(
+	                    'plugin' => 'BoostCake',
+	                    'class' => 'alert-success'
+	                ));		
+
+	            } else {
+	                $this->Session->setFlash(__('ドキュメントを更新できない、もう一度お願い'), 'alert', array(
+	                    'plugin' => 'BoostCake',
+	                    'class' => 'alert-warning'
+	            	));	
+				}
+
+				
+				if($ihan == 'true')
+					$this->redirect(array('controller' => 'lesson', 'action' => 'report', 'id' => $id));	
+				else
+					$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $id));
+					
+			}			
 		}
 	}
 

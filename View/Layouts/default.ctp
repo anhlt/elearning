@@ -43,10 +43,6 @@ $(document).ready(function(){
         timeSecond = session_time
         timeLogout();
     }
-
-
-
-
 }); 
 </script>
     <style>

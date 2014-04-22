@@ -7,7 +7,8 @@
 			$(":file").filestyle({input: false});
 		</script>		
 	</head>
-	<body>		
+	<body>
+		<?php echo $this->Session->flash(); ?>	
 		<div class='head'><h3>ファイルをアップロード</h3></div>		
 		<div class='main'>
 		<?php echo $this->Form->create('Document',array(

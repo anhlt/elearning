@@ -9,3 +9,4 @@ class DATABASE_CONFIG {
  		'database' => 'elearning'
 		);
 }
+		
