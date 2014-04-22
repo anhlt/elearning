@@ -1421,7 +1421,7 @@ class AdminsController extends AppController {
     }
 
     public function manage_lesson(){
-        $sql= "SELECT lessons.id, lessons.name, lessons.lecturer_Id, COUNT( ihans.lesson_Id ) as count
+        $sql= "SELECT lessons.id, lessons.name, lessons.lecturer_Id, lessons.baned, COUNT( ihans.lesson_Id ) as count
                 FROM  ihans , lessons
                 WHERE lessons.id = ihans.lesson_id
                 GROUP BY (lessons.id)";
