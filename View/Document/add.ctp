@@ -30,26 +30,11 @@
 	function removeRow(index) {
 		jQuery('#row'+index).remove();
 	}
-
-
-	function getExtension(filename) {
-	     return filename.split('.').pop().toLowerCase();
-	}
-
-	function checkFile(inputFile) {
-		var valid_extensions = /(.pdf)$/i;
-		if(!valid_extensions.test(inputFile.value)) {
-			alert('ファイルのタイプが正しくない');
-			inputFile.value = '';
-		} else if(inputFile.files[0].size > 20480){ //2M
-			alert('ファイルの容量が大き過ぎる');
-			inputFile.value = '';
-		}
-	}
 	</script>
 </head>
 
 <body>
+	<?php echo $this->Session->flash(); ?>
 	<div class='head'><h3>ドキュメントをアップロード</h3></div>	
 	<div class='main'>
 	<?php echo $this->Form->create('Document',array(
@@ -67,7 +52,7 @@
 
 		<div class='form-group'>
 			<input onclick="addRow(this.form);" type="button" value='追加' class='btn btn-primary'/>
-		</div>
+		</div>		
 
 		<div class="form-group">
 			<?php echo $this->Form->input('Document.0.title', array(
@@ -118,19 +103,31 @@
 	</div>	
 </body>
 
+<!--
 <script>
-	var fl = document.getElementById('f');				
+var fname;
+for(var i = 0; i < 100; i++) {
+	fname = "f.".concat(i); 	
+	var fl = document.getElementById(fname);
+	if(fl != null) {
+		fl.onchange = function(e){ 
+		    //var ext = this.value.match(/\.(.+)$/)[1];
+		    
+		    var extensionIndex = this.value.lastIndexOf(".");
+		    var ext = this.value.substring(extensionIndex + 1);
 
-	fl.onchange = function(e){ 
-	    var ext = this.value.match(/\.(.+)$/)[1];			    
-	    switch(ext)
-	    {
-	        case 'tsv':		            
-	            break;
-	        default:
-	            alert('ファイルを選択してお願い');
-	            this.value='';
-	    }		    
-	};
+		    alert(ext);			    
+		    switch(ext)
+		    {
+		        case 'pdf':         
+		            break;
+		        default:
+		            //alert('File invalid !');
+		            this.value='';
+		    }		    
+		};
+	}
+}
 </script>
+-->
 </html>

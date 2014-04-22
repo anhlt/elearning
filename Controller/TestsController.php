@@ -23,7 +23,7 @@ class TestsController extends AppController {
             if (is_uploaded_file($data['link']['tmp_name'])) {
                 $name = uniqid() . $data['link']['name'];
                 move_uploaded_file($data['link']['tmp_name'], WWW_ROOT. "tsv" . DS . $name);
-                $this->request->data['Test']['link'] = $name;                               
+                $this->request->data['Test']['link'] = $name;                            
             }
             try {
                 $this->TsvReader->getViewTSV($name);
@@ -61,32 +61,46 @@ class TestsController extends AppController {
             $data = $this->request->data['Test'];
             $this->request->data['Test']['id'] = $test_id;      
 
-            if (is_uploaded_file($data['link']['tmp_name'])) {              
-                unlink(WWW_ROOT . DS . 'tsv'. DS . $results['Test']['link']);
+            $upload = false;
+            if (is_uploaded_file($data['link']['tmp_name'])) {
+                $upload = true;
                 $name = uniqid() . $data['link']['name'];
                 move_uploaded_file($data['link']['tmp_name'], WWW_ROOT . "tsv" . DS . $name);
                 $this->request->data['Test']['link'] = $name;                                       
             } else {
                 $results = $this->Test->find("first", array("conditions"=>array('id'=>$test_id)));
                 $this->request->data['Test']['link'] = $results['Test']['link'];                
-            }           
+            }
 
-            if($this->Test->save($this->request->data['Test'])){
-                $this->Session->setFlash(__('テストファイルが更新された'), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-success'
-                ));     
+            try {
+                if($upload)
+                    $this->TsvReader->getViewTSV($name);          
+                if($this->Test->save($this->request->data['Test'])) {
+                    if($upload)
+                    unlink(WWW_ROOT . 'tsv'. DS . $results['Test']['link']);
+                    $this->Session->setFlash(__('テストファイルが更新された'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-success'
+                    ));     
 
-            } else {
-                $this->Session->setFlash(__('テストファイルを更新できない。もう一度お願い'), 'alert', array(
+                } else {                    
+                    $this->Session->setFlash(__('テストファイルを更新できない。もう一度お願い'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-warning'
+                    )); 
+                }
+            } catch (Exception $e) {
+                $this->Session->setFlash(__($e->getMessage()), 'alert', array(
                     'plugin' => 'BoostCake',
-                    'class' => 'alert-warning'
-                )); 
+                    'class' => 'alert-warning'));
+                    unlink(WWW_ROOT . 'tsv' .DS. $name);
             }
 
             $this->redirect(array('controller' => 'lesson', 'action' => 'test', 'id' => $test_id));     
         }
     }
+
+
 
     public function delete() {
         $id = $this->params['named']['id'];
@@ -157,15 +171,24 @@ class TestsController extends AppController {
                 }
             }
 
-            $this->loadModel("Result");
-            $dataSave = array("student_id"=>$this->Auth->user('id'), "point"=>$point, "test_id"=>$id, "student_of_choice"=>$result);
-            $save_result = $this->Result->save($dataSave);
-            $result_id = $save_result['Result']['id'];
-            echo $result_id;
-            if (strlen($error) != 0) {
-                echo $error;
+            $result = trim($result, ",");
+            $user = $this->Auth->user();
+            if($user['role'] == 'lecturer') {
+                
+                $link = "data:".$result."/test_id:".$id;
+                $this->redirect("/tests/result2/" . $link);
             }
-            $this->redirect("/tests/result/".$result_id);
+            elseif($user['role'] == 'student') {
+                $this->loadModel("Result");
+                $dataSave = array("student_id"=>$this->Auth->user('id'), "point"=>$point, "test_id"=>$id, "student_of_choice"=>$result);
+                $save_result = $this->Result->save($dataSave);
+                $result_id = $save_result['Result']['id'];
+                echo $result_id;
+                if (strlen($error) != 0) {
+                    echo $error;
+                }
+                $this->redirect("/tests/result/".$result_id);
+            }
         }
     }
 
@@ -190,7 +213,15 @@ class TestsController extends AppController {
         $this->loadModel("Result");
         $dataTest = $this->Result->find('first', array('conditions' => array('Result.id' => $result_id)));
         $this->set('result', $dataTest['Result']['student_of_choice']);
-        $this->set('data', $this->getDataTSV($dataTest['Result']["test_id"]));
+        $this->set('data', $this->getDataTSV($dataTest['Result']["test_id"]));        
+    }
+
+      public function result2() {   
+        $data = $this->params['named']['data'];
+        $test_id = $this->params['named']['test_id'];       
+        $this->set('result', $data);
+        $this->set('data', $this->getDataTSV($test_id));
+        $this->render('result');
     }
 
     private function getDataTSV($id) {
@@ -200,7 +231,7 @@ class TestsController extends AppController {
 #        $link = $_SERVER['DOCUMENT_ROOT'] . DS . 'tsv' . DS . $filename;
 
 #        $link = $_SERVER['DOCUMENT_ROOT'] . DS . 'tsv' . DS . $filename;
-        $link = WWW_ROOT . DS . 'tsv' . DS . $filename;
+        $link = WWW_ROOT . 'tsv' . DS . $filename;
         $data_tsv = array();
 
         if (($handle = fopen($link, "r")) !== FALSE) {

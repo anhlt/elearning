@@ -28,6 +28,8 @@ class LessonController extends AppController {
                 array_push($tags, $tag['Tag']['id']);
             }
             $data['Tag'] = $tags;
+            $data['Lesson']['update_date'] = date("Y-m-d H:i:s");
+
             $this->Lesson->create();
             if($this->Lesson->saveAll($data)){
                 $id = $this->Lesson->getInsertID();
@@ -308,7 +310,7 @@ class LessonController extends AppController {
         }		
     }
 
-    public function banstudent($value=''){
+    public function banstudent($value='') {
         $lesson_id = $this->params['named']['lesson_id'];
         $student_id = $this->params['named']['student_id'];
 
@@ -320,9 +322,9 @@ class LessonController extends AppController {
 
         if($this->LessonMembership->save($member)){
             if($member['LessonMembership']['baned'])
-                $info = 'The user has been baned !';
+                $info = 'ユーザーが禁止されている !';
             else
-                $info = 'The user has been allowed !';
+                $info = 'ユーザーが許可されています !';
 
             $this->Session->setFlash(__($info), 'alert', array(
                 'plugin' => 'BoostCake',

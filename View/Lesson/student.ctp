@@ -17,7 +17,8 @@
 	<div class="col-xs-13 col-md-9">
 		<div class="well">
 			<div class='form-group'>
-				<b><?php echo $this->Html->link("授業管理", array('controller' => 'lecturer', 'action' => 'manage')); ?></b>	  
+				<b><?php echo $this->Html->link("授業管理", array('controller' => 'lecturer', 'action' => 'manage'),
+					array('class' => 'btn btn-info')); ?></b>	  
 			</div>
 			<div style='text-align: center; margin-bottom: 20px;'>
 				<h4><b>学生情報</b></h4>
@@ -30,10 +31,11 @@
 			<table class="table table-condensed">
 				<tr>
 					<td  class="col-sm-1">順番</td>					
-					<td  class="col-sm-2"><?php echo $this->Paginator->sort('Name', '名前');?></td>
+					<td  class="col-sm-3"><?php echo $this->Paginator->sort('name', '名前');?></td>
 					<td  class="col-sm-1"><?php echo $this->Paginator->sort('baned', '禁止');?></td>
 					<td  class="col-sm-1"><?php echo $this->Paginator->sort('liked', 'いいね');?></td>
-					<td  class="col-sm-2">管理</td>
+					<td  class="col-sm-1">禁止</td>
+					<td  class="col-sm-1">削除</td>
 				</tr>
 			 <?php foreach ($results as $result) {?>
 			  <tr>
@@ -41,9 +43,14 @@
 			  	<td><?php echo($result['Student']['full_name']) ?> </td>
 			  	<td><?php echo($result['LessonMembership']['baned']?"True":"false") ?> </td>
 			  	<td><?php echo($result['LessonMembership']['liked']?"True":"false") ?> </td>
-			  	<td><?php echo $this->html->link('Delete', array('controller' => 'lesson', 'action' => 'deletestudent',
-			  		"student_id"=>$result['Student']['id'],"lesson_id"=>$result['LessonMembership']['lesson_id']),array('class' => 'btn btn-danger'))?>
-			  		<?php echo $this->html->link('Ban', array('controller' => 'lesson', 'action' => 'banstudent',"student_id"=>$result['Student']['id'],"lesson_id"=>$result['LessonMembership']['lesson_id']),array('class' => 'btn btn-warning'))?>
+			  	<td>
+			  		<?php
+			  			$s = $result['LessonMembership']['baned'] ? "ok" : "ban";
+			  			echo $this->html->link('', array('controller' => 'lesson', 'action' => 'banstudent',"student_id"=>$result['Student']['id'],"lesson_id"=>$result['LessonMembership']['lesson_id']),array('class' => 'glyphicon glyphicon-' . $s . '-circle'))?>	  		
+			  	</td>
+			  	<td>
+			  		<?php echo $this->html->link('', array('controller' => 'lesson', 'action' => 'deletestudent',
+			  		"student_id"=>$result['Student']['id'],"lesson_id"=>$result['LessonMembership']['lesson_id']), array('class' => 'glyphicon glyphicon-remove-sign'))?>			  		
 			  	</td>
 			  </tr>
 			 <?php }?>

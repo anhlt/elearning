@@ -16,7 +16,8 @@
 	<div class="col-xs-13 col-md-9">
 		<div class="well">
 			<div class='form-group'>
-				<b><?php echo $this->Html->link("授業管理", array('controller' => 'lecturer', 'action' => 'manage')); ?></b>	  
+				<b><?php echo $this->Html->link("授業管理", array('controller' => 'lecturer', 'action' => 'manage'),
+					array('class' => 'btn btn-info')); ?></b>	  
 			</div>
 			<div style='text-align: center; margin-bottom: 20px;'>
 				<h4><b>ドキュメント情報</b></h4>

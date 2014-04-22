@@ -47,7 +47,16 @@ display();*/
 
 </script>
 
-<?php if(AuthComponent::user('role')=='student') $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE, "勉強");?>    <div class="col-xs-13 col-md-9 well">  
+<?php 
+    if(AuthComponent::user('role')=='student')
+        $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE, "勉強");
+    else
+        echo "<div class='col-xs-2 col-md-2'>
+                <a class='btn btn-info' href='javascript:history.go(-1)'>戻る</a>
+            </div>";
+?>
+
+<div class="col-xs-13 col-md-9 well">  
  <h2 name="TestTitle"><?php echo $title ?></h2>
 <?php echo $content; ?>
  <button type="button" class="btn btn-success" onclick="setDefault()">終わり</button>
@@ -55,4 +64,3 @@ display();*/
     <input name="data[Test][result]" type="hidden" value="">
 </form>
 </div>
-
