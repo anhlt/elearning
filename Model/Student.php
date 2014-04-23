@@ -81,7 +81,7 @@ class Student extends AppModel{
         ),
         'credit_card_number'=> array(
            'alphaNumeric' => array(
-                'rule'     => 'alphaNumeric',
+                'rule'     => 'numeric',
                 'required' => true,
                 'message'  => '数字'
             ),
@@ -92,7 +92,7 @@ class Student extends AppModel{
         ),
         'phone_number'=>array(
             'alphaNumeric' => array(
-                'rule'     => 'alphaNumeric',
+                'rule'     => 'numeric',
                 'required' => true,
                 'message'  => '数字'
             ),
