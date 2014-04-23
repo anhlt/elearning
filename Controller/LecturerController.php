@@ -19,8 +19,9 @@ class LecturerController extends AppController {
     	}
 		if($this->request->is('post')){
 			$this->User->create();
-			$this->request->data['Lecturer']['ip_address'] = $this->request->clientIp();
+			$this->request->data['Lecturer']['ip_address'] = $this->request->clientIp();			
 			$this->request->data['Lecturer']['question_verifycode'] = base64_encode($this->request->data['Lecturer']['question_verifycode']);
+			$this->request->data['Lecturer']['init_question_verifycode'] = $this->request->data['Lecturer']['question_verifycode'];
 			$this->request->data['Lecturer']['current_verifycode'] = md5($this->request->data['Lecturer']['current_verifycode']); 
 			$this->request->data['Lecturer']['init_verifycode'] = $this->request->data['Lecturer']['current_verifycode']; 
 			$this->request->data['Lecturer']['init_password'] = AuthComponent::password($this->request->data['User']['password']);
@@ -53,7 +54,6 @@ class LecturerController extends AppController {
 			$this->request->data['Lecturer']['ip_address'] = $this->request->clientIp();
 			$this->request->data['Lecturer']['current_verifycode'] = md5($this->request->data['Lecturer']['current_verifycode']);
 			$this->request->data['Lecturer']['question_verifycode'] = base64_encode($this->request->data['Lecturer']['question_verifycode']);
-			debug($this->request->data);
 
 			if($this->Lecturer->save($this->request->data)){
 				$this->Session->setFlash(__('ユーザがセーブされた'), 'alert', array(

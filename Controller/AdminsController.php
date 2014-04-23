@@ -199,8 +199,6 @@ class AdminsController extends AppController {
             $this->request->data['Lecturer']['current_verifycode'] = base64_decode($this->request->data['Lecturer']['current_verifycode']);
         } else {
             $this->request->data['Lecturer']['id'] = $lecturer_id;
-            // $this->request->data['Lecturer']['current_verifycode'] = base64_encode($this->request->data['Lecturer']['current_verifycode']);
-            // $this->request->data['Lecturer']['question_verifycode'] = base64_encode($this->request->data['Lecturer']['question_verifycode']);
             if ($this->Lecturer->save($this->request->data)) {
                 $this->Session->setFlash(__('セーブされた'), 'alert', array(
                     'plugin' => 'BoostCake',
@@ -252,12 +250,10 @@ class AdminsController extends AppController {
         }
     }
 
-    public function reset_verifycode_lecturer($id_lecturer, $init_verifycode) {
-        //echo $id;
-        //echo $init_password;
-        if (isset($id_lecturer) && isset($init_verifycode)) {
+    public function reset_verifycode_lecturer($id_lecturer, $init_verifycode,$init_question) {
+        if (isset($id_lecturer) && isset($init_verifycode)&&isset($init_question)) {
             $this->loadModel('Lecturer');
-            $sql = "UPDATE lecturers SET current_verifycode = '$init_verifycode' WHERE lecturers.id = '$id_lecturer'";
+            $sql = "UPDATE lecturers SET current_verifycode = '$init_verifycode', question_verifycode = '$init_question' WHERE lecturers.id = '$id_lecturer'";
             $this->User->query($sql);
             //$this->Session->setFlash(__('verifycodeのリセットが成功された'));
             $this->Session->setFlash(__('verifycodeのリセットが成功された'), 'alert', array(
