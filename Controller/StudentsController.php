@@ -96,10 +96,6 @@ class StudentsController extends AppController {
         $student = $this->Student->find('first', array('conditions'=>array('Student.id'=>$id)));  
         $this->set('student', $student['Student']);
         $this->set('user', $student['User']);
-
-
-        $this->Util->checkUserLogin(38);
-
     }
 
     public function history(){

@@ -101,7 +101,6 @@ class UsersController extends AppController {
 	            return $this->redirect('/');
 	        }else
 	        {
-	        	var_dump($this->Parameter->getWrongPasswordTimes());
 	        	$locktime = $this->Parameter->getLockTime();
 	        	$failedTime = $this->Session->read('failedTime');
 	        	if(isset($failedTime))
