@@ -197,7 +197,7 @@ class DocumentController extends AppController {
         $this->set('document', $document);
         $this->loadModel("Report");
         $this->loadModel("Violate");
-        if ($this->Violate->hasAny(array('student_id'=>$this->Auth->user('id') ) ) ) {
+        if ($this->Violate->hasAny(array('student_id'=>$this->Auth->user('id'), 'document_id'=>$document_id ) ) ) {
         	 $this->set('message', 'すみません、レポートは一回だけです');
         }
         if ($this->Report->hasAny(array('document_id'=> $document_id, 'state'=>TEACHER_UNFIX))){
