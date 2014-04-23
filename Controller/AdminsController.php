@@ -1,8 +1,10 @@
 <?php
+
 App::uses('Folder', 'Utility');
 App::uses('File', 'Utility');
 
 class AdminsController extends AppController {
+
     public $components = array('Paginator');
     public $helpers = array('Js');
     var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter', 'Question', 'Document', 'Violate', 'Lesson', 'Ihan');
@@ -39,25 +41,27 @@ class AdminsController extends AppController {
                 $user = $this->User->findById($id);
                 $has_ip = 0;
                 foreach ($user['Admin']['IpAdmin'] as $ip) {
-                    if($this->request->ClientIp() == $ip['ip_address']) $has_ip = 1;
+                    if ($this->request->ClientIp() == $ip['ip_address'])
+                        $has_ip = 1;
                 };
-                if($has_ip == 0){
+                if ($has_ip == 0) {
                     $this->Session->setFlash(__('IPアドレスが違う'), 'alert', array(
                         'plugin' => 'BoostCake',
                         'class' => 'alert-warning'
-                    )); 
-                    $this->Auth->logout();
-                    $this->redirect(array('controller'=>'admins','action' => 'login'));
-                }
-                $this->redirect(array('controller'=>'Admins'));
-                }else
-                    $this->Session->setFlash(__('ユーザ名、パスワードが正しくない'), 'alert', array(
-                        'plugin' => 'BoostCake',
-                        'class' => 'alert-warning'
                     ));
+                    $this->Auth->logout();
+                    $this->redirect(array('controller' => 'admins', 'action' => 'login'));
+                }
+                $this->redirect(array('controller' => 'Admins'));
+            }
+            else
+                $this->Session->setFlash(__('ユーザ名、パスワードが正しくない'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                ));
         }
     }
-    
+
     public function add_ip_address() {
         $id = $this->Auth->user('id');
         if ($this->request->is('post')) {
@@ -212,7 +216,6 @@ class AdminsController extends AppController {
         }
     }
 
-
     public function unlock_lecturer($id_lecturer) {
         $this->loadModel('User');
         $sql = "UPDATE users SET actived = 1 WHERE users.id = '$id_lecturer'";
@@ -230,7 +233,7 @@ class AdminsController extends AppController {
     public function reset_password_lecturer($id_lecturer, $init_password) {
         //echo $id;
         //echo $init_password;
-        if(isset($id_lecturer) && isset($init_password)){
+        if (isset($id_lecturer) && isset($init_password)) {
             $this->loadModel('User');
             $sql = "UPDATE users SET password = '$init_password' WHERE users.id = '$id_lecturer'";
             $this->User->query($sql);
@@ -240,7 +243,7 @@ class AdminsController extends AppController {
                 'class' => 'alert-success'
             ));
             $this->redirect(array('action' => 'manage_lecturer'));
-        }else{
+        } else {
             $this->Session->setFlash(__('パスワードのリセットができない'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-warning'
@@ -252,22 +255,21 @@ class AdminsController extends AppController {
     public function reset_verifycode_lecturer($id_lecturer, $init_verifycode) {
         //echo $id;
         //echo $init_password;
-        if(isset($id_lecturer) && isset($init_verifycode)){
+        if (isset($id_lecturer) && isset($init_verifycode)) {
             $this->loadModel('Lecturer');
             $sql = "UPDATE lecturers SET current_verifycode = '$init_verifycode' WHERE lecturers.id = '$id_lecturer'";
-            $this->User->query($sql); 
-             //$this->Session->setFlash(__('verifycodeのリセットが成功された'));
+            $this->User->query($sql);
+            //$this->Session->setFlash(__('verifycodeのリセットが成功された'));
             $this->Session->setFlash(__('verifycodeのリセットが成功された'), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-success'
+                'plugin' => 'BoostCake',
+                'class' => 'alert-success'
             ));
             $this->redirect(array('action' => 'manage_lecturer'));
-            
-        }else{
+        } else {
             $this->Session->setFlash(__('verifycodeのリセットができない'), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-warning'
-                ));
+                'plugin' => 'BoostCake',
+                'class' => 'alert-warning'
+            ));
             $this->redirect(array('action' => 'manage_lecturer'));
         }
     }
@@ -380,7 +382,7 @@ class AdminsController extends AppController {
     public function reset_password_student($id_student, $init_password) {
         //echo $id;
         //echo $init_password;
-        if(isset($id_student) && isset($init_password)){
+        if (isset($id_student) && isset($init_password)) {
             $this->loadModel('User');
             $sql = "UPDATE users SET password = '$init_password' WHERE users.id = '$id_student'";
             $this->User->query($sql);
@@ -390,8 +392,7 @@ class AdminsController extends AppController {
                 'class' => 'alert-success'
             ));
             $this->redirect(array('action' => 'manage_student'));
-        
-        }else{
+        } else {
             //$this->Session->setFlash(__('パスワードのリセットができない'));
             $this->Session->setFlash(__('パスワードのリセットが成功された'), 'alert', array(
                 'plugin' => 'BoostCake',
@@ -404,9 +405,9 @@ class AdminsController extends AppController {
     public function reset_verifycode_student($id_student, $init_verifycode) {
         //echo $id;
         //echo $init_password;
-        if(isset($id_student) && isset($init_verifycode)){
-        $this->loadModel('Student');
-        $sql = "UPDATE students SET current_verifycode = '$init_verifycode' WHERE   students.id = '$id_student'";
+        if (isset($id_student) && isset($init_verifycode)) {
+            $this->loadModel('Student');
+            $sql = "UPDATE students SET current_verifycode = '$init_verifycode' WHERE   students.id = '$id_student'";
             $this->User->query($sql);
             //$this->Session->setFlash(__('verifycodeのリセットが成功された'));
             $this->Session->setFlash(__('verifycodeのリセットが成功された'), 'alert', array(
@@ -414,7 +415,7 @@ class AdminsController extends AppController {
                 'class' => 'alert-success'
             ));
             $this->redirect(array('action' => 'manage_student'));
-        }else{
+        } else {
             //$this->Session->setFlash(__('verifycodeのリセットができない'));
             $this->Session->setFlash(__('verifycodeのリセットができない'), 'alert', array(
                 'plugin' => 'BoostCake',
@@ -447,16 +448,16 @@ class AdminsController extends AppController {
 //以下はシステム仕様の管理の機能だ    
     public function manage_parameter() {
         //$this->Session->setFlash(NULL);
+
         if ($this->request->is('post')) {
-            
-            $LessonCost = $this->Parameter->getLessonCost();
-            $LecturerMoneyPercent = $this->Parameter->getLecturerMoneyPercent();
-            $EnableLessonTime = $this->Parameter->getEnableLessonTime();
-            $WrongPasswordTimes = $this->Parameter->getWrongPasswordTimes();
-            $LockTime = $this->Parameter->getLockTime();
-            $SessionTime = $this->Parameter->getSessionTime();
-            $ViolationsTimes = $this->Parameter->getViolationsTimes();
-            
+//            $LessonCost = $this->Parameter->getLessonCost();
+//            $LecturerMoneyPercent = $this->Parameter->getLecturerMoneyPercent();
+//            $EnableLessonTime = $this->Parameter->getEnableLessonTime();
+//            $WrongPasswordTimes = $this->Parameter->getWrongPasswordTimes();
+//            $LockTime = $this->Parameter->getLockTime();
+//            $SessionTime = $this->Parameter->getSessionTime();
+//            $ViolationsTimes = $this->Parameter->getViolationsTimes();
+
             $LESSON_COST = $this->request->data['parameter']['lesson_cost'];
             $LECTURER_MONEY_PERCENT = $this->request->data['parameter']['lecturer_money_percent'];
             $ENABLE_LESSON_TIME = $this->request->data['parameter']['enable_lesson_time'];
@@ -464,6 +465,7 @@ class AdminsController extends AppController {
             $LOCK_TIME = $this->request->data['parameter']['lock_time'];
             $SESSION_TIME = $this->request->data['parameter']['session_time'];
             $VIOLATIONS_TIMES = $this->request->data['parameter']['violations_times'];
+            $BACKUP_TIME = $this->request->data['parameter']['backup_time'];
             $error = "";
             //$this->Session->setFlash($error);
             $flash = 1;
@@ -486,6 +488,9 @@ class AdminsController extends AppController {
             if (!$this->Parameter->validates())
                 $flash = 0;
             $this->Parameter->set(array('value' => $VIOLATIONS_TIMES));
+            if (!$this->Parameter->validates())
+                $flash = 0;
+             $this->Parameter->set(array('value' => $BACKUP_TIME));
             if (!$this->Parameter->validates())
                 $flash = 0;
             if ($flash) {
@@ -523,34 +528,51 @@ class AdminsController extends AppController {
                     $error = $error . "<br>違犯の最大回数 >= 1</br>";
                 } else {
                     $this->Parameter->updateParameter('VIOLATIONS_TIMES', $VIOLATIONS_TIMES);
-                    
-                    
-        $flag = ($LessonCost == $LESSON_COST
-                )&&($LecturerMoneyPercent == $LECTURER_MONEY_PERCENT
-                )&&($EnableLessonTime == $ENABLE_LESSON_TIME
-                )&&($WrongPasswordTimes == $WRONG_PASSWORD_TIMES
-                )&&($LockTime == $LOCK_TIME
-                )&&($SessionTime == $SESSION_TIME
-                )&&($ViolationsTimes == $VIOLATIONS_TIMES);
-        //debug($flag);
-        if($flag == false){
-            $this->Session->setFlash(__('セーブされた'), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-success'
-                ));
-        }
-                    
                 }
+                if($BACKUP_TIME < 0 || $BACKUP_TIME >= 24){
+                    $error = $error . "<br>23>=　バックアップ時刻 >= ０</br>";
+                }else{
+                    $this->Parameter->updateParameter('BACKUP_TIME', $BACKUP_TIME);
+                }
+//                $flag = ($LessonCost == $LESSON_COST
+//                        ) && ($LecturerMoneyPercent == $LECTURER_MONEY_PERCENT
+//                        ) && ($EnableLessonTime == $ENABLE_LESSON_TIME
+//                        ) && ($WrongPasswordTimes == $WRONG_PASSWORD_TIMES
+//                        ) && ($LockTime == $LOCK_TIME
+//                        ) && ($SessionTime == $SESSION_TIME
+//                        ) && ($ViolationsTimes == $VIOLATIONS_TIMES);
+//                //debug($flag);
+//                if ($flag == false) {
+//                    $this->Session->setFlash(__('セーブされた'), 'alert', array(
+//                        'plugin' => 'BoostCake',
+//                        'class' => 'alert-success'
+//                    ));
+//                }
                 //$this->Session->setFlash($error);
                 if ($error != '') {
                     $this->Session->setFlash($error, 'alert', array(
                         'plugin' => 'BoostCake',
                         'class' => 'alert-warning'
                     ));
+                } else {
+                    $this->loadModel('Parameter');
+
+                    $this->set('_LESSON_COST', $this->Parameter->getLessonCost());
+                    $this->set('_LECTURER_MONEY_PERCENT', $this->Parameter->getLecturerMoneyPercent());
+                    $this->set('_ENABLE_LESSON_TIME', $this->Parameter->getEnableLessonTime());
+                    $this->set('_WRONG_PASSWORD_TIMES', $this->Parameter->getWrongPasswordTimes());
+                    $this->set('_LOCK_TIME', $this->Parameter->getLockTime());
+                    $this->set('_SESSION_TIME', $this->Parameter->getSessionTime());
+                    $this->set('_VIOLATIONS_TIMES', $this->Parameter->getViolationsTimes());
+                    $this->set('_BACKUP_TIME', $this->Parameter->getBackupTime());
+                    $this->Session->setFlash(__('セーブされた'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-success'
+                    ));
                 }
             } else {
                 //$this->Session->setFlash(__('各仕様のタイプが数字だ'));
-                $this->Session->setFlash(__('各仕様のタイプが数字だ'), 'alert', array(
+                $this->Session->setFlash(__('各仕様のタイプが整数だ'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'
                 ));
@@ -559,17 +581,15 @@ class AdminsController extends AppController {
         }
 
         $this->loadModel('Parameter');
-        //$data = $this->Parameter->query("SELECT value FROM parameters WHERE name = 'LESSON_COST'");
-        //$_LESSON_COST = $data[0]['parameters']['value'];
-        $this->set('_LESSON_COST', $this->Parameter->getLessonCost());
 
+        $this->set('_LESSON_COST', $this->Parameter->getLessonCost());
         $this->set('_LECTURER_MONEY_PERCENT', $this->Parameter->getLecturerMoneyPercent());
         $this->set('_ENABLE_LESSON_TIME', $this->Parameter->getEnableLessonTime());
         $this->set('_WRONG_PASSWORD_TIMES', $this->Parameter->getWrongPasswordTimes());
         $this->set('_LOCK_TIME', $this->Parameter->getLockTime());
         $this->set('_SESSION_TIME', $this->Parameter->getSessionTime());
         $this->set('_VIOLATIONS_TIMES', $this->Parameter->getViolationsTimes());
-        
+        $this->set('_BACKUP_TIME', $this->Parameter->getBackupTime());
     }
 
     //tha
@@ -582,7 +602,7 @@ class AdminsController extends AppController {
             $admins = $this->Admin->find();
             if ($this->User->saveAll($this->request->data)) {
                 $this->request->data['IpAdmin']['admin_id'] = $this->User->id;
-                $this->request->data['IpAdmin']['ip_address'] =$this->request->data['Admin']['ip_address'];
+                $this->request->data['IpAdmin']['ip_address'] = $this->request->data['Admin']['ip_address'];
                 $this->IpAdmin->save($this->request->data);
                 $this->Session->setFlash(__('新しい管理者が追加された'), 'alert', array(
                     'plugin' => 'BoostCake',
@@ -604,7 +624,7 @@ class AdminsController extends AppController {
             'limit' => 10,
             'fields' => array(),
             'conditions' => array(
-               // 'User.id !=' => $this->Auth->user('id'),
+                // 'User.id !=' => $this->Auth->user('id'),
                 "User.role" => "admin")
         );
 
@@ -636,12 +656,11 @@ class AdminsController extends AppController {
                 foreach ($this->request->data['IpAdmin'] as $key => $value) {
                     $this->request->data['IpAdmin'][$key]['admin_id'] = $id_admin;
                 }
-                if($this->IpAdmin->saveAll($this->request->data['IpAdmin']))
-
+                if ($this->IpAdmin->saveAll($this->request->data['IpAdmin']))
                     $this->Session->setFlash(__('セーブされた'), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-success'
-                ));
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-success'
+                    ));
             } else {
                 $this->Session->setFlash(__('セーブできない、もう一度お願い'), 'alert', array(
                     'plugin' => 'BoostCake',
@@ -714,7 +733,7 @@ class AdminsController extends AppController {
     }
 
     public function fee_manager($year_ = null, $month_ = null) {
-       
+
         $this->uses = array('Parameter');
         $result = $this->Parameter->find('all', array('conditions' => array('Parameter.name' => "LESSON_COST")));
         $lesson_cost = $result[0]["Parameter"]["value"];
@@ -810,7 +829,7 @@ class AdminsController extends AppController {
             $student_list_[$i] = $student;
             $student_list_[$i]['count'] = $count;
             $student_list_[$i]['Student']['phone_number'] = $this->getPhoneNumberFormat($student_list_[$i]['Student']['phone_number']);
-            
+
             $i++;
         }
         $this->set('student_list', $student_list_);
@@ -845,8 +864,8 @@ class AdminsController extends AppController {
             $lecturer_list_[$i] = $lecturer;
             $lecturer_list_[$i]['count'] = $count;
             $lecturer_list_[$i]['Lecturer']['phone_number'] = $this->getPhoneNumberFormat($lecturer_list_[$i]['Lecturer']['phone_number']);
-            $lecturer_list_[$i]['Lecturer']["credit_card_number"] = 
-            $this->getBankLecturerAcountFormat($lecturer_list_[$i]['Lecturer']["credit_card_number"]) ;            
+            $lecturer_list_[$i]['Lecturer']["credit_card_number"] =
+                    $this->getBankLecturerAcountFormat($lecturer_list_[$i]['Lecturer']["credit_card_number"]);
             $i++;
         }
         $this->set('lecturer_list', $lecturer_list_);
@@ -1003,13 +1022,13 @@ class AdminsController extends AppController {
         $result = "";
         for ($i = 0; $i < $n; $i++) {
             $result.=$bank_acount[$i];
-            
+
             if ($i == 3)
-                $result.="-"."0";
-            if($i == 6)
-            $result.= ("-"."000");     
-            if($i == 7)
-            $result.= ("-");    
+                $result.="-" . "0";
+            if ($i == 6)
+                $result.= ("-" . "000");
+            if ($i == 7)
+                $result.= ("-");
         }
         return $result;
     }
@@ -1320,7 +1339,7 @@ class AdminsController extends AppController {
             'class' => 'alert-warning'));
         $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));
     }
-    
+
     public function restore_database() {
         $this->autoRender = false;
         if (isset($this->params['named']['file'])) {
@@ -1336,86 +1355,86 @@ class AdminsController extends AppController {
         $this->redirect(array('controller' => 'admins', 'action' => 'database_manager'));
     }
 
-    public function manage_document(){
-        $sql= "SELECT documents.id, documents.link, documents.title, documents.baned, COUNT( violates.id ) as count
+    public function manage_document() {
+        $sql = "SELECT documents.id, documents.link, documents.title, documents.baned, COUNT( violates.id ) as count
                 FROM  `violates` , documents
                 WHERE violates.document_id = documents.id
                 GROUP BY (documents.id)";
         $datas = $this->Document->query($sql);
-        if($datas){
-        //debug($datas);
+        if ($datas) {
+            //debug($datas);
             $this->set('datas', $datas);
-        }else{
+        } else {
             $this->Session->setFlash(__('データがない'), 'alert', array(
-            'plugin' => 'BoostCake',
-            'class' => 'alert-warning'));
-        }    
+                'plugin' => 'BoostCake',
+                'class' => 'alert-warning'));
+        }
     }
-    public function see_document($document_id){
-        $datas = $this->Document->find('first',$document_id);
-        $this->redirect(array('controller' => 'Document', 'action' => 'show',$document_id));
+
+    public function see_document($document_id) {
+        $datas = $this->Document->find('first', $document_id);
+        $this->redirect(array('controller' => 'Document', 'action' => 'show', $document_id));
     }
-    
-    public function see_violate_document($document_id){
-        $datas = $this->Violate->find('all',array('conditions' =>array('document_id' => $document_id )));
+
+    public function see_violate_document($document_id) {
+        $datas = $this->Violate->find('all', array('conditions' => array('document_id' => $document_id)));
         //debug($datas);
-        if($datas){
+        if ($datas) {
             $this->set('datas', $datas);
-        }else{
+        } else {
             $this->Session->setFlash(__('違犯報告がない'), 'alert', array(
-            'plugin' => 'BoostCake',
-            'class' => 'alert-warning'));
+                'plugin' => 'BoostCake',
+                'class' => 'alert-warning'));
         }
         //$this->redirect(array('controller' => 'admins', 'action' => 'manage_document'));
     }
-    
-    public function ban_document($document_id){
-        $Document  = $this->Document->findById($document_id);
+
+    public function ban_document($document_id) {
+        $Document = $this->Document->findById($document_id);
         $Document ["Document"]['baned'] = 1;
         var_dump($Document);
-        if($this->Document->save($Document)){
+        if ($this->Document->save($Document)) {
             
-        }else{
+        } else {
             $this->Session->setFlash(__('禁止できない'), 'alert', array(
-            'plugin' => 'BoostCake',
-            'class' => 'alert-warning'));
+                'plugin' => 'BoostCake',
+                'class' => 'alert-warning'));
         }
         $this->redirect(array('controller' => 'admins', 'action' => 'manage_document'));
     }
-    
-    public function delete_ban_document($document_id){
-         $Document  = $this->Document->findById($document_id);
+
+    public function delete_ban_document($document_id) {
+        $Document = $this->Document->findById($document_id);
         $Document ["Document"]['baned'] = 0;
         var_dump($Document);
-        if($this->Document->save($Document)){
+        if ($this->Document->save($Document)) {
             
-        }else{
+        } else {
             $this->Session->setFlash(__('禁止できない'), 'alert', array(
-            'plugin' => 'BoostCake',
-            'class' => 'alert-warning'));
+                'plugin' => 'BoostCake',
+                'class' => 'alert-warning'));
         }
         $this->redirect(array('controller' => 'admins', 'action' => 'manage_document'));
     }
-    
-    public function delete_violate($document_id,$id){
+
+    public function delete_violate($document_id, $id) {
         $this->Violate->delete($id);
-        $this->redirect(array('controller' => 'admins', 'action' => 'see_violate_document',$document_id));
+        $this->redirect(array('controller' => 'admins', 'action' => 'see_violate_document', $document_id));
     }
-    
-    public function delete_document($document_id){
+
+    public function delete_document($document_id) {
         $data = $this->Document->find('first', $document_id);
-        $name = $data['Document']['link'];	
-        if ($this->Document->delete($document_id)) 
-        {
-            unlink(WWW_ROOT.DS.$name);    		
+        $name = $data['Document']['link'];
+        if ($this->Document->delete($document_id)) {
+            unlink(WWW_ROOT . DS . $name);
             $this->Session->setFlash(__('ドキュメントが削除された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
-            ));   	
+            ));
         }
         $this->redirect(array('controller' => 'admins', 'action' => 'manage_document'));
     }
-    
+
     public function look_infor_student($id_student) {
 
         $questions = $this->Question->find('all');
@@ -1446,23 +1465,23 @@ class AdminsController extends AppController {
         }
     }
 
-    public function manage_lesson(){
-        $sql_0= "SELECT *
+    public function manage_lesson() {
+        $sql_0 = "SELECT *
                 FROM  lessons";
         $datas = $this->Lesson->query($sql_0);
         //debug($datas);
-        if($datas){
+        if ($datas) {
 
             $this->set('datas', $datas);
-        }else{
+        } else {
             $this->Session->setFlash(__('データがない'), 'alert', array(
-            'plugin' => 'BoostCake',
-            'class' => 'alert-warning'));
-        }    
+                'plugin' => 'BoostCake',
+                'class' => 'alert-warning'));
+        }
     }
-    
-    public function see_violate_lesson($lesson_id){
-        $sql_0 = "SELECT * FROM lessons, lecturers, users WHERE lecturers.id = users.id AND lecturers.id = lessons.lecturer_id AND lessons.id = '$lesson_id'" ;
+
+    public function see_violate_lesson($lesson_id) {
+        $sql_0 = "SELECT * FROM lessons, lecturers, users WHERE lecturers.id = users.id AND lecturers.id = lessons.lecturer_id AND lessons.id = '$lesson_id'";
         $lesson = $this->Lesson->query($sql_0);
         $this->set('lesson', $lesson);
         //debug($lesson);
@@ -1471,45 +1490,45 @@ class AdminsController extends AppController {
         $this->set('ihan', $ihan);
         //debug($ihan);
     }
-    
-    public function ban_lesson($lesson_id){
-        $Lesson  = $this->Lesson->findById($lesson_id);
+
+    public function ban_lesson($lesson_id) {
+        $Lesson = $this->Lesson->findById($lesson_id);
         $Lesson ["Lesson"]['baned'] = 1;
         var_dump($Lesson);
-        if($this->Lesson->save($Lesson)){
+        if ($this->Lesson->save($Lesson)) {
             
-        }else{
+        } else {
             $this->Session->setFlash(__('禁止できない'), 'alert', array(
-            'plugin' => 'BoostCake',
-            'class' => 'alert-warning'));
+                'plugin' => 'BoostCake',
+                'class' => 'alert-warning'));
         }
         $this->redirect(array('controller' => 'admins', 'action' => 'manage_lesson'));
     }
-    
-    public function delete_ban_lesson($lesson_id){
-        $Lesson  = $this->Lesson->findById($lesson_id);
+
+    public function delete_ban_lesson($lesson_id) {
+        $Lesson = $this->Lesson->findById($lesson_id);
         $Lesson ["Lesson"]['baned'] = 0;
         var_dump($Lesson);
-        if($this->Lesson->save($Lesson)){
+        if ($this->Lesson->save($Lesson)) {
             
-        }else{
+        } else {
             $this->Session->setFlash(__('禁止できない'), 'alert', array(
-            'plugin' => 'BoostCake',
-            'class' => 'alert-warning'));
+                'plugin' => 'BoostCake',
+                'class' => 'alert-warning'));
         }
         $this->redirect(array('controller' => 'admins', 'action' => 'manage_lesson'));
     }
-    
-    public function delete_lesson($lesson_id){
-        if ($this->Lesson->delete($lesson_id)) 
-        {  		
+
+    public function delete_lesson($lesson_id) {
+        if ($this->Lesson->delete($lesson_id)) {
             $this->Session->setFlash(__('授業が削除された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
-            ));   	
+            ));
         }
         $this->redirect(array('controller' => 'admins', 'action' => 'manage_lesson'));
     }
+
 }
 ?>
 

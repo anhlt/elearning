@@ -44,9 +44,14 @@ class  Parameter extends AppModel{
         $data = $this->query("SELECT value FROM parameters WHERE name = 'VIOLATIONS_TIMES'");
         return $data[0]['parameters']['value'];
     }
+    public function getBackupTime(){
+        $data = $this->query("SELECT value FROM parameters WHERE name = 'BACKUP_TIME'");
+        return $data[0]['parameters']['value'];
+    }
     public function updateParameter($name, $value){
         $return = $this->query("UPDATE parameters SET value = '$value' WHERE name = '$name'");
         return $return;
-    }    
+    }  
+    
 }
 ?>

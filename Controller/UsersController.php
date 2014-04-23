@@ -29,8 +29,8 @@ class UsersController extends AppController {
         parent::beforeFilter();
         $this->Auth->allow('add');
         $this->Auth->allow('verifycode');
-       $this->mc = new Memcached();
-       $this->mc->addServer("localhost", 11211);
+       //$this->mc = new Memcached();
+       //$this->mc->addServer("localhost", 11211);
     }
 
 	public function index($value='')
