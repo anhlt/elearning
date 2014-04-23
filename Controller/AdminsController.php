@@ -203,8 +203,8 @@ class AdminsController extends AppController {
             $this->request->data['Lecturer']['current_verifycode'] = base64_decode($this->request->data['Lecturer']['current_verifycode']);
         } else {
             $this->request->data['Lecturer']['id'] = $lecturer_id;
-            $this->request->data['Lecturer']['current_verifycode'] = base64_encode($this->request->data['Lecturer']['current_verifycode']);
-            $this->request->data['Lecturer']['question_verifycode'] = base64_encode($this->request->data['Lecturer']['question_verifycode']);
+            // $this->request->data['Lecturer']['current_verifycode'] = base64_encode($this->request->data['Lecturer']['current_verifycode']);
+            // $this->request->data['Lecturer']['question_verifycode'] = base64_encode($this->request->data['Lecturer']['question_verifycode']);
             if ($this->Lecturer->save($this->request->data)) {
                 $this->Session->setFlash(__('セーブ�?�れ�?�'), 'alert', array(
                     'plugin' => 'BoostCake',
