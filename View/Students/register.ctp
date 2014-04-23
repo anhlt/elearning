@@ -13,13 +13,6 @@
     'class' => 'well'  
 )); ?> 
 
-    <div class="form-group">
-<?php echo $this->Form->input('Student.full_name', array(  
-    'placeholder' => '氏名',  
-    'style' => 'width:180px;',
-    'label' => '氏名',
-)); ?>  
-    </div>
  <div class="form-group">
 <?php echo $this->Form->input('username', array(  
     'placeholder' => 'ユーザ名',  
@@ -29,6 +22,14 @@
     </div>
     <div class="form-group">
 
+    <div class="form-group">
+<?php echo $this->Form->input('Student.full_name', array(  
+    'placeholder' => '氏名',  
+    'style' => 'width:180px;',
+    'label' => '氏名',
+)); ?>  
+    </div>
+    
 <?php echo $this->Form->input('password', array(  
     'placeholder' => 'パスワード',  
     'style' => 'width:180px;',
