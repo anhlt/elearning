@@ -2,12 +2,9 @@
 
 class LecturerController extends AppController {
 	var $name = "Lecturer";
-  	var $uses = array('User', 'Lecturer','Question','Lesson', 'Test', 'Document', 'Comment');	
-
+  	var $uses = array('User', 'Lecturer','Question','Lesson', 'Test', 'Document', 'Comment','Violate');	
 	public $components = array('RequestHandler','Paginator');
 	public $helpers = array('Js' => array('Jquery'),'LeftMenu');
-
-    
 
   	public function beforeFilter() {
         parent::beforeFilter();
@@ -153,5 +150,35 @@ class LecturerController extends AppController {
 				$this->redirect('/');
 			}
 		}
+	}
+	public function violate()
+	{
+		$id = $this->Auth->user('id');
+		$Document = $this->Document->find('all',array(
+		    'joins' => array(
+			        array(
+			            'table' => 'violates',
+			            'alias' => 'Violate',
+			            'type' => 'LEFT',
+			            'conditions' => array(
+			                'Document.id = Violate.document_id'
+			            )
+			        ),
+			        array(
+			            'table' => 'lessons',
+			            // 'alias' => 'Lesson',
+			            'type' => 'LEFT',
+			            'conditions' => array(
+			                'Document.lesson_id = lessons.id'
+			            )
+			        ),
+
+			   	),
+		    'conditions' => array(
+		    	'lessons.lecturer_id' => $id,
+		    	),
+
+			));
+		$this->set('docs',$Document);
 	}
 }

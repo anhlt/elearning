@@ -8,8 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
-	
 	<?php
 		echo $this->Html->css('bootstrap.min');
 		echo $this->Html->css('style');
@@ -43,10 +41,6 @@ $(document).ready(function(){
         timeSecond = session_time
         timeLogout();
     }
-
-
-
-
 }); 
 </script>
     <style>
@@ -73,6 +67,7 @@ $(document).ready(function(){
     <ul class="nav navbar-nav">
         <?php if(AuthComponent::user('role')=='lecturer'):?>
             <li><a href='/lecturer/'>先生</a></li>
+            <li><a href='/lecturer/violate'>Reports <span class="badge alert-danger">42</span></a></li>
         <?php elseif (AuthComponent::user('role')=='student'): ?>
             <li><a href='/students/'>学生</a></li>
         <?php elseif (AuthComponent::user('role')=='admin'): ?>
@@ -123,7 +118,6 @@ $(document).ready(function(){
     </div>
     <div class="container">
     <?php echo $this->fetch('content'); ?>
-    <?php echo $this->element('sql_dump');?>
     </div> <!-- /container -->
     <!-- Le javascript
     ================================================== -->

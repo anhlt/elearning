@@ -6,7 +6,7 @@ class Lesson extends AppModel {
 			'className'=>'Lecturer',
 			'foreignKey'=>'lecturer_id')
 		);
-        public $actsAs = array('Containable');
+    public $actsAs = array('Containable');
 	public $hasAndBelongsToMany = array(
         'Tag' => array(
             'className' => 'Tag',
