@@ -139,7 +139,7 @@ class UsersController extends AppController {
 		if ($this->request->is('post') ||$this->request->is('put') ) {
 			$data = ($this->request->data);
         	$this->Session->write('failedTime',0);
-			if($user['User']['role'] == 'lecturer' && $data['User']['username']== $user['User']['username']&& base64_encode($data['Lecturer']['verifycode']) == $user['Lecturer']['current_verifycode']){
+			if($user['User']['role'] == 'lecturer' && $data['User']['username']== $user['User']['username']&& md5($data['Lecturer']['verifycode']) == $user['Lecturer']['current_verifycode']){
 				$this->Lecturer->id = $user['User']['id'];
 				$this->Lecturer->saveField('ip_address',$this->request->clientIp());
 				$user['User']['actived'] = '1';

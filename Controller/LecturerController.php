@@ -3,7 +3,7 @@
 class LecturerController extends AppController {
 	var $name = "Lecturer";
   	var $uses = array('User', 'Lecturer','Question','Lesson', 'Test', 'Document', 'Comment','Violate');	
-	public $components = array('RequestHandler','Paginator');
+	public $components = array('RequestHandler','Paginator','Util');
 	public $helpers = array('Js' => array('Jquery'),'LeftMenu');
 
   	public function beforeFilter() {
@@ -21,7 +21,7 @@ class LecturerController extends AppController {
 			$this->User->create();
 			$this->request->data['Lecturer']['ip_address'] = $this->request->clientIp();
 			$this->request->data['Lecturer']['question_verifycode'] = base64_encode($this->request->data['Lecturer']['question_verifycode']);
-			$this->request->data['Lecturer']['current_verifycode'] = base64_encode($this->request->data['Lecturer']['current_verifycode']); 
+			$this->request->data['Lecturer']['current_verifycode'] = md5($this->request->data['Lecturer']['current_verifycode']); 
 			$this->request->data['Lecturer']['init_verifycode'] = $this->request->data['Lecturer']['current_verifycode']; 
 			$this->request->data['Lecturer']['init_password'] = AuthComponent::password($this->request->data['User']['password']);
 			$this->request->data['User']['role'] = 'lecturer';
@@ -47,11 +47,13 @@ class LecturerController extends AppController {
 	        $lecturer_id = $this->Auth->user('id');
 	        $this->request->data = $this->Lecturer->findById($lecturer_id);
 			$this->request->data['Lecturer']['question_verifycode'] = base64_decode($this->request->data['Lecturer']['question_verifycode']);
-		    $this->request->data['Lecturer']['current_verifycode'] = base64_decode($this->request->data['Lecturer']['current_verifycode']);
+		    // $this->request->data['Lecturer']['current_verifycode'] = base64_decode($this->request->data['Lecturer']['current_verifycode']);
+		    unset($this->request->data['Lecturer']['current_verifycode']);
     	}else{
 			$this->request->data['Lecturer']['ip_address'] = $this->request->clientIp();
-			$this->request->data['Lecturer']['current_verifycode'] = base64_encode($this->request->data['Lecturer']['current_verifycode']);
+			$this->request->data['Lecturer']['current_verifycode'] = md5($this->request->data['Lecturer']['current_verifycode']);
 			$this->request->data['Lecturer']['question_verifycode'] = base64_encode($this->request->data['Lecturer']['question_verifycode']);
+			debug($this->request->data);
 
 			if($this->Lecturer->save($this->request->data)){
 				$this->Session->setFlash(__('ユーザがセーブされた'), 'alert', array(
@@ -179,6 +181,22 @@ class LecturerController extends AppController {
 		    	),
 			'group' => 'Document.id',
 			));
+
+		$lesson = $this->Lesson->find('all',array(
+			'joins' => array(
+			        array(
+			            'table' => 'ihans',
+			            'alias' => 'Ihan',
+			            'type' => 'RIGHT',
+			            'conditions' => array(
+			                'Lesson.id = Ihan.lesson_id'
+			            )
+			        ),),
+			'conditions' => array(
+				),
+			'group' => 'Lesson.id'
+			));
+		debug($lesson);
 		$this->set('docs',$Document);
 	}
 }

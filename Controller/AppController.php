@@ -44,6 +44,7 @@ class AppController extends Controller {
 		)
 	),
 	'Session',
+	'Util',
 	);
 	public function beforeRender() {
 	     $this->response->disableCache();
@@ -73,9 +74,12 @@ class AppController extends Controller {
         $res = $this->Parameter->find("all");
         foreach ($res as $row) {
         	$paramater = $row['Parameter'];
-        	// if(!isset($paramater['name']))
         		define($paramater['name'], $paramater['value']);
         }
+		if($this->Auth->loggedIn()){
+	    	$mess = $this->Util->violate($this->Auth->user('id'));
+	    	$this->set('mess',$mess);
+	    }
         
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 class UtilComponent extends Component{
-    var $uses = array('StudentsLesson');
+    var $uses = array('StudentsLesson','Document');
     public function checkLessonAvailableWithStudent($lesson_id, $student_id){
         $this->StudentsLesson = ClassRegistry::init("StudentsLesson");
         $options['conditions'] = array("student_id"=>$student_id, "lesson_id"=>$lesson_id);
@@ -20,5 +20,34 @@ class UtilComponent extends Component{
             }
         }
         return LEARNABLE;
+    }
+    public function violate($id)
+    {
+        $this->Document = ClassRegistry::init("Document");
+        $Document = $this->Document->find('all',array(
+            'joins' => array(
+                    array(
+                        'table' => 'violates',
+                        'alias' => 'Violate',
+                        'type' => 'LEFT',
+                        'conditions' => array(
+                            'Document.id = Violate.document_id'
+                        )
+                    ),
+                    array(
+                        'table' => 'lessons',
+                        'type' => 'LEFT',
+                        'conditions' => array(
+                            'Document.lesson_id = lessons.id'
+                        )
+                    ),
+
+                ),
+            'conditions' => array(
+                'lessons.lecturer_id' => $id,
+                ),
+            'group' => 'Document.id',
+            ));
+        return sizeof($Document);    
     }
 }
