@@ -21,6 +21,7 @@ class Lesson extends AppModel {
             'associationForeignKey' => 'student_id'
         ));
     public $hasMany = array(
+                'Ihan' => array('dependent' => True),
                 'LessonMembership' => array('dependent' => True ),
                 'LessonsTag' => array('dependent' => True ),
                 'Document' => array('dependent' => True ), 

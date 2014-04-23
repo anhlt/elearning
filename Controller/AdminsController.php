@@ -5,7 +5,7 @@ App::uses('File', 'Utility');
 
 class AdminsController extends AppController {
 
-    public $components = array('Paginator');
+    public $components = array('Paginator', 'Util');
     public $helpers = array('Js');
     var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter', 'Question', 'Document', 'Violate', 'Lesson', 'Ihan');
 
@@ -199,8 +199,6 @@ class AdminsController extends AppController {
             $this->request->data['Lecturer']['current_verifycode'] = base64_decode($this->request->data['Lecturer']['current_verifycode']);
         } else {
             $this->request->data['Lecturer']['id'] = $lecturer_id;
-            $this->request->data['Lecturer']['current_verifycode'] = base64_encode($this->request->data['Lecturer']['current_verifycode']);
-            $this->request->data['Lecturer']['question_verifycode'] = base64_encode($this->request->data['Lecturer']['question_verifycode']);
             if ($this->Lecturer->save($this->request->data)) {
                 $this->Session->setFlash(__('セーブされた'), 'alert', array(
                     'plugin' => 'BoostCake',
@@ -252,12 +250,10 @@ class AdminsController extends AppController {
         }
     }
 
-    public function reset_verifycode_lecturer($id_lecturer, $init_verifycode) {
-        //echo $id;
-        //echo $init_password;
-        if (isset($id_lecturer) && isset($init_verifycode)) {
+    public function reset_verifycode_lecturer($id_lecturer, $init_verifycode,$init_question) {
+        if (isset($id_lecturer) && isset($init_verifycode)&&isset($init_question)) {
             $this->loadModel('Lecturer');
-            $sql = "UPDATE lecturers SET current_verifycode = '$init_verifycode' WHERE lecturers.id = '$id_lecturer'";
+            $sql = "UPDATE lecturers SET current_verifycode = '$init_verifycode', question_verifycode = '$init_question' WHERE lecturers.id = '$id_lecturer'";
             $this->User->query($sql);
             //$this->Session->setFlash(__('verifycodeのリセットが成功された'));
             $this->Session->setFlash(__('verifycodeのリセットが成功された'), 'alert', array(
@@ -450,14 +446,6 @@ class AdminsController extends AppController {
         //$this->Session->setFlash(NULL);
 
         if ($this->request->is('post')) {
-//            $LessonCost = $this->Parameter->getLessonCost();
-//            $LecturerMoneyPercent = $this->Parameter->getLecturerMoneyPercent();
-//            $EnableLessonTime = $this->Parameter->getEnableLessonTime();
-//            $WrongPasswordTimes = $this->Parameter->getWrongPasswordTimes();
-//            $LockTime = $this->Parameter->getLockTime();
-//            $SessionTime = $this->Parameter->getSessionTime();
-//            $ViolationsTimes = $this->Parameter->getViolationsTimes();
-
             $LESSON_COST = $this->request->data['parameter']['lesson_cost'];
             $LECTURER_MONEY_PERCENT = $this->request->data['parameter']['lecturer_money_percent'];
             $ENABLE_LESSON_TIME = $this->request->data['parameter']['enable_lesson_time'];
@@ -509,8 +497,10 @@ class AdminsController extends AppController {
                 } else {
                     $this->Parameter->updateParameter('ENABLE_LESSON_TIME', $ENABLE_LESSON_TIME);
                 }
-                if ($WRONG_PASSWORD_TIMES <= 0) {
+                if ($WRONG_PASSWORD_TIMES <= 0 ) {
                     $error = $error . "<br>ログイン誤り回数 > =1</br>";
+                }elseif (!ctype_digit($WRONG_PASSWORD_TIMES)) {
+                    $error = $error . "<br>ログイン誤り回数は整数だ</br>";
                 } else {
                     $this->Parameter->updateParameter('WRONG_PASSWORD_TIMES', $WRONG_PASSWORD_TIMES);
                 }
@@ -525,8 +515,10 @@ class AdminsController extends AppController {
                     $this->Parameter->updateParameter('SESSION_TIME', $SESSION_TIME);
                 }
                 if ($VIOLATIONS_TIMES <= 0) {
-                    $error = $error . "<br>違犯の最大回数 >= 1　、そして　違犯の最大回数は整数だ";
-                } else {
+                    $error = $error . "<br>違犯の最大回数 >= 1　</br>";
+                }elseif (!ctype_digit($VIOLATIONS_TIMES)) {
+                    $error = $error . "<br>違犯の最大回数は整数だ</br>";
+                }else {
                     $this->Parameter->updateParameter('VIOLATIONS_TIMES', $VIOLATIONS_TIMES);
                 }
                 if($BACKUP_TIME  <= 0){
@@ -534,21 +526,7 @@ class AdminsController extends AppController {
                 }else{
                     $this->Parameter->updateParameter('BACKUP_TIME', $BACKUP_TIME);
                 }
-//                $flag = ($LessonCost == $LESSON_COST
-//                        ) && ($LecturerMoneyPercent == $LECTURER_MONEY_PERCENT
-//                        ) && ($EnableLessonTime == $ENABLE_LESSON_TIME
-//                        ) && ($WrongPasswordTimes == $WRONG_PASSWORD_TIMES
-//                        ) && ($LockTime == $LOCK_TIME
-//                        ) && ($SessionTime == $SESSION_TIME
-//                        ) && ($ViolationsTimes == $VIOLATIONS_TIMES);
-//                //debug($flag);
-//                if ($flag == false) {
-//                    $this->Session->setFlash(__('セーブされた'), 'alert', array(
-//                        'plugin' => 'BoostCake',
-//                        'class' => 'alert-success'
-//                    ));
-//                }
-                //$this->Session->setFlash($error);
+                
                 if ($error != '') {
                     $this->Session->setFlash($error, 'alert', array(
                         'plugin' => 'BoostCake',
@@ -630,6 +608,12 @@ class AdminsController extends AppController {
 
         $this->Paginator->settings = $this->paginate;
         $res = $this->Paginator->paginate("User");
+      //  debug($res);
+        for($i = 0; $i < count($res); $i++){
+           // debug($row);
+            $res[$i]['User']['status'] = $this->Util->checkUserLogin($res[$i]['User']['id']);
+        }
+       // debug($res);
         $this->set('res', $res);
         $this->set('flag', $this->Auth->user('id'));
         //debug($flag);
@@ -639,12 +623,21 @@ class AdminsController extends AppController {
         if (!isset($id))
             $this->redirect(array("action" => "remove_admin"));
         $this->uses = array('User', 'Admin');
-        if ($this->User->delete($id))
-            $this->Session->setFlash(__('管理者が削除された'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-success'
-            ));
-        $this->redirect(array("action" => "remove_admin"));
+
+        if ($this->Util->checkUserLogin($id)== false){
+            if ($this->User->delete($id))
+                $this->Session->setFlash(__('管理者が削除された'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                    ));
+            $this->redirect(array("action" => "remove_admin"));
+        }else {
+             $this->Session->setFlash(__('この管理者はログインしている。削除できない'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-danger'
+                    ));
+            $this->redirect(array("action" => "remove_admin"));
+        }
     }
 
     public function edit_admin_process($id_admin) {

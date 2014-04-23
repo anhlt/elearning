@@ -55,10 +55,8 @@ if (!defined('APP_DIR')) {
 
 
 //define('CAKE_CORE_INCLUDE_PATH', '/var/www/Vendor/pear-pear.cakephp.org/CakePHP');
+define('CAKE_CORE_INCLUDE_PATH', DS . 'home' . DS . 'action' . DS . 'Workspace' . DS . 'Vendor' . DS . 'pear-pear.cakephp.org' . DS . 'CakePHP');
 
-//define('CAKE_CORE_INCLUDE_PATH', DS . 'home' . DS . 'action' . DS . 'Workspace' . DS . 'Vendor' . DS . 'pear-pear.cakephp.org' . DS . 'CakePHP');
-
-define('CAKE_CORE_INCLUDE_PATH',  'D:\xampp\htdocs\Vendor\pear-pear.cakephp.org\CakePHP');
 /**
  * Editing below this line should NOT be necessary.
  * Change at your own risk.

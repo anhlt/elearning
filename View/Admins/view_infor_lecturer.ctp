@@ -57,19 +57,6 @@
 			'label' => '電話番号',
 			)); ?>  
 		</div>
-		<div class="form-group">
-			<?php echo $this->Form->input('Lecturer.question_verifycode', array(    
-			'style' => 'width:180px;',
-			'label' => '質問',
-			)); ?>  
-		</div>
-		<div class="form-group">
-		  <?php echo $this->Form->input('Lecturer.current_verifycode', array(  
-			'placeholder' => '答え',  
-			'style' => 'width:180px;',
-			'label' => '答え'
-		  )); ?>  
-		</div>
 		<?php echo $this->Form->submit('セーブ', array(  
 		'div' => false,  
 		'class' => 'btn btn-default'  

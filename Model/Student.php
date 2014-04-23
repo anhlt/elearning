@@ -7,7 +7,7 @@ class Student extends AppModel{
         ),        
     );    
     public $hasMany = array(
-        'LessonMembership',
+        'LessonMembership'=> array('dependent' => false ), 
         'Result' => array('dependent' => True ));
     
     public $hasAndBelongsToMany = array( 
@@ -22,7 +22,8 @@ class Student extends AppModel{
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => '氏名を入力してお願い'
-            )
+            ), 
+            'rule'    => array('maxLength', 256)
         ),
         'init_password' => array(
             'required' => array(
@@ -61,7 +62,7 @@ class Student extends AppModel{
         ),
         'email' => array(
             'email' => array(
-                'rule'    => array('email', true),
+                'rule'    => array('email'),
                 'message' => 'メールのフォーマットが正しくない'
             ),
             'isUnique' => array(
@@ -76,19 +77,25 @@ class Student extends AppModel{
             )
         ),
         'address' => array(
-            'rule'    => array('maxLength', 1005),
+            'rule'    => array('maxLength', 256),
         ),
         'credit_card_number'=> array(
-           'alphaNumeric' => array(
-                'rule'     => 'alphaNumeric',
-                'required' => true,
+           'numeric' => array(
+                'rule'     => 'numeric',
                 'message'  => '数字'
             ),
            'between' => array(
-                'rule'    => array('between', 15, 15),
-                'message' => '15字しなけらばならない'
+                'rule'    => array('between', 24, 24),
+                'message' => '24字しなけらばならない'
+            )
+        ),
+        'phone_number'=>array(
+            'numeric' => array(
+                'rule'     => 'numeric',
+                'message'  => '数字'
             )
         )
+
 
     );
 }

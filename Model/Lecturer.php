@@ -19,7 +19,8 @@ class Lecturer extends AppModel {
 			'required' => array(
 				'rule' => array('notEmpty'),
 				'message' => '氏名を入力してお願い'
-			)
+			), 
+			'rule'    => array('maxLength', 128),
 		),
 		'init_password' => array(
 			'required' => array(
@@ -73,19 +74,24 @@ class Lecturer extends AppModel {
     		)
  		),
  		'address' => array(
- 			'rule'    => array('maxLength', 1005),
+ 			'rule'    => array('maxLength', 256),
  		),
  		'credit_card_number'=> array(
-           'alphaNumeric' => array(
-                'rule'     => 'alphaNumeric',
-                'required' => true,
+           'numeric' => array(
+                'rule'     => 'numeric',
                 'message'  => '数字'
             ),
            'between' => array(
                 'rule'    => array('between', 15, 15),
                 'message' => '１５字しなけらばならない'
             )
- 		)
+ 		), 
+ 		'phone_number'=>array(
+           'numeric' => array(
+                'rule'     => 'numeric',
+                'message'  => '数字'
+            ),
+        )
 	);
     public function beforeSave($options = array()) {
         if (isset($this->data[$this->alias]['init_verificode'])) {

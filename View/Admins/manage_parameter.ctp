@@ -32,7 +32,7 @@
   </tr>
   <tr>
       <td>ログイン誤り回数</td>
-      <td><?php echo $this->Form->input('wrong_password_times', array('style' => 'width:100px;', 'value' => $_WRONG_PASSWORD_TIMES, 'type' => 'number')); ?></td>
+      <td><?php echo $this->Form->input('wrong_password_times', array('style' => 'width:100px;', 'value' => $_WRONG_PASSWORD_TIMES)); ?></td>
       <td>回</td>
   </tr>
     <tr>
@@ -47,7 +47,7 @@
   </tr>
   <tr>
       <td>違犯の最大回数</td>
-      <td><?php echo $this->Form->input('violations_times', array('style' => 'width:100px;', 'value' => $_VIOLATIONS_TIMES, 'type' => 'number')); ?></td>
+      <td><?php echo $this->Form->input('violations_times', array('style' => 'width:100px;', 'value' => $_VIOLATIONS_TIMES)); ?></td>
       <td>回</td>
   </tr>
   <tr>
