@@ -1421,11 +1421,12 @@ class AdminsController extends AppController {
     public function delete_ban_document($document_id) {
         $Document = $this->Document->findById($document_id);
         $Document ["Document"]['baned'] = 0;
-        var_dump($Document);
+        //var_dump($Document);
         if ($this->Document->save($Document)) {
-            
+            $sql_detele = "DELETE FROM violates WHERE document_id = '$document_id'";
+            $this->Violate->query($sql_detele);
         } else {
-            $this->Session->setFlash(__('禁止できない'), 'alert', array(
+            $this->Session->setFlash(__('禁止を削除できない'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-warning'));
         }
@@ -1495,13 +1496,13 @@ class AdminsController extends AppController {
                 GROUP BY (lesson_id)";
                 $d = $this->Ihan->query($sql_1);
                 if($d){
-                    $datas[$i]['ihans']['count'] = $d[0][0]['COUNT(id)'];
+                    $datas[$i]['lessons']['count'] = $d[0][0]['COUNT(id)'];
                 }else{
                     $datas[$i]['lessons']['count'] = 0;
                 }
          
             }
-            //debug($datas);
+            debug($datas);
             $this->set('datas', $datas);
         } else {
             $this->Session->setFlash(__('データがない'), 'alert', array(
@@ -1524,7 +1525,7 @@ class AdminsController extends AppController {
     public function ban_lesson($lesson_id) {
         $Lesson = $this->Lesson->findById($lesson_id);
         $Lesson ["Lesson"]['baned'] = 1;
-        var_dump($Lesson);
+        //var_dump($Lesson);
         if ($this->Lesson->save($Lesson)) {
             
         } else {
@@ -1538,11 +1539,12 @@ class AdminsController extends AppController {
     public function delete_ban_lesson($lesson_id) {
         $Lesson = $this->Lesson->findById($lesson_id);
         $Lesson ["Lesson"]['baned'] = 0;
-        var_dump($Lesson);
+        //var_dump($Lesson);
         if ($this->Lesson->save($Lesson)) {
-            
+            $sql_detele = "DELETE FROM ihans WHERE lesson_id = '$lesson_id'";
+            $this->Ihan->query($sql_detele);
         } else {
-            $this->Session->setFlash(__('禁止できない'), 'alert', array(
+            $this->Session->setFlash(__('禁止を削除できない'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-warning'));
         }
