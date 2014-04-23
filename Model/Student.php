@@ -80,9 +80,8 @@ class Student extends AppModel{
             'rule'    => array('maxLength', 256),
         ),
         'credit_card_number'=> array(
-           'alphaNumeric' => array(
+           'numeric' => array(
                 'rule'     => 'numeric',
-                'required' => true,
                 'message'  => '数字'
             ),
            'between' => array(
@@ -91,12 +90,10 @@ class Student extends AppModel{
             )
         ),
         'phone_number'=>array(
-            'alphaNumeric' => array(
+            'numeric' => array(
                 'rule'     => 'numeric',
-                'required' => true,
                 'message'  => '数字'
-            ),
-            'rule'    => array('maxLength', 256),
+            )
         )
 
 
