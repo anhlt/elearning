@@ -21,4 +21,18 @@ class UtilComponent extends Component{
         }
         return LEARNABLE;
     }
+
+    public function checkUserLogin($user_id){
+        $this->User = ClassRegistry::init("User");
+        $res = $this->User->findById($user_id);
+        $user = $res['User'];
+        $login_time = $user['login_time'];
+        $now = date("Y-m-d H:i:s");
+        $hours = floor((strtotime($now)- strtotime($login_time)));
+        if ($hours> SESSION_TIME) {
+            return false;
+        }else {
+            return true; 
+        }
+    }
 }
