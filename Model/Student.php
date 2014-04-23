@@ -62,7 +62,7 @@ class Student extends AppModel{
         ),
         'email' => array(
             'email' => array(
-                'rule'    => array('email', true),
+                'rule'    => array('email'),
                 'message' => 'メールのフォーマットが正しくない'
             ),
             'isUnique' => array(
