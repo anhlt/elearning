@@ -50,13 +50,32 @@ class AppController extends Controller {
 	}
 	public function beforeFilter()
 	{
-        if($this->Auth->loggedIn() && $this->Auth->user('actived') == 0){
-			$this->Session->setFlash(__("あなたのアカウントがまだアクティブしない"), 'alert', array(
-				'plugin' => 'BoostCake',
-				'class' => 'alert-warning'
-				));
-        	$this->Auth->logout();
-        	$this->redirect('/users/login');
+        if($this->Auth->loggedIn()){
+        	if ($this->Auth->user('actived') == 0){
+        		$this->Session->setFlash(__("あなたのアカウントがまだアクティブしない"), 'alert', array(
+        			'plugin' => 'BoostCake',
+        			'class' => 'alert-warning'
+        			));
+        		$this->Auth->logout();
+        		$this->redirect('/users/login');
+        	}
+        	// else {
+        	// 	$user_id = $this->Auth->user("id");
+        	// 	$now = date("Y-m-d H:i:s");
+        	// 	$this->loadModel("User");
+        	// 	$query = "update `users` set login_time = '$now' where id = '$user_id' ";
+        	// //	echo $query; 
+        	// 	$this->User->query($query);
+        	// }
         }
+
+
+        $this->loadModel('Parameter');
+        $res = $this->Parameter->find("all");
+        foreach ($res as $row) {
+        	$paramater = $row['Parameter'];
+        	define($paramater['name'], $paramater['value']);
+        }
+        
 	}
 }

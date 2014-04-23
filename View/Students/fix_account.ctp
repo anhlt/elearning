@@ -22,21 +22,6 @@ $this->LeftMenu->leftMenuStudent(STUDENT_PROFILE, "更新");
 )); ?>  
 </div>
     <div class="form-group">
-
-<?php echo $this->Form->input('User.password', array(  
-    'placeholder' => 'パスワード',  
-    'style' => 'width:180px;',
-    'label' => 'パスワード'
-)); ?>  
-    </div>
-
-    <div class="form-group">
-<?php echo $this->Form->input('rePassword', array(  
-    'placeholder' => '再パスワード',  
-    'style' => 'width:180px;',
-    'label' => '再パスワード',
-    'type'=>'password'
-)); ?>  
     </div>
     <div class="form-group">
 <?php echo $this->Form->input('Student.email', array(  
@@ -84,18 +69,6 @@ $this->LeftMenu->leftMenuStudent(STUDENT_PROFILE, "更新");
 )); ?>
     </div>  
     <div class="form-group">
-<?php echo $this->Form->input('Student.question_verifycode_id', array(    
-    'style' => 'width:180px;',
-    'label' => '質問',
-    'options' => $droplist,
-)); ?>  
-    </div>
-    <div class="form-group">
-<?php echo $this->Form->input('Student.answer_verifycode', array(  
-    'placeholder' => '答え',  
-    'style' => 'width:180px;',
-    'label' => '答え'
-)); ?>  
     </div>
 <?php echo $this->Form->submit('更新', array(  
     'div' => false,  

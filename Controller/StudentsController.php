@@ -47,40 +47,46 @@ class StudentsController extends AppController {
         $this->loadModel('Question');
         $this->loadModel('User');
         $this->loadModel('Student');
-        $questions = $this->Question->find('all');
-        $droplist = array();
-        foreach ($questions as $question) {
-            $droplist[$question['Question']['id']] = $question['Question']['question'];
-        }
-        $this->set('droplist', $droplist);
-
 
         if($this->request->is("post")){
-
-        $this->User->create();
-        $this->request->data['Student']['ip_address'] = $this->request->clientIp();
-        $this->request->data['User']['role'] = 'student';
-	    $this->request->data['Student']['init_password'] = AuthComponent::password($this->request->data['User']['password']);
-	    $this->request->data['Student']['init_verifycode'] = $this->request->data['Student']['current_verifycode'];
-            if($this->User->saveAll($this->request->data)){
-                $this->Session->setFlash(__('ユーザがセーブされた'), 'alert', array(
+            if ($this->request->data['User']['password'] != $this->request->data['User']['rePassword']){
+                  $this->Session->setFlash(__('パスワードと再パスワードが違いました。もう一度お願いします！'), 'alert', array(
                     'plugin' => 'BoostCake',
-                    'class' => 'alert-success'
-                ));
-                return $this->redirect(array('controller' => 'users', 'action' => 'login'));
+                    'class' => 'alert-warning'
+                    ));
+            }else {
+                $this->User->create();
+                $this->request->data['Student']['ip_address'] = $this->request->clientIp();
+                $this->request->data['User']['role'] = 'student';
+                $this->request->data['Student']['init_password'] = AuthComponent::password($this->request->data['User']['password']);
+                unset($this->request->data['User']['rePassword']); 
+                if($this->User->saveAll($this->request->data)){
+                    $this->Session->setFlash(__('登録が成功した、ログインしてください'), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-success'
+                        ));
+                    return $this->redirect(array('controller' => 'users', 'action' => 'login'));
+                }
+                $this->Session->setFlash(__('登録が失敗した、もう一度お願い'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-warning'
+                    ));
             }
-            $this->Session->setFlash(__('ユーザをセーブできない、もう一度お願い'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-warning'
-            ));
         }
     }
 
     public function delete(){
-        if ($this->request->is("post")){
+       if ($this->request->is("post")){
             $user_id = $this->Auth->user("id");
             $this->loadModel("User");
-            $this->User->updateAll(array("actived"=>DELETED.""), array("User.id"=>$user_id));
+            $this->User->delete($user_id);
+            $this->Student->delete($user_id);
+            $this->loadModel("Comment");
+            $this->Comment->deleteAll(array("user_id"=>$user_id));
+            $this->loadModel("Result");
+            $this->Result->deleteAll(array("student_id"=>$user_id));
+            $this->loadModel("Violate");
+            $this->Violate->deleteAll(array("student_id"=>$user_id));
             $this->redirect($this->Auth->logout());
         }
     }
@@ -134,10 +140,6 @@ class StudentsController extends AppController {
             array_push($lesson_or_r, array("Lesson.summary like"=>"%".$row."%"));
         }
 
-        // $option['conditions'] = array("OR"=>array(
-        //     array("Lesson.name like "=>"%".$keyword."%"), 
-        //     array("Lesson.summary like "=>"%".$keyword."%")
-        // )); 
         $option['conditions'] = array("OR"=>$lesson_or_r);
         $lessons =$this->Lesson->find("all", $option);
         $this->set("lessons", $lessons);
@@ -149,10 +151,7 @@ class StudentsController extends AppController {
             array_push($lecturer_or_r, array("User.username like"=>"%".$row."%"));
         }
         $this->loadModel("Lecturer");
-        // $option['conditions'] =  array("OR"=>array(
-        //     array("Lecturer.full_name like "=>"%".$keyword."%"),
-        //     array("User.username like "=>"%".$keyword."%")
-        // ));
+      
         $option['conditions'] = array("OR"=>$lecturer_or_r);
         
         $lecturers =$this->Lecturer->find("all", $option);
@@ -165,15 +164,9 @@ class StudentsController extends AppController {
             array_push($student_or_r, array("User.username like"=>"%".$row."%"));
         }
         $option['conditions'] = array("OR"=>$student_or_r);
-        // $option['conditions'] =  array("OR"=>array(
-        //     array("Student.full_name like "=>"%".$keyword."%"), 
-        //     array("User.username like "=>"%".$keyword."%")
-        // )) ;
-
         $students =$this->Student->find("all", $option);
         $this->set("students", $students);
 
 $this->set("keyword", $keyword);
-    //    debug($documents);
     }
 }

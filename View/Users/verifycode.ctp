@@ -13,21 +13,17 @@
 )); ?>  
   <?php echo $this->Form->input('username', array(  
     'placeholder' => 'ユーザ名',  
-    'style' => 'width:180px;'
-  )); ?>  
-  <?php echo $this->Form->input('password', array(  
-    'placeholder' => 'パスワード',  
-    'style' => 'width:180px;' 
-  )); ?> 
+    'style' => 'width:180px;',
+  )); ?>
   <div class="form-group">
-    <?php echo $this->Form->input('Lecturer.question_verifycode_id', array(    
+    <?php echo $this->Form->input('Lecturer.question_verifycode', array(    
     'style' => 'width:180px;',
     'label' => '質問',
-    'options' => $droplist,
-    )); ?>  
+    'disabled' => true,
+    )); ?>
   </div>
   <div class="form-group">
-    <?php echo $this->Form->input('Lecturer.current_verifycode', array(  
+    <?php echo $this->Form->input('Lecturer.verifycode', array(  
     'placeholder' => '答え',  
     'style' => 'width:180px;',
     'label' => '答え'
