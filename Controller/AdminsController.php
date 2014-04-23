@@ -1495,7 +1495,6 @@ class AdminsController extends AppController {
                 }
          
             }
-            debug($datas);
             $this->set('datas', $datas);
         } else {
             $this->Session->setFlash(__('データがない'), 'alert', array(

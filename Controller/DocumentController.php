@@ -44,7 +44,7 @@ class DocumentController extends AppController {
 		$document_id = $this->params['named']['document_id'];		
 		$this->set('id', $id);
 		$this->set('document_id', $document_id);
-		$results = $this->Document->find("first", array("conditions"=>array('id'=>$document_id)));		
+		$results = $this->Document->find("first", array("conditions"=>array('Document.id'=>$document_id)));		
 		$this->set('result', $results['Document']);		
 		
 		$ihan = $this->params['named']['ihan'];	
