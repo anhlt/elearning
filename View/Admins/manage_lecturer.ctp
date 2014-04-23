@@ -35,7 +35,7 @@ if($item['users']['actived'] == 1){
         echo "<td><a href =''>".$this->html->link('可用',array('controller'=>'admins','action'=>'lock_lecturer',$item['lecturers']['id']))."</a></td>";
 }
         echo "<td><a href =''>".$this->html->link('リセット',array('controller'=>'admins','action'=>'reset_password_lecturer',$item['lecturers']['id'],$item['lecturers']['init_password']))."</a></td>";
-        echo "<td><a href =''>".$this->html->link('リセット',array('controller'=>'admins','action'=>'reset_verifycode_lecturer',$item['lecturers']['id'],$item['lecturers']['init_verifycode']))."</a></td>";
+        echo "<td><a href =''>".$this->html->link('リセット',array('controller'=>'admins','action'=>'reset_verifycode_lecturer',$item['lecturers']['id'],$item['lecturers']['init_verifycode'], $item['lecturers']['init_question_verifycode']))."</a></td>";
         echo "<td><a href =''>".$this->html->link('削除',array('controller'=>'admins','action'=>'delete_lecturer',$item['lecturers']['id']))."</a></td>";
     echo "</tr>";
 }
