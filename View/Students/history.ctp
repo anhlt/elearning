@@ -4,11 +4,12 @@
 echo " <h1> 勉強の歴史</h1>";
 echo " <h3> 受講した授業</h3>"; 
 echo "<table class = 'table table-bordered'>";
-echo $this->Html->tableHeaders(array("登録の日", "授業の名前", "ステータス"));
+echo $this->Html->tableHeaders(array("登録の日", "授業の名前", "価格", "ステータス"));
 $lessons = $student['Lesson'];
 foreach($lessons as $lesson){
     $lesson_name = $lesson['name'];
     $days_attended = $lesson['StudentsLesson']['days_attended'];
+    $price = $lesson['StudentsLesson']['price'];
     $lesson_id = $lesson['id'];
     $learn_state = "<font color=blue>勉強中</font>";
     $date = $this->Util->calDate($days_attended);
@@ -17,7 +18,7 @@ foreach($lessons as $lesson){
     }else if( $lesson['StudentsLesson']['baned'] == 1){
         $learn_state = "<font color=red>禁止された</font>";
     }
-    echo $this->Html->tableCells(array($days_attended, $this->Html->link($lesson_name, "/lesson/learn/".$lesson_id), $learn_state));     
+    echo $this->Html->tableCells(array($days_attended, $this->Html->link($lesson_name, "/lesson/learn/".$lesson_id), $price."VND", $learn_state));     
 } 
 echo "</table>";
 //受けたテストの情報

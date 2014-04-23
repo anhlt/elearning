@@ -528,7 +528,7 @@ class LessonController extends AppController {
         }
         if ($this->request->is('post')){
             $this->loadModel('StudentsLesson');
-            $data = array("student_id"=>$user_id, "lesson_id"=>$lesson_id) ;   
+            $data = array("student_id"=>$user_id, "lesson_id"=>$lesson_id, "price"=>LESSON_COST) ;   
             var_dump($this->StudentsLesson->save($data));
             $this->redirect(array("controller"=>"lesson", "action"=>"learn", $lesson_id));
         }
