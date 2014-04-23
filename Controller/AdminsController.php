@@ -525,12 +525,12 @@ class AdminsController extends AppController {
                     $this->Parameter->updateParameter('SESSION_TIME', $SESSION_TIME);
                 }
                 if ($VIOLATIONS_TIMES <= 0) {
-                    $error = $error . "<br>違犯の最大回数 >= 1</br>";
+                    $error = $error . "<br>違犯の最大回数 >= 1　、そして　違犯の最大回数は整数だ";
                 } else {
                     $this->Parameter->updateParameter('VIOLATIONS_TIMES', $VIOLATIONS_TIMES);
                 }
-                if($BACKUP_TIME < 0 || $BACKUP_TIME >= 24){
-                    $error = $error . "<br>23>=　バックアップ時刻 >= ０</br>";
+                if($BACKUP_TIME  <= 0){
+                    $error = $error . "バックアップ時刻 >０</br>";
                 }else{
                     $this->Parameter->updateParameter('BACKUP_TIME', $BACKUP_TIME);
                 }
@@ -1356,12 +1356,27 @@ class AdminsController extends AppController {
     }
 
     public function manage_document() {
-        $sql = "SELECT documents.id, documents.link, documents.title, documents.baned, COUNT( violates.id ) as count
-                FROM  `violates` , documents
-                WHERE violates.document_id = documents.id
-                GROUP BY (documents.id)";
+        
+        $sql = "SELECT *
+                FROM  documents";
         $datas = $this->Document->query($sql);
         if ($datas) {
+            //debug($datas);
+            for($i=0; $i <= count($datas) - 1 ; $i++){
+                $tmp = $datas[$i]['documents']['id'];
+                //debug($tmp);
+                $sql_1 = "SELECT COUNT(id)
+                FROM  `violates` 
+                WHERE document_id = '$tmp'
+                GROUP BY (document_id)";
+                $d = $this->Violate->query($sql_1);
+                if($d){
+                    $datas[$i]['documents']['count'] = $d[0][0]['COUNT(id)'];
+                }else{
+                    $datas[$i]['documents']['count'] = 0;
+                }
+         
+            }
             //debug($datas);
             $this->set('datas', $datas);
         } else {
@@ -1471,7 +1486,22 @@ class AdminsController extends AppController {
         $datas = $this->Lesson->query($sql_0);
         //debug($datas);
         if ($datas) {
-
+            for($i=0; $i <= count($datas) - 1 ; $i++){
+                $tmp = $datas[$i]['lessons']['id'];
+                //debug($tmp);
+                $sql_1 = "SELECT COUNT(id)
+                FROM  `ihans` 
+                WHERE lesson_id = '$tmp'
+                GROUP BY (lesson_id)";
+                $d = $this->Ihan->query($sql_1);
+                if($d){
+                    $datas[$i]['ihans']['count'] = $d[0][0]['COUNT(id)'];
+                }else{
+                    $datas[$i]['lessons']['count'] = 0;
+                }
+         
+            }
+            //debug($datas);
             $this->set('datas', $datas);
         } else {
             $this->Session->setFlash(__('データがない'), 'alert', array(
@@ -1527,6 +1557,11 @@ class AdminsController extends AppController {
             ));
         }
         $this->redirect(array('controller' => 'admins', 'action' => 'manage_lesson'));
+    }
+    
+     public function delete_violate_lesson($id, $lesson_id) {
+        $this->Ihan->delete($id);
+        $this->redirect(array('controller' => 'admins', 'action' => 'see_violate_lesson', $lesson_id));
     }
 
 }

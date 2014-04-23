@@ -12,9 +12,11 @@
  * @author Tha
  */
 class Violate extends AppModel {
-    //put your code here
-    
-    
+    //put your code 
+    public $belongsTo = array(
+        'Document' => array(
+            'className' => 'Document',            
+    ));
 }
 
 ?>
