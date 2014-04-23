@@ -61,6 +61,7 @@
 			<?php echo $this->Form->input('Lecturer.question_verifycode', array(    
 			'style' => 'width:180px;',
 			'label' => '質問',
+		    'disabled' => true,
 			)); ?>  
 		</div>
 		<div class="form-group">
