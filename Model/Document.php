@@ -4,10 +4,17 @@ class Document extends AppModel {
 	public $hasMany = array(
             'Violate' => array(
                 'className' => 'Violate',
-                'dependent' => true,
+    	       	'foreignKey' => 'document_id',
+    	       	 'dependent' => true
             )
         );
-        public $validate = array(
+    public $belongsTo = array(
+        'Lesson' => array(
+            'className' => 'Lesson',
+            'foreignKey' => 'lesson_id'
+    ));
+
+    public $validate = array(
 		'title' => array(
 			'required' => array(
 				'rule' => array('notEmpty'),

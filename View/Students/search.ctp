@@ -15,10 +15,11 @@ foreach ($lessons as $row){
     $lesson = $row['Lesson'];
     if (strpos($lesson['name'], $keyword)!= false){
      //   $lesson_name = str_replace($keyword, "<b>".$keyword."</b>", $lesson['name']);
-        $document_title = $this->Util->changeString($lesson['name'], $keyword);
+        $lesson_name = $this->Util->changeString($lesson['name'], $keyword);
         echo $this->Html->tableCells(array($lesson_name, "授業", $this->Html->link("表示", "/lesson/learn/".$lesson['id'])));
     }else {
-        $lesson_summary = str_replace($keyword, "<b>".$keyword."</b>", $lesson['summary']);
+        $lesson_summary = $this->Util->changeString($lesson['summary'], $keyword);
+       // $lesson_summary = str_replace($keyword, "<b>".$keyword."</b>", $lesson['summary']);
         echo $this->Html->tableCells(array($lesson_summary, "授業", $this->Html->link("表示", "/lesson/learn/".$lesson['id'])));
     }
 }
@@ -26,25 +27,22 @@ foreach ($lessons as $row){
 foreach ($lecturers as $row){
     $lecturer = $row['Lecturer'];
     if (strpos($lecturer['full_name'], $keyword)!= false){
-        //$lecturer_fullname = str_replace($keyword, "<b>".$keyword."</b>", $lecturer['full_name']);
-        $document_title = $this->Util->changeString($lecturer['full_name'], $keyword);
-        echo $this->Html->tableCells(array($lecturer_fullname, "先生", $this->Html->link("表示", "/lecturer/profile/".$lecturer['id'])));
+       $lecturer_fullname = $this->Util->changeString($lecturer['full_name'], $keyword);
+       echo $this->Html->tableCells(array($lecturer_fullname, "先生", ""));
     }else {
-        $lecturer_username = str_replace($keyword, "<b>".$keyword."</b>", $row['User']['username']);
-        echo $this->Html->tableCells(array($lecturer_username, "先生", $this->Html->link("表示", "/lecturer/profile/".$lecturer['id'])));
+        $lecturer_username = $this->Util->changeString($row['User']['username'], $keyword);
+        echo $this->Html->tableCells(array($lecturer_username, "先生", ""));
     }
 }
 
 foreach ($students as $row){
     $student = $row['Student'];
     if (strpos($student['full_name'], $keyword)!= false){
-    //    $student_fullname = str_replace($keyword, "<b>".$keyword."</b>", $student['full_name']);
-         $document_title = $this->Util->changeString($student['full_name'], $keyword);
-        echo $this->Html->tableCells(array($student_fullname, "学生", $this->Html->link("表示", "/students/profile/".$student['id'])));
+         $student_fullname = $this->Util->changeString($student['full_name'], $keyword);
+        echo $this->Html->tableCells(array($student_fullname, "学生", ""));
     }else {
-      //  $student_username = str_replace($keyword, "<b>".$keyword."</b>", $row['User']['username']);
-        $document_title = $this->Util->changeString($row['User'], $keyword);
-        echo $this->Html->tableCells(array($student_username, "学生", $this->Html->link("表示", "/students/profile/".$student['id'])));
+        $student_username = $this->Util->changeString($row['User']['username'], $keyword);
+        echo $this->Html->tableCells(array($student_username, "学生", ""));
     }
 }
 echo "</table>";

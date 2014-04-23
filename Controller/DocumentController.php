@@ -119,18 +119,75 @@ class DocumentController extends AppController {
     }
 
     public function show($document_id){
+    	/* Se co cac truong hop nhu sau:
+			-Admin luon luon xem dc file
+			-Giao vien xem duoc file khi khong bi cam
+		*/
+		//Get doc info
     	$doc  = $this->Document->findById($document_id);
-    	$lesson = $this->Lesson->findById($doc ["Document"]['lesson_id']);
+    	$lesson_id = $doc ["Document"]['lesson_id'];
+    	//get lesson info
+    	$lesson = $this->Lesson->findById($lesson_id);
     	$lecturer_id = $lesson['Lecturer']['id'];
-    	if($this->Auth->user('role') == 'lecturer' && $this->Auth->user('id') != $lecturer_id)
-            $this->redirect(array('controller' => 'users', 'action' => 'permission'));
-        $document = $this->Document->find("first", array("conditions"=>array("Document.id"=>$document_id)));
-        $this->set("document", $document['Document']);
-        $lesson_id = $document['Document']['lesson_id']; 
-        $this->set("learnable", $this->Util->checkLessonAvailableWithStudent($lesson_id, $this->Auth->user("id")));
-        if ($this->Auth->user('role')=='lecturer'){
-			$this->set("learnable", LEARNABLE);
-		}
+    	//get current useruser
+    	$user = $this->Auth->user();
+    	switch ($user['role']) {
+    		case 'student':
+    			if ($doc["Document"]['baned'] == 1) {
+    				$this->Session->setFlash(__('すみません、このドキュメントは管理者に禁止された。コピーライトに関するの問題だ'), 'alert', array(
+		                'plugin' => 'BoostCake',
+		                'class' => 'alert-danger'
+		            ));
+		            $this->redirect($this->referer());
+    			}
+    			$status = $this->Util->checkLessonAvailableWithStudent($lesson_id,$user['id']);
+    			switch ($status) {
+    				case UNREGISTER:
+    				    $this->Session->setFlash(__('その授業はまだ登録しないかた'), 'alert', array(
+			                'plugin' => 'BoostCake',
+			                'class' => 'alert-warning'
+		           		 )); 
+			            $this->redirect($this->referer());
+    					break;
+    				case BANED:
+    				    $this->Session->setFlash(__('あなたは教師が禁止されました'), 'alert', array(
+			                'plugin' => 'BoostCake',
+			                'class' => 'alert-warning'
+		           		 )); 
+    					$this->redirect($this->referer());
+    					break;
+    				case LEARNABLE:
+    					break;
+    				case OVER_DAY:
+    				    $this->Session->setFlash(__('その授業は終わりました、もう一度登録してください'), 'alert', array(
+			                'plugin' => 'BoostCake',
+			                'class' => 'alert-warning'
+		           		 )); 
+    					$this->redirect($this->referer());
+    					break;
+    			}
+    			break;
+    		case 'lecturer':
+    			if ($doc["Document"]['baned'] == 1) {
+    				$this->Session->setFlash(__('すみません、このドキュメントは管理者に禁止された。コピーライトに関するの問題だ'), 'alert', array(
+		                'plugin' => 'BoostCake',
+		                'class' => 'alert-danger'
+		            )); 
+		            $this->redirect($this->referer());
+
+    			}
+    			if ($user['id'] != $lecturer_id) {
+		            $this->redirect(array('controller' => 'users', 'action' => 'permission'));
+    			}
+    			break;
+    		case 'admin':
+    			# code...
+    			break;
+    		default:
+    			# code...
+    			break;
+    	}
+        $this->set("document", $doc['Document']);
     }
 
     public function report( $document_id){

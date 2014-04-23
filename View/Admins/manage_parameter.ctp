@@ -38,17 +38,22 @@
     <tr>
       <td>ロック時間</td>
       <td><?php echo $this->Form->input('lock_time', array('style' => 'width:100px;', 'value' => $_LOCK_TIME)); ?></td>
-      <td>分</td>
+      <td>秒</td>
   </tr>
   <tr>
       <td>自動セション終了時間</td>
       <td><?php echo $this->Form->input('session_time', array('style' => 'width:100px;', 'value' => $_SESSION_TIME)); ?></td>
-      <td>分</td>
+      <td>秒</td>
   </tr>
   <tr>
       <td>違犯の最大回数</td>
       <td><?php echo $this->Form->input('violations_times', array('style' => 'width:100px;', 'value' => $_VIOLATIONS_TIMES)); ?></td>
       <td>回</td>
+  </tr>
+  <tr>
+      <td>バックアップ時刻</td>
+      <td><?php echo $this->Form->input('backup_time', array('style' => 'width:100px;', 'value' => $_BACKUP_TIME)); ?></td>
+      <td>時に　毎日</td>
   </tr>
   <tr>   
       <td></td>

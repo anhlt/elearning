@@ -22,7 +22,8 @@ class Student extends AppModel{
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => '氏名を入力してお願い'
-            )
+            ), 
+            'rule'    => array('maxLength', 256)
         ),
         'init_password' => array(
             'required' => array(
@@ -76,8 +77,29 @@ class Student extends AppModel{
             )
         ),
         'address' => array(
-            'rule'    => array('maxLength', 1005),
+            'rule'    => array('maxLength', 256),
         ),
+        'credit_card_number'=> array(
+           'alphaNumeric' => array(
+                'rule'     => 'alphaNumeric',
+                'required' => true,
+                'message'  => '数字'
+            ),
+           'between' => array(
+                'rule'    => array('between', 24, 24),
+                'message' => '24字しなけらばならない'
+            )
+        ),
+        'phone_number'=>array(
+            'alphaNumeric' => array(
+                'rule'     => 'alphaNumeric',
+                'required' => true,
+                'message'  => '数字'
+            ),
+            'rule'    => array('maxLength', 256),
+        )
+
+
     );
 }
 ?>
