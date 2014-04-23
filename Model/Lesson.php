@@ -6,7 +6,7 @@ class Lesson extends AppModel {
 			'className'=>'Lecturer',
 			'foreignKey'=>'lecturer_id')
 		);
-        public $actsAs = array('Containable');
+    public $actsAs = array('Containable');
 	public $hasAndBelongsToMany = array(
         'Tag' => array(
             'className' => 'Tag',
@@ -22,6 +22,7 @@ class Lesson extends AppModel {
         ));
     public $hasMany = array(
                 'LessonMembership' => array('dependent' => True ),
+                'LessonsTag' => array('dependent' => True ),
                 'Document' => array('dependent' => True ), 
                 'Comment'=> array('dependent' => True ), 
                 'Test'=> array('dependent' => True )

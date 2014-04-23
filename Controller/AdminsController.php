@@ -450,13 +450,6 @@ class AdminsController extends AppController {
         //$this->Session->setFlash(NULL);
 
         if ($this->request->is('post')) {
-//            $LessonCost = $this->Parameter->getLessonCost();
-//            $LecturerMoneyPercent = $this->Parameter->getLecturerMoneyPercent();
-//            $EnableLessonTime = $this->Parameter->getEnableLessonTime();
-//            $WrongPasswordTimes = $this->Parameter->getWrongPasswordTimes();
-//            $LockTime = $this->Parameter->getLockTime();
-//            $SessionTime = $this->Parameter->getSessionTime();
-//            $ViolationsTimes = $this->Parameter->getViolationsTimes();
 
             $LESSON_COST = $this->request->data['parameter']['lesson_cost'];
             $LECTURER_MONEY_PERCENT = $this->request->data['parameter']['lecturer_money_percent'];
@@ -534,21 +527,7 @@ class AdminsController extends AppController {
                 }else{
                     $this->Parameter->updateParameter('BACKUP_TIME', $BACKUP_TIME);
                 }
-//                $flag = ($LessonCost == $LESSON_COST
-//                        ) && ($LecturerMoneyPercent == $LECTURER_MONEY_PERCENT
-//                        ) && ($EnableLessonTime == $ENABLE_LESSON_TIME
-//                        ) && ($WrongPasswordTimes == $WRONG_PASSWORD_TIMES
-//                        ) && ($LockTime == $LOCK_TIME
-//                        ) && ($SessionTime == $SESSION_TIME
-//                        ) && ($ViolationsTimes == $VIOLATIONS_TIMES);
-//                //debug($flag);
-//                if ($flag == false) {
-//                    $this->Session->setFlash(__('セーブされた'), 'alert', array(
-//                        'plugin' => 'BoostCake',
-//                        'class' => 'alert-success'
-//                    ));
-//                }
-                //$this->Session->setFlash($error);
+                
                 if ($error != '') {
                     $this->Session->setFlash($error, 'alert', array(
                         'plugin' => 'BoostCake',
