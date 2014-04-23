@@ -77,9 +77,8 @@ class Lecturer extends AppModel {
  			'rule'    => array('maxLength', 256),
  		),
  		'credit_card_number'=> array(
-           'alphaNumeric' => array(
+           'numeric' => array(
                 'rule'     => 'numeric',
-                'required' => true,
                 'message'  => '数字'
             ),
            'between' => array(
@@ -87,13 +86,11 @@ class Lecturer extends AppModel {
                 'message' => '１５字しなけらばならない'
             )
  		), 
- 		 'phone_number'=>array(
-            'alphaNumeric' => array(
+ 		'phone_number'=>array(
+           'numeric' => array(
                 'rule'     => 'numeric',
-                'required' => true,
                 'message'  => '数字'
             ),
-            'rule'    => array('maxLength', 256),
         )
 	);
     public function beforeSave($options = array()) {
