@@ -177,7 +177,7 @@ class LecturerController extends AppController {
 		    'conditions' => array(
 		    	'lessons.lecturer_id' => $id,
 		    	),
-
+			'group' => 'Document.id',
 			));
 		$this->set('docs',$Document);
 	}
