@@ -11,8 +11,9 @@
 			<?php foreach ($docs as $doc):?>
 				<?php foreach ($doc['Violate'] as $Violate) :?>
 				<tr>
-					<td  class="col-sm-1"><?php echo $doc['Document']['title']; ?></td>
-					<td  class="col-sm-2"><?php echo $doc['Lesson']['name'];?></td>
+					<td  class="col-sm-1"><?php echo $this->Html->link($doc['Document']['title'], array('controller' => 'document', 'action' => 'show',$doc['Document']['id'])); ?>
+</td>
+					<td  class="col-sm-2"><?php echo $this->html->link($doc['Lesson']['name'], array('controller' => 'lesson', 'action' => 'doc', "id"=>$doc['Lesson']['id']), array('class' => 'btn btn-primary'))?></td>
 					<td  class="col-sm-2"><?php echo $Violate['student_id'];?></td>
 					<td  class="col-sm-1"><?php echo $Violate['content'];?></td>
 					<td  class="col-sm-1"><?php echo $Violate['accepted'];?></td>
@@ -22,3 +23,5 @@
 
 	</table>
 </div>
+
+

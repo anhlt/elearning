@@ -7,7 +7,7 @@ class Student extends AppModel{
         ),        
     );    
     public $hasMany = array(
-        'LessonMembership',
+        'LessonMembership'=> array('dependent' => false ), 
         'Result' => array('dependent' => True ));
     
     public $hasAndBelongsToMany = array( 
@@ -81,7 +81,7 @@ class Student extends AppModel{
         ),
         'credit_card_number'=> array(
            'alphaNumeric' => array(
-                'rule'     => 'alphaNumeric',
+                'rule'     => 'numeric',
                 'required' => true,
                 'message'  => '数字'
             ),
@@ -92,7 +92,7 @@ class Student extends AppModel{
         ),
         'phone_number'=>array(
             'alphaNumeric' => array(
-                'rule'     => 'alphaNumeric',
+                'rule'     => 'numeric',
                 'required' => true,
                 'message'  => '数字'
             ),
