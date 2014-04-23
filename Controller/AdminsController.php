@@ -5,7 +5,7 @@ App::uses('File', 'Utility');
 
 class AdminsController extends AppController {
 
-    public $components = array('Paginator');
+    public $components = array('Paginator', 'Util');
     public $helpers = array('Js');
     var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter', 'Question', 'Document', 'Violate', 'Lesson', 'Ihan');
 
@@ -609,6 +609,12 @@ class AdminsController extends AppController {
 
         $this->Paginator->settings = $this->paginate;
         $res = $this->Paginator->paginate("User");
+      //  debug($res);
+        for($i = 0; $i < count($res); $i++){
+           // debug($row);
+            $res[$i]['User']['status'] = $this->Util->checkUserLogin($res[$i]['User']['id']);
+        }
+       // debug($res);
         $this->set('res', $res);
         $this->set('flag', $this->Auth->user('id'));
         //debug($flag);
@@ -618,12 +624,21 @@ class AdminsController extends AppController {
         if (!isset($id))
             $this->redirect(array("action" => "remove_admin"));
         $this->uses = array('User', 'Admin');
-        if ($this->User->delete($id))
-            $this->Session->setFlash(__('管理者が削除された'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-success'
-            ));
-        $this->redirect(array("action" => "remove_admin"));
+
+        if ($this->Util->checkUserLogin($id)== false){
+            if ($this->User->delete($id))
+                $this->Session->setFlash(__('管理者が削除された'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                    ));
+            $this->redirect(array("action" => "remove_admin"));
+        }else {
+             $this->Session->setFlash(__('この管理者はログインしている。削除できない'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-danger'
+                    ));
+            $this->redirect(array("action" => "remove_admin"));
+        }
     }
 
     public function edit_admin_process($id_admin) {

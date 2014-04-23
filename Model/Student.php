@@ -7,7 +7,7 @@ class Student extends AppModel{
         ),        
     );    
     public $hasMany = array(
-        'LessonMembership',
+        'LessonMembership'=> array('dependent' => false ), 
         'Result' => array('dependent' => True ));
     
     public $hasAndBelongsToMany = array( 

@@ -130,6 +130,9 @@ class UsersController extends AppController {
 	}
 
 	public function logout(){
+		$id = $this->Auth->user("id");
+		$sql = "update `users` set `login_time` = '0' where id = '$id'";
+		$this->User->query($sql);
 		return $this->redirect($this->Auth->logout());
 	}
 
