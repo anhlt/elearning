@@ -105,7 +105,6 @@ class DocumentController extends AppController {
 				$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $id));		
 		}
 	}
-
 	public function delete() 
 	{
         $id = $this->params['named']['id'];

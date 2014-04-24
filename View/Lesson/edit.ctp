@@ -40,16 +40,36 @@
 		</div>
 		<?php echo $this->Form->submit('Save', array(  
 		'div' => false,  
-		'class' => 'btn btn-default'  
+		'class' => 'btn btn-default',
+		'id' => 'button'
 		)); ?>  
 
 		<?php echo $this->Form->end(); ?>  
 	</div>
 
-	<script type="text/javascript">    
+	<script type="text/javascript">
+	var myvar = <?php echo json_encode($Tags); ?>;
 	window.onload = function WindowLoad(event) {
 		jQuery(".tm-input").tagsManager();
-		console.debug("aa");
+		for (index = 0; index < myvar.length; ++index) {
+    		console.log(myvar[index].name);
+			$('.tm-input').tagsManager('pushTag',myvar[index].name);
+		}
+
+		$("#button").click(function(event){
+			event.preventDefault()
+			console.log( "Handler for .submit() called.");
+			var tag = ($('.tm-input').tagsManager('tags'));
+			if (tag.length != 0 || $('.tm-input').val().length != 0){
+				$('.tm-input').tagsManager('pushTag',$('.tm-input').val());
+				$('#LessonEditForm').submit();
+			}else if(tag.length == 0 && $('.tm-input').val().length == 0)
+			{
+				alert('タグを入力してください');
+			}
+		});
+
 	}
+
 	</script>
 </div>
