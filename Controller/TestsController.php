@@ -23,7 +23,7 @@ class TestsController extends AppController {
             if (is_uploaded_file($data['link']['tmp_name'])) {
                 $name = uniqid() . $data['link']['name'];
                 move_uploaded_file($data['link']['tmp_name'], WWW_ROOT. "tsv" . DS . $name);
-                $this->request->data['Test']['link'] = $name;                               
+                $this->request->data['Test']['link'] = $name;
             }
             try {
                 $this->TsvReader->getViewTSV($name);
@@ -44,7 +44,7 @@ class TestsController extends AppController {
                 $this->Session->setFlash(__($e->getMessage()), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'));
-                    unlink(WWW_ROOT . 'tsv' .DS. $name);
+                    unlink(WWW_ROOT . 'tsv' . DS . $name);
             }
             $this->redirect(array('controller' => 'lesson', 'action' => 'test', 'id' => $lesson_id));
         }
@@ -93,12 +93,10 @@ class TestsController extends AppController {
         $data = $this->Test->find('first', $id);        
         
         if ($this->Test->delete($id)) {
-            unlink(WWW_ROOT. 'tsv' . DS . $data['Test']['link']);
             $this->Session->setFlash(__('テストが削除された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
             )); 
-
             return $this->redirect($this->referer());    
         }
     }

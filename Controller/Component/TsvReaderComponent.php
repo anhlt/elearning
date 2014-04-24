@@ -3,7 +3,7 @@
 
     public function remove_utf8_bom($filename)
     {
-        $file = $_SERVER['DOCUMENT_ROOT']. DS . 'webroot' . DS .'tsv' . DS . $filename;
+        $file = WWW_ROOT. "tsv" . DS  . $filename;
         // Open the file to get existing content
         $current = file_get_contents($file);
         // Append a new person to the file
