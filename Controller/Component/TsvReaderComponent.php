@@ -43,8 +43,8 @@
             $review = "<div name=\"TestTitle\">" . $data_tsv[0][1] . "</div>";
             $row = 1;
             $num = count($data_tsv);
-            if ($data_tsv[1][0] == "TestSunTitle") {
-                $review = $review . "<div name=\"TestSunTitle\">" . $data_tsv[1][1] . "</div>";
+            if ($data_tsv[1][0] == "TestSubTitle") {
+                $review = $review . "<div name=\"TestSubTitle\">" . $data_tsv[1][1] . "</div>";
                 $row++;
             }
             while ($row < $num) {

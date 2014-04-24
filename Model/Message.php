@@ -12,11 +12,6 @@ class Message extends AppModel {
 	    );
     public $validate = array(
         'content' => array(
-            'alphaNumeric' => array(
-                'rule'     => 'alphaNumeric',
-                'required' => true,
-                'message'  => 'Alphabets and numbers only'
-            ),
             'maxLength' => array(
 		        'rule'    => array('maxLength', 150),
 		        'message' => 'Usernames must be no larger than 150 characters long.'
