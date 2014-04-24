@@ -4,18 +4,19 @@ class DocumentController extends AppController {
 	var $uses = array('Document','Lesson', 'Report');
 	public $components = array('Util'); 
 	public $helpers = array("TsvReader");
+
 	public function add() {
 		$lesson_id = $this->params['named']['id'];
 		$this->set('id', $lesson_id);
 		$a['Document']['lesson_id'] = $lesson_id;
 
 		if ($this->request->is('post')) {
-
 			$data = $this->request->data['Document'];
 			unset($data['check']);
 			foreach ($data as $Document)
 			{				
-				$name = uniqid() . $Document['link']['name'];			
+				$Document['link']['name'] = str_replace(' ', '', $Document['link']['name']);
+				$name = uniqid() . $Document['link']['name'];
 				$data['Document']['link'] =  $name;
 				if (is_uploaded_file($Document['link']['tmp_name'])) {
 					$data['Document']['title'] = $Document['title'];					
@@ -78,7 +79,6 @@ class DocumentController extends AppController {
 
 			    	$doc = $this->Document->find("first", array('conditions' => array('id' => $document_id)));
 					$doc['Document']['baned'] = 0;
-					debug($doc);
 					$this->Document->create();
 			    	$this->Document->save($doc);	    	
 				}
@@ -125,6 +125,14 @@ class DocumentController extends AppController {
 		*/
 		//Get doc info
     	$doc  = $this->Document->findById($document_id);
+    	var_dump($doc);
+    	if(sizeof($doc) == 0){
+			$this->Session->setFlash(__('すみません、いまそのドキュメントをアクセスできない'), 'alert', array(
+	                'plugin' => 'BoostCake',
+	                'class' => 'alert-danger'
+	            ));
+			$this->redirect($this->referer());
+    	}
     	$lesson_id = $doc ["Document"]['lesson_id'];
     	//get lesson info
     	$lesson = $this->Lesson->findById($lesson_id);

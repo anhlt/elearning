@@ -44,7 +44,7 @@ class AppController extends Controller {
 		)
 	),
 	'Session',
-	'Util',
+	'Message',
 	);
 	public function beforeRender() {
 	     $this->response->disableCache();
@@ -77,7 +77,7 @@ class AppController extends Controller {
         		define($paramater['name'], $paramater['value']);
         }
 		if($this->Auth->loggedIn()){
-	    	$mess = $this->Util->violate($this->Auth->user('id'));
+	    	$mess = $this->Message->unread($this->Auth->user('id'));
 	    	$this->set('mess',$mess);
 	    }
         

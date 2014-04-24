@@ -52,12 +52,10 @@ $(document).ready(function(){
     if(AuthComponent::user('role')=='student'){
         echo $this->Html->link('違反レポート', '/document/report/'.$document['id'], array('class'=>'floatRight btn btn-danger'));
     }
-    $link = $this->html->url('/', true) . 'files' . DS . $document['link'];
+    $link = $this->html->url('/', true) . 'files' . DS . urlencode($document['link']);
     $path_parts = pathinfo($link);
     $extension = $path_parts['extension'];
     $extension = strtolower($extension);
-
-
     if ($extension == 'pdf'){
         echo "<div class='col-xs col-md-10'>";
         echo $this->Html->image('icon/trans.png', array("class"=>"transimage img-responsive", "oncontextmenu"=>'return false'));

@@ -67,8 +67,8 @@ $(document).ready(function(){
     <ul class="nav navbar-nav">
         <?php if(AuthComponent::user('role')=='lecturer'):?>
             <li><a href='/lecturer/'>先生</a></li>
-<!--             <li><a href='/lecturer/violate'>Reports <span class="badge alert-danger">42</span></a></li>
- -->        <?php elseif (AuthComponent::user('role')=='student'): ?>
+            <li><a href='/lecturer/violate'>レポート <span class="badge alert-danger"><?php echo $mess?></span></a></li>
+        <?php elseif (AuthComponent::user('role')=='student'): ?>
             <li><a href='/students/'>学生</a></li>
         <?php elseif (AuthComponent::user('role')=='admin'): ?>
             <li><a href='/Admins/'>管理者</a></li>
