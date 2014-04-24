@@ -24,10 +24,12 @@
                     <a href="/lecturer/violate/<?php echo $message["Message"]['id']?>" class="list-group-item">
                         <span class="glyphicon glyphicon-star-empty"></span>
                         <span class="name" style="min-width: 120px;display: inline-block;">管理者</span> 
-                        <?php if($message['Message']['type'] == 'Warning'):?>
-                            <span class="text-muted" style="font-size: 11px;"><span class="label label-warning">Warning</span></span> 
+                        <?php if($message['Message']['type'] == 'Block'):?>
+                            <span class="text-muted" style="font-size: 11px;"><span class="label label-warning">Block</span></span> 
                         <?php elseif($message['Message']['type'] == 'Delete') :?>
                             <span class="text-muted" style="font-size: 11px;"><span class="label label-danger">Deleted</span></span> 
+                        <?php elseif($message['Message']['type'] == 'Unblock') :?>
+                            <span class="text-muted" style="font-size: 11px;"><span class="label label-success">Unblocked</span></span> 
                         <?php endif ?>    
                         <span class=""><?php echo $message['Message']['content']?></span>
                         <span
@@ -45,17 +47,15 @@
                 <div class="list-group">
                     <?php foreach ($Messages as $message):?>
                     <?php if($message['Message']['read'] == 1):?>
-                    <?php if($message['Message']['object_type'] == 'Document'):?>
-                    <a href="/document/show/<?php echo $message["Message"]['object_id']?>" class="list-group-item">
-                    <?php else :?>
-                    <a href="/document/show/<?php echo $message["Message"]['object_id']?>" class="list-group-item">
-                    <?php endif ?>
+                    <a href="/lecturer/violate/<?php echo $message["Message"]['id']?>" class="list-group-item">
                         <span class="glyphicon glyphicon-star-empty"></span>
                         <span class="name" style="min-width: 120px;display: inline-block;">管理者</span> 
-                        <?php if($message['Message']['type'] == 'Warning'):?>
-                            <span class="text-muted" style="font-size: 11px;"><span class="label label-warning">Warning</span></span> 
+                        <?php if($message['Message']['type'] == 'Block'):?>
+                            <span class="text-muted" style="font-size: 11px;"><span class="label label-warning">Block</span></span> 
                         <?php elseif($message['Message']['type'] == 'Delete') :?>
                             <span class="text-muted" style="font-size: 11px;"><span class="label label-danger">Deleted</span></span> 
+                        <?php elseif($message['Message']['type'] == 'Unblock') :?>
+                            <span class="text-muted" style="font-size: 11px;"><span class="label label-success">Unblocked</span></span> 
                         <?php endif ?>
                         <span class=""><?php echo $message['Message']['content']?></span>
                         <span

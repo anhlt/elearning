@@ -110,7 +110,7 @@ class UsersController extends AppController {
             	if($failedTime >= $this->Parameter->getWrongPasswordTimes()){
             		if(!empty($user)){
     					$this->mc->set($user['User']['username'],time() + $locktime, time() + $locktime);
-    					if($user['User']['role'] == 'lecturer'){
+    					if($user['User']['role'] == 'lecturer' && $user['User']['actived'] == 1){
     						$user['User']['actived'] = '-1';	
     						unset($user['User']['password']);
     						$this->User->save($user);

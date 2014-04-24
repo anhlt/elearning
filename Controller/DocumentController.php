@@ -13,6 +13,7 @@ class DocumentController extends AppController {
 		if ($this->request->is('post')) {
 			$data = $this->request->data['Document'];
 			unset($data['check']);
+			$error = array();
 			foreach ($data as $Document)
 			{				
 				$Document['link']['name'] = str_replace(' ', '', $Document['link']['name']);
@@ -24,17 +25,21 @@ class DocumentController extends AppController {
 					$this->Document->create();
 					if ($this->Document->save($data)) {
 						move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT . "files". DS . $name);
-						$this->Session->setFlash(__('ドキュメントがアップロードされた'), 'alert', array(
-							'plugin' => 'BoostCake',
-							'class' => 'alert-success'));
+
 					}
 					else {
-	                	$this->Session->setFlash(__('ドキュメントをアップロードできない、もう一度お願い'), 'alert', array(
-          	 				'plugin' => 'BoostCake',
-            				'class' => 'alert-warning'));
+						array_push($error, $Document['link']['name']);
 	                }
 				}     
 	        }
+	        if(sizeof($error)!=0)
+	        	$this->Session->setFlash(__('ドキュメントをアップロードできない、もう一度お願い '.implode(",", $error)), 'alert', array(
+	 				'plugin' => 'BoostCake',
+					'class' => 'alert-warning'));
+	        else
+				$this->Session->setFlash(__('ドキュメントがアップロードされた'), 'alert', array(
+						'plugin' => 'BoostCake',
+						'class' => 'alert-success'));
 
  			$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $lesson_id));	
 		}		
@@ -104,11 +109,11 @@ class DocumentController extends AppController {
 	public function delete() 
 	{
         $id = $this->params['named']['id'];
-        $data = $this->Document->find('first', $id);
+        $data = $this->Document->findById($id);
         $name = $data['Document']['link'];	
         if ($this->Document->delete($id)) 
         {
-            unlink(WWW_ROOT . 'files' . DS . $name);    		
+            unlink(WWW_ROOT . 'files' . DS . $name);
             $this->Session->setFlash(__('ドキュメントが削除された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
