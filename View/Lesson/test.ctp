@@ -9,7 +9,8 @@
 	<li><?php echo $this->html->link('課金情報', array('controller'=>'lesson', 'action'=>'bill', 'id'=>$id));?></li>
 	<li><?php echo $this->html->link('学生リスト', array('controller'=>'lesson', 'action'=>'student',	'id'=>$id));?></li>
 	<li><?php echo $this->html->link('サマリー情報', array('controller'=>'lesson', 'action'=>'summary', 'id'=>$id));?>	</li>
-	<li><?php echo $this->html->link('レポート', array('controller'=>'lesson', 'action'=>'report', 'id'=>$id));?></li>		
+	<li><?php echo $this->html->link('コメント', array('controller'=>'lesson', 'action'=>'comment', 'id'=>$id));?></li>
+	<li><?php echo $this->html->link('メッセージ', array('controller'=>'lesson', 'action'=>'message', 'id'=>$id));?></li>	
 	</ul>
 	</div>
 	<div class="col-xs-13 col-md-9">

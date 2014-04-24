@@ -72,6 +72,7 @@ class UsersController extends AppController {
 	        if ($this->Auth->login()) {
 	        	$this->Session->write('failedTime',0);
 	        	$user = $this->Auth->user();
+	        	/*
 		  		if($pause = $this->mc->get($user['username'])){
 	        		$this->Auth->logout();
 		  			$this->Session->setFlash(__('このアカウントは'.date('Y-m-d H:i:s', $pause).'　までロックされる'), 'alert', array(
@@ -79,7 +80,7 @@ class UsersController extends AppController {
 							'class' => 'alert-warning'
 						));
 					$this->redirect(array('controller'=>'users','action' => 'login'));
-		  		}
+		  		}*/
 
 	        	if ($user['actived'] == -1 && $user['role'] == 'lecturer') {
 	        		$this->Auth->logout();

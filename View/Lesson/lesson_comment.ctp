@@ -9,8 +9,9 @@
 	<li><?php echo $this->html->link('学生リスト', array('controller'=>'lesson', 'action'=>'student', 'id'=>$id));?></li>
 	<li><?php echo $this->html->link('サマリー情報', array('controller'=>'lesson', 'action'=>'summary', 'id' => $id));?></li>
 	<li class="active">
-		<?php echo $this->html->link('レポート', array('controller'=>'lesson', 'action'=>'report', 'id'=>$id));?>	
-	</li>	
+		<?php echo $this->html->link('コメント', array('controller'=>'lesson', 'action'=>'lesson_comment', 'id'=>$id));?>
+	</li>
+	<li><?php echo $this->html->link('メッセージ', array('controller'=>'lesson', 'action'=>'message', 'id'=>$id));?></li>
 	</ul>
 	</div>
 	<div class="col-xs-13 col-md-9">		
@@ -22,59 +23,7 @@
 			<div style='text-align: center; margin-bottom: 20px;'>
 				<h4><b>レポート</b></h4>
 			</div>				
-			<div style='width: 600px; margin: auto;'>
-				<?php
-					$index = 0;
-					if(count($reports) > 0) {
-						print '<b>違反ドキュメント</b>';
-				?>
-				<div style='margin: 10px 0px 10px 0px;'>
-				<table class="table table-bordered">
-				<tr>
-					<td  class="col-sm-2">順番</td>
-					<td  class="col-sm-4">名前</td>					
-					<td  class="col-sm-2">編集</td>		
-				</tr>
-				 <?php foreach ($reports as $report) {?>
-					<tr>
-					  	<td><?php if($index < 9) echo '0'; echo ++$index ?> </td>
-					  	<td><?php echo($report['Document']['title']) ?> </td>				  					  	
-					  	<td>
-					  		<?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'edit', 'id' => $id, 
-					  			"document_id"=>$report['Document']['id'], 'ihan' => 'true'), array('class' => 
-					  			'glyphicon glyphicon-edit')); ?>
-					  	</td>		  	
-					</tr>
-				 <?php }?>
-				</table>
-				</div>
-				<?php }?>
-
-				<?php
-					$index = 0;
-					if(count($bans) > 0) {
-						print '<b>禁止ドキュメント</b>';					
-				?>
-				<table class="table table-bordered">
-				<tr>
-					<td  class="col-sm-2">順番</td>
-					<td  class="col-sm-4">名前</td>					
-					<td  class="col-sm-2">編集</td>		
-				</tr>
-				 <?php foreach ($bans as $ban) {?>
-					<tr>
-					  	<td><?php if($index < 9) echo '0'; echo ++$index ?> </td>
-					  	<td><?php echo($ban['Document']['title']) ?> </td>				  					  	
-					  	<td>
-					  		<?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'edit', 'id' => $id, 
-					  			"document_id"=>$ban['Document']['id'], 'ihan' => 'true'), array('class' => 
-					  			'glyphicon glyphicon-edit')); ?>
-					  	</td>		  	
-					</tr>
-				 <?php }?>
-				</table>
-				<?php }?>
-				
+			<div style='width: 600px; margin: auto;'>				
 				<p>返事</p>			
 				<?php
 					if(count($results) > 0) {

@@ -9,7 +9,8 @@
 		<li><?php echo $this->html->link('学生リスト', array('controller'=>'lesson', 'action'=>'student',	'id'=>$id));?></li>
 		<li class="active">
 			<?php echo $this->html->link('サマリー情報', array('controller'=>'lesson', 'action'=>'summary','id'=>$id));?></li>
-		<li><?php echo $this->html->link('レポート', array('controller'=>'lesson', 'action'=>'report', 'id'=>$id));?></li>
+		<li><?php echo $this->html->link('コメント', array('controller'=>'lesson', 'action'=>'lesson_comment', 'id'=>$id));?></li>
+		<li><?php echo $this->html->link('メッセージ', array('controller'=>'lesson', 'action'=>'message', 'id'=>$id));?></li>
 		</ul>
 	</div>
 	<div class="col-xs-13 col-md-9">
@@ -39,7 +40,7 @@
 				</table>
 
 				<div class='row'>				
-					<span style='margin: 10px 40px 0px 410px;'>授業を削除する</span>
+					<span style='margin: 10px 40px 0px 425px;'><b>授業を削除する<b></span>
 					<?php echo $this->html->link('削除', array('controller' => 'lesson', 'action' => 'delete'), array('class' => 'btn btn-primary'))?>				
 				</div>
 			</div>

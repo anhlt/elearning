@@ -1,8 +1,8 @@
 <?php
 class DocumentController extends AppController {
 	var $name = "Document";
-	var $uses = array('Document','Lesson', 'Report');
-	public $components = array('Util'); 
+	public $components = array('RequestHandler','Paginator','Util');
+	var $uses = array('User', 'Lecturer','Question','Lesson','Tag', 'Document', 'Test', 'LessonMembership', 'Message');
 	public $helpers = array("TsvReader");
 	public function add() {
 		$lesson_id = $this->params['named']['id'];
@@ -103,7 +103,7 @@ class DocumentController extends AppController {
 				    	$this->Report->query($sql);
 
 				    	$doc = $this->Document->find("first", array('conditions' => array('id' => $document_id)));
-						$doc['Document']['baned'] = 0;
+						$doc['Document']['baned'] = 2;
 						debug($doc);
 						$this->Document->create();
 				    	$this->Document->save($doc);	    	
@@ -179,5 +179,36 @@ class DocumentController extends AppController {
             $this->redirect(array("controller"=>"lesson","action"=>"learn",$lesson_id));  
         } 
 
+    }
+
+    public function message() {
+    	$user = $this->Auth->user();
+    	$doc_id = $this->params['named']['id'];
+       		
+        if($user["role"] == 'lecturer') {           
+            $this->paginate = array(
+                'fields' => array('Message.user_id', 'Message.content', 'Message.type', 'Message.time'),
+                'limit' => 10,
+                'conditions' => array(
+                    'Message.object_id' => $doc_id,
+                    'Message.object_type' => 'Document'
+                )
+            );
+
+            $this->Paginator->settings = $this->paginate;
+            $results = $this->Paginator->paginate("Message");
+
+            $index = 0;
+            foreach ($results as $result) {
+            	$user_id = $result['Message']['user_id'];            	
+            	$sql = array("fields" => "User.username", "conditions"=> array("User.id =" => $user_id));
+            	$u = $this->User->find('first', $sql);            	
+            	$results[$index++]['Message']['username'] = $u['User']['username'];      	
+            }
+
+            $this->set('results', $results);				
+        } else {
+            $this->redirect(array('controller' => 'users' ,"action" => "permission" ));
+        }    	
     }
 }

@@ -18,23 +18,25 @@
 			<table class="table table-condensed">
 			<h2>授業</h2>
 			<tr>
-				<td  class="col-sm-1"><?php echo $this->Paginator->sort('id', '順番'); ?></td>
-				<td  class="col-sm-2"><?php echo $this->Paginator->sort('Name','名前');?></td>
-				<td  class="col-sm-2">説明</td>
-				<td  class="col-sm-1">更新</td>
-				<td  class="col-sm-1">管理</td>
+				<td  class="col-sm-1"><b><?php echo $this->Paginator->sort('id', '順番'); ?><b></td>
+				<td  class="col-sm-3"><b><?php echo $this->Paginator->sort('Name','名前');?><b></td>
+				<td  class="col-sm-3"><b>説明<b></td>
+				<td  class="col-sm-2"><b>禁止された</b></td>
+				<td  class="col-sm-1"><b>更新</b></td>
+				<td  class="col-sm-1"><b>管理</b></td>				
 			</tr>
 			<?php foreach ($results as $result) :?>
 			<tr id="resultsDiv">
 				<td><?php if($index < 9) echo '0'; echo ++$index; ?> </td>
 				<td><?php echo($result['Lesson']['Name']) ?> </td>
 				<td><?php echo($result['Lesson']['summary']) ?> </td>
+				<td><font color="red"><b><?php echo($result['Lesson']['baned']?"True":"False");?><b></font></td>
 				<td>
 					<?php echo $this->html->link('更新', array('controller' => 'lesson', 'action' => 'edit', "id"=>$result['Lesson']['id']),array('class' => 'btn btn-primary'))?>					
 				</td>
 				<td>
 					<?php echo $this->html->link('管理', array('controller' => 'lesson', 'action' => 'doc', "id"=>$result['Lesson']['id']), array('class' => 'btn btn-primary'))?>
-				</td>
+				</td>				
 			</tr>
 			<?php endforeach;?>
 			</table>

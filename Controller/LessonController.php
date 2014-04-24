@@ -100,7 +100,7 @@ class LessonController extends AppController {
 
             if($result != NULL) {
                 $this->paginate = array(
-                    'fields' => array('Document.id', 'Document.link', 'Document.title'),
+                    'fields' => array('Document.id', 'Document.link', 'Document.title', 'Document.baned'),
                     'limit' => 10,
                     'conditions' => array(
                         'Document.lesson_id' => $lesson_id
@@ -244,7 +244,7 @@ class LessonController extends AppController {
         }		
     }
 
-    public function report() {
+    public function lesson_comment() {
         $lesson_id = $this->Session->read('lesson_id');		
         $this->set("id", $lesson_id);
         $user = $this->Auth->user();	
@@ -253,33 +253,7 @@ class LessonController extends AppController {
             $sql = array("conditions"=> array("Lesson.id =" => $lesson_id, "lecturer_id =" => $user['id']));
             $results = $this->Lesson->find('first', $sql);
 
-            if($results != NULL) {				
-                $results = $this->Document->find('all', array('conditions'=> array('Document.lesson_id' => $lesson_id)));
-                //var_dump($results);
-                $reports = array();
-                foreach ($results as $result) {
-                    $docs = null;
-                    $link = $result['Document']['link'];
-                    $sql = array('conditions' => array('Report.document_id' => $result['Document']['id'], 'Report.state' => 1));
-                    $docs = $this->Report->find('first', $sql);
-
-                    if($docs != NULL) {
-                        $x['Document']['id'] = $result['Document']['id'];
-                        $x['Document']['title'] = $result['Document']['title'];						
-                        array_push($reports, $x);
-                    }	    					
-                }	
-                $this->set('reports', $reports);
-
-                $bans = $this->Document->find('all', array('conditions'=> array('Document.baned' => 1)));
-                $this->set('bans', $bans);               
-
-                $sql = array(
-                    'fields' => array('Comment.id', 'Comment.user_id', 'Comment.content', 'Comment.time'),
-                    'conditions' => array(
-                        'Comment.lesson_id' => $lesson_id),
-                    //'contain' => array('Student')
-                );				
+            if($results != NULL) {
                 $results = $this->Comment->find('all', $sql);
 
                 $index = 0;
@@ -309,6 +283,40 @@ class LessonController extends AppController {
             $this->redirect(array('controller' => 'users' ,"action" => "permission" ));
         }		
     }
+
+    public function message() {
+        $this->loadModel('Message');
+        $lesson_id = $this->Session->read('lesson_id');     
+        $this->set("id", $lesson_id);
+        $user = $this->Auth->user();
+            
+        if($user["role"] == 'lecturer') {           
+            $this->paginate = array(
+                'fields' => array('Message.user_id', 'Message.content', 'Message.type', 'Message.time'),
+                'limit' => 10,
+                'conditions' => array(
+                    'Message.object_id' => $lesson_id,
+                    'Message.object_type' => 'Lesson'
+                )
+            );
+
+            $this->Paginator->settings = $this->paginate;
+            $results = $this->Paginator->paginate("Message");
+
+            $index = 0;
+            foreach ($results as $result) {
+                $user_id = $result['Message']['user_id'];               
+                $sql = array("fields" => "User.username", "conditions"=> array("User.id =" => $user_id));
+                $u = $this->User->find('first', $sql);              
+                $results[$index++]['Message']['username'] = $u['User']['username'];         
+            }
+
+            $this->set('results', $results);                
+        } else {
+            $this->redirect(array('controller' => 'users' ,"action" => "permission" ));
+        }       
+    }
+
 
     public function banstudent($value='') {
         $lesson_id = $this->params['named']['lesson_id'];
