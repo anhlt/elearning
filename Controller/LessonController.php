@@ -427,32 +427,30 @@ class LessonController extends AppController {
         $user = $this->Auth->user();
 
         if($user['role'] == 'lecturer') {
-            $sql = array('conditions'=> array('Lesson.id' => $lesson_id, 'lecturer_id' => $user['id']));
-            $result = $this->Lesson->find('first', $sql);			
-
+            $result = $this->Lesson->findById($lesson_id);
             if($result != NULL) 
             {
+                
+                $docs = $this->Document->find('all', array('conditions'=> array('Document.lesson_id' => $lesson_id)));
+                foreach ($docs as $doc) {
+                    $link = $doc['Document']['link'];
+                    if ($this->Document->delete($doc['Document']['id'])) {
+                        unlink(WWW_ROOT. 'files' . DS . $link);                        
+                    }                               
+                }
+
+                $tests = $this->Test->find('all', array('conditions'=> array('Test.lesson_id' => $lesson_id)));                   
+                foreach ($tests as $test) {
+                    $link = $test['Test']['link'];
+                    if ($this->Test->delete($test['Test']['id'])) {
+                        unlink(WWW_ROOT. 'tsv' . DS . $link);                       
+                    }                               
+                }   
+
+
                 if ($this->Lesson->delete($lesson_id))
                 {	
                     //del document file
-                    $results = $this->Document->find('all', array('conditions'=> array('Document.lesson_id' => $lesson_id)));
-                    var_dump($results);
-                    foreach ($results as $result) {
-                        $link = $result['Document']['link'];
-                        if ($this->Document->delete($result['Document']['id'])) {
-                            unlink(WWW_ROOT.DS.$link);	                 	
-                        }		    					
-                    }	    	
-
-                    //del test file
-                    $results = $this->Test->find('all', array('conditions'=> array('Test.lesson_id' => $lesson_id)));					
-                    foreach ($results as $result) {
-                        $link = $result['Test']['link'];
-                        if ($this->Test->delete($result['Test']['id'])) {
-                            unlink(WWW_ROOT.DS.$link);	                 	
-                        }		    					
-                    }	
-
                     // delete comment
                     $this->Comment->deleteAll(array('Comment.lesson_id' => $lesson_id), false);
 
@@ -460,7 +458,7 @@ class LessonController extends AppController {
                         'plugin' => 'BoostCake',
                         'class' => 'alert-success'
                     )); 		            
-                    return $this->redirect(array('controller' => 'lecturer' ,"action" => "manage" ));
+                    return $this->redirect($this->referer());
                 } 
             }
 
@@ -468,19 +466,6 @@ class LessonController extends AppController {
             $this->redirect(array('controller' => 'users' ,"action" => "permission" ));
         }          
     }
-
-    // public function show($lesson_id){
-    //     $user_id = $this->Auth->user("id");
-    //     if ($this->Util->checkLessonAvailableWithStudent($lesson_id, $user_id)){
-    //         $this->redirect("/lesson/learn/".$lesson_id);     
-    //     } 
-    //     $this->Lesson->recursive = 2; 
-    //     $options['conditions'] = array("Lesson.id"=>$lesson_id); 
-    //     $lessons = $this->Lesson->find("first",$options); 
-    //     $this->set("lessons",  $lessons);
-    // }
-
-
 
     public function learn($lesson_id){
 

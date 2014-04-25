@@ -2,12 +2,13 @@
 
 App::uses('Folder', 'Utility');
 App::uses('File', 'Utility');
+App::import('Controller', 'Lesson'); // mention at top
 
 class AdminsController extends AppController {
 
     public $components = array('Paginator', 'Util', 'RequestHandler', 'Message');
     public $helpers = array('Js');
-    var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter', 'Question', 'Document', 'Violate', 'Lesson', 'Ihan');
+    var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter', 'Question', 'Document', 'Violate', 'Lesson', 'Ihan','Test','Comment');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -1616,20 +1617,46 @@ class AdminsController extends AppController {
         }
     }
 
+
+    public function __delete_lesson($lesson_id)
+    {
+        $result = $this->Lesson->findById($lesson_id);
+        if($result != NULL) 
+        {
+            $docs = $this->Document->find('all', array('conditions'=> array('Document.lesson_id' => $lesson_id)));
+            foreach ($docs as $doc) {
+                $link = $doc['Document']['link'];
+                if ($this->Document->delete($doc['Document']['id'])) {
+                    unlink(WWW_ROOT. 'files' . DS . $link);                        
+                }                               
+            }
+            $tests = $this->Test->find('all', array('conditions'=> array('Test.lesson_id' => $lesson_id)));                   
+            foreach ($tests as $test) {
+                $link = $test['Test']['link'];
+                if ($this->Test->delete($test['Test']['id'])) {
+                    unlink(WWW_ROOT. 'tsv' . DS . $link);                       
+                }                               
+            }   
+            if ($this->Lesson->delete($lesson_id))
+            {   
+                $this->Comment->deleteAll(array('Comment.lesson_id' => $lesson_id), false);                  
+                return true;
+            } 
+        }else
+            return false;
+    }
+
     public function delete_lesson($lesson_id) {
         if (!$this->request->is('post')) {
-            
         } else {
             $Lesson = $this->Lesson->findById($lesson_id);
-            //メッセージの情報
             $user_id = $id = $this->Auth->user('id');
             $recipient_id = $Lesson["Lesson"]['lecturer_id'];
             $type = 'Delete';
             $content = $this->request->data["Message"]["content"];
             $object_id = $lesson_id;
             $object_type = 'Lesson';
-
-            if ($this->Lesson->delete($lesson_id) && $this->Message->Sent($user_id, $recipient_id, $type, $content, $object_id, $object_type)) {
+            if ($this->__delete_lesson($lesson_id) && $this->Message->Sent($user_id, $recipient_id, $type, $content, $object_id, $object_type)) {
                 $this->Session->setFlash(__('授業が削除された。そして、先生にメッセージを送った。'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
