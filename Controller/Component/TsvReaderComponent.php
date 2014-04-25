@@ -14,7 +14,7 @@
     }
 
 	public function getViewTSV($filename) {
-      	$link = $_SERVER['DOCUMENT_ROOT']. DS . 'webroot' . DS .'tsv' . DS . $filename;
+      	$link = WWW_ROOT. "tsv" . DS  . $filename;
         $this->remove_utf8_bom($filename);
         $data_tsv = array();
         if (($handle = fopen($link, "r")) !== FALSE) {

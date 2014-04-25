@@ -105,7 +105,7 @@ if (isset($rank_stt)){
             foreach($lessons as $row){ 
                 $lesson = $row['Lesson'];
                 $lecturer = $row['Lecturer'];
-                $user = $row['Lecturer']['User'];
+                $user = $lecturer['User'];
                 if (isset($lesson_truoc) && $lesson_truoc != $lesson['id']){
                      $count = $count + 1;
                 }
