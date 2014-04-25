@@ -53,10 +53,8 @@ class DocumentController extends AppController {
 		}		
 	}
 
-	public function edit() {
-		$id = $this->params['named']['id'];
-		$document_id = $this->params['named']['document_id'];		
-		$this->set('id', $id);
+	public function edit() {		
+		$document_id = $this->params['named']['id'];		
 		$this->set('document_id', $document_id);
 		$results = $this->Document->find("first", array("conditions"=>array('id'=>$document_id)));		
 		$this->set('result', $results['Document']);		
@@ -69,8 +67,7 @@ class DocumentController extends AppController {
 			$data = $this->request->data['Document'];
 			$this->request->data['Document']['id'] = $document_id;
 			
-			$uploaded = 0;
-			//debug($data['link']);
+			$uploaded = 0;			
 
 			if($data['link']['name'] != '') {
 				$uploaded = 1;
@@ -82,14 +79,13 @@ class DocumentController extends AppController {
 					$this->Session->setFlash(__('ドキュメントをアップロードできない、もう一度お願い'), 'alert', array(
 	                    'plugin' => 'BoostCake',
 	                    'class' => 'alert-warning'
-	            	));	
+	            	));
 				}
 			}
 			else {
 				$this->request->data['Document']['link'] = $results['Document']['link'];							
-			}
+			}			
 			
-			//debug($uploaded);
 			if($uploaded != 2) {
 				if($this->Document->save($this->request->data['Document']))
 				{	
@@ -98,15 +94,9 @@ class DocumentController extends AppController {
 						move_uploaded_file($data['link']['tmp_name'], WWW_ROOT. 'files' . DS . $name);
 					}			
 
-					if($ihan == 'true') {
-				    	$sql = "UPDATE reports SET state = '0' WHERE document_id = '$document_id'";
-				    	$this->Report->query($sql);
-
-				    	$doc = $this->Document->find("first", array('conditions' => array('id' => $document_id)));
-						$doc['Document']['baned'] = 2;
-						debug($doc);
-						$this->Document->create();
-				    	$this->Document->save($doc);	    	
+					if($ihan == 'true') {				    	
+				    	$sql = "UPDATE documents SET baned = '2' WHERE id = '$document_id'";
+				    	$this->Document->query($sql);							    	
 					}
 
 	                $this->Session->setFlash(__('ドキュメントが更新された'), 'alert', array(
@@ -119,13 +109,11 @@ class DocumentController extends AppController {
 	                    'plugin' => 'BoostCake',
 	                    'class' => 'alert-warning'
 	            	));	
-				}
+				}				
 				
-				if($ihan == 'true')
-					$this->redirect(array('controller' => 'lesson', 'action' => 'report', 'id' => $id));	
-				else
-					$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $id));
-					
+				$docs = $this->Document->find("first", array("conditions"=>array('id'=>$document_id))); 
+				debug($docs['Document']['lesson_id']);
+				$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $docs['Document']['lesson_id']));					
 			}			
 		}
 	}
@@ -177,38 +165,6 @@ class DocumentController extends AppController {
             $data = array("student_id"=>$this->Auth->user("id"), "document_id"=>$document_id, "content"=>$content); 
             $this->Violate->save($data);
             $this->redirect(array("controller"=>"lesson","action"=>"learn",$lesson_id));  
-        } 
-
-    }
-
-    public function message() {
-    	$user = $this->Auth->user();
-    	$doc_id = $this->params['named']['id'];
-       		
-        if($user["role"] == 'lecturer') {           
-            $this->paginate = array(
-                'fields' => array('Message.user_id', 'Message.content', 'Message.type', 'Message.time'),
-                'limit' => 10,
-                'conditions' => array(
-                    'Message.object_id' => $doc_id,
-                    'Message.object_type' => 'Document'
-                )
-            );
-
-            $this->Paginator->settings = $this->paginate;
-            $results = $this->Paginator->paginate("Message");
-
-            $index = 0;
-            foreach ($results as $result) {
-            	$user_id = $result['Message']['user_id'];            	
-            	$sql = array("fields" => "User.username", "conditions"=> array("User.id =" => $user_id));
-            	$u = $this->User->find('first', $sql);            	
-            	$results[$index++]['Message']['username'] = $u['User']['username'];      	
-            }
-
-            $this->set('results', $results);				
-        } else {
-            $this->redirect(array('controller' => 'users' ,"action" => "permission" ));
-        }    	
-    }
+        }
+    }    
 }

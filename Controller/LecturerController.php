@@ -2,7 +2,7 @@
 
 class LecturerController extends AppController {
 	var $name = "Lecturer";
-  	var $uses = array('User', 'Lecturer','Question','Lesson', 'Test', 'Document', 'Comment');	
+  	var $uses = array('User', 'Lecturer','Question','Lesson', 'Test', 'Document', 'Comment', 'Message');	
 
 	public $components = array('RequestHandler','Paginator');
 	public $helpers = array('Js' => array('Jquery'),'LeftMenu');
@@ -69,6 +69,45 @@ class LecturerController extends AppController {
 			));
 	    }
     }
+
+    public function message() {      
+        $user = $this->Auth->user();
+            
+        if($user["role"] == 'lecturer') {           
+            $this->paginate = array(                
+                'limit' => 10,
+                'conditions' => array(
+                    'Message.recipient_id' => $user['id']
+                )
+            );
+
+            $this->Paginator->settings = $this->paginate;
+            $results = $this->Paginator->paginate("Message");
+
+            $index = 0;
+            foreach ($results as $result) {
+                $user_id = $result['Message']['user_id'];               
+                $sql = array("fields" => "User.username", "conditions"=> array("User.id =" => $user_id));
+                $u = $this->User->find('first', $sql);              
+                $results[$index++]['Message']['username'] = $u['User']['username'];         
+            }
+
+            $this->set('results', $results);
+        } else {
+            $this->redirect(array('controller' => 'users' ,"action" => "permission" ));
+        }       
+    }
+
+    public function msg_accept() {
+    	$id = $this->params['named']['id'];
+    	$sql = array("conditions"=> array("Message.id" => $id));
+        $result = $this->Message->find('first', $sql);
+        $result['Message']['read'] = 1;
+        $this->Message->save($result);
+
+		$this->redirect(array('controller' => 'lecturer' ,"action" => "message" ));
+    }
+
 	
 	public function index(){
 		$user = $this->Auth->user();

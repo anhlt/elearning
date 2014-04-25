@@ -10,8 +10,7 @@
 		</li>
 		<li><?php echo $this->html->link('学生リスト', array('controller'=>'lesson', 'action'=>'student', 'id'=>$id));?></li>
 		<li><?php echo $this->html->link('サマリー情報', array('controller'=>'lesson', 'action'=>'summary', 'id'=>$id));?>	</li>
-		<li><?php echo $this->html->link('コメント', array('controller'=>'lesson', 'action'=>'lesson_comment', 'id'=>$id));?></li>
-		<li><?php echo $this->html->link('メッセージ', array('controller'=>'lesson', 'action'=>'message', 'id'=>$id));?></li>
+		<li><?php echo $this->html->link('コメント', array('controller'=>'lesson', 'action'=>'lesson_comment', 'id'=>$id));?></li>	
 		</ul>
 	</div>
 	<div class="col-xs-13 col-md-9">
@@ -32,7 +31,7 @@
 
 			<table class="table table-condensed">
 				<tr>
-					<td  class="col-sm-2">順番</td>										
+					<td  class="col-sm-2"><b>順番</b></td>										
 					<td  class="col-sm-3"><?php echo $this->Paginator->sort('Name', '名前');?></td>
 					<td  class="col-sm-3"><?php echo $this->Paginator->sort('Start time', '開始時');?></td>
 					<td 　class="col-sm-3"><?php echo $this->Paginator->sort('End time', '終了時間');?></td>
@@ -40,7 +39,7 @@
 				</tr>
 			 <?php foreach ($results as $result) {?>
 			  <tr>
-			  	<td><?php if($index < 9) echo "0"; echo ++$index; ?> </td>	  		  	
+			  	<td><b><?php if($index < 9) echo "0"; echo ++$index; ?><b></td>	  		  	
 			  	<td><?php echo($result['Student']['full_name']) ?> </td>
 			  	<td><?php echo($result['LessonMembership']['days_attended']) ?> </td>
 			  	<td>

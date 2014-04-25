@@ -9,8 +9,7 @@
 	<li><?php echo $this->html->link('課金情報', array('controller'=>'lesson', 'action'=>'bill', 'id'=>$id));?></li>
 	<li><?php echo $this->html->link('学生リスト', array('controller'=>'lesson', 'action'=>'student',	'id'=>$id));?></li>
 	<li><?php echo $this->html->link('サマリー情報', array('controller'=>'lesson', 'action'=>'summary', 'id'=>$id));?>	</li>
-	<li><?php echo $this->html->link('コメント', array('controller'=>'lesson', 'action'=>'comment', 'id'=>$id));?></li>
-	<li><?php echo $this->html->link('メッセージ', array('controller'=>'lesson', 'action'=>'message', 'id'=>$id));?></li>	
+	<li><?php echo $this->html->link('コメント', array('controller'=>'lesson', 'action'=>'comment', 'id'=>$id));?></li>		
 	</ul>
 	</div>
 	<div class="col-xs-13 col-md-9">
@@ -30,7 +29,7 @@
 			<div class='table-responsive'>
 			<table class="table">
 				<tr>
-					<td  class="col-sm-1">順番</td>	
+					<td  class="col-sm-1"><b>順番</b></td>	
 					<td  class="col-sm-2"><?php echo $this->Paginator->sort('Title','名前'); ?></td>					
 					<td  class="col-sm-1"><?php echo $this->Paginator->sort('Time','時間'); ?></td>
 					<td  class="col-sm-1">更新</td>
@@ -40,7 +39,7 @@
 				</tr>
 			 <?php foreach ($results as $result) {?>
 			  <tr>
-			  	<td><?php if($index < 9) echo '0'; echo ++$index; ?> </td>
+			  	<td><b><?php if($index < 9) echo '0'; echo ++$index; ?></b></td>
 			  	<td><?php echo($result['Test']['title']) ?></td>			  	
 			  	<td><?php echo($result['Test']['test_time']) ?> </td>
 			  	<td>

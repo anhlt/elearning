@@ -10,8 +10,7 @@
 	<li><?php echo $this->html->link('課金情報', array('controller'=>'lesson', 'action'=>'bill', 'id'=>$id));?></li>
 	<li><?php echo $this->html->link('学生リスト', array('controller'=>'lesson', 'action'=>'student', 'id'=>$id));?></li>
 	<li><?php echo $this->html->link('サマリー情報', array('controller'=>'lesson', 'action'=>'summary', 'id' => $id));?></li>
-	<li><?php echo $this->html->link('コメント', array('controller'=>'lesson', 'action'=>'lesson_comment', 'id'=>$id));?>	</li>
-	<li><?php echo $this->html->link('メッセージ', array('controller'=>'lesson', 'action'=>'message', 'id'=>$id));?></li>
+	<li><?php echo $this->html->link('コメント', array('controller'=>'lesson', 'action'=>'lesson_comment', 'id'=>$id));?></li>	
 	</ul>
 	</div>
 	<div class="col-xs-13 col-md-9">
@@ -32,42 +31,41 @@
 			<table class="table">
 				<tr>
 					<td  class="col-sm-1">順番</td>
-					<td  class="col-sm-5"><?php echo $this->Paginator->sort('title','名前'); ?></td>					
+					<td  class="col-sm-5"><?php echo $this->Paginator->sort('title','名前'); ?></td>	
+					<td  align="left" class="col-sm-2">禁止</td>				
 					<td  align="center" class="col-sm-1">更新</td>					
 					<td  align="center" class="col-sm-1">見る</td>
-					<td  align="center" class="col-sm-1">削除</td>
-					<td  align="center" class="col-sm-2">禁止</td>
-					<td  align="center" class="col-sm-1">メッセージ</td>
+					<td  align="center" class="col-sm-1">削除</td>										
 				</tr>
 				 <?php foreach ($results as $result) {?>
 				  <tr>
 				  	<td><b><?php if($index < 9) echo '0'; echo ++$index ?><b></td>
-				  	<td><?php echo($result['Document']['title']) ?> </td>				  					  	
-				  	<td align="center">
-				  		<?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'edit', 'id' => $id, "document_id"=>$result['Document']['id'], 'ihan' => 'false'), array('class' => 'glyphicon glyphicon-edit')); ?>
-				  	</td>
-				  	<td align="center">
-				  		<?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'show',$result['Document']['id']), array('class' => 'glyphicon glyphicon-folder-open')); ?>
-			  		</td>		  	
-				  	<td align="center">
-				  		<?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'delete', "id"=>$result['Document']['id']), array('class' => 'glyphicon glyphicon-trash')); ?>
-				  	</td>
-				  	<td align="center">
-				  		<font color="red"><b>
+				  	<td><?php echo($result['Document']['title']) ?></td>
+				  	<td align="left">
+				  		<b>
 				  			<?php
 				  				if($result['Document']['baned'] == 0)
-				  					$msg = "普通";
+				  					$msg = "<font color='#156AEB'/>普通</font>";
 				  				elseif($result['Document']['baned'] == 1)
-				  					$msg = "修正された";
+				  					$msg = "<font color='red'>禁止された</font>";
 				  				else
-				  					$msg = "禁止された";
+				  					$msg = "<font color='#FFB300'>修正された</font>";
 				  				echo $msg;
 
 				  			?>
-				  		<b></font></td>
+				  		<b>
+				  	</td>				  					  	
 				  	<td align="center">
-				  		<?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'message', "id"=>$result['Document']['id']), array('class' => 'glyphicon glyphicon-envelope')); ?>
-				  	</td>				  				  	
+				  		<?php 
+				  			$i = ($result['Document']['baned'] == 1) ? "true" : "false";
+				  			echo $this->Html->link("", array('controller' => 'document', 'action' => 'edit', 'id' => $result['Document']['id'], 'ihan' => $i), array('class' => 'glyphicon glyphicon-edit')); ?>
+				  	</td>				  	
+				  	<td align="center">
+				  		<?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'show', $result['Document']['id']), array('class' => 'glyphicon glyphicon-folder-open')); ?>
+			  		</td>		  	
+				  	<td align="center">
+				  		<?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'delete', "id"=>$result['Document']['id']), array('class' => 'glyphicon glyphicon-trash')); ?>
+				  	</td>				  				  				  				  	
 				  	</tr>
 				 <?php }?>
 			</table>				

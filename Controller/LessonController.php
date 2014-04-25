@@ -1,7 +1,7 @@
 <?php 
 class LessonController extends AppController {
     var $name = "Lesson";
-    var $uses = array('User', 'Lecturer','Question','Lesson','Tag', 'Document', 'Test', 'LessonMembership', 'Comment', 'Student', 'Report');
+    var $uses = array('User', 'Lecturer','Question','Lesson','Tag', 'Document', 'Test', 'LessonMembership', 'Comment', 'Student', 'Report', 'Message');
     public $components = array('RequestHandler', 'Paginator','Util');
 
 
@@ -124,7 +124,7 @@ class LessonController extends AppController {
         $user = $this->Auth->user();
 
         if($user["role"] == 'lecturer') {			
-            $sql = array("conditions"=> array("Lesson.id =" => $lesson_id, "Lesson.lecturer_id =" => $user['id']));
+            $sql = array("conditions"=> array("Lesson.id" => $lesson_id, "Lesson.lecturer_id =" => $user['id']));
             $result = $this->Lesson->find('first', $sql);
 
             if($result != NULL) {
@@ -282,41 +282,7 @@ class LessonController extends AppController {
         } else {
             $this->redirect(array('controller' => 'users' ,"action" => "permission" ));
         }		
-    }
-
-    public function message() {
-        $this->loadModel('Message');
-        $lesson_id = $this->Session->read('lesson_id');     
-        $this->set("id", $lesson_id);
-        $user = $this->Auth->user();
-            
-        if($user["role"] == 'lecturer') {           
-            $this->paginate = array(
-                'fields' => array('Message.user_id', 'Message.content', 'Message.type', 'Message.time'),
-                'limit' => 10,
-                'conditions' => array(
-                    'Message.object_id' => $lesson_id,
-                    'Message.object_type' => 'Lesson'
-                )
-            );
-
-            $this->Paginator->settings = $this->paginate;
-            $results = $this->Paginator->paginate("Message");
-
-            $index = 0;
-            foreach ($results as $result) {
-                $user_id = $result['Message']['user_id'];               
-                $sql = array("fields" => "User.username", "conditions"=> array("User.id =" => $user_id));
-                $u = $this->User->find('first', $sql);              
-                $results[$index++]['Message']['username'] = $u['User']['username'];         
-            }
-
-            $this->set('results', $results);                
-        } else {
-            $this->redirect(array('controller' => 'users' ,"action" => "permission" ));
-        }       
-    }
-
+    }    
 
     public function banstudent($value='') {
         $lesson_id = $this->params['named']['lesson_id'];
@@ -463,45 +429,57 @@ class LessonController extends AppController {
 
         if($user['role'] == 'lecturer') {
             $sql = array('conditions'=> array('Lesson.id' => $lesson_id, 'lecturer_id' => $user['id']));
-            $result = $this->Lesson->find('first', $sql);			
+            $result = $this->Lesson->find('first', $sql);	
 
             if($result != NULL) 
             {
-                if ($this->Lesson->delete($lesson_id))
-                {	
-                    //del document file
-                    $results = $this->Document->find('all', array('conditions'=> array('Document.lesson_id' => $lesson_id)));
-                    var_dump($results);
-                    foreach ($results as $result) {
-                        $link = $result['Document']['link'];
-                        if ($this->Document->delete($result['Document']['id'])) {
-                            unlink(WWW_ROOT.DS.$link);	                 	
-                        }		    					
-                    }	    	
+             
+                //delete student lesson
+                $this->LessonMembership->deleteAll(array('LessonMembership.lesson_id' => $lesson_id), false);
 
-                    //del test file
-                    $results = $this->Test->find('all', array('conditions'=> array('Test.lesson_id' => $lesson_id)));					
-                    foreach ($results as $result) {
-                        $link = $result['Test']['link'];
-                        if ($this->Test->delete($result['Test']['id'])) {
-                            unlink(WWW_ROOT.DS.$link);	                 	
-                        }		    					
-                    }	
+                //delete all message
+                $this->Message->deleteAll(array('Message.object_type' => 'Lesson', 'Message.object_id' => $lesson_id), false);
 
-                    // delete comment
-                    $this->Comment->deleteAll(array('Comment.lesson_id' => $lesson_id), false);
+                //del document file              
+                $results = $this->Document->find('all', array('conditions'=> array('Document.lesson_id' => $lesson_id)));
+                                  
+                foreach ($results as $result) {                        
+                    $link = $result['Document']['link'];  
+                    if ($this->Document->delete($result['Document']['id'])) {                           
+                        unlink(WWW_ROOT . 'files' . DS . $link);                                                                   	
+                    }
 
-                    $this->Session->setFlash(__('授業が削除された'), 'alert', array(
-                        'plugin' => 'BoostCake',
-                        'class' => 'alert-success'
-                    )); 		            
-                    return $this->redirect(array('controller' => 'lecturer' ,"action" => "manage" ));
-                } 
+                    //delete all message
+                    $this->Message->deleteAll(array('Message.object_type' => 'Lesson', 'Message.object_id' => 
+                        $result['Document']['id']), false);		    					
+                }	    	
+
+                //del test file
+                $results = $this->Test->find('all', array('conditions'=> array('Test.lesson_id' => $lesson_id)));				
+                foreach ($results as $result) {
+                    $link = $result['Test']['link'];                       
+
+                    if ($this->Test->delete($result['Test']['id'])) {
+                        unlink(WWW_ROOT . 'tsv' . DS . $link);	                 	
+                    }		    					
+                }
+
+                // delete all comment
+                $this->Comment->deleteAll(array('Comment.lesson_id' => $lesson_id), false);
+
+                $this->Session->setFlash(__('授業が削除された'), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+
+                $this->Lesson->delete($lesson_id);
+               		            
+                return $this->redirect(array('controller' => 'lecturer' ,"action" => "manage" ));       
+
+            } else {
+                $this->redirect(array('controller' => 'users' ,"action" => "permission" ));
             }
-
-        } else {
-            $this->redirect(array('controller' => 'users' ,"action" => "permission" ));
-        }          
+        }       
     }
 
     // public function show($lesson_id){

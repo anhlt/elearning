@@ -10,8 +10,7 @@
 	<li><?php echo $this->html->link('サマリー情報', array('controller'=>'lesson', 'action'=>'summary', 'id' => $id));?></li>
 	<li class="active">
 		<?php echo $this->html->link('コメント', array('controller'=>'lesson', 'action'=>'lesson_comment', 'id'=>$id));?>
-	</li>
-	<li><?php echo $this->html->link('メッセージ', array('controller'=>'lesson', 'action'=>'message', 'id'=>$id));?></li>
+	</li>	
 	</ul>
 	</div>
 	<div class="col-xs-13 col-md-9">		

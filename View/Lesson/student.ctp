@@ -2,7 +2,7 @@
 	<?php echo $this->Session->flash(); ?>
 
 	<div class="col-xs-5 col-md-3">
-		<ul class="nav nav-pills nav-stacked" id="myTab">
+	<ul class="nav nav-pills nav-stacked" id="myTab">
 		<li><?php echo $this->html->link('ファイル情報', array('controller'=>'lesson', 'action'=>'doc', 'id'=>$id));?></li>
 		<li><?php echo $this->html->link('テスト情報', array('controller'=>'lesson', 'action'=>'test', 'id'=>$id));?></li>
 		<li><?php echo $this->html->link('課金情報', array('controller'=>'lesson', 'action'=>'bill', 'id'=>$id));?></li>
@@ -10,9 +10,8 @@
 			<?php echo $this->html->link('学生リスト', array('controller'=>'lesson', 'action'=>'student', 'id'=>$id));?>
 		</li>
 		<li><?php echo $this->html->link('サマリー情報', array('controller'=>'lesson', 'action'=>'summary', 'id'=>$id));?>	</li>
-		<li><?php echo $this->html->link('コメント', array('controller'=>'lesson', 'action'=>'lesson_comment', 'id'=>$id));?></li>
-		<li><?php echo $this->html->link('メッセージ', array('controller'=>'lesson', 'action'=>'message', 'id'=>$id));?></li>
-		</ul>
+		<li><?php echo $this->html->link('コメント', array('controller'=>'lesson', 'action'=>'lesson_comment', 'id'=>$id));?></li>	
+	</ul>
 	</div>
 
 	<div class="col-xs-13 col-md-9">
@@ -31,7 +30,7 @@
 			?>
 			<table class="table table-condensed">
 				<tr>
-					<td  class="col-sm-1">順番</td>					
+					<td  class="col-sm-1"><b>順番</b></td>					
 					<td  class="col-sm-3"><?php echo $this->Paginator->sort('name', '名前');?></td>
 					<td  class="col-sm-1"><?php echo $this->Paginator->sort('baned', '禁止');?></td>
 					<td  class="col-sm-1"><?php echo $this->Paginator->sort('liked', 'いいね');?></td>
@@ -40,10 +39,10 @@
 				</tr>
 			 <?php foreach ($results as $result) {?>
 			  <tr>
-			  	<td><?php if($index < 9) echo '0'; echo ++$index; ?> </td>			  	
+			  	<td><b><?php if($index < 9) echo '0'; echo ++$index; ?></b></td>			  	
 			  	<td><?php echo($result['Student']['full_name']) ?> </td>
-			  	<td><?php echo($result['LessonMembership']['baned']?"True":"false") ?> </td>
-			  	<td><?php echo($result['LessonMembership']['liked']?"True":"false") ?> </td>
+			  	<td><b><font color="#0A91FF"><?php echo($result['LessonMembership']['baned']?"True":"False") ?></font></b></td>
+			  	<td><b><font color="#0A91FF"><?php echo($result['LessonMembership']['liked']?"True":"False") ?></font></b></td>
 			  	<td>
 			  		<?php
 			  			$s = $result['LessonMembership']['baned'] ? "ok" : "ban";
@@ -51,7 +50,7 @@
 			  	</td>
 			  	<td>
 			  		<?php echo $this->html->link('', array('controller' => 'lesson', 'action' => 'deletestudent',
-			  		"student_id"=>$result['Student']['id'],"lesson_id"=>$result['LessonMembership']['lesson_id']), array('class' => 'glyphicon glyphicon-remove-sign'))?>			  		
+			  		"student_id"=>$result['Student']['id'],"lesson_id"=>$result['LessonMembership']['lesson_id']), array('class' => 'glyphicon glyphicon-trash'))?>			  		
 			  	</td>
 			  </tr>
 			 <?php }?>

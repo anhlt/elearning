@@ -2,13 +2,14 @@
 
 		 
 	<div class="col-xs-5 col-md-3">
-		<ul class="nav nav-pills nav-stacked" id="myTab">
-			<li><a href="/lesson/search">検索</a></li>
-			<li><a href="/lecturer/">従業管理</a></li>
-			<li><a href="/lecturer/lesson">新しい従業</a></li>
-			<li><a href="/lecturer/edit">情報を更新</a></li>
-			<li><a href="/lecturer/delete">アクアウートを削除</a></li>
-		</ul>
+	<ul class="nav nav-pills nav-stacked" id="myTab">
+		<li><?php echo $this->html->link('検索', array('controller'=>'lesson', 'action'=>'search'));?></li>
+		<li><?php echo $this->html->link('授業管理', array('controller'=>'lecturer', 'action'=>'manage'));?></li>
+		<li><?php echo $this->html->link('新しい従業', array('controller'=>'lecturer', 'action'=>'lesson'));?></li>
+		<li><?php echo $this->html->link('情報を更新', array('controller'=>'lecturer', 'action'=>'edit'));?></li>
+		<li><?php echo $this->html->link('メッセージ', array('controller'=>'lecturer', 'action'=>'message'));?></li>
+		<li><?php echo $this->html->link('アクアウートを削除', array('controller'=>'lecturer', 'action'=>'delete'));?>	</li>	
+	</ul>
 	</div>
 	<?php echo $this->Session->flash(); ?>		
 	<div class="col-xs-13 col-md-9">
