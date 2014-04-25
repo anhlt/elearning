@@ -3,7 +3,7 @@
 
     public function remove_utf8_bom($filename)
     {
-        $file = $_SERVER['DOCUMENT_ROOT']. DS . 'webroot' . DS .'tsv' . DS . $filename;
+        $file = WWW_ROOT. "tsv" . DS  . $filename;
         // Open the file to get existing content
         $current = file_get_contents($file);
         // Append a new person to the file
@@ -43,8 +43,8 @@
             $review = "<div name=\"TestTitle\">" . $data_tsv[0][1] . "</div>";
             $row = 1;
             $num = count($data_tsv);
-            if ($data_tsv[1][0] == "TestSunTitle") {
-                $review = $review . "<div name=\"TestSunTitle\">" . $data_tsv[1][1] . "</div>";
+            if ($data_tsv[1][0] == "TestSubTitle") {
+                $review = $review . "<div name=\"TestSubTitle\">" . $data_tsv[1][1] . "</div>";
                 $row++;
             }
             while ($row < $num) {

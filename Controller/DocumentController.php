@@ -9,10 +9,11 @@ class DocumentController extends AppController {
 		$lesson_id = $this->params['named']['id'];
 		$this->set('id', $lesson_id);
 		$a['Document']['lesson_id'] = $lesson_id;
-
+		$list = array('video/mp4','audio/mpeg','audio/x-wav','image/jpeg','image/gif','image/png','application/pdf');
 		if ($this->request->is('post')) {
 			$data = $this->request->data['Document'];
 			unset($data['check']);
+			$error = array();
 			foreach ($data as $Document)
 			{				
 				$Document['link']['name'] = str_replace(' ', '', $Document['link']['name']);
@@ -22,23 +23,32 @@ class DocumentController extends AppController {
 					$data['Document']['title'] = $Document['title'];					
 					$data['Document']['lesson_id'] = $lesson_id;
 					$this->Document->create();
+					if(in_array(mime_content_type($Document['link']['tmp_name']),$list)) {
+						array_push($error, $Document['link']['name']);
+						continue;
+					}
 					if ($this->Document->save($data)) {
 						move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT . "files". DS . $name);
-						$this->Session->setFlash(__('ドキュメントがアップロードされた'), 'alert', array(
-							'plugin' => 'BoostCake',
-							'class' => 'alert-success'));
 					}
 					else {
-	                	$this->Session->setFlash(__('ドキュメントをアップロードできない、もう一度お願い'), 'alert', array(
-          	 				'plugin' => 'BoostCake',
-            				'class' => 'alert-warning'));
+						array_push($error, $Document['link']['name']);
 	                }
 				}     
 	        }
+	        if(sizeof($error)!=0)
+	        	$this->Session->setFlash(__('ドキュメントをアップロードできない、もう一度お願い '.implode(",", $error)), 'alert', array(
+	 				'plugin' => 'BoostCake',
+					'class' => 'alert-warning'));
+	        else
+				$this->Session->setFlash(__('ドキュメントがアップロードされた'), 'alert', array(
+						'plugin' => 'BoostCake',
+						'class' => 'alert-success'));
 
  			$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $lesson_id));	
 		}		
 	}
+
+
 
 	public function edit() {
 		$id = $this->params['named']['id'];
@@ -100,15 +110,14 @@ class DocumentController extends AppController {
 				$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $id));		
 		}
 	}
-
 	public function delete() 
 	{
         $id = $this->params['named']['id'];
-        $data = $this->Document->find('first', $id);
+        $data = $this->Document->findById($id);
         $name = $data['Document']['link'];	
         if ($this->Document->delete($id)) 
         {
-            unlink(WWW_ROOT . 'files' . DS . $name);    		
+            unlink(WWW_ROOT . 'files' . DS . $name);
             $this->Session->setFlash(__('ドキュメントが削除された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
@@ -125,7 +134,6 @@ class DocumentController extends AppController {
 		*/
 		//Get doc info
     	$doc  = $this->Document->findById($document_id);
-    	var_dump($doc);
     	if(sizeof($doc) == 0){
 			$this->Session->setFlash(__('すみません、いまそのドキュメントをアクセスできない'), 'alert', array(
 	                'plugin' => 'BoostCake',

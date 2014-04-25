@@ -10,9 +10,10 @@ class MessageComponent extends Component{
         $this->Message->set($message);
 		if ($this->Message->validates()) {
 			$this->Message->Save();
+			return True;
 		} else {
 		    $errors = $this->Message->validationErrors;
-		    debug($errors);
+		   	return false;
 		}
 	}
 	public function inbox($user_id)
