@@ -53,7 +53,7 @@
   <tr>
       <td>バックアップ時刻</td>
       <td><?php echo $this->Form->input('backup_time', array('style' => 'width:100px;', 'value' => $_BACKUP_TIME)); ?></td>
-      <td>日</td>
+      <td>間日</td>
   </tr>
   <tr>   
       <td></td>

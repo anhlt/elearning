@@ -26,7 +26,7 @@ if(isset($datas)){
                 echo "<td class = 'col-sm-1'>".$i++."</td>";
                 echo "<td class = 'col-sm-1'>".$data['documents']['title']."</td>";
                 echo "<td class = 'col-sm-1'>".$this->html->link($data['documents']['link'],array('controller'=>'admins','action'=>'see_document',$data['documents']['id']))."</td>";
-                echo "<td class = 'col-sm-1'>".$data['0']['count']."回　".$this->html->link('詳しく',array('controller'=>'admins','action'=>'see_violate_document',$data['documents']['id']))."</td>";
+                echo "<td class = 'col-sm-1'>".$data['documents']['count']."回　".$this->html->link('詳しく',array('controller'=>'admins','action'=>'see_violate_document',$data['documents']['id']))."</td>";
                 if($data['documents']['baned'] == 0){
                     echo "<td class = 'col-sm-1'>".$this->html->link('禁止',array('controller'=>'admins','action'=>'ban_document',$data['documents']['id']))."</td>";
                 }else{

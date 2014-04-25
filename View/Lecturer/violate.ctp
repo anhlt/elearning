@@ -1,27 +1,74 @@
-<div class = "col-xs col-md-9 col-md-offset-2">
-	<table class='table table-striped table-bordered'>
-			<h2>授業</h2>
-			<tr>
-				<td  class="col-sm-1">Document</td>
-				<td  class="col-sm-2">Lesson</td>
-				<td  class="col-sm-2">Reporter</td>
-				<td  class="col-sm-1">Messess</td>
-				<td  class="col-sm-1">accepted</td>
-			</tr>			
-			<?php foreach ($docs as $doc):?>
-				<?php foreach ($doc['Violate'] as $Violate) :?>
-				<tr>
-					<td  class="col-sm-1"><?php echo $this->Html->link($doc['Document']['title'], array('controller' => 'document', 'action' => 'show',$doc['Document']['id'])); ?>
-</td>
-					<td  class="col-sm-2"><?php echo $this->html->link($doc['Lesson']['name'], array('controller' => 'lesson', 'action' => 'doc', "id"=>$doc['Lesson']['id']), array('class' => 'btn btn-primary'))?></td>
-					<td  class="col-sm-2"><?php echo $Violate['student_id'];?></td>
-					<td  class="col-sm-1"><?php echo $Violate['content'];?></td>
-					<td  class="col-sm-1"><?php echo $Violate['accepted'];?></td>
-				</tr>	
-				<?php endforeach?>		
-			<?php endforeach ?>
-
-	</table>
+<div class="row">
+    <?php echo $this->Session->flash(); ?>
 </div>
-
-
+<div class="row">
+    <div class="col-sm-3 col-md-2">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="active"><a href="#"> レポート </a>
+        </ul>
+    </div>
+    <div class="col-sm-9 col-md-10">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#home" data-toggle="tab"><span class="glyphicon glyphicon-inbox">
+            </span>新しい</a></li>
+            <li><a href="#profile" data-toggle="tab"><span class="glyphicon glyphicon-user"></span>
+                古い</a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="home">
+                <div class="list-group">
+                	<?php foreach ($Messages as $message):?>
+                    <?php if($message['Message']['read'] == 0):?>
+                    <a href="/lecturer/violate/<?php echo $message["Message"]['id']?>" class="list-group-item">
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="name" style="min-width: 120px;display: inline-block;">管理者</span> 
+                        <?php if($message['Message']['type'] == 'Block'):?>
+                            <span class="text-muted" style="font-size: 11px;"><span class="label label-warning">Block</span></span> 
+                        <?php elseif($message['Message']['type'] == 'Delete') :?>
+                            <span class="text-muted" style="font-size: 11px;"><span class="label label-danger">Deleted</span></span> 
+                        <?php elseif($message['Message']['type'] == 'Unblock') :?>
+                            <span class="text-muted" style="font-size: 11px;"><span class="label label-success">Unblocked</span></span> 
+                        <?php endif ?>    
+                        <span class=""><?php echo $message['Message']['content']?></span>
+                        <span
+                            class="badge"><?php echo $message['Message']['time']?></span> 
+                        <span class="pull-right">
+                        	<span class="glyphicon glyphicon-ok"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </span>
+                    </a>
+                    <?php endif?>
+	                <?php endforeach ?>
+                </div>
+            </div>
+            <div class="tab-pane fade in" id="profile">
+                <div class="list-group">
+                    <?php foreach ($Messages as $message):?>
+                    <?php if($message['Message']['read'] == 1):?>
+                    <a href="/lecturer/violate/<?php echo $message["Message"]['id']?>" class="list-group-item">
+                        <span class="glyphicon glyphicon-star-empty"></span>
+                        <span class="name" style="min-width: 120px;display: inline-block;">管理者</span> 
+                        <?php if($message['Message']['type'] == 'Block'):?>
+                            <span class="text-muted" style="font-size: 11px;"><span class="label label-warning">Block</span></span> 
+                        <?php elseif($message['Message']['type'] == 'Delete') :?>
+                            <span class="text-muted" style="font-size: 11px;"><span class="label label-danger">Deleted</span></span> 
+                        <?php elseif($message['Message']['type'] == 'Unblock') :?>
+                            <span class="text-muted" style="font-size: 11px;"><span class="label label-success">Unblocked</span></span> 
+                        <?php endif ?>
+                        <span class=""><?php echo $message['Message']['content']?></span>
+                        <span
+                            class="badge"><?php echo $message['Message']['time']?></span> 
+                        <span class="pull-right">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </span>
+                    </a>
+                    <?php endif?>
+                    <?php endforeach ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

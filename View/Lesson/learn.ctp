@@ -28,11 +28,11 @@ if (AuthComponent::user('role')=="student") {
     $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE); 
 }
 else{
-    echo'
-    <div class="col-xs-3 col-md-3">
-    <a class="btn btn-info" href="/lecturer/">戻る</a>
-    </div>
-    ';
+    // echo'
+    // <div class="col-xs-3 col-md-3">
+    // <a class="btn btn-info" href="/lecturer/">戻る</a>
+    // </div>
+    // ';
 }?>    
 <div class="col-xs-13 col-md-9 well">  
 <?php

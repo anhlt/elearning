@@ -23,7 +23,7 @@ class TestsController extends AppController {
             if (is_uploaded_file($data['link']['tmp_name'])) {
                 $name = uniqid() . $data['link']['name'];
                 move_uploaded_file($data['link']['tmp_name'], WWW_ROOT. "tsv" . DS . $name);
-                $this->request->data['Test']['link'] = $name;                               
+                $this->request->data['Test']['link'] = $name;
             }
             try {
                 $this->TsvReader->getViewTSV($name);
@@ -44,7 +44,7 @@ class TestsController extends AppController {
                 $this->Session->setFlash(__($e->getMessage()), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-warning'));
-                    unlink(WWW_ROOT . 'tsv' .DS. $name);
+                    unlink(WWW_ROOT . 'tsv' . DS . $name);
             }
             $this->redirect(array('controller' => 'lesson', 'action' => 'test', 'id' => $lesson_id));
         }
@@ -93,12 +93,10 @@ class TestsController extends AppController {
         $data = $this->Test->find('first', $id);        
         
         if ($this->Test->delete($id)) {
-            unlink(WWW_ROOT. 'tsv' . DS . $data['Test']['link']);
             $this->Session->setFlash(__('テストが削除された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
             )); 
-
             return $this->redirect($this->referer());    
         }
     }
@@ -112,7 +110,7 @@ class TestsController extends AppController {
             $row = 1;
             $error = "";
             $num = count($data_tsv);
-            if ($data_tsv[1][0] == "TestSunTitle") {
+            if ($data_tsv[1][0] == "TestSubTitle") {
                 //echo "<h3 name=\"TestSunTitle\">" . $data_tsv[1][1] . "</h3>";
                 $row++;
             }
@@ -122,15 +120,12 @@ class TestsController extends AppController {
             //echo $num;
 
             while ($row < $num) {
-
                 $numberQuestion = substr($data_tsv[$row][0], 2, -1);
                 if ($data_tsv[$row][0] == "End") {
                     break;
                 } else {
                     $sumQuestion++;
                     if ($data_tsv[$row][1] != "QS") {
-
-
                         $error = $numberQuestion."の質問の内容がない.";
                         break;
                     } else {
@@ -157,7 +152,9 @@ class TestsController extends AppController {
                 }
             }
 
+
             $this->loadModel("Result");
+
             $dataSave = array("student_id"=>$this->Auth->user('id'), "point"=>$point, "test_id"=>$id, "student_of_choice"=>$result);
             $save_result = $this->Result->save($dataSave);
             $result_id = $save_result['Result']['id'];
@@ -170,7 +167,6 @@ class TestsController extends AppController {
     }
 
     public function list_result($test_id){
-
         $this->loadModel('Result');
         $this->Result->recursive = 1;
         $this->paginate = array(
@@ -231,8 +227,8 @@ class TestsController extends AppController {
         $error = "";
         $num = count($data);
         $test = "";
-        if ($data[1][0] == "TestSunTitle") {
-            $test = $test . "<h3 name=\"TestSunTitle\">" . $data[1][1] . "</h3>";
+        if ($data[1][0] == "TestSubTitle") {
+            $test = $test . "<h3 name=\"TestSubTitle\">" . $data[1][1] . "</h3>";
             $row++;
         }
         $sumQuestion = 0;

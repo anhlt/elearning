@@ -53,6 +53,7 @@ class LessonController extends AppController {
             $id = ($this->params['named']['id']);
             $Lesson = $this->Lesson->findById($id);
             $this->request->data = $Lesson;
+            $this->set('Tags',$Lesson['Tag']);
         }
         else{
             $data = ($this->request->data);

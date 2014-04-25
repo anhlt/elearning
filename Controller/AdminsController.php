@@ -459,7 +459,6 @@ class AdminsController extends AppController {
         //$this->Session->setFlash(NULL);
 
         if ($this->request->is('post')) {
-
             $LESSON_COST = $this->request->data['parameter']['lesson_cost'];
             $LECTURER_MONEY_PERCENT = $this->request->data['parameter']['lecturer_money_percent'];
             $ENABLE_LESSON_TIME = $this->request->data['parameter']['enable_lesson_time'];
@@ -511,8 +510,10 @@ class AdminsController extends AppController {
                 } else {
                     $this->Parameter->updateParameter('ENABLE_LESSON_TIME', $ENABLE_LESSON_TIME);
                 }
-                if ($WRONG_PASSWORD_TIMES <= 0) {
+                if ($WRONG_PASSWORD_TIMES <= 0 ) {
                     $error = $error . "<br>ログイン誤り回数 > =1</br>";
+                }elseif (!ctype_digit($WRONG_PASSWORD_TIMES)) {
+                    $error = $error . "<br>ログイン誤り回数は整数だ</br>";
                 } else {
                     $this->Parameter->updateParameter('WRONG_PASSWORD_TIMES', $WRONG_PASSWORD_TIMES);
                 }
@@ -527,12 +528,16 @@ class AdminsController extends AppController {
                     $this->Parameter->updateParameter('SESSION_TIME', $SESSION_TIME);
                 }
                 if ($VIOLATIONS_TIMES <= 0) {
-                    $error = $error . "<br>�?�犯�?�最大回数 >= 1</br>";
-                } else {
+
+                    $error = $error . "<br>違犯の最大回数 >= 1　</br>";
+                }elseif (!ctype_digit($VIOLATIONS_TIMES)) {
+                    $error = $error . "<br>違犯の最大回数は整数だ</br>";
+                }else {
+
                     $this->Parameter->updateParameter('VIOLATIONS_TIMES', $VIOLATIONS_TIMES);
                 }
-                if($BACKUP_TIME < 0 || $BACKUP_TIME >= 24){
-                    $error = $error . "<br>23>=　バックアップ時刻 >= ０</br>";
+                if($BACKUP_TIME  <= 0){
+                    $error = $error . "バックアップ時刻 >０</br>";
                 }else{
                     $this->Parameter->updateParameter('BACKUP_TIME', $BACKUP_TIME);
                 }
@@ -811,17 +816,20 @@ class AdminsController extends AppController {
         $student_list_ = array();
         $i = 0;
         foreach ($student_list as $student) {
+            $fee = 0;
             $count = 0;
             $result = $this->LessonMembership->find('all', array('conditions' => array('LessonMembership.student_id' => $student['Student']['id'])));
             foreach ($result as $res) {
                 $date = $res['LessonMembership']['days_attended'];
                 if ($this->getYear($date) == $year && $this->getMonth($date) == $month) {
                     $count++;
+                    $fee += $res['LessonMembership']['price']*10000;
                 }
             }
             // $student['count'] = $count;
             $student_list_[$i] = $student;
             $student_list_[$i]['count'] = $count;
+            $student_list_[$i]['fee'] = $fee;
             $student_list_[$i]['Student']['phone_number'] = $this->getPhoneNumberFormat($student_list_[$i]['Student']['phone_number']);
 
             $i++;
@@ -831,10 +839,11 @@ class AdminsController extends AppController {
     }
 
     private function getLecturerFee($year, $month) {
-        $this->uses = array('LessonMembership');
-        $res = $this->LessonMembership->find('all');
+       // $this->uses = array('Lesson');
+        //$res = $this->LessonMembership->find('all');
         $this->uses = array('Lecturer');
-        $lecturer_list = $this->Lecturer->find('all', array('condition' => array('actived' => 1)));
+        //$lecturer_list = $this->Lecturer->find('all', array('condition' => array('actived' => 1)));
+        $lecturer_list = $this->Lecturer->find('all');
         $this->uses = array('LessonMembership'); //$student['Student']['id'];
 
         $lecturer_list_ = array();
@@ -842,9 +851,14 @@ class AdminsController extends AppController {
         // debug($lecturer_list);
         foreach ($lecturer_list as $lecturer) {
             // echo "id =".$lecturer['Lecturer']['id'];
+            
+            $fee = 0; 
+            
             $count = 0;
             $this->uses = array('Lesson');
-            $lesson_list = $this->Lesson->find('all', array('condition' => array('Lesson.lecturer_id' => 11)));
+            $lesson_list = $this->Lesson->find('all', array('conditions' => array('Lesson.lecturer_id' => $lecturer['Lecturer']['id'])));
+            //debug($lesson_list);
+            
             $this->uses = array('LessonMembership');
             $result = $this->LessonMembership->find('all');
             foreach ($result as $res) {
@@ -853,18 +867,20 @@ class AdminsController extends AppController {
                     foreach ($lesson_list as $lesson) {
                         if ($lesson['Lesson']['id'] == $res['Lesson']['id'])
                             $count++;
-                    }
+                        $fee += $res['LessonMembership']['percent_for_teacher'] * $res['LessonMembership']['price']*100;                       
+                       }
             }
             $lecturer_list_[$i] = $lecturer;
             $lecturer_list_[$i]['count'] = $count;
+            $lecturer_list_[$i]['fee'] = $fee;
             $lecturer_list_[$i]['Lecturer']['phone_number'] = $this->getPhoneNumberFormat($lecturer_list_[$i]['Lecturer']['phone_number']);
             $lecturer_list_[$i]['Lecturer']["credit_card_number"] =
-                    $this->getBankLecturerAcountFormat($lecturer_list_[$i]['Lecturer']["credit_card_number"]);
+            $this->getBankLecturerAcountFormat($lecturer_list_[$i]['Lecturer']["credit_card_number"]);
             $i++;
         }
         $this->set('lecturer_list', $lecturer_list_);
-        $this->uses = array('Lesson');
-        $lesson_list = $this->Lesson->find('all', array('conditions' => array('Lesson.lecturer_id' => 10)));
+       // $this->uses = array('Lesson');
+        //$lesson_list = $this->Lesson->find('all', array('conditions' => array('Lesson.lecturer_id' => 10)));
         return $lecturer_list_;
     }
 
@@ -932,14 +948,14 @@ class AdminsController extends AppController {
         $this->set('month', $month);
         date_default_timezone_set('Asia/Saigon');
         $date = date('Y:m:d H:i:s');
-        echo $date;
+       // echo $date;
         mb_internal_encoding('UTF-8');
         header('Content-Type: text/html;charset=utf-8');
         // if ($month < 10)
         //    $month = "0" . $month;
         $name = "ELS-UBT-" . $year . "-" . $month . ".tsv";
         $data = "" . mb_convert_kana("ELS-UBT-GWK5M78", "rnaskhcv") . "\t";
-        echo "<br>" . $data;
+       // echo "<br>" . $data;
         $data.= mb_convert_kana($year, "rnaskhcv") . "\t";
         if ($month < 10)
             $data.= mb_convert_kana("0" . $month, "rnaskhcv") . "\t";
@@ -1349,12 +1365,27 @@ class AdminsController extends AppController {
     }
 
     public function manage_document() {
-        $sql = "SELECT documents.id, documents.link, documents.title, documents.baned, COUNT( violates.id ) as count
-                FROM  `violates` , documents
-                WHERE violates.document_id = documents.id
-                GROUP BY (documents.id)";
+        
+        $sql = "SELECT *
+                FROM  documents";
         $datas = $this->Document->query($sql);
         if ($datas) {
+            //debug($datas);
+            for($i=0; $i <= count($datas) - 1 ; $i++){
+                $tmp = $datas[$i]['documents']['id'];
+                //debug($tmp);
+                $sql_1 = "SELECT COUNT(id)
+                FROM  `violates` 
+                WHERE document_id = '$tmp'
+                GROUP BY (document_id)";
+                $d = $this->Violate->query($sql_1);
+                if($d){
+                    $datas[$i]['documents']['count'] = $d[0][0]['COUNT(id)'];
+                }else{
+                    $datas[$i]['documents']['count'] = 0;
+                }
+         
+            }
             //debug($datas);
             $this->set('datas', $datas);
 
@@ -1405,12 +1436,14 @@ class AdminsController extends AppController {
     public function delete_ban_document($document_id) {
         $Document = $this->Document->findById($document_id);
         $Document ["Document"]['baned'] = 0;
-        var_dump($Document);
+        //var_dump($Document);
         if ($this->Document->save($Document)) {
-            
+
+            $sql_detele = "DELETE FROM violates WHERE document_id = '$document_id'";
+            $this->Violate->query($sql_detele);
 
         } else {
-            $this->Session->setFlash(__('禁止できない'), 'alert', array(
+            $this->Session->setFlash(__('禁止を削除できない'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-warning'));
 
@@ -1474,7 +1507,21 @@ class AdminsController extends AppController {
         $datas = $this->Lesson->query($sql_0);
         //debug($datas);
         if ($datas) {
-
+            for($i=0; $i <= count($datas) - 1 ; $i++){
+                $tmp = $datas[$i]['lessons']['id'];
+                //debug($tmp);
+                $sql_1 = "SELECT COUNT(id)
+                FROM  `ihans` 
+                WHERE lesson_id = '$tmp'
+                GROUP BY (lesson_id)";
+                $d = $this->Ihan->query($sql_1);
+                if($d){
+                    $datas[$i]['lessons']['count'] = $d[0][0]['COUNT(id)'];
+                }else{
+                    $datas[$i]['lessons']['count'] = 0;
+                }
+         
+            }
             $this->set('datas', $datas);
 
         } else {
@@ -1498,7 +1545,7 @@ class AdminsController extends AppController {
     public function ban_lesson($lesson_id) {
         $Lesson = $this->Lesson->findById($lesson_id);
         $Lesson ["Lesson"]['baned'] = 1;
-        var_dump($Lesson);
+        //var_dump($Lesson);
         if ($this->Lesson->save($Lesson)) {
             
         } else {
@@ -1513,11 +1560,12 @@ class AdminsController extends AppController {
     public function delete_ban_lesson($lesson_id) {
         $Lesson = $this->Lesson->findById($lesson_id);
         $Lesson ["Lesson"]['baned'] = 0;
-        var_dump($Lesson);
+        //var_dump($Lesson);
         if ($this->Lesson->save($Lesson)) {
-            
+            $sql_detele = "DELETE FROM ihans WHERE lesson_id = '$lesson_id'";
+            $this->Ihan->query($sql_detele);
         } else {
-            $this->Session->setFlash(__('禁止できない'), 'alert', array(
+            $this->Session->setFlash(__('禁止を削除できない'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-warning'));
         }
@@ -1532,6 +1580,11 @@ class AdminsController extends AppController {
             ));
         }
         $this->redirect(array('controller' => 'admins', 'action' => 'manage_lesson'));
+    }
+    
+     public function delete_violate_lesson($id, $lesson_id) {
+        $this->Ihan->delete($id);
+        $this->redirect(array('controller' => 'admins', 'action' => 'see_violate_lesson', $lesson_id));
     }
 
 }

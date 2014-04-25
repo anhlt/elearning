@@ -4,47 +4,58 @@ class DocumentController extends AppController {
 	var $uses = array('Document','Lesson', 'Report');
 	public $components = array('Util'); 
 	public $helpers = array("TsvReader");
+
 	public function add() {
 		$lesson_id = $this->params['named']['id'];
 		$this->set('id', $lesson_id);
 		$a['Document']['lesson_id'] = $lesson_id;
-
+		$list = array('video/mp4','audio/mpeg','audio/x-wav','image/jpeg','image/gif','image/png','application/pdf');
 		if ($this->request->is('post')) {
-
 			$data = $this->request->data['Document'];
 			unset($data['check']);
+			$error = array();
 			foreach ($data as $Document)
 			{				
-				$name = uniqid() . $Document['link']['name'];			
+				$Document['link']['name'] = str_replace(' ', '', $Document['link']['name']);
+				$name = uniqid() . $Document['link']['name'];
 				$data['Document']['link'] =  $name;
 				if (is_uploaded_file($Document['link']['tmp_name'])) {
 					$data['Document']['title'] = $Document['title'];					
 					$data['Document']['lesson_id'] = $lesson_id;
 					$this->Document->create();
+					if(in_array(mime_content_type($Document['link']['tmp_name']),$list)) {
+						array_push($error, $Document['link']['name']);
+						continue;
+					}
 					if ($this->Document->save($data)) {
 						move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT . "files". DS . $name);
-						$this->Session->setFlash(__('ドキュメントがアップロードされた'), 'alert', array(
-							'plugin' => 'BoostCake',
-							'class' => 'alert-success'));
 					}
 					else {
-	                	$this->Session->setFlash(__('ドキュメントをアップロードできない、もう一度お願い'), 'alert', array(
-          	 				'plugin' => 'BoostCake',
-            				'class' => 'alert-warning'));
+						array_push($error, $Document['link']['name']);
 	                }
 				}     
 	        }
+	        if(sizeof($error)!=0)
+	        	$this->Session->setFlash(__('ドキュメントをアップロードできない、もう一度お願い '.implode(",", $error)), 'alert', array(
+	 				'plugin' => 'BoostCake',
+					'class' => 'alert-warning'));
+	        else
+				$this->Session->setFlash(__('ドキュメントがアップロードされた'), 'alert', array(
+						'plugin' => 'BoostCake',
+						'class' => 'alert-success'));
 
  			$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $lesson_id));	
 		}		
 	}
+
+
 
 	public function edit() {
 		$id = $this->params['named']['id'];
 		$document_id = $this->params['named']['document_id'];		
 		$this->set('id', $id);
 		$this->set('document_id', $document_id);
-		$results = $this->Document->find("first", array("conditions"=>array('id'=>$document_id)));		
+		$results = $this->Document->find("first", array("conditions"=>array('Document.id'=>$document_id)));		
 		$this->set('result', $results['Document']);		
 		
 		$ihan = $this->params['named']['ihan'];	
@@ -78,7 +89,6 @@ class DocumentController extends AppController {
 
 			    	$doc = $this->Document->find("first", array('conditions' => array('id' => $document_id)));
 					$doc['Document']['baned'] = 0;
-					debug($doc);
 					$this->Document->create();
 			    	$this->Document->save($doc);	    	
 				}
@@ -100,15 +110,14 @@ class DocumentController extends AppController {
 				$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $id));		
 		}
 	}
-
 	public function delete() 
 	{
         $id = $this->params['named']['id'];
-        $data = $this->Document->find('first', $id);
+        $data = $this->Document->findById($id);
         $name = $data['Document']['link'];	
         if ($this->Document->delete($id)) 
         {
-            unlink(WWW_ROOT . 'files' . DS . $name);    		
+            unlink(WWW_ROOT . 'files' . DS . $name);
             $this->Session->setFlash(__('ドキュメントが削除された'), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
@@ -125,6 +134,13 @@ class DocumentController extends AppController {
 		*/
 		//Get doc info
     	$doc  = $this->Document->findById($document_id);
+    	if(sizeof($doc) == 0){
+			$this->Session->setFlash(__('すみません、いまそのドキュメントをアクセスできない'), 'alert', array(
+	                'plugin' => 'BoostCake',
+	                'class' => 'alert-danger'
+	            ));
+			$this->redirect($this->referer());
+    	}
     	$lesson_id = $doc ["Document"]['lesson_id'];
     	//get lesson info
     	$lesson = $this->Lesson->findById($lesson_id);
@@ -197,7 +213,7 @@ class DocumentController extends AppController {
         $this->set('document', $document);
         $this->loadModel("Report");
         $this->loadModel("Violate");
-        if ($this->Violate->hasAny(array('student_id'=>$this->Auth->user('id') ) ) ) {
+        if ($this->Violate->hasAny(array('student_id'=>$this->Auth->user('id'), 'document_id'=>$document_id ) ) ) {
         	 $this->set('message', 'すみません、レポートは一回だけです');
         }
         if ($this->Report->hasAny(array('document_id'=> $document_id, 'state'=>TEACHER_UNFIX))){

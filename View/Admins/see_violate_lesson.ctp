@@ -58,7 +58,8 @@
                         <td  class="col-sm-1">順番</td>
                         <td  class="col-sm-1">報告者</td>                      
                         <td  class="col-sm-1">内容</td>
-                        <td  class="col-sm-1">時間</td>     
+                        <td  class="col-sm-1">時間</td>    
+                        <td  class="col-sm-1">削除</td>
                     </tr>
                     <?php
                     $i = 1;
@@ -68,6 +69,7 @@
                             echo "<td  class='col-sm-1'>".$ihan["ihans"]["lecturer_id"]."</td>";                      
                             echo "<td  class='col-sm-1'>".$ihan["ihans"]["content"]."</td>";
                             echo "<td  class='col-sm-1'>".$ihan["ihans"]["time"]."</td>";  
+                            echo "<td>".$this->html->link('削除',array('controller'=>'admins','action'=>'delete_violate_lesson',$ihan['ihans']['id'],$ihan['ihans']['lesson_id']))."</td>";
                         echo "</tr>";
                     }
                     ?>

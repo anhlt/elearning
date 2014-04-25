@@ -3,7 +3,7 @@
 class LecturerController extends AppController {
 	var $name = "Lecturer";
   	var $uses = array('User', 'Lecturer','Question','Lesson', 'Test', 'Document', 'Comment','Violate');	
-	public $components = array('RequestHandler','Paginator','Util');
+	public $components = array('RequestHandler','Paginator','Util','Message');
 	public $helpers = array('Js' => array('Jquery'),'LeftMenu');
 
   	public function beforeFilter() {
@@ -155,48 +155,25 @@ class LecturerController extends AppController {
 	}
 	public function violate()
 	{
+		if(sizeof($this->params['pass']) !=0)
+		{
+			$id = $this->params['pass'][0];
+			$Message = $this->Message->get_message($id);
+			if(sizeof($Message) != 0){
+				$this->Message->read($Message['Message']['id']);
+				switch ($Message['Message']['object_type']) {
+					case 'Lesson':
+						$this->redirect(array('controller'=>'lesson','action' => 'learn',$Message['Message']['object_id']));
+						break;
+					case 'Document':
+						$this->redirect(array('controller'=>'document','action' => 'show',$Message['Message']['object_id']));						# code...
+						break;
+				}
+			}
+		}
 		$id = $this->Auth->user('id');
-		$Document = $this->Document->find('all',array(
-		    'joins' => array(
-			        array(
-			            'table' => 'violates',
-			            'alias' => 'Violate',
-			            'type' => 'LEFT',
-			            'conditions' => array(
-			                'Document.id = Violate.document_id'
-			            )
-			        ),
-			        array(
-			            'table' => 'lessons',
-			            // 'alias' => 'Lesson',
-			            'type' => 'LEFT',
-			            'conditions' => array(
-			                'Document.lesson_id = lessons.id'
-			            )
-			        ),
-
-			   	),
-		    'conditions' => array(
-		    	'lessons.lecturer_id' => $id,
-		    	),
-			'group' => 'Document.id',
-			));
-
-		$lesson = $this->Lesson->find('all',array(
-			'joins' => array(
-			        array(
-			            'table' => 'ihans',
-			            'alias' => 'Ihan',
-			            'type' => 'RIGHT',
-			            'conditions' => array(
-			                'Lesson.id = Ihan.lesson_id'
-			            )
-			        ),),
-			'conditions' => array(
-				),
-			'group' => 'Lesson.id'
-			));
-		debug($lesson);
-		$this->set('docs',$Document);
+		$Messages = $this->Message->inbox($id);
+		$this->set('Messages',$Messages);
+		
 	}
 }
