@@ -1602,7 +1602,7 @@ class AdminsController extends AppController {
             $object_id = $lesson_id;
             $object_type = 'Lesson';
 
-            if ($this->Lesson->save($Lesson) && !$this->Message->Sent($user_id, $recipient_id, $type, $content, $object_id, $object_type)) {
+            if ($this->Lesson->save($Lesson) && $this->Message->Sent($user_id, $recipient_id, $type, $content, $object_id, $object_type)) {
                 $sql_detele = "DELETE FROM ihans WHERE lesson_id = '$lesson_id'";
                 $this->Ihan->query($sql_detele);
                 $this->Session->setFlash(__('授業の禁止を削除した。そして、先生にメッセージを送った。'), 'alert', array(
