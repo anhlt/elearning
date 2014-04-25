@@ -89,7 +89,7 @@
                         <td align="center">住所</td>
                         <td align="center">電話番号</td>
                         <td align="center">銀行口座</td>     
-<!--                        <td align="center">学生に登録された授業数</td>-->
+        <!--                        <td align="center">学生に登録された授業数</td>-->
                         <td align="center">課金</td>
                     </tr>
 
@@ -118,7 +118,7 @@
                             echo '<td align="center">' . $credit_number . "</td>";
 //                            echo '<td align="center">' . ($lecturer['count']) . "</td>";
 //                            echo '<td align="center">' . ($lecturer['count'] * $lesson_cost) * $lecturer_money_percent . "</td>";
-                             echo '<td align="center">' . $lecturer['fee'] . "</td>";
+                            echo '<td align="center">' . $lecturer['fee'] . "</td>";
                             echo "</tr>";
                         }
                     }
@@ -137,7 +137,7 @@
                                     <td align="center">住所ID</td>
                                     <td align="center">電話番号ID</td>
                                     <td align="center">クレジットカード番号</td>
-<!--                                    <td align="center">登録した授業数</td>-->
+            <!--                                    <td align="center">登録した授業数</td>-->
                                     <td align="center">課金</td>
 
                                 </tr>
@@ -162,23 +162,20 @@
                                     echo '<td align="center">' . $credit_number . "</td>";
 //                                    echo '<td align="center">' . ($student['count']) . "</td>";
 //                                    echo '<td align="center">' . ($student['count'] * $lesson_cost) . "</td>";
-                                    echo '<td align="center">' . $student['fee'] . "</td>";                                    
+                                    echo '<td align="center">' . $student['fee'] . "</td>";
                                     echo "</tr>";
-                                }                              
+                                }
                             }
-                        }                   
-                          
+                        }
                     }
-                 
                     ?>
                 </table>
 
-    <?php 
-     if (!$exit && (!isset($checkyearover) || !$checkyearover))
-                    echo $this->html->link($year . "年" . $month . '月のTSVを作成しませんか?', array('controller' => "admins", 'action' => "generate_tsv", $year, $month
-                               ));
-    
-    ?>
+<?php
+if (!$exit && (!isset($checkyearover) || !$checkyearover))
+    echo $this->html->link($year . "年" . $month . '月のTSVを作成しませんか?', array('controller' => "admins", 'action' => "generate_tsv", $year, $month
+    ));
+?>
 
 
             </div>
