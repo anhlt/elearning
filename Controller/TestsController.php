@@ -192,10 +192,6 @@ class TestsController extends AppController {
     private function getDataTSV($id) {
         $test = $this->Test->find("first", array("conditions"=>array("Test.id"=>$id)));
         $filename = $test['Test']['link'];  //TSVファイルの名前はリンクとして保存されている
-
-#        $link = $_SERVER['DOCUMENT_ROOT'] . DS . 'tsv' . DS . $filename;
-
-#        $link = $_SERVER['DOCUMENT_ROOT'] . DS . 'tsv' . DS . $filename;
         $link = WWW_ROOT . DS . 'tsv' . DS . $filename;
         $data_tsv = array();
 

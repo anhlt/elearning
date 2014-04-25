@@ -1434,7 +1434,7 @@ class AdminsController extends AppController {
             //メッセージの情報
             $user_id = $id = $this->Auth->user('id');
             $recipient_id = $Document["Lesson"]['lecturer_id'];
-            $type = 'UnBlock';
+            $type = 'Unblock';
             $content = $this->request->data["Message"]["content"];
             $object_id = $document_id;
             $object_type = 'Document';
@@ -1473,7 +1473,6 @@ class AdminsController extends AppController {
             $content = $this->request->data["Message"]["content"];
             $object_id = $document_id;
             $object_type = 'Document';
-
             //ドキュメントの削除
             if ($this->Document->delete($document_id) && $this->Message->Sent($user_id, $recipient_id, $type, $content, $object_id, $object_type)) {
                 unlink(WWW_ROOT . DS . $name);
@@ -1597,7 +1596,7 @@ class AdminsController extends AppController {
             //メッセージの情報
             $user_id = $id = $this->Auth->user('id');
             $recipient_id = $Lesson["Lesson"]['lecturer_id'];
-            $type = 'UnBlock';
+            $type = 'Unblock';
             $content = $this->request->data["Message"]["content"];
             $object_id = $lesson_id;
             $object_type = 'Lesson';
