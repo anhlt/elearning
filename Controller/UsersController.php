@@ -54,7 +54,6 @@ class UsersController extends AppController {
         }
     }
     public function login() {
-
         if($this->Auth->loggedIn()){
           $this->redirect('/');
       }
@@ -80,7 +79,6 @@ class UsersController extends AppController {
                     ));
                 $this->redirect(array('controller'=>'users','action' => 'login'));
             }
-
             if ($user['actived'] == -1 && $user['role'] == 'lecturer') {
                 $this->Auth->logout();
                 $this->Session->setFlash(__('このアカウントはロックされた'), 'alert', array(
