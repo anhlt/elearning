@@ -11,6 +11,8 @@ if(isset($datas)){
         <table class="table">
             <tr>
                 <td  class="col-sm-1">順番</td>
+                <td  class="col-sm-1">先生ID</td>
+                <td  class="col-sm-1">先生名</td>
                 <td  class="col-sm-1">タイトル</td>
                 <td  class="col-sm-1">ファイル名</td>						
                 <td  class="col-sm-1">違犯報告</td>
@@ -24,14 +26,20 @@ if(isset($datas)){
         foreach ($datas as $data) {
             echo "<tr>";
                 echo "<td class = 'col-sm-1'>".$i++."</td>";
+                echo "<td class = 'col-sm-1'>".$data['users']['id']."</td>";
+                echo "<td class = 'col-sm-1'>".$data['users']['username']."</td>";
                 echo "<td class = 'col-sm-1'>".$data['documents']['title']."</td>";
                 echo "<td class = 'col-sm-1'>".$this->html->link($data['documents']['link'],array('controller'=>'admins','action'=>'see_document',$data['documents']['id']))."</td>";
                 echo "<td class = 'col-sm-1'>".$data['documents']['count']."回　".$this->html->link('詳しく',array('controller'=>'admins','action'=>'see_violate_document',$data['documents']['id']))."</td>";
                 if($data['documents']['baned'] == 0){
                     echo "<td class = 'col-sm-1'>".$this->html->link('禁止',array('controller'=>'admins','action'=>'ban_document',$data['documents']['id']))."</td>";
-                }else{
+                }else if($data['documents']['baned'] == 1){
                     echo "<td class = 'col-sm-1'>".$this->html->link('禁止の削除',array('controller'=>'admins','action'=>'delete_ban_document',$data['documents']['id']))."</td>";
                 }
+                else if($data['documents']['baned'] == 2){
+                    echo "<td class = 'col-sm-1'>"."更新した".$this->html->link('禁止の削除',array('controller'=>'admins','action'=>'delete_ban_document',$data['documents']['id']))."</td>";
+                }
+
                 echo "<td class = 'col-sm-1'>".$this->html->link('削除',array('controller'=>'admins','action'=>'delete_document',$data['documents']['id']))."</td>";
             echo "</tr>";
         }

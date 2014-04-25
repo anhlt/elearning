@@ -8,8 +8,8 @@
 $row = 1;
 $error = "";
 $num = count($data);
-if($data[1][0] == "TestSunTitle") {
-    echo "<h3 name=\"TestSunTitle\">".$data[1][1]."</h3>";
+if($data[1][0] == "TestSubTitle") {
+    echo "<h3 name=\"TestSubTitle\">".$data[1][1]."</h3>";
     $row++;
 }
 $sumQuestion = 0;

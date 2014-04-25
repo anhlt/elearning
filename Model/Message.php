@@ -19,7 +19,7 @@ class Message extends AppModel {
         ),
 	    'type' => array(
 	         'allowedChoice' => array(
-	             'rule'    => array('inList', array('Delete', 'Block', 'UnBlock')),
+	             'rule'    => array('inList', array('Block', 'Delete','Unblock')),
 	             'message' => 'Enter either Warning or Delete.'
 	         )
 	    ),
