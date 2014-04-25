@@ -29,8 +29,8 @@ class UsersController extends AppController {
         parent::beforeFilter();
         $this->Auth->allow('add');
         $this->Auth->allow('verifycode');
-        $this->mc = new Memcached();
-        $this->mc->addServer("localhost", 11211);
+//        $this->mc = new Memcached();
+//        $this->mc->addServer("localhost", 11211);
     }
 
     public function index($value='')
@@ -54,31 +54,32 @@ class UsersController extends AppController {
         }
     }
     public function login() {
-        if($this->Auth->loggedIn()){
-          $this->redirect('/');
-      }
-      
-      if ($this->request->is('post')) {
-        $data = ($this->request->data);
-        $user = $this->User->findByUsername($data['User']['username']);
-        if (isset($user['User']) && $user['User']['role'] =='admin') {
-            $this->Session->setFlash(__('管理者はこの画面でロクインできない'), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-warning'
-                ));
-            $this->redirect(array('controller'=>'users','action' => 'login'));
-        }
-        if ($this->Auth->login()) {
-            $this->Session->write('failedTime',0);
-            $user = $this->Auth->user();
-            if($pause = $this->mc->get($user['username'])){
-                $this->Auth->logout();
-                $this->Session->setFlash(__('このアカウントは'.date('Y-m-d H:i:s', $pause).'　までロックされる'), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-warning'
-                    ));
-                $this->redirect(array('controller'=>'users','action' => 'login'));
-            }
+	   	if($this->Auth->loggedIn()){
+      	  $this->redirect('/');
+    	}
+    	
+	    if ($this->request->is('post')) {
+	    	$data = ($this->request->data);
+	    	$user = $this->User->findByUsername($data['User']['username']);
+	    	if (isset($user['User']) && $user['User']['role'] =='admin') {
+		        $this->Session->setFlash(__('管理者はこの画面でロクインできない'), 'alert', array(
+					'plugin' => 'BoostCake',
+					'class' => 'alert-warning'
+				));
+				$this->redirect(array('controller'=>'users','action' => 'login'));
+	    	}
+	        if ($this->Auth->login()) {
+	        	$this->Session->write('failedTime',0);
+	        	$user = $this->Auth->user();
+//		  		if($pause = $this->mc->get($user['username'])){
+//	        		$this->Auth->logout();
+//		  			$this->Session->setFlash(__('このアカウントは'.date('Y-m-d H:i:s', $pause).'　までロックされる'), 'alert', array(
+//							'plugin' => 'BoostCake',
+//							'class' => 'alert-warning'
+//						));
+//					$this->redirect(array('controller'=>'users','action' => 'login'));
+//		  		}
+
             if ($user['actived'] == -1 && $user['role'] == 'lecturer') {
                 $this->Auth->logout();
                 $this->Session->setFlash(__('このアカウントはロックされた'), 'alert', array(

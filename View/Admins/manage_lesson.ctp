@@ -11,6 +11,8 @@ if(isset($datas)){
         <table class="table">
             <tr>
                 <td  class="col-sm-1">順番</td>
+                <td  class="col-sm-1">先生ID</td>
+                <td  class="col-sm-1">先生名</td>
                 <td  class="col-sm-1">タイトル</td>                      
                 <td  class="col-sm-1">授業情報</td>
                 <td  class="col-sm-1">授業禁止</td>   
@@ -23,6 +25,8 @@ if(isset($datas)){
         foreach ($datas as $data) {
             echo "<tr>";
                 echo "<td class = 'col-sm-1'>".$i++."</td>";
+                echo "<td class = 'col-sm-1'>".$data['lessons']['lecturer_id']."</td>";
+                echo "<td class = 'col-sm-1'>".$data['users']['username']."</td>";
                 echo "<td class = 'col-sm-1'>".$data['lessons']['name']."</td>";
                 echo "<td class = 'col-sm-1'>".$data['lessons']['count']."回　違犯報告された".$this->html->link('詳しく',array('controller'=>'admins','action'=>'see_violate_lesson',$data['lessons']['id']))."</td>";
                 if($data['lessons']['baned'] == 0){
