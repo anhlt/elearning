@@ -8,7 +8,6 @@ class DocumentController extends AppController {
 	public function add() {
 		$lesson_id = $this->params['named']['id'];
 		$this->set('id', $lesson_id);
-		$a['Document']['lesson_id'] = $lesson_id;
 		$list = array('video/mp4','audio/mpeg','audio/x-wav','image/jpeg','image/gif','image/png','application/pdf');
 		if ($this->request->is('post')) {
 			$data = $this->request->data['Document'];
@@ -50,64 +49,46 @@ class DocumentController extends AppController {
 
 
 
-	public function edit() {
-		$id = $this->params['named']['id'];
-		$document_id = $this->params['named']['document_id'];		
-		$this->set('id', $id);
-		$this->set('document_id', $document_id);
-		$results = $this->Document->find("first", array("conditions"=>array('Document.id'=>$document_id)));		
-		$this->set('result', $results['Document']);		
-		
-		$ihan = $this->params['named']['ihan'];	
-		$this->set('ihan', $ihan);
+	public function edit($id='') {
 
-		if ($this->request->is('post'))
-		{				
-			$data = $this->request->data['Document'];
-			$this->request->data['Document']['id'] = $document_id;
-			$uploaded = false;
-			if (is_uploaded_file($data['link']['tmp_name'])) {
-				$uploaded = true;			
-				$name = uniqid() . $data['link']['name'];				
-				$this->request->data['Document']['link'] = $name;										
-			} else {
-				$this->request->data['Document']['link'] = $results['Document']['link'];							
-			}			
-
-			if($this->Document->save($this->request->data['Document']))
-			{	
-				if($uploaded) {
-					unlink(WWW_ROOT . 'files' . DS . $results['Document']['link']);
-					move_uploaded_file($data['link']['tmp_name'], WWW_ROOT. 'files' . DS . $name);
+		$old_file = $this->Document->findById($id);
+		$old_file = $old_file['Document'];
+		$list = array('video/mp4','audio/mpeg','audio/x-wav','image/jpeg','image/gif','image/png','application/pdf');
+		$error = array();
+		if ($this->request->is('put')) {
+			$Document = $this->request->data['Document'];
+			$Document['link']['name'] = str_replace(' ', '', $Document['link']['name']);
+			$name = uniqid() . $Document['link']['name'];
+			$data['Document']['link'] =  $name;
+			if (is_uploaded_file($Document['link']['tmp_name'])) {
+				$data['Document']['id'] = $old_file['id'];
+				$data['Document']['title'] = $Document['title'];					
+				$data['Document']['lesson_id'] = $old_file['lesson_id'];
+				if($old_file['baned'] == 1)
+					$data['Document']['baned'] = 2;
+				$this->Document->create();
+				if(!in_array(mime_content_type($Document['link']['tmp_name']),$list)) {
+					array_push($error, $Document['link']['name']);
+				}else if ($this->Document->save($data)) {
+					move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT . "files". DS . $name);
+					unlink(WWW_ROOT . 'files' .DS . $old_file['link']);
 				}
+				else {
+					array_push($error, $Document['link']['name']);
+                }
+			} 
+	        if(sizeof($error)!=0)
+	        	$this->Session->setFlash(__('ドキュメントをアップロードできない、もう一度お願い '.implode(",", $error)), 'alert', array(
+	 				'plugin' => 'BoostCake',
+					'class' => 'alert-warning'));
+	        else
+				$this->Session->setFlash(__('ドキュメントがアップロードされた'), 'alert', array(
+						'plugin' => 'BoostCake',
+						'class' => 'alert-success'));
 
-				if($ihan == 'true') {		
-					$report = $this->Report->find("first", array('conditions' => array('document_id' => $document_id)));
-					$report['Report']['state'] = 0;
-					$this->Report->create();
-			    	$this->Report->save($report);
-
-			    	$doc = $this->Document->find("first", array('conditions' => array('id' => $document_id)));
-					$doc['Document']['baned'] = 0;
-					$this->Document->create();
-			    	$this->Document->save($doc);	    	
-				}
-                $this->Session->setFlash(__('ドキュメントが更新された'), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-success'
-                ));		
-
-            } else {
-                $this->Session->setFlash(__('ドキュメントを更新できない、もう一度お願い'), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-warning'
-            	));	
-			}
-	
-			if($ihan == 'true')
-				$this->redirect(array('controller' => 'lesson', 'action' => 'report', 'id' => $id));	
-			else
-				$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $id));		
+ 			$this->redirect(array('controller' => 'lesson', 'action' => 'doc', 'id' => $old_file['lesson_id']));
+		} else {
+			$this->request->data = $this->Document->findById($id);
 		}
 	}
 

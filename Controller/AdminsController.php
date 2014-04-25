@@ -1475,7 +1475,7 @@ class AdminsController extends AppController {
             $object_type = 'Document';
             //ドキュメントの削除
             if ($this->Document->delete($document_id) && $this->Message->Sent($user_id, $recipient_id, $type, $content, $object_id, $object_type)) {
-                unlink(WWW_ROOT . DS . $name);
+                unlink(WWW_ROOT . 'files' . DS . $name);
                 $this->Session->setFlash(__('ドキュメントが削除された。そして、先生にメッセージを送った。'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
