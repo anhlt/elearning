@@ -27,9 +27,12 @@ if(isset($datas)){
                 echo "<td class = 'col-sm-1'>".$data['lessons']['count']."回　違犯報告された".$this->html->link('詳しく',array('controller'=>'admins','action'=>'see_violate_lesson',$data['lessons']['id']))."</td>";
                 if($data['lessons']['baned'] == 0){
                     echo "<td class = 'col-sm-1'>".$this->html->link('禁止',array('controller'=>'admins','action'=>'ban_lesson',$data['lessons']['id']))."</td>";
-                }else{
+                }else if($data['lessons']['baned'] == 1){
                     echo "<td class = 'col-sm-1'>".$this->html->link('禁止の削除',array('controller'=>'admins','action'=>'delete_ban_lesson',$data['lessons']['id']))."</td>";
+                } else if($data['lessons']['baned'] == 2){
+                    echo "<td class = 'col-sm-1'>"."更新した".$this->html->link('禁止の削除',array('controller'=>'admins','action'=>'delete_ban_lesson',$data['lessons']['id']))."</td>";
                 }
+
                 echo "<td class = 'col-sm-1'>".$this->html->link('削除',array('controller'=>'admins','action'=>'delete_lesson',$data['lessons']['id']))."</td>";
             echo "</tr>";
         }
