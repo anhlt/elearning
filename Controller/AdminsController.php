@@ -1351,10 +1351,11 @@ class AdminsController extends AppController {
     public function manage_document() {
 
         $sql = "SELECT *
-                FROM  documents";
+                FROM  documents, lessons, users WHERE documents.lesson_id = lessons.id AND lessons.lecturer_id = users.id";
         $datas = $this->Document->query($sql);
+       
         if ($datas) {
-            //debug($datas);
+            
             for ($i = 0; $i <= count($datas) - 1; $i++) {
                 $tmp = $datas[$i]['documents']['id'];
                 //debug($tmp);
@@ -1521,7 +1522,7 @@ class AdminsController extends AppController {
 
     public function manage_lesson() {
         $sql_0 = "SELECT *
-                FROM  lessons";
+                FROM  lessons, users WHERE lessons.lecturer_id = users.id ";
         $datas = $this->Lesson->query($sql_0);
         //debug($datas);
         if ($datas) {
