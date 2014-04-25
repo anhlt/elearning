@@ -36,8 +36,7 @@
 					'type'=> 'file', 
 					'id' => 'f',
 					'placeholder' => 'ファイル',  
-					'class' => 'btn-file',
-					'accept' => "image/gif, image/jpeg"
+					'class' => 'btn-file'
 				)); ?>
 
 			</div>
