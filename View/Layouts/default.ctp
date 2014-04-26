@@ -18,30 +18,30 @@
     ?>
     <!-- Le styles -->
 <script>
-var timeSecond = 20;
-function timeLogout() {
-    if(timeSecond > 0) {
-        timeSecond -= 1;
-        setTimeout("timeLogout()",1000);
-    } else {
-        window.location.assign("/users/logout");
-    }
-}
+// var timeSecond = 20;
+// function timeLogout() {
+//     if(timeSecond > 0) {
+//         timeSecond -= 1;
+//         setTimeout("timeLogout()",1000);
+//     } else {
+//         window.location.assign("/users/logout");
+//     }
+// }
 
-$(document).ready(function(){
-    $("#searchip").keypress(function(e){
-        if (e.which==13){
-            tag_value = $("#searchip").val();
-            window.location = "/students/search?search_value="+tag_value; 
-        }
-    });
+// $(document).ready(function(){
+//     $("#searchip").keypress(function(e){
+//         if (e.which==13){
+//             tag_value = $("#searchip").val();
+//             window.location = "/students/search?search_value="+tag_value; 
+//         }
+//     });
 
-    session_time = $("#session_time").text();
-    if (session_time > 0){
-        timeSecond = session_time
-        timeLogout();
-    }
-}); 
+//     session_time = $("#session_time").text();
+//     if (session_time > 0){
+//         timeSecond = session_time
+//         timeLogout();
+//     }
+// }); 
 </script>
     <style>
     body {

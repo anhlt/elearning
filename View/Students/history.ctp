@@ -18,7 +18,7 @@ foreach($lessons as $lesson){
     }else if( $lesson['StudentsLesson']['baned'] == 1){
         $learn_state = "<font color=red>禁止された</font>";
     }
-    echo $this->Html->tableCells(array($days_attended, $this->Html->link($lesson_name, "/lesson/learn/".$lesson_id), $price."VND", $learn_state));     
+    echo $this->Html->tableCells(array($days_attended, $this->Html->link($lesson_name, "/lesson/learn/".$lesson_id), $price."万VND", $learn_state));     
 } 
 echo "</table>";
 //受けたテストの情報
