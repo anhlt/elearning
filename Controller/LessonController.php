@@ -558,4 +558,39 @@ class LessonController extends AppController {
             $this->redirect("/lesson/learn/".$lesson_id);
         } 
     }
+
+    public function searchByTag($tag_name=""){
+        $this->loadModel("Tag");
+        $this->Tag->recursive = 3; 
+        $tag_list = $this->Tag->find("all", array("order"=>"Tag.name asc"));
+        $this->set("tag_list", $tag_list);
+        $rankStt = 0; 
+        if ($this->request->is('post')){
+            $rankStt =$this->data['rankWay']['rankStt'];
+        }
+
+            $query_base = "select lessons.name, users.username, lecturers.full_name, count(students_lessons.id) as student_number, sum(students_lessons.liked) as liked_number
+                    from lessons, tags, lessons_tags, students_lessons, lecturers, users
+                    where tags.name = '".$tag_name."' and 
+                            tags.id = lessons_tags.tag_id and 
+                            lessons_tags.lesson_id = lessons.id and
+                            lessons.lecturer_id = lecturers.id and 
+                            students_lessons.lesson_id= lessons.id and 
+                            lecturers.id = users.id
+                    group by lessons.id"; 
+            if ($rankStt==1){
+                $query = $query_base. " order by student_number desc"; 
+            }else if ($rankStt == 0){
+                $query = $query_base. " order by liked_number desc"; 
+            }else if ($rankStt==2){
+                $query = $query_base. " order by lecturers.full_name desc"; 
+            }else if ($rankStt == 3){
+                $query = $query_base. " order by users.username desc"; 
+            }
+            $res = $this->Lesson->query($query);
+            $this->set("res", $res);
+
+
+    }
+
 }

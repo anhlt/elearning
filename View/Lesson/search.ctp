@@ -95,7 +95,7 @@ if (isset($rank_stt)){
                 if ($count%2==0) {
                     echo $this->Html->tableCells(array($lesson['id'],$user['username'],  $lecturer['full_name'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn", $lesson['id'])),  $lesson['update_date'])); 
                 }else {
-                    echo $this->Html->tableCells(array($lesson['id'],$user['username'],  $lecturer['full_name'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn", $lesson['id'])),  $lesson['update_date']), array('class'=>'danger')); 
+                    echo "<tr class = 'danger'><td>".$lesson['id']."</td><td>".$user['username']."</td>.<td>". $lecturer['full_name']."</td><td>".  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn", $lesson['id']))."</td><td>".  $lesson['update_date']."</td></tr>"; 
                 }
                 $user_truoc = $user['username'];
             }
@@ -105,14 +105,15 @@ if (isset($rank_stt)){
             foreach($lessons as $row){ 
                 $lesson = $row['Lesson'];
                 $lecturer = $row['Lecturer'];
-                $user = $row['Lecturer']['User'];
+                $user = $lecturer['User'];
                 if (isset($lesson_truoc) && $lesson_truoc != $lesson['id']){
                      $count = $count + 1;
                 }
                 if ($count%2==0){
                     echo $this->Html->tableCells(array($lesson['id'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn",  $lesson['id'])), $user['username'], $lecturer['full_name'],  $lesson['update_date'])); 
                 }else {
-                    echo $this->Html->tableCells(array($lesson['id'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn",  $lesson['id'])), $user['username'], $lecturer['full_name'],  $lesson['update_date']), array('class'=>'danger')); 
+                    echo "<tr class = 'danger'> <td>". $lesson['id']."</td><td>".$this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn",  $lesson['id']))."</td><td>". $user['username']."</td><td>". $lecturer['full_name']."</td><td>".  $lesson['update_date']."</td></tr>";
+
                 }
                 $lesson_truoc = $lesson['id'];
             }
@@ -128,15 +129,12 @@ if (isset($rank_stt)){
                 if (isset($tag_truoc) && $tag_truoc!=$tag['id']){
                     $count = $count + 1;    
                 }
-               // debug($count); 
                 if ($count %2 ==0) {
-                //    debug("flag");
-                    echo $this->Html->tableCells(array($lesson['id'], $tag['name'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn",  $lesson['id'])), $user['username'], $lecturer['full_name'],  $lesson['update_date'])); 
+                    echo $this->Html->tableCells(array($lesson['id'],$this->Html->link($tag['name'], "/lesson/searchByTag/".$tag['name']),  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn",  $lesson['id'])), $user['username'], $lecturer['full_name'],  $lesson['update_date'])); 
                 }else {
-                    echo $this->Html->tableCells(array($lesson['id'], $tag['name'],  $this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn",  $lesson['id'])), $user['username'], $lecturer['full_name'],  $lesson['update_date']), array('class'=>'danger')); 
+                    echo "<tr class='danger'><td>".$lesson['id']."</td><td>". $this->Html->link($tag['name'], "/lesson/searchByTag/".$tag['name'])."</td><td>".$this->Html->link($lesson['name'], array("controller"=>"lesson", "action"=>"learn",  $lesson['id']))."</td><td>". $user['username']."</td><td>". $lecturer['full_name']."</td><td>".$lesson['update_date']."</td></tr>";
                 }
                 $tag_truoc = $tag['id'];
-               // echo $tag['id'];
             }
         }
     }

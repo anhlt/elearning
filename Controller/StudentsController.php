@@ -2,7 +2,7 @@
 
 class StudentsController extends AppController {
     var $components = array("Auth", "Paginator", "Loger", "Util");
-    var $uses = array('Question', 'Student');
+    var $uses = array('Student');
     public $helpers = array("Util", "Paginator");
     public function beforeFilter(){
         parent::beforeFilter();
@@ -32,19 +32,11 @@ class StudentsController extends AppController {
            // $this->Loger->writeLog(O,"", "Student", "ユーザがアカウントを更新した", "" );
             $this->redirect("/students/profile");
         }
-        $this->loadModel('Question');
         $student = $this->Student->find('first', array('conditions'=>array('Student.id'=>$id)));  
-        $this->set('student', $student['Student']);
-        $questions = $this->Question->find('all');
-        $droplist = array();
-        foreach ($questions as $question) {
-            $droplist[$question['Question']['id']] = $question['Question']['question'];
-        }
-        $this->set('droplist', $droplist);
+        $this->set('student', $student['Student']); 
     }
 
     public function register(){
-        $this->loadModel('Question');
         $this->loadModel('User');
         $this->loadModel('Student');
 
@@ -91,7 +83,6 @@ class StudentsController extends AppController {
         }
     }
     public function profile(){
-        $this->loadModel('Question');
         $id = $this->Auth->user("id");
         $student = $this->Student->find('first', array('conditions'=>array('Student.id'=>$id)));  
         $this->set('student', $student['Student']);
