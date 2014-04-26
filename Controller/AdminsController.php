@@ -2,6 +2,7 @@
 
 App::uses('Folder', 'Utility');
 App::uses('File', 'Utility');
+App::import('Controller', 'Lesson'); // mention at top
 
 class AdminsController extends AppController {
 
@@ -9,7 +10,7 @@ class AdminsController extends AppController {
     public $components = array('Paginator', 'Util', 'RequestHandler', 'Message');
 
     public $helpers = array('Js');
-    var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter', 'Question', 'Document', 'Violate', 'Lesson', 'Ihan');
+    var $uses = array('Admin', 'IpAdmin', 'Lecturer', 'User', 'Student', 'Parameter', 'Question', 'Document', 'Violate', 'Lesson', 'Ihan','Test','Comment');
 
     public function beforeFilter() {
         parent::beforeFilter();
@@ -1393,10 +1394,11 @@ class AdminsController extends AppController {
     public function manage_document() {
 
         $sql = "SELECT *
-                FROM  documents";
+                FROM  documents, lessons, users WHERE documents.lesson_id = lessons.id AND lessons.lecturer_id = users.id";
         $datas = $this->Document->query($sql);
+       
         if ($datas) {
-            //debug($datas);
+            
             for ($i = 0; $i <= count($datas) - 1; $i++) {
                 $tmp = $datas[$i]['documents']['id'];
                 //debug($tmp);
@@ -1527,7 +1529,7 @@ class AdminsController extends AppController {
             $object_type = 'Document';
             //ドキュメントの削除
             if ($this->Document->delete($document_id) && $this->Message->Sent($user_id, $recipient_id, $type, $content, $object_id, $object_type)) {
-                unlink(WWW_ROOT . DS . $name);
+                unlink(WWW_ROOT . 'files' . DS . $name);
                 $this->Session->setFlash(__('ドキュメントが削除された。そして、先生にメッセージを送った。'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
@@ -1574,7 +1576,7 @@ class AdminsController extends AppController {
 
     public function manage_lesson() {
         $sql_0 = "SELECT *
-                FROM  lessons";
+                FROM  lessons, users WHERE lessons.lecturer_id = users.id ";
         $datas = $this->Lesson->query($sql_0);
         //debug($datas);
         if ($datas) {
@@ -1672,20 +1674,46 @@ class AdminsController extends AppController {
         }
     }
 
+
+    public function __delete_lesson($lesson_id)
+    {
+        $result = $this->Lesson->findById($lesson_id);
+        if($result != NULL) 
+        {
+            $docs = $this->Document->find('all', array('conditions'=> array('Document.lesson_id' => $lesson_id)));
+            foreach ($docs as $doc) {
+                $link = $doc['Document']['link'];
+                if ($this->Document->delete($doc['Document']['id'])) {
+                    unlink(WWW_ROOT. 'files' . DS . $link);                        
+                }                               
+            }
+            $tests = $this->Test->find('all', array('conditions'=> array('Test.lesson_id' => $lesson_id)));                   
+            foreach ($tests as $test) {
+                $link = $test['Test']['link'];
+                if ($this->Test->delete($test['Test']['id'])) {
+                    unlink(WWW_ROOT. 'tsv' . DS . $link);                       
+                }                               
+            }   
+            if ($this->Lesson->delete($lesson_id))
+            {   
+                $this->Comment->deleteAll(array('Comment.lesson_id' => $lesson_id), false);                  
+                return true;
+            } 
+        }else
+            return false;
+    }
+
     public function delete_lesson($lesson_id) {
         if (!$this->request->is('post')) {
-            
         } else {
             $Lesson = $this->Lesson->findById($lesson_id);
-            //メッセージの情報
             $user_id = $id = $this->Auth->user('id');
             $recipient_id = $Lesson["Lesson"]['lecturer_id'];
             $type = 'Delete';
             $content = $this->request->data["Message"]["content"];
             $object_id = $lesson_id;
             $object_type = 'Lesson';
-
-            if ($this->Lesson->delete($lesson_id) && $this->Message->Sent($user_id, $recipient_id, $type, $content, $object_id, $object_type)) {
+            if ($this->__delete_lesson($lesson_id) && $this->Message->Sent($user_id, $recipient_id, $type, $content, $object_id, $object_type)) {
                 $this->Session->setFlash(__('授業が削除された。そして、先生にメッセージを送った。'), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'

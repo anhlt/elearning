@@ -10,61 +10,65 @@
 	<body>		
 		<div class='head'><h3>ファイルをアップロード</h3></div>		
 		<div class='main'>
-		<?php echo $this->Form->create('Document',array(
-			'inputDefaults' => array(  
-				'div' => false,  
-				'label' => false,  
-				'wrapInput' => false,  
-				'class' => 'form-control'  
-				),  
-			'class' => 'well',
-		    'url' => array('controller' => 'document', 'action' => 'edit', 'id' => $id, 'document_id' => $document_id, 'ihan' => $ihan),
-		    'method' => 'post',
-		    'enctype' => 'multipart/form-data'
+	<?php echo $this->Form->create('Document',array(
+		'inputDefaults' => array(
+			'div' => false,
+			'label' => false,
+			'wrapInput' => false,
+			'class' => 'form-control'
+		),
+		'class' => 'well',
+		'url' => array('controller' => 'document', 'action' => 'edit',),
+		'method' => 'post',
+		'enctype' => 'multipart/form-data'
+		)); ?>
+		<div class="form-group">
+			<?php echo $this->Form->input('Document.title', array(
+				'placeholder' => 'ドキュメントの名前',
+				'style' => 'width: 300px;',
+				'label' => 'ドキュメントの名前'	
 			)); ?>
-			
-			<!-- <?php echo $this->Form->hidden('ihan', array('value' => $ihan));?> -->		
-			<div class="form-group">
-				<?php echo $this->Form->input('title', array(  
-					'value' => $result['title'],  
-					'style' => 'width: 300px;',
-					'label' => 'ファイルの名前',
-				)); ?>  
-			</div>
+		</div>		
+		<div class="form-group">
+			<?php echo $this->Form->input('Document.id') ; ?>
+		</div>
 
-			<div class='form-group'>
-				<?php echo $this->Form->input('link', array( 
-					'type'=> 'file',					
-					'value' => $result['link'],
-					'placeholder' => 'ファイル',
-					'required' => $ihan,
-					'class' => 'btn-file'
-				)); ?>
-			</div>
+		<div class='form-group'>
+			<?php echo $this->Form->input('Document.link', array(
+				'type'=> 'file',
+				'placeholder' => 'ファイル',
+				'class' => 'btn-file',
+				'required' => true
+			)); ?>
+		</div>
 
-			<div class='row'>
-				<div class=' col-md-1'>
+		<div id='addition'>
+		</div>
+		<br>
+
+		<div class='row'>
+			<div class=' col-md-1'>
 				<?php echo $this->Form->checkbox('Document.check', array(
-				'class' => 'btn-checkbox',
-				'required' => true	
+					'class' => 'btn-checkbox',
+					'required' => true	
 				)); ?>	
-				</div>
-				<div>私はそのドキュメントを専従する</div>
 			</div>
+			<div>私はそのドキュメントを専従する</div>
+		</div>
 
-			<br>
-			<div class='form-group'>
+		<br>
+		<div class='form-group'>
 			<?php echo $this->Form->submit('アップロード', array(
 				'class' => 'btn btn-primary',
-				'div' => false,				
+				'div' => false
 			));?>
 
 			<?php echo $this->Form->reset('再アップロード',array(
 				'class' => 'btn btn-primary',
 				'div' => false,
 				'value' => '再アップロード'
-			));?>
-			</div>								
+			));?>	
+		</div>
 		</form>
 	</body>
 </html>

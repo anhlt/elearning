@@ -161,15 +161,8 @@ class LecturerController extends AppController {
 			$Message = $this->Message->get_message($id);
 			if(sizeof($Message) != 0){
 				$this->Message->read($Message['Message']['id']);
-				switch ($Message['Message']['object_type']) {
-					case 'Lesson':
-						$this->redirect(array('controller'=>'lesson','action' => 'learn',$Message['Message']['object_id']));
-						break;
-					case 'Document':
-						$this->redirect(array('controller'=>'document','action' => 'show',$Message['Message']['object_id']));						# code...
-						break;
+				$this->redirect($this->referer());
 				}
-			}
 		}
 		$id = $this->Auth->user('id');
 		$Messages = $this->Message->inbox($id);

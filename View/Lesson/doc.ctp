@@ -40,7 +40,7 @@
 				  	<td><?php if($index < 9) echo '0'; echo ++$index ?> </td>
 				  	<td><?php echo($result['Document']['title']) ?> </td>				  					  	
 				  	<td>
-				  		<?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'edit', 'id' => $id, "document_id"=>$result['Document']['id'], 'ihan' => 'false'), array('class' => 'glyphicon glyphicon-edit')); ?>
+				  		<?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'edit',$result['Document']['id']), array('class' => 'glyphicon glyphicon-edit')); ?>
 				  	</td>		  	
 				  	<td>
 				  		<?php echo $this->Html->link("", array('controller' => 'document', 'action' => 'delete', "id"=>$result['Document']['id']), array('class' => 'glyphicon glyphicon-remove-sign')); ?>
