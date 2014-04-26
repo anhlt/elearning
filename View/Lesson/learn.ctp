@@ -57,12 +57,13 @@ if ($learnable == LEARNABLE){
 $learnedPeople = $lessons['Student'];
 $learnedPeopleNumber = count($learnedPeople); 
 echo " <span class='label label-primary'>".$likePeople."人/".$learnedPeopleNumber."人いいねした</span>";
+ echo "   <span class = 'label label-danger'>".$this->Html->link('違犯レポート', "/lesson/report_violate/".$lesson_id)."</span>";
 if ($learnable==UNREGISTER){
     if (AuthComponent::user('role')=='student'){
         echo "   <span class = 'label label-danger'>".$this->Html->link('登録', "/lesson/register/".$lesson_id)."</span>";
-    }else{
-        echo "   <span class = 'label label-danger'>".$this->Html->link('違犯レポート', "/lesson/report_violate/".$lesson_id)."</span>";
-    }
+    }//else{
+    //     echo "   <span class = 'label label-danger'>".$this->Html->link('違犯レポート', "/lesson/report_violate/".$lesson_id)."</span>";
+    // }
 }else if ($learnable == OVER_DAY){
      echo "   <span class = 'label label-danger'>".$this->Html->link('再登録', "/lesson/register/".$lesson_id)."</span>";
 }
