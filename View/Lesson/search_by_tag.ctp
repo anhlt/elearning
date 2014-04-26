@@ -28,8 +28,9 @@ echo "<br>";
        echo $this->Html->tableHeaders(array("授業の名前", "先生のユーザ名", "先生の名前", "いいねの数", "受講学生の数"));  
             
        foreach($res as $row){
-           
-                echo $this->Html->tableCells(array($row['lessons']['name'], $row['users']['username'], $row['lecturers']['full_name'],$row[0]['liked_number'],  $row[0]['student_number'])); 
+            if (!isset($row[0]['liked_number'])) $liked_number  = 0; 
+            else $liked_number = $row[0]['liked_number'];
+             echo $this->Html->tableCells(array($this->Html->link($row['lessons']['name'], '/lesson/learn/'.$row['lessons']['LESSID']), $row['users']['username'], $row['lecturers']['full_name'],$liked_number,  $row[0]['student_number'])); 
             }
         
         echo "</table"; 
