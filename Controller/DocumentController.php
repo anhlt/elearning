@@ -22,10 +22,10 @@ class DocumentController extends AppController {
 					$data['Document']['title'] = $Document['title'];					
 					$data['Document']['lesson_id'] = $lesson_id;
 					$this->Document->create();
-//					if(!in_array(mime_content_type($Document['link']['tmp_name']),$list)) {
-//						array_push($error, $Document['link']['name']);
-//						continue;
-//					}
+					if(!in_array(mime_content_type($Document['link']['tmp_name']),$list)) {
+						array_push($error, $Document['link']['name']);
+						continue;
+					}
 					if ($this->Document->save($data)) {
 						move_uploaded_file($Document['link']['tmp_name'], WWW_ROOT . "files". DS . $name);
 					}
