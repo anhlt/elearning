@@ -13,7 +13,7 @@
  */
 class TestsController extends AppController {    
 
-    public $components = array('Paginator','TsvReader');
+    public $components = array('Paginator','TsvReader', 'Util');
     public function add() {
         $lesson_id = $this->params['named']['id'];
         $this->set('id', $lesson_id);
@@ -102,6 +102,16 @@ class TestsController extends AppController {
     }
 
     public function show($id) {
+
+        $test = $this->Test->findById($id);
+        $lesson_id = $test['Test']['lesson_id'];
+        
+        $checkLearnable = $this->Util->checkLessonAvailableWithStudent($lesson_id, $this->Auth->user("id"));
+        if ($checkLearnable != LEARNABLE){
+            $this->set("cannot", "true");
+        }
+
+
         $data_tsv = $this->getDataTSV($id);
         $this->set('title', $data_tsv[0][1]);
         $this->set('content', $this->getContent($data_tsv));
@@ -168,7 +178,7 @@ class TestsController extends AppController {
 
     public function list_result($test_id){
         $this->loadModel('Result');
-        $this->Result->recursive = 1;
+        $this->Result->recursive = 3;
         $this->paginate = array(
             'fields' => array('Result.id', 'Student.full_name','Result.point'),
             'limit' => 10,

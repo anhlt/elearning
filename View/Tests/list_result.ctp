@@ -13,7 +13,10 @@
 				<td  class="col-sm-3"><?php echo $this->Paginator->sort('point','点数')?></td>
 				<td  class="col-sm-3">細部</td>
 			</tr>
-			<?php foreach ($results as $result) :?>
+			<?php 
+
+			debug($results);
+			foreach ($results as $result) :?>
 			<tr id="resultsDiv">
 				<td><?php if($index < 9) echo '0'; echo ++$index; ?> </td>
 				<td><?php echo($result['Student']['full_name']) ?> </td>

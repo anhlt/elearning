@@ -48,11 +48,19 @@ display();*/
 </script>
 
 <?php if(AuthComponent::user('role')=='student') $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE, "勉強");?>    <div class="col-xs-13 col-md-9 well">  
- <h2 name="TestTitle"><?php echo $title ?></h2>
+<?php
+    if (isset($cannot)){
+       echo ("<h2>このテストは実施できない</h2>"); 
+    }else {
+?>
+<h2 name="TestTitle"><?php echo $title ?></h2>
 <?php echo $content; ?>
  <button type="button" class="btn btn-success" onclick="setDefault()">終わり</button>
 <form name="formRusult" method="post" >
     <input name="data[Test][result]" type="hidden" value="">
 </form>
 </div>
+<?php 
+    }
+        ?>
 
