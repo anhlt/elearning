@@ -183,7 +183,8 @@ class TestsController extends AppController {
             'fields' => array('Result.id', 'Student.full_name','Result.point'),
             'limit' => 10,
             'conditions' => array(
-                'Result.test_id' => $test_id
+                'Result.test_id' => $test_id,
+                'not' => array ( 'Student.full_name' => null),
            )
         );
         $results = $this->Paginator->paginate('Result');

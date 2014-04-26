@@ -14,8 +14,6 @@
 				<td  class="col-sm-3">細部</td>
 			</tr>
 			<?php 
-
-			debug($results);
 			foreach ($results as $result) :?>
 			<tr id="resultsDiv">
 				<td><?php if($index < 9) echo '0'; echo ++$index; ?> </td>

@@ -49,7 +49,7 @@ display();*/
 
 <?php if(AuthComponent::user('role')=='student') $this->LeftMenu->leftMenuStudent(STUDENT_CHOOSE_COURSE, "勉強");?>    <div class="col-xs-13 col-md-9 well">  
 <?php
-    if (isset($cannot) && AuthComponent::user('role')=='student')){
+    if (isset($cannot) && AuthComponent::user('role')=='student'){
        echo ("<h2>このテストは実施できない</h2>"); 
     }else {
 ?>

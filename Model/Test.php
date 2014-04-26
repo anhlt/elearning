@@ -3,7 +3,13 @@ class Test extends AppModel {
     //public $belongsTo = array('Lesson');
     public $hasMany = array(
                 'Result' => array('dependent' => True ));
-    
+    public $belongsTo = array(
+        'Lesson' => array(
+            'className' => 'Lesson',
+            'foreignKey' => 'lesson_id'
+    ));
+
+
 	public $validate = array(
 		'title' => array(
 			'required' => array(
