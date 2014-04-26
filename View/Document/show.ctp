@@ -24,25 +24,25 @@ height: 650px;
 }
 </style>
 <script>
-$(document).ready(function(){
-    $(document).keypress(function(e){
-        e.preventDefault();
+ $(document).ready(function(){
+    $("#bigBt").click(function(){
+        $("#anh").attr('height', 600); 
+        $("#anh").attr('width', 600);
+
     });
-    $("#frameClip").mousedown(function(e){
-        console.log("abc")
-            switch(e.which){
-            case 1:
-                console.log("chuot trai")
-                    break;
-            case 2:
-                console.log("middle")
-                    break;
-            case 3:
-                console.log("phai")
-                    //   alert("abc");
-                    break
-            }
+
+     $("#normalBt").click(function(){
+        $("#anh").attr('height', 420); 
+        $("#anh").attr('width', 420);
+
     });
+
+    $("#smallBt").click(function(){
+        $("#anh").attr('height', 300); 
+        $("#anh").attr('width', 300);
+
+    });
+
 });
 </script>
 
@@ -66,10 +66,61 @@ $(document).ready(function(){
         echo "<div oncontextmenu='return false;'>".$this->Html->media($link,  array("controls", "autoplay", "id"=>"frameMusic"))."</div>";
 
     }else if ($extension == 'mp4'){
-        echo "<div oncontextmenu='return false;'>".$this->Html->media($link,  array("controls", "autoplay", "id"=>"frameClip"))."</div>";
+  //      echo "<div >".$this->Html->media($link,  array(controls, "autoplay", "id"=>"frameClip"))."</div>";
+  
+        echo "<video id = 'video1' width = 420 oncontextmenu='return false;'>";
+        echo "<source src='$link'>";
+        echo "</video>";
+        ?>
+        <br>
+        <button class='btn' onclick="playPause()">Play/Pause</button> 
+        <button class = 'btn' onclick="stop()">Stop</button>
+        <button class = 'btn' onclick="makeBig()">Big</button>
+        <button class = 'btn' onclick="makeSmall()">Small</button>
+        <button class = 'btn' onclick="makeNormal()">Normal</button>
+        <?php
     }else if ($extension == 'gif'|| $extension == 'jpg'|| $extension == 'png'){
-        echo "<div oncontextmenu='return false;'>".$this->Html->image($link,  array('width'=>'670', 'height'=>'690'))."</div>";
+        echo "<div oncontextmenu='return false;'>".$this->Html->image($link,  array('width'=>'420', 'height'=>'420', 'id'=>'anh'))."</div>";
+        ?>
+        <br>
+        <button class = 'btn' id ='bigBt'>Big</button>
+        <button class = 'btn' id = 'smallBt'>Small</button>
+        <button class = 'btn' id = 'normalBt'>Normal</button>
+        <?php 
     }
 
     ?>
 </div>
+
+<script>
+
+var myVideo=document.getElementById("video1"); 
+
+function playPause()
+{ 
+    if (myVideo.paused) 
+      myVideo.play(); 
+  else 
+      myVideo.pause(); 
+} 
+
+function makeBig()
+{ 
+    myVideo.width=560; 
+} 
+
+function makeSmall()
+{ 
+    myVideo.width=320; 
+} 
+
+function makeNormal()
+{ 
+    myVideo.width=420; 
+} 
+
+function stop(){
+    myVideo.pause();
+    myVideo.currentTime = 0;
+}
+</script>

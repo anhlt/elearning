@@ -514,7 +514,7 @@ class LessonController extends AppController {
         }
         if ($this->request->is('post')){
             $this->loadModel('StudentsLesson');
-            $data = array("student_id"=>$user_id, "lesson_id"=>$lesson_id, "price"=>LESSON_COST) ;   
+            $data = array("student_id"=>$user_id, "lesson_id"=>$lesson_id, "price"=>LESSON_COST, "percent_for_teacher"=>LECTURER_MONEY_PERCENT) ;   
             var_dump($this->StudentsLesson->save($data));
             $this->redirect(array("controller"=>"lesson", "action"=>"learn", $lesson_id));
         }
@@ -569,14 +569,30 @@ class LessonController extends AppController {
             $rankStt =$this->data['rankWay']['rankStt'];
         }
 
-            $query_base = "select lessons.name, users.username, lecturers.full_name, count(students_lessons.id) as student_number, sum(students_lessons.liked) as liked_number
-                    from lessons, tags, lessons_tags, students_lessons, lecturers, users
-                    where tags.name = '".$tag_name."' and 
-                            tags.id = lessons_tags.tag_id and 
-                            lessons_tags.lesson_id = lessons.id and
-                            lessons.lecturer_id = lecturers.id and 
-                            students_lessons.lesson_id= lessons.id and 
-                            lecturers.id = users.id
+            // $query_base = "select lessons.id, lessons.name, users.username, lecturers.full_name, 
+            //                         count(students_lessons.id) as student_number, sum(students_lessons.liked) as liked_number
+            //         from lessons, tags, lessons_tags, students_lessons, lecturers, users
+            //         where tags.name = '".$tag_name."' and 
+            //                 tags.id = lessons_tags.tag_id and 
+            //                 lessons_tags.lesson_id = lessons.id and
+            //                 lessons.lecturer_id = lecturers.id and 
+            //                 students_lessons.lesson_id= lessons.id and 
+            //                 lecturers.id = users.id
+            //         group by lessons.id"; 
+
+             $query_base = "select lessons.id as LESSID, lessons.name, users.username, lecturers.full_name, 
+                                 (select count(students_lessons.id) from students_lessons, lessons where lessons.id = students_lessons.lesson_id and lessons.id = LESSID) as student_number, 
+                                 (select sum(students_lessons.liked) from students_lessons, lessons where lessons.id = students_lessons.lesson_id and lessons.id = LESSID) as liked_number
+                    from lecturers, users, lessons 
+                    where   lessons.lecturer_id = lecturers.id and 
+                            lecturers.id = users.id and 
+                            lessons.id in (
+                                select lessons.id 
+                                from  tags, lessons_tags, lessons
+                                where tags.name = '".$tag_name."' and 
+                                tags.id = lessons_tags.tag_id and 
+                                lessons_tags.lesson_id = lessons.id
+                            )
                     group by lessons.id"; 
             if ($rankStt==1){
                 $query = $query_base. " order by student_number desc"; 
@@ -587,7 +603,9 @@ class LessonController extends AppController {
             }else if ($rankStt == 3){
                 $query = $query_base. " order by users.username desc"; 
             }
+            //debug($query);
             $res = $this->Lesson->query($query);
+            //debug($res);
             $this->set("res", $res);
 
 
