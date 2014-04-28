@@ -515,8 +515,33 @@ class LessonController extends AppController {
         if ($this->request->is('post')){
             $this->loadModel('StudentsLesson');
             $data = array("student_id"=>$user_id, "lesson_id"=>$lesson_id, "price"=>LESSON_COST, "percent_for_teacher"=>LECTURER_MONEY_PERCENT) ;   
-            var_dump($this->StudentsLesson->save($data));
-            $this->redirect(array("controller"=>"lesson", "action"=>"learn", $lesson_id));
+            $this->StudentsLesson->save($data); 
+
+            $student_lesson_id = $this->StudentsLesson->getLastInsertID();
+            $this->loadModel("LessonMembership");
+            $this->LessonMembership->recursive = 3;
+            $student_lesson = $this->LessonMembership->findById($student_lesson_id);
+         //   debug($student_lesson);
+            $student_username = $student_lesson['Student']['User']['username'];
+            $student_fullname = $student_lesson['Student']['full_name'];
+            $student_address = $student_lesson['Student']['address'];
+            $student_account = $student_lesson['Student']['credit_card_number'];
+            $lecturer_username = $student_lesson['Lesson']['Lecturer']['User']['username'];
+            $lecturer_fullname = $student_lesson['Lesson']['Lecturer']['full_name'];
+            $lecturer_address = $student_lesson['Lesson']['Lecturer']['address'];
+            $lecturer_account =$student_lesson['Lesson']['Lecturer']['credit_card_number'];
+            $days_attended = $student_lesson['LessonMembership']['days_attended'];
+            $price = $student_lesson['LessonMembership']['price'];
+            $percent_for_teacher= $student_lesson['LessonMembership']['percent_for_teacher'];
+            $data2 = array("days_attended"=>$days_attended, "price"=>$price, "percent_for_teacher"=>$percent_for_teacher, 
+                "lecturer_username"=>$lecturer_username, "lecturer_fullname"=>$lecturer_fullname, "lecturer_address"=>$lecturer_address, "lecturer_account"=>$lecturer_account, 
+                "student_username"=>$student_username, "student_fullname"=>$student_fullname, "student_address"=>$student_address, "student_account"=>$student_account);
+
+           //debug($data2);
+           $this->loadModel("History");
+           $this->History->save($data2);
+           $this->redirect(array("controller"=>"lesson", "action"=>"learn", $lesson_id));
+        
         }
     }
 
