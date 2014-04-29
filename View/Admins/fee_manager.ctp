@@ -102,13 +102,13 @@
                         foreach ($lecturer_list as $lecturer) {
 
                             echo "<tr>";
-                            echo '<td align="center">' . ($lecturer['Lecturer']['id']) . "</td>";
-                            echo '<td align="center">' . ($lecturer['Lecturer']["full_name"]) . "</td>";
-                            echo '<td align="center">' . ($lecturer['Lecturer']["address"]) . "</td>";
-                            $phone_number = $lecturer['Lecturer']["phone_number"];
+                            echo '<td align="center">' . ($lecturer['History']['lecturer_username']) . "</td>";
+                            echo '<td align="center">' . ($lecturer['History']["lecturer_fullname"]) . "</td>";
+                            echo '<td align="center">' . ($lecturer['History']["lecturer_address"]) . "</td>";
+                            $phone_number = $lecturer['History']["lecturer_phone_number"];
 //                            $phone_number = substr_replace($phone_number, '-', 3, 0);
 //                            $phone_number = substr_replace($phone_number, '-', 7, 0);
-                            $credit_number = $lecturer['Lecturer']["credit_card_number"];
+                            $credit_number = $lecturer['History']["lecturer_account"];
 //                            $credit_number = substr_replace($credit_number, '-', 3, 0);
 //                            $credit_number = substr_replace($credit_number, '-', 8, 0);
 //                            $credit_number = substr_replace($credit_number, '-', 13, 0);
@@ -134,7 +134,7 @@
                                 <tr>
                                     <td align="center">学生ID</td>
                                     <td align="center">名前</td>                       
-                                    <td align="center">住所ID</td>
+                                    <td align="center">住所</td>
                                     <td align="center">電話番号ID</td>
                                     <td align="center">クレジットカード番号</td>
             <!--                                    <td align="center">登録した授業数</td>-->
@@ -145,18 +145,14 @@
                                 <?php
                                 foreach ($student_list as $student) {
                                     echo "<tr>";
-                                    echo '<td align="center">' . ($student['Student']['id']) . "</td>";
-                                    echo '<td align="center">' . ($student['Student']['full_name']) . "</td>";
-                                    echo '<td align="center">' . ($student['Student']['address']) . "</td>";
-                                    $phone_number = $student['Student']["phone_number"];
+                                    echo '<td align="center">' . ($student['History']['student_username']) . "</td>";
+                                    echo '<td align="center">' . ($student['History']['student_fullname']) . "</td>";
+                                    echo '<td align="center">' . ($student['History']['student_address']) . "</td>";
+                                    $phone_number = $student['History']["student_phone_number"];
 //                                    $phone_number = substr_replace($phone_number, '-', 3, 0);
 //                                    $phone_number = substr_replace($phone_number, '-', 7, 0);
-                                    $credit_number = $student['Student']["credit_card_number"];
-                                    $credit_number = substr_replace($credit_number, '-', 3, 0);
-                                    $credit_number = substr_replace($credit_number, '-', 8, 0);
-                                    $credit_number = substr_replace($credit_number, '-', 13, 0);
-                                    $credit_number = substr_replace($credit_number, '-', 18, 0);
-                                    $credit_number = substr_replace($credit_number, '-', 23, 0);
+                                    $credit_number = $student['History']["student_account"];
+                                    
 
                                     echo '<td align="center">' . $phone_number . "</td>";
                                     echo '<td align="center">' . $credit_number . "</td>";
