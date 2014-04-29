@@ -865,7 +865,7 @@ class AdminsController extends AppController {
 
             $fee = 0;
             $this->uses = array('History');
-            $students = $this->History->find('all', array('condition' => array('student_username' => $student_username['History']['student_username'])));
+            $students = $this->History->find('all', array('conditions' => array('student_username' => $student_username['History']['student_username'])));
 
             foreach ($students as $student) {
                 $date = $student['History']['days_attended'];
