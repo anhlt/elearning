@@ -534,14 +534,13 @@ class LessonController extends AppController {
             $price = $student_lesson['LessonMembership']['price'];
             $percent_for_teacher= $student_lesson['LessonMembership']['percent_for_teacher'];
             $student_phone_number = $student_lesson['Student']['phone_number'];
-            $lecturer_phone_number = $student_lesson['Lesson']['Lecturer'];['phone_number'];
+            $lecturer_phone_number = $student_lesson['Lesson']['Lecturer']['phone_number'];
             
             $data2 = array("days_attended"=>$days_attended, "price"=>$price, "percent_for_teacher"=>$percent_for_teacher, 
                 "lecturer_username"=>$lecturer_username, "lecturer_fullname"=>$lecturer_fullname, "lecturer_address"=>$lecturer_address, "lecturer_account"=>$lecturer_account, 
                 "student_username"=>$student_username, "student_fullname"=>$student_fullname, "student_address"=>$student_address, "student_account"=>$student_account
                     ,"student_phone_number" =>$student_phone_number,"lecturer_phone_number" =>$lecturer_phone_number);
 
-           //debug($data2);
            $this->loadModel("History");
            $this->History->save($data2);
            $this->redirect(array("controller"=>"lesson", "action"=>"learn", $lesson_id));
